@@ -14,8 +14,9 @@ services:
     image: "mariadb/server:10.3"
     container_name: seb-server-mariadb
     environment:
-        MYSQL_ROOT_PASSWORD: somePW
+        - MYSQL_ROOT_PASSWORD_FILE=/etc/mysql/conf.d/secret
     volumes:
+        - seb-server-config:/etc/mysql/conf.d
         - seb-server-mariadb:/var/lib/mysql
     networks:
         - seb-server-network
