@@ -36,6 +36,7 @@ CMD if [ "${DEBUG_MODE}" = "true" ] ; \
             -Djava.rmi.server.hostname=127.0.0.1 \
 # TODO secure the JMX connection (cueenrtly there is a premission problem with the secret file
             -Dcom.sun.management.jmxremote.ssl=false \
+            -Dcom.sun.management.jmxremote.local.only=false \
             -Dcom.sun.management.jmxremote.authenticate=false \
             -jar seb-server-"${SEBSERVER_VERSION}".jar \
             --spring.profiles.active=prod \
