@@ -30,11 +30,10 @@ CMD if [ "${DEBUG_MODE}" = "true" ] ; \
         then secret=$(cat /sebserver/config/secret) && exec java \
             -Xms64M \
             -Xmx1G \
-            -Djavax.net.debug=ssl \
             -Dcom.sun.management.jmxremote \
             -Dcom.sun.management.jmxremote.port=9090 \
             -Dcom.sun.management.jmxremote.rmi.port=9090 \
-            -Djava.rmi.server.hostname=127.0.0.1 \
+            -Djava.rmi.server.hostname=0.0.0.0 \
 # TODO secure the JMX connection (cueenrtly there is a premission problem with the secret file
             -Dcom.sun.management.jmxremote.ssl=false \
             -Dcom.sun.management.jmxremote.authenticate=false \
@@ -55,4 +54,4 @@ CMD if [ "${DEBUG_MODE}" = "true" ] ; \
             --sebserver.password="${secret}" ; \
         fi
 
-EXPOSE 443 8080 9090
+EXPOSE 8080 9090

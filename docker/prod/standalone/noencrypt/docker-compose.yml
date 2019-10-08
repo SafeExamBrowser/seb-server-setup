@@ -32,7 +32,7 @@ services:
         - seb-server-config:/sebserver/config
         - ./config/spring:/sebserver/config/spring
       environment:
-        - DEBUG_MODE=false
+        - DEBUG_MODE=true
       logging:
         driver: "json-file"
         options:
@@ -51,6 +51,7 @@ services:
       - ./config/nginx:/etc/nginx/conf.d
     ports:
       - 80:80
+      - 9090:9090
     networks:
       - seb-server-network
     depends_on:
