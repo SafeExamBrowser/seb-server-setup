@@ -49,7 +49,6 @@ services:
     container_name: seb-server-proxy
     volumes:
       - ./config/nginx:/etc/nginx/conf.d
-      - seb-server-certs:/certs
     ports:
       - 80:80
     networks:
