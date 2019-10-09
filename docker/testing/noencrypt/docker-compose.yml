@@ -1,17 +1,5 @@
 version: '3'
 services:
-  setup:
-    image: tianon/true
-    restart: "no"
-    depends_on: 
-      - seb-server-setup
-      
-  sebserver:
-    image: tianon/true
-    restart: "no"
-    depends_on: 
-      - reverse-proxy
-
   seb-server-setup:
     build:
         context: .
@@ -56,7 +44,7 @@ services:
           - seb-server-network
       depends_on:
           - "mariadb"
-          - "seb-server-setup"
+          - "reverse-proxy"
 
   reverse-proxy:
     image: "nginx:latest"
@@ -67,9 +55,6 @@ services:
       - 80:80
     networks:
       - seb-server-network
-    depends_on:
-      - "mariadb"
-      - "seb-server"
 
 networks:
   seb-server-network:
