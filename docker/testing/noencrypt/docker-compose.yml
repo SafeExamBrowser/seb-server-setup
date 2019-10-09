@@ -10,7 +10,7 @@ services:
         - ./config:/host/config
 
   mariadb: 
-    image: "mariadb/server:10.3"
+    image: "mariadb/server:10.3.17"
     container_name: seb-server-mariadb
     environment:
         - MYSQL_ROOT_PASSWORD_FILE=/etc/mysql/conf.d/secret
