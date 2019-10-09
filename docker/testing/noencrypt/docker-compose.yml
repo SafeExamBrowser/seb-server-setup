@@ -1,5 +1,16 @@
 version: '3'
 services:
+  setup:
+    image: monroe/noop
+    depends_on: 
+      - seb-server-setup
+      
+   sebserver:
+    image: monroe/noop
+    depends_on: 
+      - reverse-proxy
+
+
   seb-server-setup:
     build:
         context: .
@@ -58,7 +69,6 @@ services:
     depends_on:
       - "mariadb"
       - "seb-server"
-      - "seb-server-setup"
 
 networks:
   seb-server-network:
