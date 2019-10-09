@@ -34,7 +34,7 @@ services:
         - seb-server-config:/sebserver/config
         - ./config/spring:/sebserver/config/spring
       environment:
-        - DEBUG_MODE=false
+        - DEBUG_MODE=true
       ports:
         - 9090:9090
       logging:
