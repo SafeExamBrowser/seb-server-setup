@@ -15,6 +15,8 @@ services:
     container_name: seb-server-mariadb
     environment:
         - MYSQL_ROOT_PASSWORD_FILE=/etc/mysql/conf.d/secret
+    ports:
+        - 3306:3306
     volumes:
         - seb-server-config:/etc/mysql/conf.d
         - seb-server-mariadb:/var/lib/mysql
