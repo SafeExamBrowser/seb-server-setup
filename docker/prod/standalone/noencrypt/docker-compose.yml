@@ -32,7 +32,7 @@ services:
         - seb-server-config:/sebserver/config
         - ./config/spring:/sebserver/config/spring
       environment:
-        - DEBUG_MODE=true
+        - DEBUG_MODE=false
       logging:
         driver: "json-file"
         options:
