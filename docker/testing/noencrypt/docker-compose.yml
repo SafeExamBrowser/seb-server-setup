@@ -10,10 +10,12 @@ services:
         - ./config:/host/config
 
   mariadb: 
-    image: "mariadb/server:10.3.17"
+    image: "mariadb/server:10.3"
     container_name: seb-server-mariadb
     environment:
         - MYSQL_ROOT_PASSWORD_FILE=/etc/mysql/conf.d/secret
+        # workaround: https://github.com/docker-library/mariadb/issues/262
+        - MYSQL_INITDB_SKIP_TZINFO=1    
     ports:
         - 3306:3306
     volumes:
