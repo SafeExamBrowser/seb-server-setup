@@ -5,6 +5,7 @@ services:
         context: .
         dockerfile: setup.Dockerfile
     container_name: seb-server-setup
+    restart: "no"
     volumes:
         - seb-server-config:/config
         - ./config:/host/config
