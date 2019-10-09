@@ -5,7 +5,6 @@ services:
         context: .
         dockerfile: setup.Dockerfile
     container_name: seb-server-setup
-    restart: "no"
     volumes:
         - seb-server-config:/config
         - ./config:/host/config
@@ -14,7 +13,6 @@ services:
     image: "mariadb/server:10.3"
     container_name: seb-server-mariadb
     environment:
-        - MYSQL_ROOT_HOST=%
         - MYSQL_ROOT_PASSWORD_FILE=/etc/mysql/conf.d/secret
     ports:
         - 3306:3306
@@ -36,7 +34,7 @@ services:
         - seb-server-config:/sebserver/config
         - ./config/spring:/sebserver/config/spring
       environment:
-        - DEBUG_MODE=true
+        - DEBUG_MODE=false
       ports:
         - 9090:9090
       logging:
@@ -48,7 +46,7 @@ services:
           - seb-server-network
       depends_on:
           - "mariadb"
-          - "reverse-proxy"
+          - "seb-server-setup"
 
   reverse-proxy:
     image: "nginx:latest"
@@ -59,6 +57,10 @@ services:
       - 80:80
     networks:
       - seb-server-network
+    depends_on:
+      - "mariadb"
+      - "seb-server"
+      - "seb-server-setup"
 
 networks:
   seb-server-network:
