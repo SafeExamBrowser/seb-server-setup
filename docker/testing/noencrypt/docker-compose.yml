@@ -5,11 +5,10 @@ services:
     depends_on: 
       - seb-server-setup
       
-   sebserver:
+  sebserver:
     image: monroe/noop
     depends_on: 
       - reverse-proxy
-
 
   seb-server-setup:
     build:
