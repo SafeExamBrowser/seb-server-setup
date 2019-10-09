@@ -1,0 +1,69 @@
+version: '3'
+services:
+  seb-server-setup:
+    build:
+        context: .
+        dockerfile: setup.Dockerfile
+    container_name: seb-server-setup
+    volumes:
+        - seb-server-config:/config
+        - ./config:/host/config
+
+  mariadb: 
+    image: "mariadb/server:10.3"
+    container_name: seb-server-mariadb
+    environment:
+        - MYSQL_ROOT_PASSWORD_FILE=/etc/mysql/conf.d/secret
+    volumes:
+        - seb-server-config:/etc/mysql/conf.d
+        - seb-server-mariadb:/var/lib/mysql
+    networks:
+        - seb-server-network
+
+  seb-server:
+      build:
+          context: .
+          dockerfile: sebserver.Dockerfile
+          args:
+              - GIT_TAG=
+              - SEBSERVER_VERSION=0.4.3-beta-SNAPSHOT
+      container_name: seb-server
+      volumes:
+        - seb-server-config:/sebserver/config
+        - ./config/spring:/sebserver/config/spring
+      environment:
+        - DEBUG_MODE=true
+      ports:
+        - 9090:9090
+      logging:
+        driver: "json-file"
+        options:
+            max-size: "200k"
+            max-file: "10"
+      networks:
+          - seb-server-network
+      depends_on:
+          - "mariadb"
+          - "seb-server-setup"
+
+  reverse-proxy:
+    image: "nginx:latest"
+    container_name: seb-server-proxy
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+    ports:
+      - 80:80
+      - 9090:9090
+    networks:
+      - seb-server-network
+    depends_on:
+      - "mariadb"
+      - "seb-server"
+      - "seb-server-setup"
+
+networks:
+  seb-server-network:
+
+volumes:
+  seb-server-config:
+  seb-server-mariadb:
