@@ -1,12 +1,14 @@
 version: '3'
 services:
   setup:
-    image: monroe/noop
+    image: tianon/true
+    restart: "no"
     depends_on: 
       - seb-server-setup
       
   sebserver:
-    image: monroe/noop
+    image: tianon/true
+    restart: "no"
     depends_on: 
       - reverse-proxy
 
