@@ -21,6 +21,7 @@ services:
         - seb-server-mariadb:/var/lib/mysql
     networks:
         - seb-server-network
+    restart: unless-stopped
 
   seb-server:
       build:
@@ -61,6 +62,7 @@ services:
       - "mariadb"
       - "seb-server"
       - "seb-server-setup"
+    restart: unless-stopped
 
 networks:
   seb-server-network:
