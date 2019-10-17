@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-stretch
+FROM alpine:latest
 
 WORKDIR /certs
 
