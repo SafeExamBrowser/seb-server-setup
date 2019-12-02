@@ -1,5 +1,5 @@
-SEB Server Installation Overview
-================================
+SEB Server Overview
+===================
 
 SEB Server Overall Architecture
 -------------------------------

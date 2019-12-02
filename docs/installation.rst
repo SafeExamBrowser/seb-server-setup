@@ -1,4 +1,4 @@
-SEB Server Installation
-=======================
+Installation
+============
 
 TODO
