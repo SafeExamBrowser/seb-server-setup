@@ -1,4 +1,4 @@
-SEB Server Installation Troubleshooting
-=======================================
+Troubleshooting
+===============
 
 TODO

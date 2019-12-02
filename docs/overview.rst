@@ -1,12 +1,12 @@
-SEB Server Overview
-===================
+Overview
+========
 
-SEB Server Overall Architecture
--------------------------------
+Overall Architecture
+--------------------
 
 TODO 
 
-Installation Overview
----------------------
+Installation Repository
+-----------------------
 
 TODO
