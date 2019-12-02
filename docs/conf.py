@@ -24,9 +24,9 @@ copyright = u'2019, ETH Zurich'
 author = u'Andreas Hefti'
 
 # The short X.Y version
-version = u''
+version = u'0.5'
 # The full version, including alpha/beta/rc tags
-release = u'1.0'
+release = u''
 
 
 # -- General configuration ---------------------------------------------------
@@ -85,7 +85,14 @@ html_theme = 'sphinx_rtd_theme'
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {
+    "description": "Documentation for SEB Server installation",
+    "github_user": "anhefti",
+    "github_repo": "seb-server-setup",
+    "link": "#3782BE",
+    "link_hover": "#3782BE",
+    "page_width": "1024px",
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
