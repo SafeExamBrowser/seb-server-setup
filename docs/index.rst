@@ -7,14 +7,10 @@ SEB Server Installation Guide
 =============================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-
-Chapter title..
----------------
-
-Paragraph title..
-*****************
-
+   :maxdepth: 3
+   
+   about
+   overview
+   installation
+   troubleshooting
 
