@@ -1,4 +1,8 @@
 
+.. image:: https://readthedocs.org/projects/seb-server-setup/badge/?version=latest
+    :target: https://seb-server-setup.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+
 
 What is Safe Exam Browser (SEB)?
 ---------------------------------------
