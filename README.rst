@@ -27,6 +27,12 @@ SEB Server provides a range of basic functionalities:
 - Automated SEB restriction on LMS side if the specified type of LMS supports the SEB restriction API
 - Monitoring and administration of SEB Client connections within a running exam
 
+The image below shows a very simplified diagram that locates the SEB Server in a setup with a Learning Management System (LMS) and the Safe Exam Browser (SEB). The SEB Server communicates with the LMS for managing and prepare exams as well as with the SEB Client to ensure a more automated and secure setup for high-stake exams.
+
+.. image:: docs/images/seb-sebserver-lms.png
+    :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/seb-sebserver-lms.png
+
+
 What is the SEB Server Setup repository?
 ----------------------------------------
 
