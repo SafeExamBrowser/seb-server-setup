@@ -74,8 +74,8 @@ With the default configuration, the MariaDB server is exposed on port 3306 and t
 .. note::
 
     The newest versions of Git and Docker are recommended. For installation see:
-    |    - Git : https://www.atlassian.com/git/tutorials/install-git
-    |    - Docker : https://docs.docker.com/install/
+        |    - Git : https://www.atlassian.com/git/tutorials/install-git
+        |    - Docker : https://docs.docker.com/install/
     
 **Setup:**
 
