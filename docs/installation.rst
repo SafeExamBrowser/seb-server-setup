@@ -1,7 +1,7 @@
 Installation
 ============
 
-Fist we will have a look at the overall installation process that can be applied to all different installation strategies we have discussed 
+First we will have a look at the overall installation process that can be applied to all different installation strategies we have discussed 
 in section :ref:`installation-repo-label`. 
 
 The endpoint root of every sub-directory of an installation strategies has the same structure and contains docker files, docker compose 
@@ -29,11 +29,11 @@ So a specific installation the process should mostly be the same:
 
 - Install Git and Docker if not already installed.
 
-    .. note::
-    
-        The newest versions of Git and Docker are recommended. For installation see:
-        - Git : https://www.atlassian.com/git/tutorials/install-git
-        - Docker : https://docs.docker.com/install/
+.. note::
+
+    The newest versions of Git and Docker are recommended. For installation see:
+    |    - Git : https://www.atlassian.com/git/tutorials/install-git
+    |    - Docker : https://docs.docker.com/install/
 
 - In the installation directory of choice clone the seb-server-setup repository of desired version
 
@@ -52,6 +52,9 @@ Demo
 
 **Info:**
 
+This setup provides a single, unsecured SEB Server setup for demonstrations and testing. Includes a single SEB Server instance and a single MariaDB server instance running both in a docker-container. 
+With the default configuration, the MariaDB server is exposed on port 3306 and the SEB Server on port 8080.
+
 ::
 
         installation strategy sub-directory.........docker/demo
@@ -61,17 +64,34 @@ Demo
         integrated reverse proxy....................false
         automated backup-restore service............false
         
-This setup provides a single, unsecured SEB Server setup for demonstrations and testing. Includes a single SEB Server instance and a single MariaDB server instance running both in a docker-container. 
-With the default configuration, the MariaDB server is exposed on port 3306 and the SEB Server on port 8080.
+
 
 **Requirements:**
 
-- Git installation. Newest version recommended but at least version 2.19 : https://www.atlassian.com/git/tutorials/install-git
-- Docker installation. Newest version recommended : https://docs.docker.com/install/
+- Git installation if not already installed
+- Docker installation if not already installed
 
+.. note::
+
+    The newest versions of Git and Docker are recommended. For installation see:
+    |    - Git : https://www.atlassian.com/git/tutorials/install-git
+    |    - Docker : https://docs.docker.com/install/
+    
 **Setup:**
 
 The docker setup consists of a Dockerfile (sebserver.Docker) that defines and builds an image for the SEB Server and a docker-compose.yml file that orchestrates the setup of the needed containers/services. 
 The build of the image for SEB Server first clones the defines version of the SEB Server source repository form GitHub and build the SEB Server with Maven that leads to a self-contained, spring-boot-based, 
 jar artifact that will be run with a usual java command on container startup. For MariaDB the defined public image is been used to build-up the MariaDB server service.
-        
+
+
+
+
+Testing
+-------
+
+TODO
+
+Production
+----------
+
+TODO
