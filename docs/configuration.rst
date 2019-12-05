@@ -23,6 +23,23 @@ to each relevant setting.
     ======================================================================== ============================================ ============================================
 
 
+.. list-table::
+    :name: tab-beispieltabelle
+    :widths: 50 50 50
+    :header-rows: 0
+
+    * - Art der Einträge
+      - Eigenschaft 1
+      - Eigenschaft 2
+    * - Gegenstand 1
+      - eckig
+      - rot
+    * - Gegenstand 2
+      - rund
+      - blau
+
+
+
 
 Reverse Proxy Configuration
 ---------------------------
