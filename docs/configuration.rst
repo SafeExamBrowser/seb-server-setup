@@ -46,7 +46,7 @@ with also the global settings and all webservice related settings.
       - For default this is the root '/'
       
       
-[I'm an inline-style link](https://www.google.com)
+`I'm an inline-style link <https://www.google.com>`
 
 **Webservice Settings**
 
