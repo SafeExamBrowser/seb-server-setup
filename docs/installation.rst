@@ -30,7 +30,7 @@ So a usual installation process for SEB Server mostly look something like:
 
 #. Connecting to the remote machine where the SEB Server instance has to be installed 
     
-    Install Git and Docker if not already installed.
+   Install Git and Docker if not already installed.
     
     .. note::
     
@@ -38,13 +38,13 @@ So a usual installation process for SEB Server mostly look something like:
             |    - Git : https://www.atlassian.com/git/tutorials/install-git
             |    - Docker : https://docs.docker.com/install/
     
-    In the installation directory of choice clone the seb-server-setup repository of desired version
+   In the installation directory of choice clone the seb-server-setup repository of desired version
     
-    Navigate into the installation strategy sub-directory of choice and edit/prepare the configuration for the specified needs
+   Navigate into the installation strategy sub-directory of choice and edit/prepare the configuration for the specified needs
     
-    Build the docker images and do some strategy dependent additional settings
+   Build the docker images and do some strategy dependent additional settings
     
-    Bring the docker containers up and running and do some suggested health checks
+   Bring the docker containers up and running and do some suggested health checks
 
 Next part describes this process in detail for all supported installation strategies and also gives a service overview for a
 specific installation strategy.
