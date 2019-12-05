@@ -31,8 +31,8 @@ to each relevant setting.
       - The IP address the SEB Server binds to
       - Usually set to 0.0.0.0 for docker internal communication
     * - server.port
-      - The port the SEB Server listen to (HTTP/HTTPS). 
-        thia eifj qeifj qefij qefije qeofj qeof q'ef qef0 qef kqeofki qüefk qüpefk pefk qüpefk pefk epfk epükf qpfü kfq
+      - |The port the SEB Server listen to (HTTP/HTTPS). 
+        |thia eifj qeifj qefij qefije qeofj qeof q'ef qef0 qef kqeofki qüefk qüpefk pefk qüpefk pefk epfk epükf qpfü kfq
       - Usually this is set to 8080 and the reverse proxy deals with mapping and TLS
 
 
