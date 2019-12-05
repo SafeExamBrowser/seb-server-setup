@@ -28,23 +28,23 @@ defines images for installation related services and a docker-compose file that 
 docker files can be modified for the specified needs on the installation environment.
 So a usual installation process for SEB Server mostly look something like:
 
-1. Connecting to the remote machine where the SEB Server instance has to be installed
+#.  Connecting to the remote machine where the SEB Server instance has to be installed
 
-2. Install Git and Docker if not already installed.
+    Install Git and Docker if not already installed.
 
-    .. note::
-    
-        The newest versions of Git and Docker are recommended. For installation see:
-            |    - Git : https://www.atlassian.com/git/tutorials/install-git
-            |    - Docker : https://docs.docker.com/install/
+        .. note::
+        
+            The newest versions of Git and Docker are recommended. For installation see:
+                |    - Git : https://www.atlassian.com/git/tutorials/install-git
+                |    - Docker : https://docs.docker.com/install/
 
-3. In the installation directory of choice clone the seb-server-setup repository of desired version
+    In the installation directory of choice clone the seb-server-setup repository of desired version
 
-4. Navigate into the installation strategy sub-directory of choice and edit/prepare the configuration for the specified needs
+    Navigate into the installation strategy sub-directory of choice and edit/prepare the configuration for the specified needs
 
-5. Build the docker images and do some strategy dependent additional settings
+    Build the docker images and do some strategy dependent additional settings
 
-6. Bring the docker containers up and running and do some suggested health checks
+    Bring the docker containers up and running and do some suggested health checks
 
 Next part describes this process in detail for all supported installation strategies and also gives a service overview for a
 specific installation strategy.
@@ -93,7 +93,7 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
 
 **Installation:**
 
-1. Login to the target/remote host where the SEB Server demo shall be installed, on windows open a command or PowerShell and create a working directory and navigate into it.
+1. Login to the target/remote host where the SEB Server demo shall be installed, on windows open a command or PowerShell, create a working directory and navigate into it.
     
     .. code-block:: bash
     
@@ -138,7 +138,7 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
     
     .. note::
     
-        Since this is a demo installation it may not be necessary but we highly recommend to change the generated password form the initial admin account immediately after first login. 
+        Since this is a demo installation it may not be necessary but we highly recommend to change the generated password from the initial admin account immediately after first login. 
     
 
 
