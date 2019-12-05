@@ -16,27 +16,20 @@ like '_demo' or '_prod' in the file name. This property file contains all config
 SEB Server in as name/value pair settings. Have a look at the following table to find more information 
 to each relevant setting.
 
-    ======================================================================== ============================================ ============================================
-    Property Name                                                            Description                                  Info 
-    ======================================================================== ============================================ ============================================
-    sebserver.webservice.api.exam.config.init.permittedProcesses             2 rg rg rg     gregreg        erg rregg rgergerg ergergege                               3
-    ======================================================================== ============================================ ============================================
-
-
 .. list-table::
-    :name: tab-beispieltabelle
-    :widths: 50 50 50
+    :name: SEB Server Configuration Properties
+    :widths: 200 200 100
     :header-rows: 0
 
-    * - Art der Einträge
-      - Eigenschaft 1
-      - Eigenschaft 2
-    * - Gegenstand 1
-      - eckig
-      - rot
-    * - Gegenstand 2
-      - rund
-      - blau
+    * - file.encoding
+      - Defines the standard encoding
+      - Default is 'UTF-8'
+    * - server.address
+      - The IP address the SEB Server binds to
+      - Usually set to 0.0.0.0 for docker internal communication
+    * - server.port
+      - The port the SEB Server listen to (HTTP/HTTPS)
+      - Usually this is set to 8080 and the reverse proxy deals with mapping and TLS
 
 
 
