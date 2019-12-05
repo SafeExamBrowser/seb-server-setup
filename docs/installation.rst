@@ -23,25 +23,28 @@ provides a setup for testing with a mariadb service, a seb-server single instanc
         sebserver.Dockerfile
         setup.Dockerfile
         
-So a specific installation the process should mostly be the same:
+The docker based installation typically contains a config directory with all the related config files, one or more docker-files that
+defines images for installation related services and a docker-compose file that bundles all together. Configuration files as well as 
+docker files can be modified for the specified needs on the installation environment.
+So a usual installation process for SEB Server mostly look something like:
 
-- Connecting to the remote machine where the SEB Server instance has to be installed
+1. Connecting to the remote machine where the SEB Server instance has to be installed
 
-- Install Git and Docker if not already installed.
+2. Install Git and Docker if not already installed.
 
-.. note::
+    .. note::
+    
+        The newest versions of Git and Docker are recommended. For installation see:
+            |    - Git : https://www.atlassian.com/git/tutorials/install-git
+            |    - Docker : https://docs.docker.com/install/
 
-    The newest versions of Git and Docker are recommended. For installation see:
-    |    - Git : https://www.atlassian.com/git/tutorials/install-git
-    |    - Docker : https://docs.docker.com/install/
+3. In the installation directory of choice clone the seb-server-setup repository of desired version
 
-- In the installation directory of choice clone the seb-server-setup repository of desired version
+4. Navigate into the installation strategy sub-directory of choice and edit/prepare the configuration for the specified needs
 
-- Navigate into the installation strategy sub-directory of choice and edit/prepare the configuration for the specified needs
+5. Build the docker images and do some strategy dependent additional settings
 
-- Build the docker images and do some strategy dependent additional settings
-
-- Bring the docker containers up and running and do some suggested health checks
+6. Bring the docker containers up and running and do some suggested health checks
 
 Next part describes this process in detail for all supported installation strategies and also gives a service overview for a
 specific installation strategy.
@@ -83,7 +86,60 @@ The docker setup consists of a Dockerfile (sebserver.Docker) that defines and bu
 The build of the image for SEB Server first clones the defines version of the SEB Server source repository form GitHub and build the SEB Server with Maven that leads to a self-contained, spring-boot-based, 
 jar artifact that will be run with a usual java command on container startup. For MariaDB the defined public image is been used to build-up the MariaDB server service.
 
+**Configuration**
 
+There is only the SEB Server Spring configuration in place so far for the Demo setup. See :ref:`configuration-label`.
+
+
+**Installation:**
+
+1. Login to the target/remote host where the SEB Server demo shall be installed, on windows open a command or PowerShell and create a working directory and navigate into it.
+    
+    .. code-block:: bash
+    
+        $ mkdir /sebserver
+        $ cd sebserver
+        
+2. Get a clone of the seb-server-setup repository and navigate to the demo setup folder
+
+    .. code-block:: bash
+    
+        $ git clone https://github.com/SafeExamBrowser/seb-server-setup.git
+        $ cd seb-server-setup/docker/demo
+
+3. If some specific configuration is needed, this can be done within this step. See :ref:`configuration-label`. for more details on how to configure the services
+
+4. build the docker images. 
+
+    .. code-block:: bash
+    
+        $ docker-compose build --no-cache
+
+    .. note::
+    
+        This step can be skipped if the images are already build with the right version.
+
+5. Start the services. 
+
+    .. code-block:: bash
+    
+        $ docker-compose up -d
+        
+6. Check if the containers are started and running with. There should be two containers running; seb-server and seb-server-mariadb. You can also check the logs of individual container
+
+    .. code-block:: bash
+    
+        $ docker ps --all
+        $ docker logs ${container name}
+        
+7. If there where no changes to the default configuration the SEB Server is now running on port 8080 and can be accessed with a browser on http://server-address:8080/. There is one pre-configured institution (ETH Zürich) and one user-account with all roles to manage the server. The username of the initial account is always "super-admin" and the can be extracted from the SEB Server log-file. View logs with docker logs and have a find the line called:
+
+        ******* SEB Server initial admin pwd: [the password is here]
+    
+    .. note::
+    
+        Since this is a demo installation it may not be necessary but we highly recommend to change the generated password form the initial admin account immediately after first login. 
+    
 
 
 Testing
@@ -95,3 +151,4 @@ Production
 ----------
 
 TODO
+

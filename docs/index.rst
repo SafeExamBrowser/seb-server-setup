@@ -16,5 +16,6 @@ SEB Server Installation Guide
    
    overview
    installation
+   configuration
    troubleshooting
 
