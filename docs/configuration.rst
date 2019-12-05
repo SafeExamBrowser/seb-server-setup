@@ -16,16 +16,11 @@ like '_demo' or '_prod' in the file name. This property file contains all config
 SEB Server in as name/value pair settings. Have a look at the following table to find more information 
 to each relevant setting.
 
-=====  =====  ======
-   Inputs     Output
-------------  ------
-  A      B    A or B
-=====  =====  ======
-False  False  False
-True   False  True
-False  True   True
-True   True   True
-=====  =====  ======
+    ======================================================================== ============================================ ============================================
+    Property Name                                                            Description                                  Info 
+    ======================================================================== ============================================ ============================================
+    sebserver.webservice.api.exam.config.init.permittedProcesses             2 rg rg rg     gregreg        erg rregg rgergerg ergergege                               3
+    ======================================================================== ============================================ ============================================
 
 
 
