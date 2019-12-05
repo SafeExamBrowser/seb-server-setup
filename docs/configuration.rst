@@ -18,9 +18,12 @@ to each relevant setting.
 
 .. list-table::
     :name: SEB Server Configuration Properties
-    :widths: 200 200 100
-    :header-rows: 0
-
+    :widths: 200 100 100
+    :header-rows: 1
+    
+    * - Property Name
+      - Description
+      - Info
     * - file.encoding
       - Defines the standard encoding
       - Default is 'UTF-8'
