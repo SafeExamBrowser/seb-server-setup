@@ -28,23 +28,23 @@ defines images for installation related services and a docker-compose file that 
 docker files can be modified for the specified needs on the installation environment.
 So a usual installation process for SEB Server mostly look something like:
 
-#.  Connecting to the remote machine where the SEB Server instance has to be installed 
+#. Connecting to the remote machine where the SEB Server instance has to be installed 
 
-        Install Git and Docker if not already installed.
+    Install Git and Docker if not already installed.
 
-            .. note::
-            
-                The newest versions of Git and Docker are recommended. For installation see:
-                    |    - Git : https://www.atlassian.com/git/tutorials/install-git
-                    |    - Docker : https://docs.docker.com/install/
+    .. note::
+    
+        The newest versions of Git and Docker are recommended. For installation see:
+            |    - Git : https://www.atlassian.com/git/tutorials/install-git
+            |    - Docker : https://docs.docker.com/install/
 
-        In the installation directory of choice clone the seb-server-setup repository of desired version
-    
-        Navigate into the installation strategy sub-directory of choice and edit/prepare the configuration for the specified needs
-    
-        Build the docker images and do some strategy dependent additional settings
-    
-        Bring the docker containers up and running and do some suggested health checks
+    In the installation directory of choice clone the seb-server-setup repository of desired version
+
+    Navigate into the installation strategy sub-directory of choice and edit/prepare the configuration for the specified needs
+
+    Build the docker images and do some strategy dependent additional settings
+
+    Bring the docker containers up and running and do some suggested health checks
 
 Next part describes this process in detail for all supported installation strategies and also gives a service overview for a
 specific installation strategy.
