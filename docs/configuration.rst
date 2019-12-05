@@ -16,6 +16,14 @@ like '_demo' or '_prod' in the file name. This property file contains all config
 SEB Server in as name/value pair settings. Have a look at the following table to find more information 
 to each relevant setting.
 
+The settings can be divided into three categories, global settings, gui-service settings and web-service settings.
+If the SEB Server is deployed as stand-alone server then all the properties are in one properties file with the
+setup specific related suffix. If the gui and the web-service is deployed separately there will be two property files
+one for the gui server containing the global settings and all gui-service related settings and one for the webservice
+with also the global settings and all webservice related settings.
+
+**Global Settings**
+
 .. list-table::
     :name: SEB Server Configuration Properties
     :widths: 200 100 100
@@ -31,12 +39,13 @@ to each relevant setting.
       - The IP address the SEB Server binds to
       - Usually set to 0.0.0.0 for docker internal communication
     * - server.port
-      - |The port the SEB Server listen to (HTTP/HTTPS). 
-        |thia eifj qeifj qefij qefije qeofj qeof q'ef qef0 qef kqeofki qüefk qüpefk pefk qüpefk pefk epfk epükf qpfü kfq
+      - | The port the SEB Server listen to (HTTP/HTTPS). 
+        | thia eifj qeifj qefij qefije qeofj qeof q'ef qef0 qef kqeofki qüefk qüpefk pefk qüpefk pefk epfk epükf qpfü kfq
       - Usually this is set to 8080 and the reverse proxy deals with mapping and TLS
 
+**Webservice Settings**
 
-
+**GUI Service Settings**
 
 Reverse Proxy Configuration
 ---------------------------
