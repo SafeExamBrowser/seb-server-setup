@@ -28,7 +28,7 @@ defines images for installation related services and a docker-compose file that 
 docker files can be modified for the specified needs on the installation environment.
 So a usual installation process for SEB Server mostly look something like:
 
-#.  Connecting to the remote machine where the SEB Server instance has to be installed
+#. Connecting to the remote machine where the SEB Server instance has to be installed 
 
     Install Git and Docker if not already installed.
 
