@@ -137,12 +137,12 @@ There is one pre-configured institution (ETH Zürich) and one user-account with 
 The username of the initial account is always "super-admin" and the can be extracted from the SEB Server log-file. 
 View logs with docker logs find the SEB Server initialization info and there the initial admin-account line
 
-    [SEB SERVER INIT] ---->   ___  ___  ___   ___
-    [SEB SERVER INIT] ---->  / __|| __|| _ ) / __| ___  _ _ __ __ ___  _ _ 
-    [SEB SERVER INIT] ---->  \__ \| _| | _ \ \__ \/ -_)| '_|\ V // -_)| '_|
-    [SEB SERVER INIT] ---->  |___/|___||___/ |___/\___||_|   \_/ \___||_|  
-    
-    [SEB SERVER INIT] ----> SEB Server initial admin-account: ...
+    | [SEB SERVER INIT] ---->   ___  ___  ___   ___
+    | [SEB SERVER INIT] ---->  / __|| __|| _ ) / __| ___  _ _ __ __ ___  _ _ 
+    | [SEB SERVER INIT] ---->  \__ \| _| | _ \ \__ \/ -_)| '_|\ V // -_)| '_|
+    | [SEB SERVER INIT] ---->  |___/|___||___/ |___/\___||_|   \_/ \___||_|  
+    | 
+    | [SEB SERVER INIT] ----> SEB Server initial admin-account: ...
     
     .. note::
     
