@@ -33,7 +33,7 @@ common cases and can easily be extended by adding new installation setup.
 The seb-server-setup repository structure defines the installation type on the fist directory level. Currently only docker-based 
 installations are supported. On the second directory level defines installation purpose categories like "demo" for setting up a 
 SEB Server for demonstrations, "testing" or "prod" for testing purposes or final productivity setup. The third and forth directory level, 
-if existing, defines then different SEB Server setups like "standalone" or "distributed" and finally the encryption (TLS) method that 
+if existing, defines then different SEB Server setups like "stand-alone" or "distributed" and finally the encryption (TLS) method that 
 should be used. Below is an example of the seb-server-setup directory structure. 
 
 ::
@@ -46,10 +46,23 @@ should be used. Below is an example of the seb-server-setup directory structure.
           - standalone
              - letsencrypt [experimental]
              - noencrypt
-             - selfsigned
+             - selfsigned [experimental]
         - testing
           - noencrypt
-          - selfsigned
+          - selfsigned [experimental]
         - ..?
       
-At the 
+At each endpoint exists a root installation directory with docker-files for the services, a docker-compose definition and a "config" directory
+containing service related configurations like Spring configuration for the SEB Server, MariaDB configuration for the database and/or
+reverse proxy configuration.
+
+**HTTPS / TLS Configuration**
+
+There are manly two ways/strategies to configure HTTPS / TLS for a SEB Server;
+
+    - The HTTPS / TLS is handled by a reverse-proxy that is exposed to the Internet and forwards the requests over HTTP to the SEB Server that in this
+    case has only an simple HTTP connector and is not exposed to the Internet but to the internal network with the reverse proxy
+    - The HTTPS / TLS is handled by the SEB Server itself (end to end). 
+    
+    .. note:: It is highly recommended to use the first approach here that is easier to install then the end to end approach. 
+    There are some prepared installations for the second approach within the seb-server-setup repository (selfsigned) but they are experimental yet

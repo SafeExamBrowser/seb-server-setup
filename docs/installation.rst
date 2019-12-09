@@ -28,9 +28,9 @@ defines images for installation related services and a docker-compose file that 
 docker files can be modified for the specified needs on the installation environment.
 So a usual installation process for SEB Server mostly look something like:
 
-#. Connecting to the remote machine where the SEB Server instance has to be installed 
+1. Connecting to the remote machine where the SEB Server instance has to be installed 
     
-   Install Git and Docker if not already installed.
+2. Install Git and Docker if not already installed.
     
     .. note::
     
@@ -38,13 +38,13 @@ So a usual installation process for SEB Server mostly look something like:
             |    - Git : https://www.atlassian.com/git/tutorials/install-git
             |    - Docker : https://docs.docker.com/install/
     
-   In the installation directory of choice clone the seb-server-setup repository of desired version
+3. In the installation directory of choice clone the seb-server-setup repository of desired version
     
-   Navigate into the installation strategy sub-directory of choice and edit/prepare the configuration for the specified needs
+4. Navigate into the installation strategy sub-directory of choice and edit/prepare the configuration for the specified needs
     
-   Build the docker images and do some strategy dependent additional settings
+5. Build the docker images and do some strategy dependent additional settings
     
-   Bring the docker containers up and running and do some suggested health checks
+6. Bring the docker containers up and running and do some suggested health checks
 
 Next part describes this process in detail for all supported installation strategies and also gives a service overview for a
 specific installation strategy.
@@ -125,7 +125,7 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
     
         $ docker-compose up -d
         
-6. Check if the containers are started and running with. There should be two containers running; seb-server and seb-server-mariadb. You can also check the logs of individual container
+6. Check if the containers are started and running. There should be two containers running; seb-server and seb-server-mariadb. You can also check the logs of individual container
 
     .. code-block:: bash
     
@@ -140,6 +140,47 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
     
         Since this is a demo installation it may not be necessary but we highly recommend to change the generated password from the initial admin account immediately after first login. 
     
+**Update**
+
+To update an already installed SEB Server instance, following the steps below;
+
+1. Shouting down the SEB Server setup docker services with;
+
+    .. code-block:: bash
+    
+        $ docker-compose down
+        
+2. Update to the newest or preferred version within the seb-server-setup. Use git tags to show the available tags. If there are already local changed - if the configuration was modified from the original settings - and the local changes shall still be used and remain, git stash can be used to locally store and merge them.
+
+    .. code-block:: bash
+    
+        # Get new tags from remote
+        $ git fetch --tags
+
+        # Get latest tag name
+        $ latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+        
+        # If local changes shall remain
+        $ git stash
+
+        # Checkout latest tag
+        $ git checkout $latestTag
+        
+        # If local changes shall remain
+        $ git stash apply
+        
+3. Boot the SEB Server setup docker services with
+
+    .. code-block:: bash
+    
+        $ docker-compose up -d
+        
+6. Check if the containers are started and running. There should be two containers running; seb-server and seb-server-mariadb. You can also check the logs of individual container
+
+    .. code-block:: bash
+    
+        $ docker ps --all
+        $ docker logs ${container name}
 
 
 Testing
