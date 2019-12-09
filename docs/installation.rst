@@ -132,9 +132,17 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
         $ docker ps --all
         $ docker logs ${container name}
         
-7. If there where no changes to the default configuration the SEB Server is now running on port 8080 and can be accessed with a browser on http://server-address:8080/. There is one pre-configured institution (ETH Zürich) and one user-account with all roles to manage the server. The username of the initial account is always "super-admin" and the can be extracted from the SEB Server log-file. View logs with docker logs and have a find the line called:
+7. If there where no changes to the default configuration the SEB Server is now running on port 8080 and can be accessed with a browser on http://server-address:8080/. 
+There is one pre-configured institution (ETH Zürich) and one user-account with all roles to manage the server. 
+The username of the initial account is always "super-admin" and the can be extracted from the SEB Server log-file. 
+View logs with docker logs find the SEB Server initialization info and there the initial admin-account line
 
-    ----> SEB Server initial admin-account;
+    [SEB SERVER INIT] ---->   ___  ___  ___   ___
+    [SEB SERVER INIT] ---->  / __|| __|| _ ) / __| ___  _ _ __ __ ___  _ _ 
+    [SEB SERVER INIT] ---->  \__ \| _| | _ \ \__ \/ -_)| '_|\ V // -_)| '_|
+    [SEB SERVER INIT] ---->  |___/|___||___/ |___/\___||_|   \_/ \___||_|  
+    
+    [SEB SERVER INIT] ----> SEB Server initial admin-account: ...
     
     .. note::
     
