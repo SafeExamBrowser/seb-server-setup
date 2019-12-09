@@ -18,7 +18,20 @@ The webservice uses a well defined REST API interface over HTTP and mainly JSON 
 The webservice also implements OAuth2 as a standard authentication method. 
 The GUI service is also written in Java and uses Eclipse RWT to create the HTML front-end and drive upon the REST API of 
 the webservice. While the webservice externalize state as much as possible (except some internal caching) to make horizontal 
-scaling possible and easy, the GUI service has a session-state for the logged in users
+scaling possible, the GUI service has a session-state for the logged in users
+
+The following diagram shows a setup with scaled web-services covered by a load balancer and a separated GUI service on top.
+The web-services as well as the GUI service can run on the same host (but separated processes) or they can run on different 
+hosts / cluster.
+
+.. image:: images/overall-architecture-scaled.png
+    :align: center
+    :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/overall-architecture-scaled.png
+
+.. note:: 
+
+    A Fully clustered setup installation for SEB Server is not yet part of this documentation but it should be possible to
+    achieve this with a docker based cluster service like `docker-swarm <https://docs.docker.com/engine/swarm/>`_ or `Kubernetes <https://kubernetes.io/docs/concepts/>`_ 
 
 .. _installation-repo-label:
 
@@ -64,5 +77,7 @@ There are manly two ways/strategies to configure HTTPS / TLS for a SEB Server;
     case has only an simple HTTP connector and is not exposed to the Internet but to the internal network with the reverse proxy
     - The HTTPS / TLS is handled by the SEB Server itself (end to end). 
     
-    .. note:: It is highly recommended to use the first approach here that is easier to install then the end to end approach. 
+    .. note:: 
+    
+        It is highly recommended to use the first approach here that is easier to install then the end to end approach. 
     There are some prepared installations for the second approach within the seb-server-setup repository (selfsigned) but they are experimental yet

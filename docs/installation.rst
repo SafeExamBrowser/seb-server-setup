@@ -137,12 +137,16 @@ There is one pre-configured institution (ETH Zürich) and one user-account with 
 The username of the initial account is always "super-admin" and the can be extracted from the SEB Server log-file. 
 View logs with docker logs find the SEB Server initialization info and there the initial admin-account line
 
-    | [SEB SERVER INIT] ---->   ___  ___  ___   ___
-    | [SEB SERVER INIT] ---->  / __|| __|| _ ) / __| ___  _ _ __ __ ___  _ _ 
-    | [SEB SERVER INIT] ---->  \__ \| _| | _ \ \__ \/ -_)| '_|\ V // -_)| '_|
-    | [SEB SERVER INIT] ---->  |___/|___||___/ |___/\___||_|   \_/ \___||_|  
-    | 
-    | [SEB SERVER INIT] ----> SEB Server initial admin-account: ...
+::
+
+    [SEB SERVER INIT] ---->   ___  ___  ___   ___
+    [SEB SERVER INIT] ---->  / __|| __|| _ ) / __| ___  _ _ __ __ ___  _ _ 
+    [SEB SERVER INIT] ---->  \__ \| _| | _ \ \__ \/ -_)| '_|\ V // -_)| '_|
+    [SEB SERVER INIT] ---->  |___/|___||___/ |___/\___||_|   \_/ \___||_|  
+    [SEB SERVER INIT] ---->
+    [SEB SERVER INIT] ----> SEB Server successfully started up!
+    ...
+    [SEB SERVER INIT] ----> SEB Server initial admin-account: ...
     
     .. note::
     
@@ -183,7 +187,7 @@ To update an already installed SEB Server instance, following the steps below;
     
         $ docker-compose up -d
         
-6. Check if the containers are started and running. There should be two containers running; seb-server and seb-server-mariadb. You can also check the logs of individual container
+4. Check if the containers are started and running. There should be two containers running; seb-server and seb-server-mariadb. You can also check the logs of individual container
 
     .. code-block:: bash
     
