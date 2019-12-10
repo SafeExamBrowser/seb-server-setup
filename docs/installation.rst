@@ -173,8 +173,8 @@ This setup provides currently two different setups, one with no HTTPS/TLS config
 The setup without HTTPS/TLS configuration can be used for testing without TLS in place at all or within an internal infrastructure that has already a reverse proxy that handles TLS encryption.
 The "selfsigned" setup is currently in construction and highly experimental. Because of that this setup is not described.
 
-Testing Basic Setup
--------------------
+Basic Setup
+...........
 
 The testing basic setup comes with a webservice and GUI-service bundled single server setup defined in the usual sebserver.Docker file, a simple and integrated MariaDB setup that uses just the official
 MariaDB Docker image, and a reverse proxy using the official nginx:latest Docker image. There is also a initial setup service that is defined in setup.Dockerfile and that in this case does only the 
