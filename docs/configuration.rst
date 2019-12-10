@@ -87,6 +87,10 @@ with also the global settings and all webservice related settings.
         | spring.datasource.hikari.maxLifetime
       - Hikari data-base connection pool times and timeouts
       - See `Hakari Documentation <https://github.com/brettwooldridge/HikariCP#configuration-knobs-baby>`_
+    * - sebserver.gui.multilingual
+      - Indicates if the multilingual feature is on or off
+      - Set this to true if
+      
 
 **Webservice Settings**
 
