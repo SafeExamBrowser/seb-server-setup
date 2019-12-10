@@ -3,7 +3,7 @@ services:
   certificates:
     build:
         context: .
-        dockerfile: selfsigned.Dockerfile
+        dockerfile: setup.Dockerfile
     container_name: certificates
     volumes:
         - seb-server-certs:/certs

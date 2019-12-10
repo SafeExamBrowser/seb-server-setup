@@ -6,6 +6,8 @@ Configuration
 For different setups, there can be different configuration files be involved or not. The configurations coming from 
 the seb-server-setup repository are listed and documented here by the service they belong to.
 
+.. _seb-sever-configuration-label:
+
 SEB Server Configuration
 ------------------------
 
@@ -90,10 +92,14 @@ with also the global settings and all webservice related settings.
 
 **GUI Service Settings**
 
+.. _proxy-configuration-label:
+
 Reverse Proxy Configuration
 ---------------------------
 
 TODO
+
+.. _db-configuration-label:
 
 MariaDB Configuration
 ---------------------
