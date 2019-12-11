@@ -39,7 +39,7 @@ CMD if [ "${DEBUG_MODE}" = "true" ] ; \
             -Dcom.sun.management.jmxremote.local.only=false \
             -Dcom.sun.management.jmxremote.authenticate=false \
             -jar seb-server-"${SEBSERVER_JAR_VERSION}".jar \
-            --spring.profiles.active=prod \
+            --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
             --sebserver.certs.password="${secret}" \ 
             --sebserver.mariadb.password="${secret}" \
@@ -48,7 +48,7 @@ CMD if [ "${DEBUG_MODE}" = "true" ] ; \
             -Xms64M \
             -Xmx1G \
             -jar seb-server-"${SEBSERVER_JAR_VERSION}".jar \
-            --spring.profiles.active=prod \
+            --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
             --sebserver.certs.password="${secret}" \ 
             --sebserver.mariadb.password="${secret}" \

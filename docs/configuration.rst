@@ -87,14 +87,27 @@ with also the global settings and all webservice related settings.
         | spring.datasource.hikari.maxLifetime
       - Hikari data-base connection pool times and timeouts
       - See `Hakari Documentation <https://github.com/brettwooldridge/HikariCP#configuration-knobs-baby>`_
+    * - | spring.datasource.password
+      - The password for the database connection
+      - | This usually is automatically set by the password given from the initial setup process
+        | and must not be changed. If there is the need to change this for whatever reason, be
+        | aware that it is not secure to give a password in plain test within the configuration 
+        | and everyone that is able to read the configuration is able to get the password.
+    * - sebserver.webservice.api.admin.clientSecret
+      - The secret for the GUI service s basic authentication to connect to the webservice; OAuth2
+      - 
+
+
+**GUI Service Settings**
+
+.. list-table::
+    :name: SEB Server Webservice Settings
+    :widths: 200 100 100
+    :header-rows: 1
+      
     * - sebserver.gui.multilingual
       - Indicates if the multilingual feature is on or off
       - Set this to true if
-      
-
-**Webservice Settings**
-
-**GUI Service Settings**
 
 .. _proxy-configuration-label:
 

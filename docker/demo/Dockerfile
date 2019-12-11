@@ -1,32 +1,31 @@
 FROM alpine/git
 
-ARG GIT_TAG
 ARG SEBSERVER_VERSION
+ARG GIT_TAG="v${SEBSERVER_VERSION}"
 
 WORKDIR /sebserver
 RUN if [ "x${GIT_TAG}" = "x" ] ; \
     then git clone --depth 1 https://github.com/SafeExamBrowser/seb-server.git ; \
     else git clone -b "$GIT_TAG" --depth 1 https://github.com/SafeExamBrowser/seb-server.git ; fi
 
-FROM maven:3.5-jdk-8-alpine
+FROM maven:latest
 
 ARG SEBSERVER_VERSION
 
 WORKDIR /sebserver
 COPY --from=0 /sebserver/seb-server /sebserver
-RUN mvn clean install -e -P Demo -DskipTests
+RUN mvn clean install -DskipTests
 
-FROM openjdk:8-jre-alpine
+FROM openjdk:11-jre-stretch
 
 ARG SEBSERVER_VERSION
-ENV SEBSERVER_VERSION=${SEBSERVER_VERSION}
+ARG SEBSERVER_BUILD=
+ENV SEBSERVER_JAR=${SEBSERVER_VERSION}${SEBSERVER_BUILD}
 ENV SERVER_PORT="8080"
-ENV DBSERVER_PWD=
-ENV GUICLIENT_PWD=
-ENV INTERNAL_PWD=
+ENV SERVER_PWD=
 
 WORKDIR /sebserver
-COPY --from=1 /sebserver/target/seb-server-"$SEBSERVER_VERSION"-SNAPSHOT.jar /sebserver
+COPY --from=1 /sebserver/target/seb-server-"$SEBSERVER_JAR".jar /sebserver
 
 ENTRYPOINT exec java \
     -Dcom.sun.management.jmxremote \
@@ -36,12 +35,11 @@ ENTRYPOINT exec java \
     -Dcom.sun.management.jmxremote.local.only=false \
     -Dcom.sun.management.jmxremote.ssl=false \
     -Dcom.sun.management.jmxremote.authenticate=false \
-    -jar seb-server-"${SEBSERVER_VERSION}"-SNAPSHOT.jar \
+    -jar seb-server-"${SEBSERVER_JAR}".jar \
     --server.port="${SERVER_PORT}" \
     --spring.profiles.active=demo \
     --spring.config.location=file:/sebserver/config/,classpath:/config/ \
-    --spring.datasource.password="${DBSERVER_PWD}" \
-    --sebserver.webservice.api.admin.clientSecret="${GUICLIENT_PWD}" \
-    --sebserver.webservice.internalSecret="${INTERNAL_PWD}"
+    --sebserver.mariadb.password="${SERVER_PWD}" \
+    --sebserver.password="${SERVER_PWD}"
 
 EXPOSE $SERVER_PORT 9090
