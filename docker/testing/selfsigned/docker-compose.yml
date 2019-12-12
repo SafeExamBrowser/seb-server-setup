@@ -28,8 +28,8 @@ services:
           context: .
           dockerfile: sebserver.Dockerfile
           args:
-              - GIT_TAG=
-              - SEBSERVER_JAR_VERSION=0.5.1-beta-SNAPSHOT
+              - SEBSERVER_VERSION=0.5.3-beta
+              - SEBSERVER_BUILD=-SNAPSHOT
       container_name: seb-server
       volumes:
         - seb-server-config:/sebserver/config

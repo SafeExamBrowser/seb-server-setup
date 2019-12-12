@@ -11,7 +11,7 @@ RUN if [ "x${GIT_TAG}" = "x" ] ; \
 # Build with maven (skip tests)
 FROM maven:latest
 
-ARG SEBSERVER_JAR_VERSION
+ARG SEBSERVER_VERSION
 
 WORKDIR /sebserver
 COPY --from=0 /sebserver/seb-server /sebserver
@@ -19,12 +19,13 @@ RUN mvn clean install -DskipTests
 
 FROM openjdk:11-jre-stretch
 
-ARG SEBSERVER_JAR_VERSION
-ENV SEBSERVER_JAR_VERSION=${SEBSERVER_JAR_VERSION}
+ARG SEBSERVER_VERSION
+ARG SEBSERVER_BUILD=
+ENV SEBSERVER_JAR=${SEBSERVER_VERSION}${SEBSERVER_BUILD}
 ENV DEBUG_MODE=false
 
 WORKDIR /sebserver
-COPY --from=1 /sebserver/target/seb-server-"$SEBSERVER_JAR_VERSION".jar /sebserver
+COPY --from=1 /sebserver/target/seb-server-"$SEBSERVER_JAR".jar /sebserver
 
 CMD if [ "${DEBUG_MODE}" = "true" ] ; \
         then secret=$(cat /sebserver/config/secret) && exec java \
@@ -38,7 +39,7 @@ CMD if [ "${DEBUG_MODE}" = "true" ] ; \
             -Dcom.sun.management.jmxremote.ssl=false \
             -Dcom.sun.management.jmxremote.local.only=false \
             -Dcom.sun.management.jmxremote.authenticate=false \
-            -jar seb-server-"${SEBSERVER_JAR_VERSION}".jar \
+            -jar seb-server-"${SEBSERVER_JAR}".jar \
             --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
             --sebserver.certs.password="${secret}" \ 
@@ -47,7 +48,7 @@ CMD if [ "${DEBUG_MODE}" = "true" ] ; \
         else secret=$(cat /sebserver/config/secret) && exec java \
             -Xms64M \
             -Xmx1G \
-            -jar seb-server-"${SEBSERVER_JAR_VERSION}".jar \
+            -jar seb-server-"${SEBSERVER_JAR}".jar \
             --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
             --sebserver.certs.password="${secret}" \ 

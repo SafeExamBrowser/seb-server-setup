@@ -11,7 +11,7 @@ RUN if [ "x${GIT_TAG}" = "x" ] ; \
 # Build with maven (skip tests)
 FROM maven:latest
 
-ARG SEBSERVER_JAR_VERSION
+ARG SEBSERVER_VERSION
 
 WORKDIR /sebserver
 COPY --from=0 /sebserver/seb-server /sebserver
