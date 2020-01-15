@@ -31,7 +31,7 @@ services:
           context: .
           dockerfile: sebserver.Dockerfile
           args:
-              - SEBSERVER_VERSION=0.5.3-beta
+              - SEBSERVER_VERSION=0.5.4-beta
               - SEBSERVER_BUILD=-SNAPSHOT
       container_name: seb-server
       volumes:
