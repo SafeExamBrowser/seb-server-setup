@@ -34,7 +34,7 @@ CMD if [ "${DEBUG_MODE}" = "true" ] ; \
             -Dcom.sun.management.jmxremote \
             -Dcom.sun.management.jmxremote.port=9090 \
             -Dcom.sun.management.jmxremote.rmi.port=9090 \
-            -Djava.rmi.server.hostname=0.0.0.0 \
+            -Djava.rmi.server.hostname=localhost \
 # TODO secure the JMX connection (cueenrtly there is a premission problem with the secret file
             -Dcom.sun.management.jmxremote.ssl=false \
             -Dcom.sun.management.jmxremote.local.only=false \
