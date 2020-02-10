@@ -22,6 +22,7 @@ services:
         - seb-server-network
     ports:
         - 3306:3306
+    restart: unless-stopped
 
   seb-server:
       build:
@@ -50,6 +51,7 @@ services:
       depends_on:
           - "mariadb"
           - "certificates"
+      restart: unless-stopped
 
   reverse-proxy:
     image: "nginx:latest"
@@ -66,6 +68,7 @@ services:
       - "mariadb"
       - "seb-server"
       - "certificates"
+    restart: unless-stopped
 
 networks:
   seb-server-network:

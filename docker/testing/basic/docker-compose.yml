@@ -51,6 +51,7 @@ services:
       depends_on:
           - "mariadb"
           - "seb-server-setup"
+      restart: unless-stopped
 
   reverse-proxy:
     image: "nginx:latest"
