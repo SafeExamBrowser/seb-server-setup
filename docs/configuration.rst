@@ -206,11 +206,17 @@ with also the global settings and all webservice related settings.
 Reverse Proxy Configuration
 ---------------------------
 
-TODO
+Docker internal SEB Server setup uses a nginx reverse proxy for communication with the host and the Internet. The configuration is places
+in the app.conf file and will be loaded by nginx on startup of the container. The configuration usually has all the pre-settings needed
+for working correctly within the specific setup context. If there is the need to have a different configuration for the nginx reverse prox
+we refer to the `nginx configuration documentation <http://nginx.org/en/docs/>`_ 
 
 .. _db-configuration-label:
 
 MariaDB Configuration
 ---------------------
 
-TODO
+CUrrently there is no separated MariaDB configuration and all is setup within the the automated docker setup of MariaDB. As long
+as no distributed MariaDB cluster is needed the MariaDB is bundled with the docker setup of the SEB Server web-service. As soon as 
+possible and if requested, we will provide a guidance for setting up a separated MariaDB cluster and how to configure SEB Server web-service
+for such a setup.
