@@ -68,6 +68,17 @@ with also the global settings and all webservice related settings.
     * - Property Name
       - Description
       - Info
+    * - sebserver.init.adminaccount.gen-on-init
+      - Indicates whether initial admin account creation is on/off
+      - If an initial admin account should be created on first startup of the SEB Server this must be set
+    * - sebserver.init.adminaccount.username
+      - Defines the username of the initial admin account.
+      - If initial admin account creation is switched on, this is mandatory and defines the username that is created for the initial account.
+    * - sebserver.init.organisation.name
+      - Defines the institution name for of the institution to create for the initial admin account
+      - | If an initial admin account must be created, we need also an institution to assign this initial account to.
+        | This defines the name of that initial institution that is created together with the initial admin account.
+    
     * - datastore.mariadb.server.address
       - Defines the address of the MariaDB data-store server
       - | Usually the data-store is defined in a separated docker container/service and connected within a docker-network.
@@ -77,7 +88,7 @@ with also the global settings and all webservice related settings.
       - Same as datastore.mariadb.server.address
     * - spring.datasource.username
       - The username for the JDBC account to use to connect to the MariaDB server
-      - 
+      - In a bundled environment with docker, root is default and must not be changed
     * - spring.datasource.url
       - the JDBC connection URL 
       - This mostly is composed from other settings and must not be changed
@@ -94,8 +105,33 @@ with also the global settings and all webservice related settings.
         | aware that it is not secure to give a password in plain test within the configuration 
         | and everyone that is able to read the configuration is able to get the password.
     * - sebserver.webservice.api.admin.clientSecret
-      - The secret for the GUI service s basic authentication to connect to the webservice; OAuth2
-      - 
+      - The secret for the GUI service basic authentication to connect to the webservice; OAuth2
+      - | This usually is automatically set by the password given from the initial setup process
+        | and must not be changed. If there is the need to change this for whatever reason, be
+        | aware that it is not secure to give a password in plain test within the configuration 
+        | and everyone that is able to read the configuration is able to get the password.
+    * - sebserver.webservice.internalSecret
+      - The secret that is used for SEB Server internal encryption.
+      - | This usually is automatically set by the password given from the initial setup process
+        | and must not be changed. If there is the need to change this for whatever reason, be
+        | aware that it is not secure to give a password in plain test within the configuration 
+        | and everyone that is able to read the configuration is able to get the password.
+    * - sebserver.webservice.distributed
+      - Indicates whether the web-service runs within a distributed environment or as single-bundled server
+      - | On a distributed environment (multiple running instances with load balancing) this must set to true
+        | to ensure internal cache strategies are working correctly on distributed setup.
+    * - | sebserver.webservice.http.scheme
+        | sebserver.webservice.http.external.servername
+        | sebserver.webservice.http.external.port
+      - This properties defines the URL on that the SEB Server can be accessed from the public Internet.
+      - | Set the scheme (http/https) and the server name to the external URL settings of the SEB Server. 
+        | If the web-service runs on default HTTP/HTTPS ports, the port must not be specified.
+    * - sebserver.webservice.http.redirect.gui
+      - Defines the redirection URL/Path to the GUI service.
+      - | On a single-bundled setup this can stick to the default and for a distributed setup this must define
+        | the public URL of the GUI service, where redirects from web-service should point to.
+    * - 
+      
 
 
 **GUI Service Settings**

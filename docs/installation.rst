@@ -37,6 +37,7 @@ So a usual installation process for SEB Server mostly look something like:
         The newest versions of Git and Docker are recommended. For installation see:
             |    - Git : https://www.atlassian.com/git/tutorials/install-git
             |    - Docker : https://docs.docker.com/install/
+            |    - Docker-Compose : https://docs.docker.com/compose/install/
     
 3. In the installation directory of choice clone the seb-server-setup repository of desired version
     
@@ -83,6 +84,7 @@ With the default configuration, the MariaDB server is exposed on port 3306 and t
     The newest versions of Git and Docker are recommended. For installation see:
         |    - Git : https://www.atlassian.com/git/tutorials/install-git
         |    - Docker : https://docs.docker.com/install/
+        |    - Docker-Compose : https://docs.docker.com/compose/install/
     
 **Setup:**
 
@@ -100,7 +102,7 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
     
     .. code-block:: bash
     
-        $ mkdir /sebserver
+        $ mkdir sebserver
         $ cd sebserver
         
 2. Get a clone of the seb-server-setup repository and navigate to the demo setup folder
@@ -108,7 +110,7 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
     .. code-block:: bash
     
         $ git clone https://github.com/SafeExamBrowser/seb-server-setup.git
-        $ cd docker/demo
+        $ cd seb-server-setup/docker/demo
 
 3. If some specific configuration is needed, this can be done within this step. See :ref:`configuration-label`. for more details on how to configure the services
 
@@ -137,8 +139,8 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
         
 7. If there where no changes to the default configuration the SEB Server is now running on port 8080 and can be accessed with a browser on http://server-address:8080/. 
 There is one pre-configured institution (ETH Zürich) and one user-account with all roles to manage the server. 
-The username of the initial account is always "super-admin" and the can be extracted from the SEB Server log-file. 
-View logs with docker logs find the SEB Server initialization info and there the initial admin-account line
+The username of the initial account is always "super-admin" and the password is "admin". After successful startup you will see a message like
+the following within the SEB Server log file.
 
 ::
 
@@ -205,6 +207,7 @@ initial password handling that is needed in the initial setup. And all is bundle
     The newest versions of Git and Docker are recommended. For installation see:
         |    - Git : https://www.atlassian.com/git/tutorials/install-git
         |    - Docker : https://docs.docker.com/install/
+        |    - Docker-Compose : https://docs.docker.com/compose/install/
         
 **Setup:**
 
@@ -222,7 +225,7 @@ There is the SEB Server Spring configuration in place: ref:`seb-server-configura
     
     .. code-block:: bash
     
-        $ mkdir /sebserver
+        $ mkdir sebserver
         $ cd sebserver
         
 2. Get a clone of the seb-server-setup repository and navigate to the demo setup folder
@@ -230,9 +233,15 @@ There is the SEB Server Spring configuration in place: ref:`seb-server-configura
     .. code-block:: bash
     
         $ git clone https://github.com/SafeExamBrowser/seb-server-setup.git
-        $ cd docker/testing/basic/
+        $ cd seb-server-setup/docker/testing/basic/
 
 3. If some specific configuration is needed, this can be done within this step. See:ref:`configuration-label`. for more details on how to configure the services
+   At least one should check the application-prof.properties file in the spring config directory, if everything is set properly.
+   
+   .. note::
+   
+        Check that the spring configuration properties "sebserver.webservice.http.external.*" are set correctly
+        to the URL where the SEB Server can be accessed from the public.
 
 4. build the docker images. 
 
@@ -294,7 +303,12 @@ The username and generated password of the initial admin account can be found on
     [SEB SERVER INIT] ---->
     [SEB SERVER INIT] ----> SEB Server successfully started up!
     ...
-    [SEB SERVER INIT] ----> SEB Server initial admin-account: ...
+    [SEB SERVER INIT] ----> ***********************************************************************************************************************************************************************
+    [SEB SERVER INIT] ----> SEB Server initial admin-account; name: sebserver-admin, pwd: i![qt}O3mUrCAA7WSZj5`ETRb4kfiy+za_IepZgnBCc^Br9=B%7lWXwcVABOAPJA
+    [SEB SERVER INIT] ---->
+    [SEB SERVER INIT] ----> !!!! NOTE: Do not forget to login and reset the generated admin password immediately !!!!
+    [SEB SERVER INIT] ----> ***********************************************************************************************************************************************************************
+
     
 .. note::
 
