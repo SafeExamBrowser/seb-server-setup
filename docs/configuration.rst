@@ -62,7 +62,7 @@ with also the global settings and all webservice related settings.
 
 .. list-table::
     :name: SEB Server Webservice Settings
-    :widths: 200 100 100
+    :widths: auto auto auto
     :header-rows: 1
     
     * - Property Name
@@ -161,7 +161,7 @@ with also the global settings and all webservice related settings.
 **GUI Service Settings**
 
 .. list-table::
-    :name: SEB Server Webservice Settings
+    :name: SEB Server GUI service Settings
     :widths: 200 100 100
     :header-rows: 1
       
