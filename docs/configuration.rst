@@ -130,7 +130,31 @@ with also the global settings and all webservice related settings.
       - Defines the redirection URL/Path to the GUI service.
       - | On a single-bundled setup this can stick to the default and for a distributed setup this must define
         | the public URL of the GUI service, where redirects from web-service should point to.
-    * - 
+    * - | sebserver.webservice.api.admin.endpoint
+        | sebserver.webservice.api.admin.accessTokenValiditySeconds
+        | sebserver.webservice.api.admin.refreshTokenValiditySeconds
+      - Defines properties for the admin API access.
+      - | The admin API access is needed to access the admin API of the web-service. The admin API defines a REST API
+        | for all administrative purposes. 
+    * - | sebserver.webservice.api.exam.endpoint
+        | sebserver.webservice.api.exam.accessTokenValiditySeconds
+        | sebserver.webservice.api.exam.endpoint.v1
+        | sebserver.webservice.api.exam.endpoint.discovery
+      - Defines properties for the exam API access.
+      - | The exam API access is needed to access the exam API of the web-service. The exam API defines a REST API
+        | for SEB clients to connect.
+    * - sebserver.webservice.api.exam.event-handling-strategy
+      - Defines the SEB client event handling strategy that is used by the web-service to store SEB client events.
+      - Currently there are two strategies available: SINGLE_EVENT_STORE_STRATEGY and ASYNC_BATCH_STORE_STRATEGY
+    * - sebserver.webservice.api.exam.enable-indicator-cache
+      - Indicates if internal indicator value cache should be used where possible
+      -
+    * - sebserver.webservice.api.pagination.maxPageSize
+      - This defines a maximal page size for the REST API list/page endpoints
+      - 
+    * - sebserver.webservice.lms.openedx.api.token.request.paths
+      - Defines a comma separated list of known Open edX LMS API token request paths.
+      - This paths will be used by the web-service to try to connect to a Open edX LMS REST API and request an access token. 
       
 
 
@@ -143,7 +167,39 @@ with also the global settings and all webservice related settings.
       
     * - sebserver.gui.multilingual
       - Indicates if the multilingual feature is on or off
-      - Set this to true if
+      - Set this to true if the SEB Server GUI should be multi lingual
+    * - sebserver.gui.supported.languages
+      - Comma separated list of supported language tags
+      - 
+    * - sebserver.gui.theme
+      - The RAP theme css file that should be used
+      - 
+    * - sebserver.gui.list.page.size
+      - The default page size of lists in SEB Server GUI
+      - 
+    * - sebserver.gui.date.displayformat
+      - The locale tag for the display format to use
+      - This defines the formatting of dates and numbers within the formatting of the specified location tag
+    * - sebserver.gui.entrypoint
+      - The servlet endpoint where the GUI service servlet is located.
+      - 
+    * - | sebserver.gui.webservice.protocol
+        | sebserver.gui.webservice.address
+        | sebserver.gui.webservice.port
+      - The URL properties to define the URL with that the web service is accessed from the GUI component.
+      - | On a single-bundled setup this must not be changed since GUI runs on the same server as the web-service and communicates 
+        | over standard localhost settings. For a distributed environment this must define the URL to the web-service server.
+    * - sebserver.gui.webservice.poll-interval
+      - Defines the interval in milliseconds that the GUI service uses to poll the live monitoring data from web-service.
+      -
+    * - sebserver.gui.webservice.mock-lms-enabled
+      - Indicates whether a mocking LMS for testing should be available in the LMS Setup section or not.
+      -
+    * - sebserver.gui.seb.client.config.download.filename
+      - Defines the download file name of a SEB client configuration.
+      - 
+    * - sebserver.gui.seb.exam.config.download.filename
+      - Defines the download file name of a SEB exam configuration
 
 .. _proxy-configuration-label:
 
