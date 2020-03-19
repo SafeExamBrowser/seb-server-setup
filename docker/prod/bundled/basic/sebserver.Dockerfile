@@ -30,15 +30,15 @@ COPY --from=1 /sebserver/target/seb-server-"$SEBSERVER_JAR".jar /sebserver
 CMD if [ "${DEBUG_MODE}" = "true" ] ; \
         then secret=$(cat /sebserver/config/secret) && exec java \
             -Xms64M \
-            -Xmx1G \
+            -Xmx2G \
             -Dcom.sun.management.jmxremote \
             -Dcom.sun.management.jmxremote.port=9090 \
             -Dcom.sun.management.jmxremote.rmi.port=9090 \
             -Djava.rmi.server.hostname=localhost \
-# TODO secure the JMX connection (cueenrtly there is a premission problem with the secret file
             -Dcom.sun.management.jmxremote.ssl=false \
             -Dcom.sun.management.jmxremote.local.only=false \
-            -Dcom.sun.management.jmxremote.authenticate=false \
+            -Dcom.sun.management.jmxremote.authenticate=true \
+            -Dcom.sun.management.jmxremote.access.file=jmxremote.access
             -jar seb-server-"${SEBSERVER_JAR}".jar \
             --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
@@ -47,7 +47,7 @@ CMD if [ "${DEBUG_MODE}" = "true" ] ; \
             --sebserver.password="${secret}" ; \
         else secret=$(cat /sebserver/config/secret) && exec java \
             -Xms64M \
-            -Xmx1G \
+            -Xmx2G \
             -jar seb-server-"${SEBSERVER_JAR}".jar \
             --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
