@@ -62,7 +62,7 @@ with also the global settings and all webservice related settings.
 
 .. list-table::
     :name: SEB Server Webservice Settings
-    :widths: auto auto auto
+    :widths: auto
     :header-rows: 1
     
     * - Property Name
@@ -78,7 +78,6 @@ with also the global settings and all webservice related settings.
       - Defines the institution name for of the institution to create for the initial admin account
       - | If an initial admin account must be created, we need also an institution to assign this initial account to.
         | This defines the name of that initial institution that is created together with the initial admin account.
-    
     * - datastore.mariadb.server.address
       - Defines the address of the MariaDB data-store server
       - | Usually the data-store is defined in a separated docker container/service and connected within a docker-network.
