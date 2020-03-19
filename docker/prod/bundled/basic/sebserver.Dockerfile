@@ -38,7 +38,7 @@ CMD if [ "${DEBUG_MODE}" = "true" ] ; \
             -Dcom.sun.management.jmxremote.ssl=false \
             -Dcom.sun.management.jmxremote.local.only=false \
             -Dcom.sun.management.jmxremote.authenticate=true \
-            -Dcom.sun.management.jmxremote.access.file=jmxremote.access
+            -Dcom.sun.management.jmxremote.access.file=jmxremote.access \
             -jar seb-server-"${SEBSERVER_JAR}".jar \
             --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
