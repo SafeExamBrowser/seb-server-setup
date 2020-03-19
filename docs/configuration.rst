@@ -165,6 +165,12 @@ with also the global settings and all webservice related settings.
     :widths: 200 100 100
     :header-rows: 1
       
+    * - Property Name
+      - Description
+      - Info
+    * - sebserver.gui.external.messages
+      - Defines the path where SEB Server GUI shall load external messages from
+      - 
     * - sebserver.gui.multilingual
       - Indicates if the multilingual feature is on or off
       - Set this to true if the SEB Server GUI should be multi lingual
