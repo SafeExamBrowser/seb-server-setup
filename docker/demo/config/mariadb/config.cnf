@@ -20,3 +20,7 @@ table_cache = 512
 [mysqld_safe]
 log-error=/var/log/mariadb/mariadb.log
 pid-file=/var/run/mariadb/mariadb.pid
+
+[client]
+port = 3306
+socket= /data/mysql/mysql.sock
