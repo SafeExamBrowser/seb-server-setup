@@ -7,6 +7,7 @@ services:
         MYSQL_ROOT_PASSWORD: somePW
     volumes:
         - seb-server-mariadb-data:/var/lib/mysql
+        - ./config/mariadb:/etc/mysql/conf.d
     ports:
         - 3306:3306
     networks:
