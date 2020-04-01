@@ -17,8 +17,8 @@ services:
     ports:
         - 3306:3306
     volumes:
-        - seb-server-config:/etc/mysql/conf.d
         - seb-server-mariadb:/var/lib/mysql
+        - ./config/mariadb:/etc/mysql/conf.d
     networks:
         - seb-server-network
 

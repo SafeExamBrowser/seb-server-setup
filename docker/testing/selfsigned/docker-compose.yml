@@ -16,8 +16,8 @@ services:
     environment:
         - MYSQL_ROOT_PASSWORD_FILE=/etc/mysql/conf.d/secret
     volumes:
-        - seb-server-config:/etc/mysql/conf.d
         - seb-server-mariadb:/var/lib/mysql
+        - ./config/mariadb:/etc/mysql/conf.d
     networks:
         - seb-server-network
     ports:

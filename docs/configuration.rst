@@ -221,7 +221,7 @@ we refer to the `nginx configuration documentation <http://nginx.org/en/docs/>`_
 MariaDB Configuration
 ---------------------
 
-CUrrently there is no separated MariaDB configuration and all is setup within the the automated docker setup of MariaDB. As long
-as no distributed MariaDB cluster is needed the MariaDB is bundled with the docker setup of the SEB Server web-service. As soon as 
-possible and if requested, we will provide a guidance for setting up a separated MariaDB cluster and how to configure SEB Server web-service
-for such a setup.
+The MariaDB configuration can be found in the config/mariadb/config.cnf file and the directory config/mariadb is mapped to the directory /etc/mysql/conf.d
+of the seb-server-mariadb docker container to be used to override the default MariaDB configuration. This file can be used to configure the MariaDB
+that is bundled with SEB Server in the docker-compose setup like a normal MariaDB configuration file. See `MariaDB Configuration <https://mariadb.com/kb/en/configuring-mariadb-with-option-files/>`_ 
+for more information on how to configure MariaDB with the options file.
