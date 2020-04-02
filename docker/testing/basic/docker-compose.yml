@@ -22,7 +22,7 @@ services:
     volumes:
         - seb-server-config:/etc/mysql/conf.d
         - seb-server-mariadb:/var/lib/mysql
-        - ./config/mariadb:/etc/mysql/conf.d
+        - ./config/mariadb/config.cnf:/etc/mysql/conf.d
     networks:
         - seb-server-network
     restart: unless-stopped
