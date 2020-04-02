@@ -8,4 +8,3 @@ wait_timeout = 28800
 max_connections = 100000
 max_allowed_packet = 64M
 max_connect_errors = 1000
-
