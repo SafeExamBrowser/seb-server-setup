@@ -33,6 +33,7 @@ services:
       volumes:
         - seb-server-config:/sebserver/config
         - ./config/spring:/sebserver/config/spring
+        - seb-server-logs:/sebserver/log
       environment:
         - DEBUG_MODE=false
       ports:
@@ -68,3 +69,4 @@ networks:
 volumes:
   seb-server-config:
   seb-server-mariadb:
+  seb-server-logs:

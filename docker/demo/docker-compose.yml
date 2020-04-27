@@ -26,6 +26,7 @@ services:
           - SERVER_PWD=somePW
       volumes:
         - ./config:/sebserver/config
+        - seb-server-logs:/sebserver/log
 
       ports:
           - 8080:8080
@@ -40,3 +41,4 @@ networks:
   
 volumes:
   seb-server-mariadb-data:
+  seb-server-logs:
