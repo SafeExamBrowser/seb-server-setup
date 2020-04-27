@@ -1,7 +1,8 @@
 # Clone git repository form specified tag
 FROM alpine/git
 
-ARG GIT_TAG
+ARG SEBSERVER_VERSION
+ARG GIT_TAG="v${SEBSERVER_VERSION}"
 
 WORKDIR /sebserver
 RUN if [ "x${GIT_TAG}" = "x" ] ; \
@@ -30,16 +31,14 @@ COPY --from=1 /sebserver/target/seb-server-"$SEBSERVER_JAR".jar /sebserver
 CMD if [ "${DEBUG_MODE}" = "true" ] ; \
         then secret=$(cat /sebserver/config/secret) && exec java \
             -Xms64M \
-            -Xmx2G \
+            -Xmx1G \
             -Dcom.sun.management.jmxremote \
             -Dcom.sun.management.jmxremote.port=9090 \
             -Dcom.sun.management.jmxremote.rmi.port=9090 \
             -Djava.rmi.server.hostname=localhost \
             -Dcom.sun.management.jmxremote.ssl=false \
             -Dcom.sun.management.jmxremote.local.only=false \
-            -Dcom.sun.management.jmxremote.authenticate=true \
-            -Dcom.sun.management.jmxremote.password.file=/sebserver/config/jmxremote.password \
-            -Dcom.sun.management.jmxremote.access.file=/sebserver/config/jmxremote.access \
+            -Dcom.sun.management.jmxremote.authenticate=false \
             -jar seb-server-"${SEBSERVER_JAR}".jar \
             --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
@@ -48,7 +47,7 @@ CMD if [ "${DEBUG_MODE}" = "true" ] ; \
             --sebserver.password="${secret}" ; \
         else secret=$(cat /sebserver/config/secret) && exec java \
             -Xms64M \
-            -Xmx2G \
+            -Xmx1G \
             -jar seb-server-"${SEBSERVER_JAR}".jar \
             --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
