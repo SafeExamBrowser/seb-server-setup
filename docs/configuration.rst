@@ -29,9 +29,11 @@ with also the global settings and all webservice related settings.
 .. glossary::
     file.encoding
         Defines the standard encoding 
+        
         Default is 'UTF-8'
     server.address
         The IP address the SEB Server is binding to on startup
+        
         Usually set to 0.0.0.0 for docker internal communication
         
         
