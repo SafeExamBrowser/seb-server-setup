@@ -17,24 +17,27 @@ services:
     ports:
         - 3306:3306
     volumes:
+        - seb-server-config:/etc/mysql/conf.d
         - seb-server-mariadb:/var/lib/mysql
-        - ./config/mariadb:/etc/mysql/conf.d
+        - ./config/mariadb/config.cnf:/etc/mysql/conf.d/config.cnf
     networks:
         - seb-server-network
+    restart: unless-stopped
 
   seb-server:
       build:
           context: .
           dockerfile: sebserver.Dockerfile
           args:
-              - SEBSERVER_VERSION=1.0-latest
+              - SEBSERVER_VERSION=0.6.6
+              - SEBSERVER_BUILD=-SNAPSHOT
       container_name: seb-server
       volumes:
         - seb-server-config:/sebserver/config
         - ./config/spring:/sebserver/config/spring
         - seb-server-logs:/sebserver/log
       environment:
-        - DEBUG_MODE=false
+        - DEBUG_MODE=true
       ports:
         - 9090:9090
       logging:
@@ -47,6 +50,7 @@ services:
       depends_on:
           - "mariadb"
           - "seb-server-setup"
+      restart: unless-stopped
 
   reverse-proxy:
     image: "nginx:latest"
@@ -61,6 +65,7 @@ services:
       - "mariadb"
       - "seb-server"
       - "seb-server-setup"
+    restart: unless-stopped
 
 networks:
   seb-server-network:
