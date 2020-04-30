@@ -26,49 +26,39 @@ with also the global settings and all webservice related settings.
 
 **Global Settings**
 
+See also the `Spring documentation <https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html>`_ for more information about specific global settings.
+
 .. glossary::
     file.encoding
         - Defines the standard encoding 
         - Default is 'UTF-8'
     server.address
-        The IP address the SEB Server is binding to on startup
-        
-        Usually set to 0.0.0.0 for docker internal communication
-        
-        
-*file.encoding*
-    
-.. list-table::
-    :name: SEB Server Global Settings
-    :widths: 200 100 100
-    :header-rows: 1
-    
-    * - Property Name
-      - Description
-      - Info
-    * - file.encoding
-      - Defines the standard encoding
-      - Default is 'UTF-8'
-    * - server.address
-      - The IP address the SEB Server binds to
-      - Usually set to 0.0.0.0 for docker internal communication
-    * - server.port
-      - The port the SEB Server listen to (HTTP/HTTPS). 
-      - Usually this is set to 8080 and the reverse proxy deals with mapping and TLS
-    * - server.servlet.context-path
-      - The context path where the servers entry-point is mapped to
-      - For default this is the root '/'
-    * - logging.level.ch
-      - The initial log-level for a given package
+        - The IP address the SEB Server is binding to on startup
+        - Usually set to 0.0.0.0 for docker internal communication
+    server.port
+        - The port the SEB Server listen to (HTTP/HTTPS). 
+        - Usually this is set to 8080 for docker internal communication and the reverse proxy deals with mapping and TLS integration if needed
+    server.servlet.context-path
+        - The context path where the server/servlet entry-point is mapped to
+        - Default this is the root '/'
+    logging.level.ROOT
+        The initial log-level for all loggers
       - See `Spring Logging <https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/boot-features-logging.html>`_
-    * - logging.file
+      - Default is WARN
+    logging.level.ch
+        - The initial log-level for a given package - here for all SEB Server packages
+        - See `Spring Logging <https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/boot-features-logging.html>`_
+        - Default is INFO
+    logging.file
       - if defined the SEB Server logs to the specified file
       - See `Spring Logging <https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/boot-features-logging.html>`_
-    * - security.require-ssl
+      - Default is /sebserver/log/sebserver.log. Note this path is also used in docker-compose to bind  the log directory to a named volume.
+    security.require-ssl
       - Set true if the SEB Server shall deal with TLS
       - | Usually a reverse proxy deals with TLS. SEB Server is able to do it also by it's own 
-        | but needs more effort. It is recommended to delegate the TLS handling to a reverse proxy
-        
+        | but needs more effort to implement and effect performance. It is recommended to delegate the TLS handling to a reverse proxy
+      - Default is false
+
         
 **Webservice Settings**
 
