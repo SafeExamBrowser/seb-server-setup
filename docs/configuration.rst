@@ -139,7 +139,7 @@ See also the `Spring documentation <https://docs.spring.io/spring-boot/docs/curr
     sebserver.webservice.api.pagination.maxPageSize
         - This defines a maximal page size for the REST API list/page endpoints
         - The maximal page size restricts the page size on the REST API to avoid performance problems by loading all data at once
-         - Default is set to 500
+        - Default is set to 500
     sebserver.webservice.lms.openedx.api.token.request.paths
         - Defines a comma separated list of known Open edX LMS API token request paths.
         - This paths will be used by the web-service to try to connect to a Open edX LMS REST API and request an access token. 
@@ -152,25 +152,27 @@ See also the `Spring documentation <https://docs.spring.io/spring-boot/docs/curr
 
 **GUI Service Settings**
 
-.. list-table::
-    :name: SEB Server GUI service Settings
-    :widths: 200 100 100
-    :header-rows: 1
-      
-    * - Property Name
-      - Description
-      - Info
-    * - sebserver.gui.external.messages
-      - Defines the path where SEB Server GUI shall load external messages from
-      - 
-    * - sebserver.gui.multilingual
-      - Indicates if the multilingual feature is on or off
-      - Set this to true if the SEB Server GUI should be multi lingual
-    * - sebserver.gui.supported.languages
-      - Comma separated list of supported language tags
-      - 
-    * - sebserver.gui.theme
-      - The RAP theme css file that should be used
+
+.. glossary::
+    sebserver.gui.external.messages
+        - Defines the path where SEB Server GUI shall load additional wording files that overrides the internal wording
+        - Within the Spring configuration of SEB Server you are able to define a messages_[iso-language-code].properties file where you are able to override the default wording of SEB Server or to provide wording for additional languages.
+        - Default is file:/sebserver/config/spring/messages
+    sebserver.gui.multilingual
+        - Indicates if the multilingual feature is on or off
+        - Set this to true if the SEB Server GUI should be multi lingual. You have also to provide additional language files that contains the wording for the supported languages. See **sebserver.gui.external.messages**
+        - Default is false (only english is supported)
+    sebserver.gui.supported.languages
+        - Comma separated list of supported language codes (iso-language code)
+        - For example if you want to support the languages English (default) and German use "en,de". See also **sebserver.gui.external.messages** and **sebserver.gui.multilingual**
+        - Default is "en"
+    sebserver.gui.theme
+        - The RAP theme css file that should be used to override the default one
+        - Default is css/sebserver.css
+    sebserver.gui.date.displayformat
+        - The 
+        
+
       - 
     * - sebserver.gui.list.page.size
       - The default page size of lists in SEB Server GUI
