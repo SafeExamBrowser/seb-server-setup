@@ -26,6 +26,17 @@ with also the global settings and all webservice related settings.
 
 **Global Settings**
 
+.. glossary::
+    file.encoding
+        Defines the standard encoding 
+        Default is 'UTF-8'
+    server.address
+        The IP address the SEB Server is binding to on startup
+        Usually set to 0.0.0.0 for docker internal communication
+        
+        
+*file.encoding*
+    
 .. list-table::
     :name: SEB Server Global Settings
     :widths: 200 100 100
