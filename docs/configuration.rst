@@ -169,37 +169,27 @@ See also the `Spring documentation <https://docs.spring.io/spring-boot/docs/curr
     sebserver.gui.theme
         - The RAP theme css file that should be used to override the default one
         - Default is css/sebserver.css
+    sebserver.gui.list.page.size
+        - The default page size of lists in SEB Server GUI
+        - Default is set to 20
     sebserver.gui.date.displayformat
-        - The 
-        
-
-      - 
-    * - sebserver.gui.list.page.size
-      - The default page size of lists in SEB Server GUI
-      - 
-    * - sebserver.gui.date.displayformat
-      - The locale tag for the display format to use
-      - This defines the formatting of dates and numbers within the formatting of the specified location tag
-    * - sebserver.gui.entrypoint
-      - The servlet endpoint where the GUI service servlet is located.
-      - 
-    * - | sebserver.gui.webservice.protocol
-        | sebserver.gui.webservice.address
-        | sebserver.gui.webservice.port
-      - The URL properties to define the URL with that the web service is accessed from the GUI component.
-      - | On a single-bundled setup this must not be changed since GUI runs on the same server as the web-service and communicates 
-        | over standard localhost settings. For a distributed environment this must define the URL to the web-service server.
-    * - sebserver.gui.webservice.poll-interval
-      - Defines the interval in milliseconds that the GUI service uses to poll the live monitoring data from web-service.
-      -
-    * - sebserver.gui.webservice.mock-lms-enabled
-      - Indicates whether a mocking LMS for testing should be available in the LMS Setup section or not.
-      -
-    * - sebserver.gui.seb.client.config.download.filename
-      - Defines the download file name of a SEB client configuration.
-      - 
-    * - sebserver.gui.seb.exam.config.download.filename
-      - Defines the download file name of a SEB exam configuration
+        - The locale tag for the display format to use
+        - This defines the formatting of dates and numbers within the formatting of the specified location tag
+    sebserver.gui.entrypoint
+        - The servlet endpoint where the GUI service servlet is located.
+    sebserver.gui.webservice.protocol
+    sebserver.gui.webservice.address
+    sebserver.gui.webservice.port
+        - The URL properties to define the URL with that the web service is accessed from the GUI component.
+        - On a single-bundled setup this must not be changed since GUI runs on the same server as the web-service and communicates over standard localhost settings. For a distributed environment this must define the URL to the web-service server.
+    sebserver.gui.webservice.poll-interval
+        - Defines the interval in milliseconds that the GUI service uses to poll the live monitoring data from web-service.
+    sebserver.gui.webservice.mock-lms-enabled
+        - Indicates whether a mocking LMS for testing should be available in the LMS Setup section or not.
+    sebserver.gui.seb.client.config.download.filename
+        - Defines the download file name of a SEB client configuration.
+    sebserver.gui.seb.exam.config.download.filename
+        - Defines the download file name of a SEB exam configuration
 
 .. _proxy-configuration-label:
 
