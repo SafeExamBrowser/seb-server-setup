@@ -10,15 +10,12 @@ RUN if [ "x${GIT_TAG}" = "x" ] ; \
 
 FROM maven:latest
 
-ARG SEBSERVER_VERSION="${SEBSERVER_VERSION}"
-
 WORKDIR /sebserver
 COPY --from=0 /sebserver/seb-server /sebserver
 RUN mvn clean install -DskipTests -Dbuild-version="${SEBSERVER_VERSION}"
 
 FROM openjdk:11-jre-stretch
 
-ENV SEBSERVER_VERSION="${SEBSERVER_VERSION}"
 ENV SERVER_PORT="8080"
 ENV SERVER_PWD=
 
