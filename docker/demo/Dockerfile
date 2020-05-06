@@ -17,12 +17,12 @@ COPY --from=0 /sebserver/seb-server /sebserver
 RUN mvn clean install -DskipTests -Dbuild-version="${SEBSERVER_VERSION}"
 
 FROM openjdk:11-jre-stretch
-
+ARG SEBSERVER_VERSION
 ENV SERVER_PORT="8080"
 ENV SERVER_PWD=
 
 WORKDIR /sebserver
-COPY --from=1 /sebserver/target/seb-server-"$SEBSERVER_VERSION".jar /sebserver
+COPY --from=1 /sebserver/target/seb-server-"${SEBSERVER_VERSION}".jar /sebserver
 
 ENTRYPOINT exec java \
     -Dcom.sun.management.jmxremote \
