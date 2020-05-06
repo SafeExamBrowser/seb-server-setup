@@ -23,22 +23,16 @@ FROM openjdk:11-jre-stretch
 ARG SEBSERVER_VERSION
 ARG SEBSERVER_BUILD=
 ENV SEBSERVER_JAR=${SEBSERVER_VERSION}${SEBSERVER_BUILD}
-ENV DEBUG_MODE=false
+ENV MONITORING_MODE=false
 
 WORKDIR /sebserver
 COPY --from=1 /sebserver/target/seb-server-"$SEBSERVER_JAR".jar /sebserver
 
-CMD if [ "${DEBUG_MODE}" = "true" ] ; \
+CMD if [ "${MONITORING_MODE}" = "true" ] ; \
         then secret=$(cat /sebserver/config/secret) && exec java \
             -Xms64M \
             -Xmx1G \
-            -Dcom.sun.management.jmxremote \
-            -Dcom.sun.management.jmxremote.port=9090 \
-            -Dcom.sun.management.jmxremote.rmi.port=9090 \
-            -Djava.rmi.server.hostname=localhost \
-            -Dcom.sun.management.jmxremote.host=localhost \
-            -Dcom.sun.management.jmxremote.ssl=false \
-            -Dcom.sun.management.jmxremote.authenticate=false \
+            -Dcom.sun.management.config.file=/sebserver/config/jmx/jmxremote.properties \
             -jar seb-server-"${SEBSERVER_JAR}".jar \
             --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \

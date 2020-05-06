@@ -110,7 +110,7 @@ See also the `Spring documentation <https://docs.spring.io/spring-boot/docs/curr
     sebserver.webservice.distributed
         - Indicates whether the web-service runs within a distributed environment or as single-bundled server
         - On a distributed environment (multiple running instances with load balancing) this must set to true to ensure internal cache strategies are working correctly on distributed setup.
-    sebserver.webservice.http.scheme
+    sebserver.webservice.http.external.scheme
     sebserver.webservice.http.external.servername
     sebserver.webservice.http.external.port
         - This properties defines the URL on that the SEB Server can be accessed from the public Internet.
@@ -210,3 +210,11 @@ The MariaDB configuration can be found in the config/mariadb/config.cnf file and
 of the seb-server-mariadb docker container to be used to override the default MariaDB configuration. This file can be used to configure the MariaDB
 that is bundled with SEB Server in the docker-compose setup like a normal MariaDB configuration file. See `MariaDB Configuration <https://mariadb.com/kb/en/configuring-mariadb-with-option-files/>`_ 
 for more information on how to configure MariaDB with the options file.
+
+JMX Configuration
+-----------------
+
+If you want to have JMX enabled for production environment there is a prepared default configuration in config/jmx/. Please refer to the 
+`JMX documentation <https://docs.oracle.com/javadb/10.10.1.2/adminguide/radminjmxenabledisable.html>`_ as well the this `JMX security guide <https://gquintana.github.io/2016/09/01/Securing-remote-JMX.html>`_
+You need also the set the MONITORING_MODE flag in the docker-compose file to true as well as uncomment the port mapping 9090 to 9090 also in 
+the seb-server service of the docker-compose file.

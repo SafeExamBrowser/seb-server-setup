@@ -29,20 +29,23 @@ services:
           context: .
           dockerfile: sebserver.Dockerfile
           args:
-              - SEBSERVER_VERSION=0.6.6
-              - SEBSERVER_BUILD=-SNAPSHOT
+              - SEBSERVER_VERSION=1.0-latest
       container_name: seb-server
       volumes:
         - seb-server-config:/sebserver/config
         - ./config/spring:/sebserver/config/spring
         - seb-server-logs:/sebserver/log
       environment:
-        - DEBUG_MODE=true
-      ports:
-        - 9090:9090
+        - MONITORING_MODE=false
+        
+      # Connect this port to host of you want to use JMX (MONITORING_MODE=true)
+      #ports:
+      #  - 9090:9090
+      
       logging:
         driver: "json-file"
         options:
+            mode: "non-blocking"
             max-size: "200k"
             max-file: "10"
       networks:
