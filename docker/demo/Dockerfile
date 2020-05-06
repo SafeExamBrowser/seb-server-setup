@@ -19,11 +19,12 @@ RUN mvn clean install -DskipTests -Dbuild-version="${SEBSERVER_VERSION}"
 FROM openjdk:11-jre-stretch
 
 ARG SEBSERVER_VERSION
+ENV SEBSERVER_JAR=${SEBSERVER_VERSION}
 ENV SERVER_PORT="8080"
 ENV SERVER_PWD=
 
 WORKDIR /sebserver
-COPY --from=1 /sebserver/target/seb-server-"${SEBSERVER_VERSION}".jar /sebserver
+COPY --from=1 /sebserver/target/seb-server-"${SEBSERVER_JAR}".jar /sebserver
 
 ENTRYPOINT exec java \
     -Dcom.sun.management.jmxremote \
@@ -33,7 +34,7 @@ ENTRYPOINT exec java \
     -Dcom.sun.management.jmxremote.local.only=false \
     -Dcom.sun.management.jmxremote.ssl=false \
     -Dcom.sun.management.jmxremote.authenticate=false \
-    -jar seb-server-"${SEBSERVER_VERSION}".jar \
+    -jar seb-server-"${SEBSERVER_JAR}".jar \
     --server.port="${SERVER_PORT}" \
     --spring.profiles.active=demo \
     --spring.config.location=file:/sebserver/config/,classpath:/config/ \
