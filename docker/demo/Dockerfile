@@ -10,7 +10,7 @@ RUN if [ "x${GIT_TAG}" = "x" ] ; \
 
 FROM maven:latest
 
-ARG SEBSERVER_VERSION
+ARG SEBSERVER_VERSION=${SEBSERVER_VERSION}
 
 WORKDIR /sebserver
 COPY --from=0 /sebserver/seb-server /sebserver
