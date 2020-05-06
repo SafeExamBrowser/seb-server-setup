@@ -43,6 +43,8 @@ a more automated and secure setup for high-stake exams.
 .. image:: docs/images/seb-sebserver-lms.png
     :align: center
     :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/seb-sebserver-lms.png
+    
+    
 .. image:: images/seb-sebserver-lms.png
     :align: center
     :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/seb-sebserver-lms.png
