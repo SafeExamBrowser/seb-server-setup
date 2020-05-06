@@ -21,7 +21,9 @@ FROM openjdk:11-jre-stretch
 ARG SEBSERVER_VERSION
 ENV SEBSERVER_JAR=${SEBSERVER_VERSION}
 ENV SERVER_PORT="8080"
+ENV JMX_PORT="9090"
 ENV SERVER_PWD=
+
 
 WORKDIR /sebserver
 COPY --from=1 /sebserver/target/seb-server-"${SEBSERVER_JAR}".jar /sebserver
@@ -41,4 +43,4 @@ ENTRYPOINT exec java \
     --sebserver.mariadb.password="${SERVER_PWD}" \
     --sebserver.password="${SERVER_PWD}"
 
-EXPOSE $SERVER_PORT 9090
+EXPOSE $SERVER_PORT $JMX_PORT

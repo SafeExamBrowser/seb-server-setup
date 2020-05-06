@@ -1,4 +1,3 @@
-# Clone git repository form specified tag
 FROM alpine/git
 
 ARG SEBSERVER_VERSION
@@ -9,30 +8,28 @@ RUN if [ "x${GIT_TAG}" = "x" ] ; \
     then git clone --depth 1 https://github.com/SafeExamBrowser/seb-server.git ; \
     else git clone -b "$GIT_TAG" --depth 1 https://github.com/SafeExamBrowser/seb-server.git ; fi
 
-# Build with maven (skip tests)
 FROM maven:latest
 
 ARG SEBSERVER_VERSION
 
 WORKDIR /sebserver
 COPY --from=0 /sebserver/seb-server /sebserver
-RUN mvn clean install -DskipTests
+RUN mvn clean install -DskipTests -Dbuild-version="${SEBSERVER_VERSION}"
 
 FROM openjdk:11-jre-stretch
 
 ARG SEBSERVER_VERSION
-ARG SEBSERVER_BUILD=
-ENV SEBSERVER_JAR=${SEBSERVER_VERSION}${SEBSERVER_BUILD}
-ENV MONITORING_MODE=false
+ENV SEBSERVER_JAR=${SEBSERVER_VERSION}
+ENV SERVER_PORT="8080"
+ENV JMX_PORT=
 
 WORKDIR /sebserver
 COPY --from=1 /sebserver/target/seb-server-"$SEBSERVER_JAR".jar /sebserver
 
-CMD if [ "${MONITORING_MODE}" = "true" ] ; \
+CMD if [ "x${JMX_PORT}" = "x" ] ; \
         then secret=$(cat /sebserver/config/secret) && exec java \
             -Xms64M \
             -Xmx1G \
-            -Dcom.sun.management.config.file=/sebserver/config/jmx/jmxremote.properties \
             -jar seb-server-"${SEBSERVER_JAR}".jar \
             --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
@@ -42,6 +39,7 @@ CMD if [ "${MONITORING_MODE}" = "true" ] ; \
         else secret=$(cat /sebserver/config/secret) && exec java \
             -Xms64M \
             -Xmx1G \
+            -Dcom.sun.management.config.file=/sebserver/config/jmx/jmxremote.properties \
             -jar seb-server-"${SEBSERVER_JAR}".jar \
             --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
@@ -50,4 +48,4 @@ CMD if [ "${MONITORING_MODE}" = "true" ] ; \
             --sebserver.password="${secret}" ; \
         fi
 
-EXPOSE 8080 9090
+EXPOSE $SERVER_PORT $JMX_PORT

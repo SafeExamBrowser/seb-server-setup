@@ -32,14 +32,14 @@ services:
           context: .
           dockerfile: sebserver.Dockerfile
           args:
-              - SEBSERVER_VERSION=1.0.0
-              - SEBSERVER_BUILD=
+              - SEBSERVER_VERSION=1.0.latest
+              - GIT_TAG=
       container_name: seb-server
       volumes:
         - seb-server-config:/sebserver/config
         - ./config/spring:/sebserver/config/spring
       environment:
-        - DEBUG_MODE=true
+        - JMX_PORT=9090
       ports:
         - 9090:9090
       logging:
