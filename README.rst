@@ -40,7 +40,7 @@ The image below shows a very simplified diagram that locates the SEB Server in a
 Safe Exam Browser (SEB). The SEB Server communicates with the LMS for managing and prepare exams as well as with the SEB Client to ensure 
 a more automated and secure setup for high-stake exams.
 
-.. image:: images/seb-sebserver-lms.png
+.. image:: docs/images/seb-sebserver-lms.png,images/seb-sebserver-lms.png
     :align: center
     :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/seb-sebserver-lms.png
 
