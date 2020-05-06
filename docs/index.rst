@@ -6,7 +6,7 @@
 About SEB Server
 ================
 
-.. include:: ../README.rst
+.. include:: readme.rst
 
 SEB Server Installation Guide
 =============================
