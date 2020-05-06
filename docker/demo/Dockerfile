@@ -18,8 +18,6 @@ RUN mvn clean install -DskipTests -Dbuild-version="${SEBSERVER_VERSION}"
 
 FROM openjdk:11-jre-stretch
 
-ARG SEBSERVER_VERSION
-ARG SEBSERVER_BUILD=
 ENV SERVER_PORT="8080"
 ENV SERVER_PWD=
 
