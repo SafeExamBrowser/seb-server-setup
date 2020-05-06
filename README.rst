@@ -4,4 +4,4 @@
     :alt: Documentation Status
 
 
-.. include:: /docs/readme.rst
+.. include:: docs/readme.rst
