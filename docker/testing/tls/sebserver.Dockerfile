@@ -1,7 +1,8 @@
 # Clone git repository form specified tag
 FROM alpine/git
 
-ARG GIT_TAG
+ARG SEBSERVER_VERSION
+ARG GIT_TAG="v${SEBSERVER_VERSION}"
 
 WORKDIR /sebserver
 RUN if [ "x${GIT_TAG}" = "x" ] ; \
@@ -31,12 +32,11 @@ CMD if [ "${DEBUG_MODE}" = "true" ] ; \
         then secret=$(cat /sebserver/config/secret) && exec java \
             -Xms64M \
             -Xmx1G \
-            -Djavax.net.debug=ssl \
             -Dcom.sun.management.jmxremote \
             -Dcom.sun.management.jmxremote.port=9090 \
             -Dcom.sun.management.jmxremote.rmi.port=9090 \
             -Djava.rmi.server.hostname=localhost \
-# TODO secure the JMX connection (cueenrtly there is a premission problem with the secret file
+            -Dcom.sun.management.jmxremote.host=localhost \
             -Dcom.sun.management.jmxremote.ssl=false \
             -Dcom.sun.management.jmxremote.authenticate=false \
             -jar seb-server-"${SEBSERVER_JAR}".jar \
@@ -56,4 +56,4 @@ CMD if [ "${DEBUG_MODE}" = "true" ] ; \
             --sebserver.password="${secret}" ; \
         fi
 
-EXPOSE 443 8080 9090
+EXPOSE 8080 9090

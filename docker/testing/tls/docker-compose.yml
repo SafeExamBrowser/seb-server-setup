@@ -1,12 +1,11 @@
 version: '3'
 services:
-  certificates:
+  seb-server-setup:
     build:
         context: .
         dockerfile: setup.Dockerfile
-    container_name: certificates
+    container_name: seb-server-setup
     volumes:
-        - seb-server-certs:/certs
         - seb-server-config:/config
         - ./config:/host/config
 
@@ -15,13 +14,14 @@ services:
     container_name: seb-server-mariadb
     environment:
         - MYSQL_ROOT_PASSWORD_FILE=/etc/mysql/conf.d/secret
-    volumes:
-        - seb-server-mariadb:/var/lib/mysql
-        - ./config/mariadb:/etc/mysql/conf.d
-    networks:
-        - seb-server-network
     ports:
         - 3306:3306
+    volumes:
+        - seb-server-config:/etc/mysql/conf.d
+        - seb-server-mariadb:/var/lib/mysql
+        - ./config/mariadb/config.cnf:/etc/mysql/conf.d/config.cnf
+    networks:
+        - seb-server-network
     restart: unless-stopped
 
   seb-server:
@@ -29,15 +29,16 @@ services:
           context: .
           dockerfile: sebserver.Dockerfile
           args:
-              - SEBSERVER_VERSION=0.6.6
-              - SEBSERVER_BUILD=-SNAPSHOT
+              - SEBSERVER_VERSION=1.0-latest
       container_name: seb-server
       volumes:
         - seb-server-config:/sebserver/config
         - ./config/spring:/sebserver/config/spring
-        - seb-server-certs:/certs
+        - seb-server-logs:/sebserver/log
       environment:
         - DEBUG_MODE=false
+      ports:
+        - 9090:9090
       logging:
         driver: "json-file"
         options:
@@ -45,30 +46,24 @@ services:
             max-file: "10"
       networks:
           - seb-server-network
-      ports:
-          - 8080:8080
-          - 9090:9090
       depends_on:
           - "mariadb"
-          - "certificates"
-      restart: unless-stopped
+          - "seb-server-setup"
 
   reverse-proxy:
     image: "nginx:latest"
     container_name: seb-server-proxy
     volumes:
       - ./config/nginx:/etc/nginx/conf.d
-      - seb-server-certs:/certs
+      - ./config/nginx/certs:/sebserver/config/certs
     ports:
-      - 80:80
       - 443:443
     networks:
       - seb-server-network
     depends_on:
       - "mariadb"
       - "seb-server"
-      - "certificates"
-    restart: unless-stopped
+      - "seb-server-setup"
 
 networks:
   seb-server-network:
@@ -76,4 +71,4 @@ networks:
 volumes:
   seb-server-config:
   seb-server-mariadb:
-  seb-server-certs:
+  seb-server-logs:

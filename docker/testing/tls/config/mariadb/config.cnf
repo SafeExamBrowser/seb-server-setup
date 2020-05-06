@@ -13,4 +13,4 @@ skip_external_locking
 skip_name_resolve
 
 #memory
-innodb_buffer_pool_size=1G
+innodb_buffer_pool_size=2G
