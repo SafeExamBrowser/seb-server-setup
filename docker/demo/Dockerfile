@@ -14,7 +14,7 @@ ARG SEBSERVER_VERSION
 
 WORKDIR /sebserver
 COPY --from=0 /sebserver/seb-server /sebserver
-RUN mvn clean install -DskipTests -build-version=${SEBSERVER_VERSION}
+RUN mvn clean install -DskipTests -Dbuild-version="${SEBSERVER_VERSION}"
 
 FROM openjdk:11-jre-stretch
 
