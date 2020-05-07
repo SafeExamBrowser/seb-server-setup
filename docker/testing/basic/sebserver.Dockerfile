@@ -39,6 +39,9 @@ CMD if [ "x${JMX_PORT}" = "x" ] ; \
         else secret=$(cat /sebserver/config/secret) && exec java \
             -Xms64M \
             -Xmx1G \
+            -Dcom.sun.management.jmxremote=true \
+            -Dcom.sun.management.jmxremote.port=${JMX_PORT} \
+            -Dcom.sun.management.jmxremote.rmi.port=${JMX_PORT} \
             -Djava.rmi.server.hostname=localhost \
             -Dcom.sun.management.config.file=/sebserver/config/jmx/jmxremote.properties \
             -jar "${SEBSERVER_JAR}" \
