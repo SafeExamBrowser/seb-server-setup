@@ -198,7 +198,7 @@ Reverse Proxy Configuration
 
 Docker internal SEB Server setup uses a nginx reverse proxy for communication with the host and the Internet. The configuration is places
 in the app.conf file and will be loaded by nginx on startup of the container. The configuration usually has all the pre-settings needed
-for working correctly within the specific setup context. If there is the need to have a different configuration for the nginx reverse prox
+for working correctly within the specific setup context. If there is the need to have a different configuration for the nginx reverse proxy
 we refer to the `nginx configuration documentation <http://nginx.org/en/docs/>`_ 
 
 .. _db-configuration-label:
@@ -216,5 +216,5 @@ JMX Configuration
 
 If you want to have JMX enabled for production environment there is a prepared default configuration in config/jmx/. Please refer to the 
 `JMX documentation <https://docs.oracle.com/javadb/10.10.1.2/adminguide/radminjmxenabledisable.html>`_ as well the this `JMX security guide <https://gquintana.github.io/2016/09/01/Securing-remote-JMX.html>`_
-You need also the set the MONITORING_MODE flag in the docker-compose file to true as well as uncomment the port mapping 9090 to 9090 also in 
-the seb-server service of the docker-compose file.
+You need also the set the JMX_PORT as environment veriable in the docker-compose file to the port you want to use as well as uncomment the port mapping 
+the seb-server service of the docker-compose file. And make sure also the right port is set in the jmxremote.properties file.

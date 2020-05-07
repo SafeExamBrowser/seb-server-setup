@@ -69,15 +69,3 @@ At each endpoint exists a root installation directory with docker-files for the 
 containing service related configurations like Spring configuration for the SEB Server, MariaDB configuration for the database and/or
 reverse proxy configuration.
 
-**HTTPS / TLS Configuration**
-
-There are manly two ways/strategies to configure HTTPS / TLS for a SEB Server;
-
-    - The HTTPS / TLS is handled by a reverse-proxy that is exposed to the Internet and forwards the requests over HTTP to the SEB Server that in this
-    case has only an simple HTTP connector and is not exposed to the Internet but to the internal network with the reverse proxy
-    - The HTTPS / TLS is handled by the SEB Server itself (end to end). 
-    
-    .. note:: 
-    
-        It is highly recommended to use the first approach here that is easier to install then the end to end approach. 
-    There are some prepared installations for the second approach within the seb-server-setup repository (selfsigned) but they are experimental yet
