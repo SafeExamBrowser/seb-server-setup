@@ -21,7 +21,7 @@ FROM openjdk:11-jre-stretch
 ARG SEBSERVER_VERSION
 ENV SEBSERVER_JAR="seb-server-${SEBSERVER_VERSION}.jar"
 ENV SERVER_PORT="8080"
-ENV JMX_PORT="9090"
+ENV JMX_PORT=
 
 WORKDIR /sebserver
 COPY --from=1 /sebserver/target/"${SEBSERVER_JAR}" /sebserver

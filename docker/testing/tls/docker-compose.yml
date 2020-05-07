@@ -36,7 +36,7 @@ services:
         - ./config/spring:/sebserver/config/spring
         - seb-server-logs:/sebserver/log
       environment:
-        - DEBUG_MODE=false
+        - JMX_PORT=9090
       ports:
         - 9090:9090
       logging:
