@@ -30,7 +30,7 @@ CMD if [ "x${JMX_PORT}" = "x" ] ; \
         then secret=$(cat /sebserver/config/secret) && exec java \
             -Xms64M \
             -Xmx1G \
-            -jar seb-server-"${SEBSERVER_JAR}".jar \
+            -jar "${SEBSERVER_JAR}" \
             --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
             --sebserver.certs.password="${secret}" \ 
@@ -46,7 +46,7 @@ CMD if [ "x${JMX_PORT}" = "x" ] ; \
             -Dcom.sun.management.jmxremote.ssl=false \
             -Dcom.sun.management.jmxremote.local.only=false \
             -Dcom.sun.management.jmxremote.authenticate=false \
-            -jar seb-server-"${SEBSERVER_JAR}".jar \
+            -jar "${SEBSERVER_JAR}" \
             --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
             --sebserver.certs.password="${secret}" \ 
