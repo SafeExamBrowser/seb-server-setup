@@ -19,12 +19,12 @@ RUN mvn clean install -DskipTests -Dbuild-version="${SEBSERVER_VERSION}"
 FROM openjdk:11-jre-stretch
 
 ARG SEBSERVER_VERSION
-ENV SEBSERVER_JAR=${SEBSERVER_VERSION}
+ENV SEBSERVER_JAR="seb-server-${SEBSERVER_VERSION}.jar"
 ENV SERVER_PORT="8080"
 ENV JMX_PORT="9090"
 
 WORKDIR /sebserver
-COPY --from=1 /sebserver/target/seb-server-"$SEBSERVER_JAR".jar /sebserver
+COPY --from=1 /sebserver/target/"${SEBSERVER_JAR}" /sebserver
 
 CMD if [ "x${JMX_PORT}" = "x" ] ; \
         then secret=$(cat /sebserver/config/secret) && exec java \
