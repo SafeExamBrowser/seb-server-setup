@@ -45,7 +45,9 @@ CMD if [ "x${JMX_PORT}" = "x" ] ; \
             -Djava.rmi.server.hostname=localhost \
             -Dcom.sun.management.jmxremote.local.only=false \
             -Dcom.sun.management.jmxremote.ssl=false \
-            -Dcom.sun.management.jmxremote.authenticate=false \
+            -Dcom.sun.management.jmxremote.authenticate=true \
+            -Dcom.sun.management.jmxremote.password.file=/sebserver/config/jmx/jmxremote.password \
+            -Dcom.sun.management.jmxremote.access.file=/sebserver/config/jmx/jmxremote.access \
             -jar "${SEBSERVER_JAR}" \
             --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
