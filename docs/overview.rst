@@ -38,31 +38,36 @@ hosts / cluster.
 Installation Repository
 -----------------------
 
-The installation and setup of SEB Server depends on the service needs and the local environment and infrastructure that exists 
+The installation and setup of SEB Server depends on the service needs and the local IT environment and infrastructure that exists 
 and can be used. Because the setup can vary from a simple in-house all-in-one server setup to a setup that serves many institutions 
 and must be horizontally scalable, the seb-server-setup repository contains pre-configured docker-based SEB Server setups for the most 
-common cases and can easily be extended by adding new installation setup. 
+common cases and can easily be extended by adding new installation setups. 
 
-The seb-server-setup repository structure defines the installation type on the fist directory level. Currently only docker-based 
-installations are supported. On the second directory level defines installation purpose categories like "demo" for setting up a 
-SEB Server for demonstrations, "testing" or "prod" for testing purposes or final productivity setup. The third and forth directory level, 
-if existing, defines then different SEB Server setups like "stand-alone" or "distributed" and finally the encryption (TLS) method that 
-should be used. Below is an example of the seb-server-setup directory structure. 
+The seb-server-setup repository structure defines the installation type on the first directory level. Currently only docker-based 
+installations are supported. On the second directory level installation purpose categories like "demo" for setting up a 
+SEB Server for demonstrations, "testing" or "prod" for testing purposes or final productivity setup are defined. The third and forth directory level, 
+if existing, names then different SEB Server setups like "bundled", "basic", "tls" or "distributed". Below is an example of the seb-server-setup directory structure. 
 
 ::
     
     - docker
+    
         - demo
+            [a basic bundled test setup]
         - prod
+            - bundled
+                - basic
+                    [basic bundled setup]
+                - tls
+                    [bundled setup with tls endpoint]
           - distributed
-             - [not yet available]
-          - standalone
-             - letsencrypt [experimental]
-             - noencrypt
-             - selfsigned [experimental]
+                [not yet available]
+
         - testing
-          - noencrypt
-          - selfsigned [experimental]
+            - basic
+                [a basic bundled stup of testing]
+            - tls 
+                [experimental]
         - ..?
       
 At each endpoint exists a root installation directory with docker-files for the services, a docker-compose definition and a "config" directory
