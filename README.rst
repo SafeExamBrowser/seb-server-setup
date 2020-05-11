@@ -43,6 +43,21 @@ a more automated and secure setup for high-stake exams.
 .. image:: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/seb-sebserver-lms.png
     :align: center
     :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/seb-sebserver-lms.png
+    
+SEB - SEB Server Compatibility
+------------------------------
+
+The table below shows available and upcomming SEB client versions that has SEB Server integration support and are compatible with particular 
+SEB Server version. There is an entry for each platform with a beta or testing release date and a oficial release date.
+
+** SEB Server Version 1.0.X
+
+.. csv-table::
+   :header: "Platform / OS", "Beta/RC Version", "Release Version"
+
+   "SEB Client for iOS", "22. April 2020 - Version 2.1.50", "Q2 2020 - Version 2.2"
+   "SEB Client for Mac", "Q2 2020 - Version 2.2", "Q2 2020 - Version 2.2"
+   "SEB Client for iOS", "Q2 2020 - Version 3.1", "Q3 2020 - Version 3.1"
 
 
 What is the SEB Server Setup repository?
