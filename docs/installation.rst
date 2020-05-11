@@ -1,9 +1,6 @@
 Installation
 ============
 
-General
--------
-
 All provided setups are pre-configured docker-compose setups that suppose to work well with a general installation process and fit with
 usual IT environment. The setups are mainly categorized into bundled setups and distributed setups where a bundled setup is a single
 docker-compose setup that bundles all services together within one machine and an internal docker-network. A distributed setup may contain
@@ -15,7 +12,7 @@ A docker compose configuration for a bundled setup looks pretty much the same fo
 
 - **seb-server-setup** This service is just to setup everything in advanced and uses a Docker container for that runs a some
  initial actions to bind the volumes and copy the initial password, make it internally available by also deleting it from the hosts
- file system. And probably some other needed commands that presets things for the following services. 
+ file system. And probably some other needed commands that presets things for the specific setup. 
  
 - **mariadb** This is the MariaDB service that is bound to the internal network as well as exposing its default port to the host
  network by default. This service uses the official "mariadb/server:10.3" image for the service and the configuration that is provided
@@ -38,20 +35,20 @@ A docker compose configuration for a bundled setup looks pretty much the same fo
     minor version to always get the latest specific minor version with all patches on installation or update. If you want the latest minor version
     use version tags like 1.0-latest or 1.1-latest.
  
- - **reverse-proxy** This service uses a nginx server as reverse-proxy to connect the bundle to the host network. In a basic setup this 
+- **reverse-proxy** This service uses a nginx server as reverse-proxy to connect the bundle to the host network. In a basic setup this 
  usually just maps the host HTTP port (80) to the internal HTTP port (8080). In a setup with end to end TLS this service is used to manage
  the TLS part and must be provided with the certificate(s) to use. The configuration of the proxy service is located in the folder confg/nginx/
  
 **Docker Compose for distributed setup**
  
-Default setups for distributed environments on a cloud service for example are not provided yet. You can use the pre-defined components
-from bundled setups and adapt and use it for distributed environments. Please also contact a system administrator or cloud administrator
-of your company/institution to find a solution that fits best within your IT environment. If you have questions or need help / report bugs, 
+Default setups for distributed environments to install SEB Server as a cloud service for example are not provided yet. You can use the pre-defined components
+from a bundled setup and adapt and use it for your distributed environments. Please also contact a system administrator or cloud administrator
+of your company/institution to find a solution that fits best within your needs and given IT environment. If you have questions or need help / report bugs, 
 please use the `issue tracker <https://github.com/SafeExamBrowser/seb-server-setup/issues>`_  on Github for reporting.
 
 **HTTPS / TLS Configuration**
 
-There are manly two ways/strategies to configure HTTPS / TLS for a SEB Server;
+There are manly two strategies to configure HTTPS / TLS for a SEB Server;
 
     - The HTTPS / TLS is handled by a reverse-proxy that is exposed to the Internet and forwards the requests over HTTP to the SEB Server that in this
     case has only an simple HTTP connector and is not exposed to the Internet but to the internal network with the reverse proxy
@@ -62,14 +59,13 @@ There are manly two ways/strategies to configure HTTPS / TLS for a SEB Server;
         It is highly recommended to use the first approach here that is easier to install then the end to end approach. 
     There are some prepared installations for the second approach within the seb-server-setup repository (tls) but they are experimental yet
 
-Overall Installation Process
+General Installation Process
 -----------------------------
 
 First we will have a look at the overall installation process that can be applied to all bundled installation strategies we have discussed 
 in section :ref:`installation-repo-label`. 
-
 The endpoint root of every sub-directory of an installation strategies has the same structure and contains docker files, docker compose 
-configurations and various configuration files within the "config" sub-directory
+configurations and various configuration files within the "config" sub-directory.
 
 This is an example structure of an installation strategy sub-directory. The installation directory docker/testing/basic/ in this case 
 provides a setup for testing with a mariadb service, a seb-server single instance service and a reverse proxy service that is bundled and
@@ -90,15 +86,18 @@ exposed to the host network by the proxy
         sebserver.Dockerfile
         setup.Dockerfile
         
-The docker based installation typically contains a config directory with all the related config files, one or more docker-files that
+The docker based installation typically is composed of a config directory with all the related config files, one or more docker-files that
 defines images for installation related services and a docker-compose file that bundles all together. Configuration files as well as 
-docker files can be modified for the specified needs on the installation environment.
+docker files are pre-configured in a way that a minimum of additional settings has to be done to setup the service. Usually you have to define 
+the external URL on witch the service will be available in the spring application-[].properties configuration. And you have to create a file
+with the internal password before starting up the server. In more advanced setups, also more pre-settings may be needed, for a TLS based 
+setup for example, you have to replace the self signed certificates (that are only for example) with your own certificates. 
 
-A usual installation process for SEB Server mostly look something like:
+A usual installation process for SEB Server mostly look something like the following:
 
-1. Connecting to the remote machine where the SEB Server instance has to be installed 
+1. Connect to the remote host where the SEB Server instance has to be installed 
     
-2. Install Git and Docker if not already installed.
+2. Install Git and Docker on the remote host if not already installed.
     
     .. note::
     
@@ -107,13 +106,28 @@ A usual installation process for SEB Server mostly look something like:
             |    - Docker : https://docs.docker.com/install/
             |    - Docker-Compose : https://docs.docker.com/compose/install/
     
-3. In the installation directory of choice clone the seb-server-setup repository of desired version
+3. In the installation directory of your choice clone the seb-server-setup repository of desired version from guthub.
     
-4. Navigate into the installation strategy sub-directory of choice and edit/prepare the configuration for the specified needs
+4. Navigate into the installation strategy sub-directory you want to install from and edit/prepare the configuration for your needs.
     
-5. Build the docker images and do some strategy dependent additional settings
+5. Build the docker images with docker-compose build.
     
-6. Bring the docker containers up and running and do some suggested health checks
+6. Bring the docker containers up and running with docker-compose up, and do some suggested health checks.
+
+General Update Process
+-----------------------
+
+If this initial setup has bin done once, it is possible to update to a newer SEB Server version (or down-grade) by applying the following steps:
+
+- Stop the services with *docker-compose down*.
+
+- Open the *docker-compose.yml* and set the *SEBSERVER_VERSION* argument from the sebserver service to the version you want to have.
+
+- Do some additional configuration changes if needed.
+
+- Rebuild the image with the new SEB Server version with *docker-compose build --no-cache*
+
+- Restart the services with *docker-compose up -d*
 
 Next part describes this process in detail for all supported installation strategies and also gives a service overview for a
 specific installation strategy.
