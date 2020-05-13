@@ -89,7 +89,7 @@ used by the seb-server service if JMX is enabled. For more details on how to con
 3. If some specific configuration is needed, this can be done within this step. See:ref:`configuration-label`. for more details on how to configure the services
    At least you should check the application-prod.properties file in the spring config directory, if everything is set properly.
    
-   .. note::
+.. note::
         Check that the spring configuration properties "sebserver.webservice.http.external.*" are set correctly to the URL where the SEB Server 
         can be accessed from the public. Usually your server has an URL like https://example.com. so use "https" for the scheme, "example.com"
         for the servername and specify the port if differs from default.
@@ -99,10 +99,6 @@ used by the seb-server service if JMX is enabled. For more details on how to con
     .. code-block:: bash
     
         $ docker-compose build --no-cache
-
-    .. note::
-    
-        This step can be skipped if the images are already build with the right version.
         
 5. Now we have to give a password that is internally used to create a data base account as well as to secure internal sensitive data.
 The initial password must be set by creating a text file named "secret" with no extension and placed directly in the "config" sub-folder.
@@ -165,6 +161,53 @@ The username and generated password of the initial admin account can be found on
 
     We highly recommend to change the generated password from the initial admin account immediately after first login. 
     
+**Enable JMX Remote Monitoring**
+
+If you want to be able to remotely connect to the SEB Server within a JMX monitoring tool you have to enable the JMX remote monitoring and therefore 
+you have to edit some configuration files at step 3. of the installation process.
+
+- Open the docker-compose.yml file with a text editor of your choice.
+    
+.. code-block:: vi docker-compose.yml
+
+- Remove the commented section about JMX and monitoring and set the MONITORING_MODE environment attribute to "true".
+
+.. code-block:: 
+    environment:
+        - MONITORING_MODE=false
+      # - JMX_PORT=9090
+      # Connect this port to host if you want to use JMX (MONITORING_MODE=true)
+      #ports:
+      #  - 9090:9090
+      
+      alter to
+      
+      environment:
+        - MONITORING_MODE=true
+        - JMX_PORT=9090
+      # Connect this port to host if you want to use JMX (MONITORING_MODE=true)
+      ports:
+        - 9090:9090
+      
+- Save the modified file and go into the jmx configuration directory
+
+.. code-block:: cd config/jmx
+
+- Open file "jmxremote.password" file in a text editor
+
+.. code-block:: vi jmxremote.password
+
+- The file is empty and you can give a password for a user (read-only) and an admin (read and write)
+
+.. code-block:: 
+    user [your password here]
+    
+- Save the file and go on with the installation process as decribed above.
+
+- After starting up the SEB Server successfully you should be able to remotely connect with a JMX monitoring tool to the server. Make sure
+you have a secured connection over SSH with a tunnel for example. 
+
+
 **Update**
 
 .. include:: service-update.rst
@@ -172,4 +215,5 @@ The username and generated password of the initial admin account can be found on
 **Backup**
 
 .. include:: service-backup.rst
+
 
