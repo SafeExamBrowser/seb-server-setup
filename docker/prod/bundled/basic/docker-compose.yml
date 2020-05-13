@@ -14,9 +14,6 @@ services:
     container_name: seb-server-mariadb
     environment:
         - MYSQL_ROOT_PASSWORD_FILE=/etc/mysql/conf.d/secret
-        # workaround: https://github.com/docker-library/mariadb/issues/262 
-        # TODO this seems to be fixed now... try to remove and test
-        - MYSQL_INITDB_SKIP_TZINFO=1
     ports:
         - 3306:3306
     volumes:
