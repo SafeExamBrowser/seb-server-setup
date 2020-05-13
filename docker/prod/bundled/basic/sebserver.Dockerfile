@@ -19,18 +19,18 @@ RUN mvn clean install -DskipTests -Dbuild-version="${SEBSERVER_VERSION}"
 FROM openjdk:11-jre-stretch
 
 ARG SEBSERVER_VERSION
-ENV SEBSERVER_JAR=${SEBSERVER_VERSION}
+ENV SEBSERVER_JAR="seb-server-${SEBSERVER_VERSION}.jar"
 ENV SERVER_PORT="8080"
 ENV JMX_PORT=
 
 WORKDIR /sebserver
-COPY --from=1 /sebserver/target/seb-server-"$SEBSERVER_JAR".jar /sebserver
+COPY --from=1 /sebserver/target/"${SEBSERVER_JAR}" /sebserver
 
 CMD if [ "x${JMX_PORT}" = "x" ] ; \
         then secret=$(cat /sebserver/config/secret) && exec java \
             -Xms64M \
             -Xmx1G \
-            -jar seb-server-"${SEBSERVER_JAR}".jar \
+            -jar "${SEBSERVER_JAR}" \
             --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
             --sebserver.certs.password="${secret}" \ 
@@ -48,7 +48,7 @@ CMD if [ "x${JMX_PORT}" = "x" ] ; \
             -Dcom.sun.management.jmxremote.authenticate=true \
             -Dcom.sun.management.jmxremote.password.file=/sebserver/config/jmx/jmxremote.password \
             -Dcom.sun.management.jmxremote.access.file=/sebserver/config/jmx/jmxremote.access \
-            -jar seb-server-"${SEBSERVER_JAR}".jar \
+            -jar "${SEBSERVER_JAR}" \
             --spring.profiles.active=prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
             --sebserver.certs.password="${secret}" \ 

@@ -29,19 +29,23 @@ services:
           context: .
           dockerfile: sebserver.Dockerfile
           args:
-              - SEBSERVER_VERSION=1.0-latest
+              - SEBSERVER_VERSION=1.0.0
       container_name: seb-server
       volumes:
         - seb-server-config:/sebserver/config
         - ./config/spring:/sebserver/config/spring
         - seb-server-logs:/sebserver/log
       environment:
-        - DEBUG_MODE=false
-      ports:
-        - 9090:9090
+        - MONITORING_MODE=false
+      # - JMX_PORT=9090
+      # Connect this port to host if you want to use JMX (MONITORING_MODE=true)
+      #ports:
+      #  - 9090:9090
+      
       logging:
         driver: "json-file"
         options:
+            mode: "non-blocking"
             max-size: "200k"
             max-file: "10"
       networks:
@@ -49,6 +53,7 @@ services:
       depends_on:
           - "mariadb"
           - "seb-server-setup"
+      restart: unless-stopped
 
   reverse-proxy:
     image: "nginx:latest"
@@ -64,6 +69,7 @@ services:
       - "mariadb"
       - "seb-server"
       - "seb-server-setup"
+    restart: unless-stopped
 
 networks:
   seb-server-network:
