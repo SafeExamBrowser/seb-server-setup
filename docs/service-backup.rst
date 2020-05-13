@@ -1,5 +1,3 @@
-**Database backup**
-
 Per default the data of the MariaDB service is stored within a docker named volume (seb-server-mariadb) and can either be directly dumped 
 from there by using a script or it is also possible to map this named volume to the hosts files system on installation process to 
 apply to host filesystem backup procedures that may already be in place for your particular IT environment. In this way you can perform

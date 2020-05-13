@@ -70,16 +70,16 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
         $ docker-compose up -d
         
 6. Check if the containers are started and running. There should be two containers running; seb-server and seb-server-mariadb. 
-You can also check the logs of individual container
+    You can also check the logs of individual container
 
     .. code-block:: bash
         $ docker ps --all
         $ docker logs ${container name}
         
 7. If there where no changes to the default configuration the SEB Server is now running on port 8080 and can be accessed with a browser on http://server-address:8080/. 
-There is one pre-configured institution (ETH Zürich) and one user-account with all roles to manage the server. 
-The username of the initial account is always "super-admin" and the password is "admin". After successful startup you will see a message like
-the following within the SEB Server log file.
+    There is one pre-configured institution (ETH Zürich) and one user-account with all roles to manage the server. 
+    The username of the initial account is always "super-admin" and the password is "admin". After successful startup you will see a message like
+    the following within the SEB Server log file.
 
 ::
 
