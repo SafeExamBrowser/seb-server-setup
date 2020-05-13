@@ -16,8 +16,8 @@ correct settings will be able to access the quiz in your Open edX course. The Sa
 and supported by the `SEB Consortium <https://safeexambrowser.org/consortium/>`_.
 
 
-What is SEB Server?
--------------------
+What is Safe Exam Browser Server (SEB Server)?
+----------------------------------------------
 
 While the interaction with SEB is well known in Learning Management Systems (LMS) like `Open edX <https://open.edx.org/>`_, 
 `Moodle <https://moodle.org/>`_ etc. the SEB Server is an entirely new component to set up secured online exams. 
@@ -47,8 +47,8 @@ a more automated and secure setup for high-stake exams.
 SEB - SEB Server Compatibility
 ------------------------------
 
-The table below shows available and upcomming SEB client versions that has SEB Server integration support and are compatible with particular 
-SEB Server version. There is an entry for each platform with a beta or testing release date and a oficial release date.
+The table below shows available and upcoming SEB client versions that has SEB Server integration support and are compatible with particular 
+SEB Server version. There is an entry for each platform with a beta or testing release date and a official release date.
 
 **SEB Server Version 1.0.X**
 
