@@ -74,10 +74,10 @@ used by the seb-server service if JMX is enabled. For more details on how to con
 
 1. Login to the target/remote host where the SEB Server demo shall be installed, on windows open a command or PowerShell, create a working directory and navigate into it.
     
-    .. code-block:: bash
+ .. code-block:: bash
     
-        $ mkdir sebserver
-        $ cd sebserver
+    $ mkdir sebserver
+    $ cd sebserver
         
 2. Get a clone of the seb-server-setup repository and navigate to the demo setup folder
 
@@ -96,9 +96,9 @@ used by the seb-server service if JMX is enabled. For more details on how to con
 
 4. build the docker images. 
 
-    .. code-block:: bash
+ .. code-block:: bash
     
-        $ docker-compose build --no-cache
+    $ docker-compose build --no-cache
         
 5. Now we have to give a password that is internally used to create a data base account as well as to secure internal sensitive data.
 The initial password must be set by creating a text file named "secret" with no extension and placed directly in the "config" sub-folder.

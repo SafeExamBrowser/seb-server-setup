@@ -56,17 +56,17 @@ There is the SEB Server Spring configuration in place: ref:`seb-server-configura
 
 1. Login to the target/remote host where the SEB Server demo shall be installed, on windows open a command or PowerShell, create a working directory and navigate into it.
     
-    .. code-block:: bash
+ .. code-block:: bash
     
-        $ mkdir sebserver
-        $ cd sebserver
+    $ mkdir sebserver
+    $ cd sebserver
         
 2. Get a clone of the seb-server-setup repository and navigate to the demo setup folder
 
-    .. code-block:: bash
+ .. code-block:: bash
     
-        $ git clone https://github.com/SafeExamBrowser/seb-server-setup.git
-        $ cd seb-server-setup/docker/testing/basic/
+    $ git clone https://github.com/SafeExamBrowser/seb-server-setup.git
+    $ cd seb-server-setup/docker/testing/basic/
 
 3. If some specific configuration is needed, this can be done within this step. See:ref:`configuration-label`. for more details on how to configure the services
    At least you should check the application-prod.properties file in the spring config directory, if everything is set properly.
@@ -77,13 +77,13 @@ There is the SEB Server Spring configuration in place: ref:`seb-server-configura
 
 4. build the docker images. 
 
-    .. code-block:: bash
+ .. code-block:: bash
     
-        $ docker-compose build --no-cache
+    $ docker-compose build --no-cache
 
-    .. note::
+.. note::
     
-        This step can be skipped if the images are already build with the right version.
+    This step can be skipped if the images are already build with the right version.
         
 5. Now we have to give a password that is internally used to create a data base account as well as to secure internal sensitive data.
 The initial password must be set by creating a text file named "secret" with no extension and placed directly in the "config" sub-folder.
@@ -92,31 +92,31 @@ into an internal docker volume and automatically deleted from the external confi
 with for example : printf %s "somePassword" >> secret. Or if the password should not appear in the command-line history, 
 just create the file and edit it with a text editor of your choice.
 
-    .. code-block:: bash
+ .. code-block:: bash
     
-        $ cd config
-        $ printf %s "somePassword" >> secret
-        $ cd ..
+    $ cd config
+    $ printf %s "somePassword" >> secret
+    $ cd ..
 
-    .. note::
+.. note::
         
-            This step usually must only be done once on the initial setup of the service. On a service update this is not needed and the
-            password that was given by the initial setup remains
-            
-            This password can be used to connect directly to the database that is created with the service and should be remembered by an administrator.
+        This step usually must only be done once on the initial setup of the service. On a service update this is not needed and the
+        password that was given by the initial setup remains
+        
+        This password can be used to connect directly to the database that is created with the service and should be remembered by an administrator.
 
 6. Start the services. 
 
-    .. code-block:: bash
+ .. code-block:: bash
     
-        $ docker-compose up -d
+    $ docker-compose up -d
         
 7. Check if the containers are started and running. The output should look something like the following.
 
-    .. code-block:: bash
+ .. code-block:: bash
     
-        $ docker ps --all
-        $ docker logs ${container name}
+    $ docker ps --all
+    $ docker logs ${container name}
         
     .. image:: images/dockerServicesTestUp.png
         :align: center

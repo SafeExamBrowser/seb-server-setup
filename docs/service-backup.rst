@@ -17,6 +17,7 @@ Currently there is only a manual docker-based backup in place that uses a docker
    service again after backup has been done with docker-compose up -d.
 
 .. code-block:: bash
+
     # Create a backup
     $ docker run --rm -v noencrypt_seb-server-mariadb:/volume -v $PWD:/backup loomchild/volume-backup backup seb-server-backup-[DATE]
     

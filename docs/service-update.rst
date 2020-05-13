@@ -56,6 +56,6 @@ To update an already installed and bundled SEB Server service, following the ste
         
 7. Cleanup the docker engine with
 
-    .. code-block:: bash
+ .. code-block:: bash
     
-        $ docker system prune
+    $ docker system prune
