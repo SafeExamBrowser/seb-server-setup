@@ -114,29 +114,64 @@ A usual installation process for SEB Server mostly look something like the follo
     
 6. Bring the docker containers up and running with docker-compose up, and do some suggested health checks.
 
-General Update Process
------------------------
-
-If this initial setup has bin done once, it is possible to update to a newer SEB Server version (or down-grade) by applying the following steps:
-
-- Stop the services with *docker-compose down*.
-
-- Open the *docker-compose.yml* and set the *SEBSERVER_VERSION* argument from the sebserver service to the version you want to have.
-
-- Do some additional configuration changes if needed.
-
-- Rebuild the image with the new SEB Server version with *docker-compose build --no-cache*
-
-- Restart the services with *docker-compose up -d*
-
-Next part describes this process in detail for all supported installation strategies and also gives a service overview for a
-specific installation strategy.
-
-
+For detailed setup and installation please see the detailed installation guide for the particular setup; demo, testing and production.
 .. toctree::
    :maxdepth: 1
    
    install-demo
    install-testing
    install-production
+
+
+
+General Update Process
+-----------------------
+
+If this initial setup has bin done once, it is possible to update to a newer SEB Server version (or down-grade) by applying the following steps:
+
+- Stop the services with docker compose.
+
+.. code-block:: docker-compose down
+    
+
+- Open the *docker-compose.yml* and set the *SEBSERVER_VERSION* argument from the sebserver service to the version you want to have.
+
+.. code-block::
+    $ vi docker-compose.yml
+    
+    ...
+    
+    seb-server:
+      build:
+          context: .
+          dockerfile: sebserver.Dockerfile
+          args:
+              - SEBSERVER_VERSION=1.0.0
+              
+    ...
+    
+    change to
+    
+    ...
+    
+    seb-server:
+      build:
+          context: .
+          dockerfile: sebserver.Dockerfile
+          args:
+              - SEBSERVER_VERSION=1.0.1
+              
+     ...
+     
+- Do some additional configuration changes if needed.
+
+- Rebuild the image with the new SEB Server version
+
+.. code-block:: $ docker-compose build --no-cache
+
+- Restart the services
+
+.. code-block:: $ docker-compose up -d
+
+
 

@@ -168,7 +168,7 @@ you have to edit some configuration files at step 3. of the installation process
 
 - Open the docker-compose.yml file with a text editor of your choice.
     
-.. code-block:: vi docker-compose.yml
+.. code-block:: $ vi docker-compose.yml
 
 - Remove the commented section about JMX and monitoring and set the MONITORING_MODE environment attribute to "true".
 
@@ -191,11 +191,11 @@ you have to edit some configuration files at step 3. of the installation process
       
 - Save the modified file and go into the jmx configuration directory
 
-.. code-block:: cd config/jmx
+.. code-block:: $ cd config/jmx
 
 - Open file "jmxremote.password" file in a text editor
 
-.. code-block:: vi jmxremote.password
+.. code-block:: $ vi jmxremote.password
 
 - The file is empty and you can give a password for a user (read-only) and an admin (read and write)
 
