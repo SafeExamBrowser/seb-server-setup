@@ -165,13 +165,13 @@ you have to edit some configuration files at step 3. of the installation process
 
 - Open the docker-compose.yml file with a text editor of your choice.
     
-.. code-block:: 
+ .. code-block:: 
 
     $ vi docker-compose.yml
 
 - Remove the commented section about JMX and monitoring and set the MONITORING_MODE environment attribute to "true".
 
-.. code-block:: 
+ .. code-block:: 
 
     environment:
         - MONITORING_MODE=false
@@ -191,27 +191,28 @@ you have to edit some configuration files at step 3. of the installation process
       
 - Save the modified file and go into the jmx configuration directory
 
-.. code-block:: 
+ .. code-block:: 
 
     $ cd config/jmx
 
 - Open file "jmxremote.password" file in a text editor
 
-.. code-block:: 
+ .. code-block:: 
 
     $ vi jmxremote.password
 
 - The file is empty and you can give a password for a user (read-only) and an admin (read and write). 
-.. code-block:: 
+ .. code-block:: 
 
     user [your password here]
     
 - Save the file and change to access rights according to JMX setup with:
 
-.. code-block:: bash
-
+ .. code-block:: bash
+ 
     $ chmod 600 jmxremote.password
     
+- Go further form here with the normal installation process
     
 - After starting up the SEB Server successfully you should be able to remotely connect with a JMX monitoring tool to the server. Make sure
   you have a secured connection over SSH with a tunnel for example. 
