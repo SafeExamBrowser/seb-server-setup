@@ -134,47 +134,50 @@ If this initial setup has bin done once, it is possible to update to a newer SEB
 
 - Stop the services with docker compose.
 
-.. code-block:: docker-compose down
+    .. code-block:: 
+        $ docker-compose down
     
 
 - Open the *docker-compose.yml* and set the *SEBSERVER_VERSION* argument from the sebserver service to the version you want to have.
 
-.. code-block::
-    $ vi docker-compose.yml
-    
-    ...
-    
-    seb-server:
-      build:
-          context: .
-          dockerfile: sebserver.Dockerfile
-          args:
-              - SEBSERVER_VERSION=1.0.0
-              
-    ...
-    
-    change to
-    
-    ...
-    
-    seb-server:
-      build:
-          context: .
-          dockerfile: sebserver.Dockerfile
-          args:
-              - SEBSERVER_VERSION=1.0.1
-              
-     ...
+    .. code-block::
+        $ vi docker-compose.yml
+        
+        ...
+        
+        seb-server:
+          build:
+              context: .
+              dockerfile: sebserver.Dockerfile
+              args:
+                  - SEBSERVER_VERSION=1.0.0
+                  
+        ...
+        
+        change to
+        
+        ...
+        
+        seb-server:
+          build:
+              context: .
+              dockerfile: sebserver.Dockerfile
+              args:
+                  - SEBSERVER_VERSION=1.0.1
+                  
+         ...
      
 - Do some additional configuration changes if needed.
 
 - Rebuild the image with the new SEB Server version
 
-.. code-block:: $ docker-compose build --no-cache
+    .. code-block:: 
+        $ docker-compose build --no-cache
 
 - Restart the services
 
-.. code-block:: $ docker-compose up -d
+    .. code-block:: 
+        $ docker-compose up -d
 
 
 
