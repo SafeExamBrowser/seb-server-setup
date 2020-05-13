@@ -8,7 +8,7 @@ To update an already installed and bundled SEB Server service, following the ste
      
 2. Update to the newest or preferred version within the seb-server-setup. Use git tags to show the available tags. If there are already local changed - if the configuration was modified from the original settings, and the local changes shall still be used and remain, git stash can be used to locally store and merge them.
 
-    .. code-block:: bash
+ .. code-block:: bash
  
          # Get new tags from remote
          $ git fetch --tags
@@ -36,19 +36,19 @@ To update an already installed and bundled SEB Server service, following the ste
          
 4. Rebuild the image with the new SEB Server version
 
-.. code-block:: bash
+ .. code-block:: bash
     $ docker-compose build --no-cache
         
 5. Boot the SEB Server setup docker services with
 
-.. code-block:: bash
+ .. code-block:: bash
     $ docker-compose up -d
      
 
         
 6. Check if the containers are started and running and everything is set in place for the particular setup
 
-    .. code-block:: bash
+ .. code-block:: bash
         $ docker ps --all
         $ docker logs ${container name}
         
