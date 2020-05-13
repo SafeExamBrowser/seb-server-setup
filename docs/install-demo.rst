@@ -45,40 +45,40 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
 
 **Installation:**
 
-1. Login to the target/remote host where the SEB Server demo shall be installed, on windows open a command or PowerShell, create a working directory and navigate into it.
+ 1. Login to the target/remote host where the SEB Server demo shall be installed, on windows open a command or PowerShell, create a working directory and navigate into it.
     
     .. code-block:: bash
         $ mkdir sebserver
         $ cd sebserver
         
-2. Get a clone of the seb-server-setup repository and navigate to the demo setup folder
+ 2. Get a clone of the seb-server-setup repository and navigate to the demo setup folder
 
     .. code-block:: bash
         $ git clone https://github.com/SafeExamBrowser/seb-server-setup.git
         $ cd seb-server-setup/docker/demo
 
-3. If some specific configuration is needed, this can be done within this step. See :ref:`configuration-label`. for more details on how to configure the services
+ 3. If some specific configuration is needed, this can be done within this step. See :ref:`configuration-label`. for more details on how to configure the services
 
-4. build the docker images. 
+ 4. build the docker images. 
 
     .. code-block:: bash
         $ docker-compose build --no-cache
 
-5. Start the services. 
+ 5. Start the services. 
 
     .. code-block:: bash
         $ docker-compose up -d
         
-6. Check if the containers are started and running. There should be two containers running; seb-server and seb-server-mariadb. You can also check the logs of individual container.
+ 6. Check if the containers are started and running. There should be two containers running; seb-server and seb-server-mariadb. You can also check the logs of individual container.
 
     .. code-block:: bash
         $ docker ps --all
         $ docker logs ${container name}
         
-7. If there where no changes to the default configuration the SEB Server is now running on port 8080 and can be accessed with a browser on http://server-address:8080/. 
-There is one pre-configured institution (ETH Zürich) and one user-account with all roles to manage the server. 
-The username of the initial account is always "super-admin" and the password is "admin". After successful startup you will see a message like
-the following within the SEB Server log file.
+ 7. If there where no changes to the default configuration the SEB Server is now running on port 8080 and can be accessed with a browser on http://server-address:8080/. 
+ There is one pre-configured institution (ETH Zürich) and one user-account with all roles to manage the server. 
+ The username of the initial account is always "super-admin" and the password is "admin". After successful startup you will see a message like
+ the following within the SEB Server log file.
 
 ::
 
