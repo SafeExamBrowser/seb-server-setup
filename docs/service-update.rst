@@ -6,10 +6,7 @@ To update an already installed and bundled SEB Server service, following the ste
  
      $ docker-compose down
      
-2. Update to the newest or preferred version within the seb-server-setup. Use git tags to show the available tags. 
-    If there are already local changed - if the configuration was modified from the original settings, 
-    and the local changes shall still be used and remain, git stash can be used to locally store and merge them.
-
+2. Update to the newest or preferred version within the seb-server-setup. Use git tags to show the available tags. If there are already local changed - if the configuration was modified from the original settings, and the local changes shall still be used and remain, git stash can be used to locally store and merge them.
 
     .. code-block:: bash
  
@@ -27,6 +24,7 @@ To update an already installed and bundled SEB Server service, following the ste
          
          # If local changes shall remain
          $ git stash apply
+         
          
 .. note::
       Usually you want to point to the exact version of the SEB Server setup by using `semantic versioning <https://semver.org/>`_ like 1.0.0 or 1.0.1. 
