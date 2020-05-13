@@ -45,7 +45,6 @@ To update an already installed and bundled SEB Server service, following the ste
     $ docker-compose up -d
      
 
-        
 6. Check if the containers are started and running and everything is set in place for the particular setup
 
  .. code-block:: bash
