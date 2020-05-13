@@ -201,14 +201,18 @@ you have to edit some configuration files at step 3. of the installation process
 
     $ vi jmxremote.password
 
-- The file is empty and you can give a password for a user (read-only) and an admin (read and write)
-
+- The file is empty and you can give a password for a user (read-only) and an admin (read and write). 
 .. code-block:: 
 
     user [your password here]
     
-- Save the file and go on with the installation process as decribed above.
+- Save the file and change to access rights according to JMX setup with:
 
+.. code-block:: bash
+
+    $ chmod 600 jmxremote.password
+    
+    
 - After starting up the SEB Server successfully you should be able to remotely connect with a JMX monitoring tool to the server. Make sure
   you have a secured connection over SSH with a tunnel for example. 
 
