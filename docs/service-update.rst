@@ -37,21 +37,25 @@ To update an already installed and bundled SEB Server service, following the ste
 4. Rebuild the image with the new SEB Server version
 
  .. code-block:: bash
+ 
     $ docker-compose build --no-cache
         
 5. Boot the SEB Server setup docker services with
 
  .. code-block:: bash
+ 
     $ docker-compose up -d
      
 
 6. Check if the containers are started and running and everything is set in place for the particular setup
 
  .. code-block:: bash
+ 
         $ docker ps --all
         $ docker logs ${container name}
         
 7. Cleanup the docker engine with
 
     .. code-block:: bash
+    
         $ docker system prune

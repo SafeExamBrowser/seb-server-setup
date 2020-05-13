@@ -48,12 +48,14 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
 1. Login to the target/remote host where the SEB Server demo shall be installed, on windows open a command or PowerShell, create a working directory and navigate into it.
     
  .. code-block:: bash
+ 
         $ mkdir sebserver
         $ cd sebserver
         
 2. Get a clone of the seb-server-setup repository and navigate to the demo setup folder
 
  .. code-block:: bash
+ 
         $ git clone https://github.com/SafeExamBrowser/seb-server-setup.git
         $ cd seb-server-setup/docker/demo
 
@@ -62,16 +64,19 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
 4. build the docker images. 
 
  .. code-block:: bash
+ 
         $ docker-compose build --no-cache
 
 5. Start the services. 
 
  .. code-block:: bash
+ 
         $ docker-compose up -d
         
 6. Check if the containers are started and running. There should be two containers running; seb-server and seb-server-mariadb. You can also check the logs of individual container.
 
  .. code-block:: bash
+ 
         $ docker ps --all
         $ docker logs ${container name}
         
