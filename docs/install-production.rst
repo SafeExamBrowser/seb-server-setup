@@ -208,11 +208,15 @@ you have to edit some configuration files at step 3. of the installation process
 you have a secured connection over SSH with a tunnel for example. 
 
 
-**Update**
+**Service Update**
 
 .. include:: service-update.rst
+
+**Service Reset**
+
+.. include:: service-reset.rst
         
-**Backup**
+**Service Backup / Restore**
 
 .. include:: service-backup.rst
 

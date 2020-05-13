@@ -101,10 +101,14 @@ the following within the SEB Server log file.
 
     Since this is a demo installation it may not be necessary but we highly recommend to change the generated password from the initial admin account immediately after first login. 
     
-**Update**
+**Service Update**
 
 .. include:: service-update.rst
+
+**Service Reset**
+
+.. include:: service-reset.rst
         
-**Backup**
+**Service Backup / Restore**
 
 .. include:: service-backup.rst

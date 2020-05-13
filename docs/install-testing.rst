@@ -146,10 +146,14 @@ The username and generated password of the initial admin account can be found on
 
     We highly recommend to change the generated password from the initial admin account immediately after first login. 
     
-**Update**
+**Service Update**
 
 .. include:: service-update.rst
+
+**Service Reset**
+
+.. include:: service-reset.rst
         
-**Backup**
+**Service Backup / Restore**
 
 .. include:: service-backup.rst
