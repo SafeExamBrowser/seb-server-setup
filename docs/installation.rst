@@ -114,7 +114,10 @@ A usual installation process for SEB Server mostly look something like the follo
     
 6. Bring the docker containers up and running with docker-compose up, and do some suggested health checks.
 
+
+
 For detailed setup and installation please see the detailed installation guide for the particular setup; demo, testing and production.
+
 .. toctree::
    :maxdepth: 1
    
