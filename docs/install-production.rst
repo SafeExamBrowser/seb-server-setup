@@ -175,11 +175,11 @@ of the installation process.
 
 ::
 
-        installation strategy sub-directory.........docker/prod/bundled/basic/
-        seb-server configuration....................docker/prod/bundled/basic/config/spring
-        maria-db configuration......................docker/prod/bundled/basic/config/mariadb
-        reverse-proxy configuration.................docker/prod/bundled/basic/config/nginx
-        jmx configuration...........................docker/prod/bundled/basic/config/jmx
+        installation strategy sub-directory.........docker/prod/bundled/tls/
+        seb-server configuration....................docker/prod/bundled/tls/config/spring
+        maria-db configuration......................docker/prod/bundled/tls/config/mariadb
+        reverse-proxy configuration.................docker/prod/bundled/tls/config/nginx
+        jmx configuration...........................docker/prod/bundled/tls/config/jmx
         single server setup.........................true
         secured (TLS)...............................true
         integrated mariadb service..................true

@@ -146,14 +146,17 @@ There is the SEB Server Spring configuration in place: ref:`seb-server-configura
 
     We highly recommend to change the generated password from the initial admin account immediately after first login. 
     
-**Service Update**
+Service Update
+..............
 
 .. include:: service-update.rst
 
-**Service Reset**
+Service Reset
+.............
 
 .. include:: service-reset.rst
         
-**Service Backup / Restore**
+Service Backup / Restore
+........................
 
 .. include:: service-backup.rst
