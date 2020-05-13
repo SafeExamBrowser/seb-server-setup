@@ -3,7 +3,8 @@ Demo
 
 **Info:**
 
-This setup provides a single, unsecured SEB Server setup for demonstrations and testing. Includes a single SEB Server instance and a single MariaDB server instance running both in a docker-container. 
+This setup provides a single, unsecured SEB Server setup for demonstrations and testing. 
+This setup includes a single SEB Server instance and a single MariaDB server instance running both in a docker-container. 
 With the default configuration, the MariaDB server is exposed on port 3306 and the SEB Server on port 8080.
 
 ::
@@ -23,8 +24,8 @@ With the default configuration, the MariaDB server is exposed on port 3306 and t
 
 **Requirements:**
 
-- Git installation if not already installed
-- Docker installation if not already installed
+- Git if not already installed
+- Docker and Docker-Compose if not already installed
 
 .. note::
 

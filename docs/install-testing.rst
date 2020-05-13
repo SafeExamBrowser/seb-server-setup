@@ -71,9 +71,9 @@ There is the SEB Server Spring configuration in place: ref:`seb-server-configura
 3. If some specific configuration is needed, this can be done within this step. See:ref:`configuration-label`. for more details on how to configure the services
    At least you should check the application-prod.properties file in the spring config directory, if everything is set properly.
    
-   .. note::
-        Check that the spring configuration properties "sebserver.webservice.http.external.*" are set correctly
-        to the URL where the SEB Server can be accessed from the public.
+.. note::
+    Check that the spring configuration properties "sebserver.webservice.http.external.*" are set correctly
+    to the URL where the SEB Server can be accessed from the public.
 
 4. build the docker images. 
 
@@ -86,11 +86,11 @@ There is the SEB Server Spring configuration in place: ref:`seb-server-configura
     This step can be skipped if the images are already build with the right version.
         
 5. Now we have to give a password that is internally used to create a data base account as well as to secure internal sensitive data.
-The initial password must be set by creating a text file named "secret" with no extension and placed directly in the "config" sub-folder.
-In this file the password must be written in plain text with no line brakes. Once the docker services started up the file will be copied 
-into an internal docker volume and automatically deleted from the external config directory. The file can be created from the command line 
-with for example : printf %s "somePassword" >> secret. Or if the password should not appear in the command-line history, 
-just create the file and edit it with a text editor of your choice.
+   The initial password must be set by creating a text file named "secret" with no extension and placed directly in the "config" sub-folder.
+   In this file the password must be written in plain text with no line brakes. Once the docker services started up the file will be copied 
+   into an internal docker volume and automatically deleted from the external config directory. The file can be created from the command line 
+   with for example : printf %s "somePassword" >> secret. Or if the password should not appear in the command-line history, 
+   just create the file and edit it with a text editor of your choice.
 
  .. code-block:: bash
     
@@ -123,8 +123,8 @@ just create the file and edit it with a text editor of your choice.
         :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/dockerServicesTestUp.png
         
 8. If there where no changes to the default configuration the SEB Server is now running on port 80 and can be accessed with a browser on http://server-address
-There is one pre-configured institution and one user-account with SEB Server Administrator role to manage the server. 
-The username and generated password of the initial admin account can be found on the logs:
+   There is one pre-configured institution and one user-account with SEB Server Administrator role to manage the server. 
+   The username and generated password of the initial admin account can be found on the logs:
 
 ::
 

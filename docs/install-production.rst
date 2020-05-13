@@ -90,9 +90,9 @@ used by the seb-server service if JMX is enabled. For more details on how to con
    At least you should check the application-prod.properties file in the spring config directory, if everything is set properly.
    
 .. note::
-        Check that the spring configuration properties "sebserver.webservice.http.external.*" are set correctly to the URL where the SEB Server 
-        can be accessed from the public. Usually your server has an URL like https://example.com. so use "https" for the scheme, "example.com"
-        for the servername and specify the port if differs from default.
+    Check that the spring configuration properties "sebserver.webservice.http.external.*" are set correctly to the URL where the SEB Server 
+    can be accessed from the public. Usually your server has an URL like https://example.com. so use "https" for the scheme, "example.com"
+    for the servername and specify the port if differs from default.
 
 4. build the docker images. 
 
@@ -101,45 +101,43 @@ used by the seb-server service if JMX is enabled. For more details on how to con
     $ docker-compose build --no-cache
         
 5. Now we have to give a password that is internally used to create a data base account as well as to secure internal sensitive data.
-The initial password must be set by creating a text file named "secret" with no extension and placed directly in the "config" sub-folder.
-In this file the password must be written in plain text with no line brakes. Once the docker services started up the file will be copied 
-into an internal docker volume and automatically deleted from the external config directory. The file can be created from the command line 
-with for example : printf %s "somePassword" >> secret. Or if the password should not appear in the command-line history, 
-just create the file and edit it with a text editor of your choice.
+   The initial password must be set by creating a text file named "secret" with no extension and placed directly in the "config" sub-folder.
+   In this file the password must be written in plain text with no line brakes. Once the docker services started up the file will be copied 
+   into an internal docker volume and automatically deleted from the external config directory. The file can be created from the command line 
+   with for example : printf %s "somePassword" >> secret. Or if the password should not appear in the command-line history, 
+   just create the file and edit it with a text editor of your choice.
 
-    .. code-block:: bash
+ .. code-block:: bash
     
-        $ cd config
-        $ printf %s "somePassword" >> secret
-        $ cd ..
+    $ cd config
+    $ printf %s "somePassword" >> secret
+    $ cd ..
 
-    .. note::
-        
-            This step usually must only be done once on the initial setup of the service. On a service update this is not needed and the
-            password that was given by the initial setup remains
-            
-            This password can be used to connect directly to the database that is created with the service and should be remembered by an administrator.
+.. note::
+    This step usually must only be done once on the initial setup of the service. On a service update this is not needed and the
+    password that was given by the initial setup remains
+    This password can be used to connect directly to the database that is created with the service and should be remembered by an administrator.
 
 6. Start the services. 
 
-    .. code-block:: bash
+ .. code-block:: bash
     
-        $ docker-compose up -d
+    $ docker-compose up -d
         
 7. Check if the containers are started and running. The output should look something like the following.
 
-    .. code-block:: bash
+ .. code-block:: bash
     
-        $ docker ps --all
-        $ docker logs ${container name}
+    $ docker ps --all
+    $ docker logs ${container name}
         
     .. image:: images/dockerServicesTestUp.png
         :align: center
         :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/dockerServicesTestUp.png
         
 8. If there where no changes to the default configuration the SEB Server is now running on port 80 and can be accessed with a browser on http(s)://server-address
-There is one pre-configured institution and one user-account with SEB Server Administrator role to manage the server. 
-The username and generated password of the initial admin account can be found on the logs:
+   There is one pre-configured institution and one user-account with SEB Server Administrator role to manage the server. 
+   The username and generated password of the initial admin account can be found on the logs:
 
 ::
 
@@ -158,7 +156,6 @@ The username and generated password of the initial admin account can be found on
 
     
 .. note::
-
     We highly recommend to change the generated password from the initial admin account immediately after first login. 
     
 **Enable JMX Remote Monitoring**
@@ -168,11 +165,14 @@ you have to edit some configuration files at step 3. of the installation process
 
 - Open the docker-compose.yml file with a text editor of your choice.
     
-.. code-block:: $ vi docker-compose.yml
+.. code-block:: 
+
+    $ vi docker-compose.yml
 
 - Remove the commented section about JMX and monitoring and set the MONITORING_MODE environment attribute to "true".
 
 .. code-block:: 
+
     environment:
         - MONITORING_MODE=false
       # - JMX_PORT=9090
@@ -191,21 +191,26 @@ you have to edit some configuration files at step 3. of the installation process
       
 - Save the modified file and go into the jmx configuration directory
 
-.. code-block:: $ cd config/jmx
+.. code-block:: 
+
+    $ cd config/jmx
 
 - Open file "jmxremote.password" file in a text editor
 
-.. code-block:: $ vi jmxremote.password
+.. code-block:: 
+
+    $ vi jmxremote.password
 
 - The file is empty and you can give a password for a user (read-only) and an admin (read and write)
 
 .. code-block:: 
+
     user [your password here]
     
 - Save the file and go on with the installation process as decribed above.
 
 - After starting up the SEB Server successfully you should be able to remotely connect with a JMX monitoring tool to the server. Make sure
-you have a secured connection over SSH with a tunnel for example. 
+  you have a secured connection over SSH with a tunnel for example. 
 
 
 **Service Update**
