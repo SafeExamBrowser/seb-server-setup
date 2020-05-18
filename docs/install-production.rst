@@ -21,10 +21,10 @@ TLS handling and you have to configure and manage your certificates within the s
 Basic Setup
 ...........
 
-The production basic setup comes with a webservice and GUI-service bundled single server setup defined in the usual sebserver.Docker file, 
-a simple and integrated MariaDB setup that uses just the official MariaDB Docker image, and a reverse proxy using the official nginx:latest Docker image. 
+The production basic setup comes with the webservice and the GUI-service bundled in a single server setup and defined in the usual sebserver.Docker file.
+A simple and integrated MariaDB setup that uses just the official MariaDB Docker image, and a reverse proxy using the official nginx:latest Docker image. 
 There is also a initial setup service that is defined in setup.Dockerfile and that in this case does only the initial 
-password handling that is needed in the initial setup. And all is bundled together within the docker-compose.yml configuration file.
+password handling that is needed for the initial setup. All this is bundled together within the docker-compose.yml configuration file to run on the same host.
 
 ::
 
@@ -165,10 +165,10 @@ used by the seb-server service if JMX is enabled. For more details on how to con
 TLS Setup
 ...........
 
-The production tls setup comes with a webservice and GUI-service bundled single server setup defined in the usual sebserver.Docker file, 
-a simple and integrated MariaDB setup that uses just the official MariaDB Docker image, and a reverse proxy using the official nginx:latest Docker image. 
-There is also a initial setup service that is defined in setup.Dockerfile and that in this case does only the initial 
-password handling that is needed in the initial setup. And all is bundled together within the docker-compose.yml configuration file.
+The production tls setup comes with the webservice and the GUI-service bundled in single server setup defined in the usual sebserver.Docker file. 
+A simple and integrated MariaDB setup that uses just the official MariaDB Docker image, and a reverse proxy using the official nginx:latest Docker image. 
+There is also a initial setup service that is defined in setup.Dockerfile and that in this case does the initial 
+password handling that is needed for the initial setup. All is bundled together within the docker-compose.yml configuration file to run on the same host. 
 Additional to the basic setup, this setup contains a nginx app.conf file with HTTPS configuration and a sub-directory "certs" that contains
 self-signed certificates that are only for documentation purposes and that must be replaced by your singed certificates in step 4.
 of the installation process.
