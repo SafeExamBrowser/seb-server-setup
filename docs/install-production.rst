@@ -3,18 +3,20 @@ Production
 
 **Info:**
 
-For production we provide currently two different default setups, both for bundled environments. Setups for distributed environments will follow as soon
-as possible. The first bundled setup is the usual basic setup with no HTTPS/TLS in place that can be used if the SEB Server shall be running in 
+For production we provide currently two different default setups. Both for bundled environments. 
+Separated setups for distributed environments will follow as soon as we have created and tested this. 
+
+The first bundled setup is the usual basic setup with no HTTPS/TLS in place that can be used if the SEB Server shall be running in 
 an environment that is already protected with an end to end TLS handling. Usually SEB Server will then run behind a reverse-proxy that handles the
 TLS encryption on HTTPS and forward the decrypted traffic directly to the SEB Server on HTTP. We recommend such a setup because it is usually also
 prefered by system administration and may already be in place within your IT environment. The other setup "tls" integrates the HTTPS/TLS handling
-with the docker setup of SEB Server. The reverse-proxy that usually shodows the SEB Server within the docker-compose setup is used to terminate the
+with the docker setup of SEB Server. The reverse-proxy that usually shadows the SEB Server within the docker-compose setup is used to terminate the
 TLS handling and you have to configure and manage your certificates within the setup as described later in detail.
 
 .. note::
     If you want to setup SEB Server for a cloud environment you have to adapt the available docker and docker-compose configurations to apply to
     your best-practices and standards. Currently there are no default configurations for cloud setup on cloud environments. Since SEB Server
-    is built to be able to separte GUI- and web-service parts and to scale-up the web-service to run with many instances, it is just a matter of
+    is built to be able to have separated GUI- and web-service parts and to scale-up the web-service to run with many instances, it is just a matter of
     setting up all things properly and use cloud integration like docker-swarm or kubernetes. This should be possible but is not tested yet.
     
 
@@ -57,15 +59,15 @@ password handling that is needed for the initial setup. All this is bundled toge
         
 **Setup:**
 
-The docker setup consists of two docker-files, "sebserver.Docker" that defines and builds an image for the SEB Server, "setup.Docker" that 
-defines the initial setup job and a docker-compose.yml file that orchestrate the setup of the needed containers/services. 
-The build of the image for SEB Server first clones the defines version of the SEB Server source repository form GitHub and build the SEB Server 
-with Maven that leads to a self-contained, spring-boot-based, jar artifact that will be run with a usual java command on container startup. 
-For MariaDB the defined public image is been used to build-up the MariaDB server service.
+The docker setup consists of two docker-files, "sebserver.Docker" that defines and builds an image for the SEB Server and "setup.Docker" that 
+defines the initial setup job. And a docker-compose.yml file that orchestrate the setup of the needed containers/services. 
+The build of the docker image for SEB Server first clones the configured version of the SEB Server source repository from GitHub and builds the SEB Server 
+with the Maven build tool that leads to a self-contained, spring-boot-based jar artifact that is run with a usual java command on the container startup. 
+For MariaDB the official public image is used to build-up the MariaDB server service.
 
 **Configuration**
 
-The configuration for each service are located in the local /config directory separated by folders for each concern. The "spring" folder
+The configuration for each service is located in the local /config directory separated by folders for each concern. The "spring" folder
 contains all the Spring and Spring-Boot based configurations and is used by the seb-server service. The "mariadb" folder contains the
 usual mariadb configuration file that is loaded form the seb-server-mariadb service on startup. The "nginx" folder contains a usual 
 nginx reverse-proxy configuration and is used by the reverse-proxy service. The "jmx" folder contains JMX related configurations and is also
@@ -92,8 +94,8 @@ used by the seb-server service if JMX is enabled. For more details on how to con
    
 .. note::
     Check that the spring configuration properties "sebserver.webservice.http.external.*" are set correctly to the URL where the SEB Server 
-    can be accessed from the public. Usually your server has an URL like https://example.com. so use "https" for the scheme, "example.com"
-    for the servername and specify the port if differs from default.
+    can be accessed from the public Internet. Usually your server has an URL like https://example.com. so use "https" for the scheme, "example.com"
+    for the servername and specify the port if it differs from default port (80/443).
 
 4. build the docker images. 
 
@@ -103,7 +105,7 @@ used by the seb-server service if JMX is enabled. For more details on how to con
         
 5. Now we have to give a password that is internally used to create a data base account as well as to secure internal sensitive data.
    The initial password must be set by creating a text file named "secret" with no extension and placed directly in the "config" sub-folder.
-   In this file the password must be written in plain text with no line brakes. Once the docker services started up the file will be copied 
+   In this file the password must be written in plain text with no line brakes. Once the docker services start up the first time the file will be copied 
    into an internal docker volume and automatically deleted from the external config directory. The file can be created from the command line 
    with for example : printf %s "somePassword" >> secret. Or if the password should not appear in the command-line history, 
    just create the file and edit it with a text editor of your choice.
@@ -116,8 +118,8 @@ used by the seb-server service if JMX is enabled. For more details on how to con
 
 .. note::
     This step usually must only be done once on the initial setup of the service. On a service update this is not needed and the
-    password that was given by the initial setup remains
-    This password can be used to connect directly to the database that is created with the service and should be remembered by an administrator.
+    password that was given by the initial setup remains.
+    This password can be used to connect to the database within a SSH tunnel for example. The password should be in the responsibility of a system administrator and handled with care.
 
 6. Start the services. 
 
@@ -267,7 +269,7 @@ used by the seb-server service if JMX is enabled. For more details on how to con
 .. note::
     This step usually must only be done once on the initial setup of the service. On a service update this is not needed and the
     password that was given by the initial setup remains
-    This password can be used to connect directly to the database that is created with the service and should be remembered by an administrator.
+    This password can be used to connect to the database within a SSH tunnel for example. The password should be in the responsibility of a system administrator and handled with care.
 
 7. Start the services. 
 

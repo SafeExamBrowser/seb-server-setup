@@ -10,7 +10,6 @@ max_allowed_packet = 256M
 max_connect_errors = 1000000
 
 skip_external_locking
-skip_name_resolve
 
 #memory
 innodb_buffer_pool_size=2G

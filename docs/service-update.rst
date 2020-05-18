@@ -1,6 +1,6 @@
 To update an already installed and bundled SEB Server service, following the steps below;
 
-1. Shouting down the SEB Server setup docker services with;
+1. Shout down the SEB Server setup docker services with;
 
  .. code-block:: bash
  

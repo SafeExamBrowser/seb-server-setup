@@ -41,7 +41,6 @@ services:
       # Connect this port to host if you want to use JMX (MONITORING_MODE=true)
       #ports:
       #  - 9090:9090
-      
       logging:
         driver: "json-file"
         options:

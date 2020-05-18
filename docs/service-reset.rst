@@ -1,5 +1,12 @@
-To reset a SEB Server installation either to delete the installation or the be able to install form scratch, we have do shout down the service
+To reset a SEB Server installation either to delete the installation or the be able to install form scratch, you have to shout down the service
 and prune the docker system entirely. To do so, use the following steps.
+
+.. warn:: 
+    Make sure you have a actual backup form the database before reset the whole service. Otherwise all data will be lost.
+    
+.. note:: 
+    If you want to reuse data from backup you have to make sure you use the same initial password on the setup as before.
+    Otherwise the service will not be able to decrypt previously encrypted data from the database. 
 
 1. If the service is still running, go into the service setup directory and shout it down
 
