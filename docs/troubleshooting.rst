@@ -25,28 +25,28 @@ files in SEB Server startup.
    Use "docker logs seb-server" to quickly show the SEB Server application logs.
    
 - **Explanation** : It seems that this error happens sometimes when the services are starting slowly, and either the MariaDB service or the 
- network is not up and running while the seb-sever service tries to connect. It also fails on following automated service restarts for some unknown
- reason. We are working on a better solution for this.
+network is not up and running while the seb-sever service tries to connect. It also fails on following automated service restarts for some unknown
+reason. We are working on a better solution for this.
 
 - **Solution** : to stop and restart the seb-server service manually. This usually works if the described explanation is the reason of the connection error.
 
-- Stop the service with:
+    - Stop the service with:
 
- .. code-block:: bash
+        .. code-block:: bash
  
-   $ docker stop seb-server
+            $ docker stop seb-server
    
-- And restart it again with:
+    - And restart it again with:
 
- .. code-block:: bash
+        .. code-block:: bash
  
-   $ docker restart seb-server
+            $ docker restart seb-server
    
-- See the logs if this solved the problem:
+    - See the logs if this solved the problem:
 
- .. code-block:: bash
+        .. code-block:: bash
  
-   $ docker logs seb-server
+            $ docker logs seb-server
    
 -------------------------------------
    
@@ -77,9 +77,9 @@ files in SEB Server startup.
    
  - Start the whole service again with:
 
- .. code-block:: bash
+  .. code-block:: bash
  
-   $ docker-compose up -d
+    $ docker-compose up -d
    
 ------------------------------------------------
 
