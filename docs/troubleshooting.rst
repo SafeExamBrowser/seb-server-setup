@@ -14,9 +14,9 @@ There shall be at least a problem description, an optional explanation if needed
 
 ------------------------------
 
-**Version** : 1.0.0
-**Domain**  : general bundled setups
-**Problem** : SEB Server is not able to connect internally to MariaDB**
+- **Version** : 1.0.0
+- **Domain**  : general bundled setups
+- **Problem** : SEB Server is not able to connect internally to MariaDB**
 
 SEB Server is not able to connect internally to MariaDB within the docker network. You see a connection error on the seb-server log 
 files in SEB Server startup. 
@@ -24,11 +24,11 @@ files in SEB Server startup.
 .. note::
    Use "docker logs seb-server" to quickly show the SEB Server application logs.
    
-**Explanation** : It seems that this error happens sometimes when the services are starting slowly, and either the MariaDB service or the 
-network is not up and running while the seb-sever service tries to connect. It also fails on following automated service restarts for some unknown
-reason. We are working on a better solution for this.
+- **Explanation** : It seems that this error happens sometimes when the services are starting slowly, and either the MariaDB service or the 
+ network is not up and running while the seb-sever service tries to connect. It also fails on following automated service restarts for some unknown
+ reason. We are working on a better solution for this.
 
-**Solution** : to stop and restart the seb-server service manually. This usually works if the described explanation is the reason of the connection error.
+- **Solution** : to stop and restart the seb-server service manually. This usually works if the described explanation is the reason of the connection error.
 
 - Stop the service with:
 
@@ -50,10 +50,10 @@ reason. We are working on a better solution for this.
    
 -------------------------------------
    
-**Version** : 1.0.0
-**Domain**  : general bundled setups
-**Problem** : The initial password file setup was not correctly done for the first time or you need or want to reset the password.
-**Solution** : You have to remove the configuration volume form the docker engine and create the password file again. Then restarting the service.
+- **Version** : 1.0.0
+- **Domain**  : general bundled setups
+- **Problem** : The initial password file setup was not correctly done for the first time or you need or want to reset the password.
+- **Solution** : You have to remove the configuration volume form the docker engine and create the password file again. Then restarting the service.
 
 .. note::
    Do this with care! If there is already data stored that was encrypted for security reasons with a password that was originally set on the
@@ -61,21 +61,21 @@ reason. We are working on a better solution for this.
    In the initial setup you are able to change the password but from the time one you have living data on the service you never should change
    this initial password. 
 
-- Stop the whole service with:
+ - Stop the whole service with:
 
- .. code-block:: bash
+  .. code-block:: bash
  
-   $ docker-compose down
+    $ docker-compose down
    
-- Go into the config directory and create the "secret" file with the password as described in the setup process:
+ - Go into the config directory and create the "secret" file with the password as described in the setup process:
 
- .. code-block:: bash
+  .. code-block:: bash
  
-   $ cd config
-   $ vi secret
-   $ cd ..
+    $ cd config
+    $ vi secret
+    $ cd ..
    
-- Start the whole service again with:
+ - Start the whole service again with:
 
  .. code-block:: bash
  
