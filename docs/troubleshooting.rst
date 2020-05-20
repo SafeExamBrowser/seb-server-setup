@@ -16,18 +16,12 @@ There shall be at least a problem description, an optional explanation if needed
 
 - **Version** : 1.0.0
 - **Domain**  : general bundled setups
-- **Problem** : SEB Server is not able to connect internally to MariaDB**
-
-SEB Server is not able to connect internally to MariaDB within the docker network. You see a connection error on the seb-server log 
-files in SEB Server startup. 
+- **Problem** : SEB Server is not able to connect internally to MariaDB SEB Server is not able to connect internally to MariaDB within the docker network. You see a connection error on the seb-server log files in SEB Server startup. 
 
 .. note::
    Use "docker logs seb-server" to quickly show the SEB Server application logs.
    
-- **Explanation** : It seems that this error happens sometimes when the services are starting slowly, and either the MariaDB service or the 
-network is not up and running while the seb-sever service tries to connect. It also fails on following automated service restarts for some unknown
-reason. We are working on a better solution for this.
-
+- **Explanation** : It seems that this error happens sometimes when the services are starting slowly, and either the MariaDB service or the network is not up and running while the seb-sever service tries to connect. It also fails on following automated service restarts for some unknown reason. We are working on a better solution for this.
 - **Solution** : to stop and restart the seb-server service manually. This usually works if the described explanation is the reason of the connection error.
 
     - Stop the service with:
