@@ -31,7 +31,7 @@ CMD if [ "x${JMX_PORT}" = "x" ] ; \
             -Xms64M \
             -Xmx1G \
             -jar "${SEBSERVER_JAR}" \
-            --spring.profiles.active=prod,prod-gui,prod-ws \
+            --spring.profiles.active=ws,gui,prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
             --sebserver.certs.password="${secret}" \ 
             --sebserver.mariadb.password="${secret}" \
@@ -49,7 +49,7 @@ CMD if [ "x${JMX_PORT}" = "x" ] ; \
             -Dcom.sun.management.jmxremote.password.file=/sebserver/config/jmx/jmxremote.password \
             -Dcom.sun.management.jmxremote.access.file=/sebserver/config/jmx/jmxremote.access \
             -jar "${SEBSERVER_JAR}" \
-            --spring.profiles.active=prod,prod-gui,prod-ws \
+            --spring.profiles.active=ws,gui,prod,prod-gui,prod-ws \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
             --sebserver.certs.password="${secret}" \ 
             --sebserver.mariadb.password="${secret}" \

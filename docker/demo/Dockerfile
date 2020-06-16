@@ -38,7 +38,7 @@ ENTRYPOINT exec java \
     -Dcom.sun.management.jmxremote.authenticate=false \
     -jar seb-server-"${SEBSERVER_JAR}".jar \
     --server.port="${SERVER_PORT}" \
-    --spring.profiles.active=demo \
+    --spring.profiles.active=ws,gui,demo \
     --spring.config.location=file:/sebserver/config/,classpath:/config/ \
     --sebserver.mariadb.password="${SERVER_PWD}" \
     --sebserver.password="${SERVER_PWD}"
