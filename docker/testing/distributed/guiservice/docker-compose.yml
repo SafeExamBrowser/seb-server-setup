@@ -29,6 +29,7 @@ services:
 volumes:
   seb-server-config:
   seb-server-logs:
+    name: seb-guiservice-logs
 
 networks:
   seb-server-network:

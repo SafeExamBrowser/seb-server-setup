@@ -7,7 +7,7 @@ Another method would be to connect to the MariaDB server from a script on the ho
 
 We recommend to contact your system administration to develop and apply a proper backup and restore procedure that fits best with your
 IT infrastructure. For further information about backup and restore procedures for MariaDB see 
-`Backing Up and Restoring Databases<https://mariadb.com/kb/en/backing-up-and-restoring-databases/>`_
+`Backing Up and Restoring Databases <https://mariadb.com/kb/en/backing-up-and-restoring-databases/>`_
 
 
 There is also a docker-based backup and restore service provided by `loomchild <https://github.com/loomchild/volume-backup>`_ directly
@@ -21,8 +21,8 @@ possible to automate this procedure for automated backups on daily basis.
 .. code-block:: bash
 
     # Create a backup
-    $ docker run --rm -v noencrypt_seb-server-mariadb:/volume -v $PWD:/backup loomchild/volume-backup backup seb-server-backup-[DATE]
+    $ docker run --rm -v seb-server-mariadb:/volume -v $PWD:/backup loomchild/volume-backup backup seb-server-backup-[DATE]
     
     # Restore from a previously created backup
-    $ docker run --rm -v noencrypt_seb-server-mariadb:/volume -v $PWD:/backup loomchild/volume-backup restore seb-server-backup-[DATE]
+    $ docker run --rm -v seb-server-mariadb:/volume -v $PWD:/backup loomchild/volume-backup restore seb-server-backup-[DATE]
     $ docker restart seb-server-mariadb

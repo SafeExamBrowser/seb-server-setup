@@ -19,6 +19,7 @@ services:
 
 volumes:
   mariadb-data:
+    name: seb-server-data
   
 networks:
   seb-server-network:

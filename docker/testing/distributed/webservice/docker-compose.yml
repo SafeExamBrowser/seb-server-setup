@@ -86,6 +86,7 @@ services:
 volumes:
   seb-server-config:
   seb-server-logs:
+    name: seb-webservice-logs
 
 networks:
   seb-server-network:
