@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 services:
   seb-server-setup:
     build:
@@ -72,8 +72,12 @@ services:
 
 networks:
   seb-server-network:
+    name: seb-server-network
 
 volumes:
   seb-server-config:
+    name: seb-server-config
   seb-server-mariadb:
+    name: seb-server-mariadb
   seb-server-logs:
+    name: seb-server-logs
