@@ -22,6 +22,8 @@ services:
         - ./config/mariadb/config.cnf:/etc/mysql/conf.d/config.cnf
     networks:
         - seb-server-network
+    depends_on:
+        - "seb-server-setup"
     restart: unless-stopped
 
   seb-server:
