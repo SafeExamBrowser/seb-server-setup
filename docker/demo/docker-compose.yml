@@ -12,6 +12,7 @@ services:
         - 3306:3306
     networks:
         - ralph
+    restart: unless-stopped
 
   seb-server:
       build:
@@ -33,6 +34,7 @@ services:
           - ralph
       depends_on:
           - "mariadb"
+      restart: unless-stopped
             
 networks:
   ralph:
