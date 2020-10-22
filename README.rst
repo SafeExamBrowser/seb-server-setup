@@ -59,9 +59,11 @@ SEB Server version. There is an entry for each platform with a beta or testing r
    "SEB Client for Mac", "Q4 2020 - Version 2.3", "Q4 2020 - Version 2.3"
    "SEB Client for Windows", "Q2 2020 - Version 3.1", "Q4 2020 - Version 3.1"
    
-For testing: 
+*Note that these are all beta versions and must only be used for testing or demonstration.*
 
-`Download beta version of SEB Client for iOS <https://sourceforge.net/p/seb/discussion/seb-ios/thread/e7e542a5/>`_
+`Download beta version of SEB Client iOS <https://sourceforge.net/p/seb/discussion/seb-ios/thread/e7e542a5/>`_
+`Download beta version of SEB Client Windows <https://sebdev-let.ethz.ch/project/appveyor/seb-win-refactoring/build/job/syhbap4i8f4ykd5h/artifacts>`_
+
 
 
 What is the SEB Server Setup repository?
