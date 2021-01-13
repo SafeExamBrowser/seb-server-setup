@@ -5,8 +5,8 @@ services:
           context: .
           dockerfile: ../sebserver.Dockerfile
           args:
-            - GIT_TAG=development
             - SEBSERVER_VERSION=
+            - GIT_TAG=development
       container_name: seb-webservice
       volumes:
         - seb-server-config:/sebserver/config
@@ -14,7 +14,7 @@ services:
       environment:
         - SERVICE_PROFILE=ws
         - MONITORING_MODE=false
-        - SEBSERVER_SECRET=somePW
+        - SEBSERVER_SECRET=${SEBSERVER_SECRET}
         - DB_SECRET=${SEBSERVER_SECRET}
         - INTERNAL_SECRET=${SEBSERVER_SECRET}
       # - JMX_PORT=9090 # Connect this port to host if you want to use JMX (MONITORING_MODE=true)

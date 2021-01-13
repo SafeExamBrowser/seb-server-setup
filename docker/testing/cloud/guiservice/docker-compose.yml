@@ -14,7 +14,9 @@ services:
       environment:
         - SERVICE_PROFILE=gui
         - MONITORING_MODE=false
-        - SEBSERVER_SECRET=
+        - SEBSERVER_SECRET=${SEBSERVER_SECRET}
+        - DB_SECRET=${SEBSERVER_SECRET}
+        - INTERNAL_SECRET=${SEBSERVER_SECRET}
       # - JMX_PORT=9090 # Connect this port to host if you want to use JMX (MONITORING_MODE=true)
       ports:
         - 80:8080
