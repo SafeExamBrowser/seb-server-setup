@@ -23,6 +23,9 @@ ENV SEBSERVER_JAR="seb-server-${SEBSERVER_VERSION}.jar"
 ENV SERVER_PORT="8080"
 ENV JMX_PORT=
 ENV SERVICE_PROFILE=ws
+ENV SEBSERVER_SECRET=
+ENV DB_SECRET=$SEBSERVER_SECRET
+ENV INTERNAL_SECRET=$SEBSERVER_SECRET
 
 RUN groupadd --system spring && useradd --system --gid spring spring
 USER spring:spring
@@ -30,16 +33,16 @@ WORKDIR /sebserver
 COPY --from=1 /sebserver/target/"${SEBSERVER_JAR}" /sebserver
 
 CMD if [ "x${JMX_PORT}" = "x" ] ; \
-        then secret=$(cat /sebserver/config/secret) && exec java \
+        then exec java \
             -Xms64M \
             -Xmx1G \
             -jar "${SEBSERVER_JAR}" \
             --spring.profiles.active=${SERVICE_PROFILE},prod,prod-${SERVICE_PROFILE} \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
-            --sebserver.certs.password="${secret}" \ 
-            --sebserver.mariadb.password="${secret}" \
-            --sebserver.password="${secret}" ; \
-        else secret=$(cat /sebserver/config/secret) && exec java \
+            --sebserver.certs.password="${SEBSERVER_SECRET}" \ 
+            --sebserver.mariadb.password="${DB_SECRET}" \
+            --sebserver.password="${INTERNAL_SECRET}" ; \
+        else exec java \
             -Xms64M \
             -Xmx1G \
             -Dcom.sun.management.jmxremote \
@@ -54,9 +57,9 @@ CMD if [ "x${JMX_PORT}" = "x" ] ; \
             -jar "${SEBSERVER_JAR}" \
             --spring.profiles.active=${SERVICE_PROFILE},prod,prod-${SERVICE_PROFILE} \
             --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
-            --sebserver.certs.password="${secret}" \ 
-            --sebserver.mariadb.password="${secret}" \
-            --sebserver.password="${secret}" ; \
+            --sebserver.certs.password="${SEBSERVER_SECRET}" \ 
+            --sebserver.mariadb.password="${DB_SECRET}" \
+            --sebserver.password="${INTERNAL_SECRET}" ; \
         fi
 
 EXPOSE $SERVER_PORT $JMX_PORT
