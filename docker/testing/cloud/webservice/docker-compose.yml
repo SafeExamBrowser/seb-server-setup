@@ -15,8 +15,8 @@ services:
         - SERVICE_PROFILE=ws
         - MONITORING_MODE=false
         - SEBSERVER_SECRET=
-        - DB_SECRET=
-        - INTERNAL_SECRET=
+        - DB_SECRET=${SEBSERVER_SECRET}
+        - INTERNAL_SECRET=${SEBSERVER_SECRET}
       # - JMX_PORT=9090 # Connect this port to host if you want to use JMX (MONITORING_MODE=true)
       ports:
         - 8081:8080
