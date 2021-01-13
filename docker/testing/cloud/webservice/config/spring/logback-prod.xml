@@ -6,20 +6,11 @@
         <pattern>%d{HH:mm:ss.SSS} %-5level [%thread]:[%logger] %msg%n</pattern>
       </encoder>
     </appender>
-    
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-      <file>log/sebserver.log</file>
-      <append>true</append>
-      <encoder>
-         <pattern>%d{HH:mm:ss.SSS} %-5level [%thread]:[%logger] %msg%n</pattern>
-      </encoder>
-   </appender>
   
   <springProfile name="prod">
 
     <root level="DEBUG" additivity="true">
       <appender-ref ref="STDOUT" />
-      <appender-ref ref="FILE" />
     </root>
     
   </springProfile>
