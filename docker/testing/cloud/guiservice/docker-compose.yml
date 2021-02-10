@@ -11,13 +11,16 @@ services:
       volumes:
         - seb-server-config:/sebserver/config
         - ./config/spring:/sebserver/config/spring
+        - ./config/jmx:/sebserver/config/jmx
       environment:
-        - SERVICE_PROFILE=gui
+        - JAVA_HEAP_MIN=1G
+        - JAVA_HEAP_MAX=8G
         - MONITORING_MODE=false
-        - SEBSERVER_SECRET=${SEBSERVER_SECRET}
-        - DB_SECRET=${SEBSERVER_SECRET}
-        - INTERNAL_SECRET=${SEBSERVER_SECRET}
-      # - JMX_PORT=9090 # Connect this port to host if you want to use JMX (MONITORING_MODE=true)
+        - JMX_PORT=9090
+        - spring_profiles_active=gui,prod-gui,prod
+        - sebserver_password=${SEBSERVER_PWD}
+        - sebserver_test_property=${SEBSERVER_SETUP_TAG}
+        - sebserver_gui_http_external_servername=${SEBSERVER_EXT_HOST}
       ports:
         - 80:8080
       # - 9090:9090 # Connect this port to host if you want to use JMX (MONITORING_MODE=true)

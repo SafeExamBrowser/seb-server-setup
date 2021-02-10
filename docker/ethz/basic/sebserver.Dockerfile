@@ -21,18 +21,14 @@ FROM openjdk:11-jre-stretch
 ARG SEBSERVER_VERSION
 ENV SEBSERVER_JAR="seb-server-${SEBSERVER_VERSION}.jar"
 ENV SERVER_PORT="8080"
-ENV JMX_PORT=ws
-ENV SERVICE_PROFILE=
-ENV SEBSERVER_SECRET=
-ENV DB_SECRET=
-ENV INTERNAL_SECRET=
-ENV JAVA_HEAP_MIN=1G
-ENV JAVA_HEAP_MAX=8G
+ENV JMX_PORT=
+ENV JAVA_HEAP_MIN=
+ENV JAVA_HEAP_MAX=
 
-RUN groupadd --system spring && useradd --system --gid spring spring
+RUN groupadd --system spring && useradd --system --gid spring spring && mkdir /sebserver && chown spring:spring /sebserver
 USER spring:spring
-
 WORKDIR /sebserver
+
 COPY --from=1 /sebserver/target/"${SEBSERVER_JAR}" /sebserver
 
 CMD if [ "x${JMX_PORT}" = "x" ] ; \
@@ -40,12 +36,8 @@ CMD if [ "x${JMX_PORT}" = "x" ] ; \
             -Xms${JAVA_HEAP_MIN} \
             -Xmx${JAVA_HEAP_MAX} \
             -jar "${SEBSERVER_JAR}" \
-            --spring.profiles.active=${SERVICE_PROFILE},prod \
-            --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
-            --sebserver.certs.password="${SEBSERVER_SECRET}" \ 
-            --sebserver.mariadb.password="${DB_SECRET}" \
-            --sebserver.password="${INTERNAL_SECRET}" ; \
-        else exec java \
+            --spring.config.location=file:/sebserver/config/spring/,classpath:/config/; \
+        else echo "admin ${SEBSERVER_SECRET}" > jmxremote.password && chown spring:spring /sebserver/jmxremote.password && chmod 400 /sebserver/jmxremote.password && exec java \
             -Xms${JAVA_HEAP_MIN} \
             -Xmx${JAVA_HEAP_MAX} \
             -Dcom.sun.management.jmxremote \
@@ -55,14 +47,10 @@ CMD if [ "x${JMX_PORT}" = "x" ] ; \
             -Dcom.sun.management.jmxremote.local.only=false \
             -Dcom.sun.management.jmxremote.ssl=false \
             -Dcom.sun.management.jmxremote.authenticate=true \
-            -Dcom.sun.management.jmxremote.password.file=/sebserver/config/jmx/jmxremote.password \
+            -Dcom.sun.management.jmxremote.password.file=/sebserver/jmxremote.password \
             -Dcom.sun.management.jmxremote.access.file=/sebserver/config/jmx/jmxremote.access \
             -jar "${SEBSERVER_JAR}" \
-            --spring.profiles.active=${SERVICE_PROFILE},prod \
-            --spring.config.location=file:/sebserver/config/spring/,classpath:/config/ \
-            --sebserver.certs.password="${SEBSERVER_SECRET}" \ 
-            --sebserver.mariadb.password="${DB_SECRET}" \
-            --sebserver.password="${INTERNAL_SECRET}" ; \
+            --spring.config.location=file:/sebserver/config/spring/,classpath:/config/; \
         fi
 
 EXPOSE $SERVER_PORT $JMX_PORT
