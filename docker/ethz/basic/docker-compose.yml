@@ -1,0 +1,29 @@
+version: '3.5'
+services:
+  seb-webservice:
+      build:
+          context: .
+          dockerfile: ../sebserver.Dockerfile
+          args:
+            - GIT_TAG=${version-tag}
+      container_name: seb-webservice
+      volumes:
+        - seb-server-config:/sebserver/config
+        - ./config/spring:/sebserver/config/spring
+      environment:
+        - JAVA_HEAP_MIN=${java-heap-min}
+        - JAVA_HEAP_MAX=${java-heap-max}
+        - SERVICE_PROFILE=gui,ws
+        - MONITORING_MODE=true
+        - SEBSERVER_SECRET=${sebserver-secret}
+        - DB_SECRET=$${db-secret}
+        - INTERNAL_SECRET=${sebserver-secret}
+        - JMX_PORT=9090 
+      ports:
+        - 80:8080
+        - 9090:9090
+      restart: unless-stopped
+      
+
+volumes:
+  seb-server-config:
