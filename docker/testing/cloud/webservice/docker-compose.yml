@@ -5,8 +5,7 @@ services:
           context: .
           dockerfile: ../sebserver.Dockerfile
           args:
-            - SEBSERVER_VERSION=
-            - GIT_TAG=development
+            - GIT_TAG=v1.1-latest
       container_name: seb-webservice
       volumes:
         - seb-server-config:/sebserver/config
@@ -17,14 +16,9 @@ services:
         - JAVA_HEAP_MAX=8G
         - MONITORING_MODE=false
         - JMX_PORT=9090
-        - spring_profiles_active=ws,gui,prod-ws,prod-gui,prod
+        - spring_profiles_active=ws,prod-ws,prod
         - sebserver_password=${SEBSERVER_PWD}
         - sebserver_mariadb_password=${DB_SA_PWD}
-        - spring_datasource_username=${DB_SA_NAME}
-        - datastore_mariadb_server_address=${DB_ADDRESS}
-        - datastore_mariadb_server_port=${DB_PORT}
-        - sebserver_test_property=${SEBSERVER_SETUP_TAG}
-        - sebserver_webservice_http_external_servername=${SEBSERVER_EXT_HOST}
       ports:
         - 8081:8080
       # - 9090:9090 # Connect this port to host if you want to use JMX (MONITORING_MODE=true)
