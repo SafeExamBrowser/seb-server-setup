@@ -5,7 +5,7 @@ services:
           context: .
           dockerfile: sebserver.Dockerfile
           args:
-            - GIT_TAG=${VERSION_TAG}
+            - GIT_TAG=v1.1-latest
       container_name: sebserver-ethz
       volumes:
         - seb-server-config:/sebserver/config
@@ -19,17 +19,11 @@ services:
         - spring_profiles_active=ws,gui,prod-ws,prod-gui,prod
         - sebserver_password=${SEBSERVER_PWD}
         - sebserver_mariadb_password=${DB_SA_PWD}
-        - spring_datasource_username=${DB_SA_NAME}
-        - datastore_mariadb_server_address=${DB_ADDRESS}
-        - datastore_mariadb_server_port=${DB_PORT}
-        - sebserver_test_property=${SEBSERVER_SETUP_TAG}
-        - sebserver_webservice_http_external_servername=${SEBSERVER_EXT_HOST}
       ports:
         - 8080:8080
         - 9090:9090
       restart: unless-stopped
       
-
 volumes:
   seb-server-config:
     name: seb-server-config
