@@ -184,7 +184,7 @@ See also the `Spring documentation <https://docs.spring.io/spring-boot/docs/curr
         - On a single-bundled setup this must not be changed since GUI runs on the same server as the web-service and communicates over standard localhost settings. For a distributed environment this must define the URL to the web-service server.
     sebserver.gui.webservice.poll-interval
         - Defines the interval in milliseconds that the GUI service uses to poll the live monitoring data from web-service.
-    sebserver.gui.webservice.mock-lms-enabled
+    sebserver.gui.webservice.lms.disable.MOCKUP
         - Indicates whether a mocking LMS for testing should be available in the LMS Setup section or not.
     sebserver.gui.seb.client.config.download.filename
         - Defines the download file name of a SEB client configuration.
