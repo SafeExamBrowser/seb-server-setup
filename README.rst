@@ -16,7 +16,7 @@ It controls access to resources like system functions, other websites and applic
 used during an exam. Safe Exam Browser can work with Open edX to control what a student can access during a Open edX quiz attempt. 
 With the SEB Open edX plugin you activate the SEB support in Open edX and now only students using an approved version of SEB and the 
 correct settings will be able to access the quiz in your Open edX course. The Safe Exam Browser is offered under a Mozilla Public License 
-and supported by the `SEB Consortium <https://safeexambrowser.org/consortium/>`_.
+and supported by the `SEB Alliance <https://safeexambrowser.org/alliance/>`_.
 
 
 What is Safe Exam Browser Server (SEB Server)?
