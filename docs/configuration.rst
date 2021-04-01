@@ -148,6 +148,38 @@ See also the `Spring documentation <https://docs.spring.io/spring-boot/docs/curr
         - Defines a comma separated list of known Moodle LMS API token request paths.
         - This paths will be used by the web-service to try to connect to a Moodle LMS REST API and request an access token. 
         - Default is "/login/token.php"
+        
+Since SEB Server version 1.1.0:
+
+.. glossary::
+    sebserver.webservice.forceMaster
+        - Flag indicating a primary master service instance that claims to be master when active.
+        - This can be used in fail-over setups with two SEB Server nodes running, one as the master and another
+          as hot-backup. The master sould then have this flag set to true to become master again after recovery.
+        - Default is false
+    sebserver.webservice.api.admin.request.limit
+        - A general request limit used for request limits on certain API endpoints
+        - This uses a bucked-algorithm where each request attempt removes a item from the bucket and if the bucket is empty no request is permittet
+          Involved endpoints: user-account-registration
+        - Default is 10
+    sebserver.webservice.api.admin.request.limit.refill
+        - The refill items count for the above request limit
+        - Default is 2
+    sebserver.webservice.api.admin.request.limit.interval.min
+        - The refill interval in minutes for the above request limit
+        - Default is 10
+    sebserver.webservice.api.admin.create.limit
+        - A general object create limit used to prevent exessive object creation (persistent storage)
+        - This uses a bucked-algorithm where each creation attempt removes a item from the bucket and if the bucket is empty no object creation is permittet
+          Involved endpoints: user-account-registration
+        - Default is 10
+    sebserver.webservice.api.admin.create.limit.refill
+        - The refill items count for the above object creation limit
+        - Default is 10
+    sebserver.webservice.api.admin.create.limit.interval.min=3600
+        - The refill interval in minutes for the above object creation limit
+        - Default is 3600
+    
 
 
 **GUI Service Settings**
@@ -190,6 +222,11 @@ See also the `Spring documentation <https://docs.spring.io/spring-boot/docs/curr
         - Defines the download file name of a SEB client configuration.
     sebserver.gui.seb.exam.config.download.filename
         - Defines the download file name of a SEB exam configuration
+    sebserver.gui.http.external.scheme
+    sebserver.gui.http.external.servername
+    sebserver.gui.http.external.port
+        - The URL properties that defines the URL the gui service can be accessed from external
+        - On a single-bundled setup this must not be changed since GUI runs on the same server as the web-service and uses the defaults from the web-service
 
 .. _proxy-configuration-label:
 
