@@ -47,6 +47,35 @@ a more automated and secure setup for high-stake exams.
     :align: center
     :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/seb-sebserver-lms.png
     
+SEB Server Version 1.1.0 is out
+-------------------------------
+
+New features:
+
+- Moodle integration part 1 (Course Access)
+- Live proctoring with Jitsi Meet integration (Prototype)
+- Deletion of user accounts
+- Deletion of exams
+- User registration rate limit
+- Inform user about unpublished chances in exam configuration settings
+- Added "Ignore SEB Service" attributes in exam configuration settings
+- Additional monitoring indicator (WIFI and battery status)
+- Notification events (experimental)
+- Download/Export Connection Configuration from Exam page to start an exam directly "Export Exam Connection Configuration"
+
+Bugfixes:
+
+- Monitoring table update, incorrect table rendering after status changed
+- Remove caching for distributed setup
+- Add lookup and automated master service allocation for distributed setup
+
+Changes:
+
+- "Client Configuration" is now named "Connection Configuration"
+- "Export Exam Configuration" is now named "Export SEB Settings" and can be found in the "SEB Settings" view of an "Exam Configuration"
+
+
+    
 SEB - SEB Server Compatibility
 ------------------------------
 

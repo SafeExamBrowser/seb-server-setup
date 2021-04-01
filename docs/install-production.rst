@@ -86,7 +86,7 @@ used by the seb-server service if JMX is enabled. For more details on how to con
 
  .. code-block:: bash
     
-    $ git clone -b v1.0-latest https://github.com/SafeExamBrowser/seb-server-setup.git
+    $ git clone -b v1.1-latest https://github.com/SafeExamBrowser/seb-server-setup.git
     $ cd seb-server-setup/docker/prod/bundled/basic/
 
 3. If some specific configuration is needed, this can be done within this step. See:ref:`configuration-label`. for more details on how to configure the services
