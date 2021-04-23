@@ -1,0 +1,11 @@
+{
+    "kind": "Secret",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "app-env",
+        "creationTimestamp": null
+    },
+    "data": {
+        "SECRET": "YjVjYjBmMzJmNzJjYTA2MDU2MTQ2YzBjNzUyZjY1YTM0ODhiMDlhNA=="
+    }
+}

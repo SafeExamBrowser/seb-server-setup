@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: seb-service
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  rules:
+  - host: sebserver.let.ethz.ch
+    http:
+      paths:
+        - backend:
+            serviceName: seb-guiservice
+            servicePort: 80
+  tls:
+    - hosts:
+        - sebserver.let.ethz.ch
+      secretName: auto-cert-sebserver

@@ -1,0 +1,61 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seb-webservice
+  labels:
+    app: seb-webservice
+spec:
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app: seb-webservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: seb-webservice
+    spec:
+      volumes:
+        - name: application-properties
+          configMap:
+            name: application-webservice-prod-properties
+        - name: logback-xml
+          configMap:
+            name: logback-webservice-prod-xml
+        - name: jmx-remote-access
+          configMap:
+            name: webservice-jmx-remote-access
+      containers:
+        - name: seb-webservice
+          image: bengig/seb-server:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: application-properties
+              mountPath: /sebserver/config/spring/application-prod.properties
+            - name: logback-xml
+              mountPath: /sebserver/config/spring/logback-prod.xml
+            - name: jmx-remote-access
+              mountPath: /sebserver/config/jmx/jmxremote.access
+          env:
+            - name: JAVA_HEAP_MIN
+              value: "1G"
+            - name: JAVA_HEAP_MAX
+              value: "8G"
+            - name: MONITORING_MODE
+              value: "false"
+            - name: JMX_PORT
+              value: "9090"
+            - name: spring_profils_active
+              value: "ws,prod-ws,prod"
+            - name: sebserver_password
+              valueFrom:
+                secretKeyRef:
+                  name: sebserver_credentials
+                  key: SEBSERVER_PWD
+            - name: sebserver_mariadb_password
+              valueFrom:
+                secretKeyRef:
+                  name: sebserver_mariadb_password
+                  key: DB_SA_PWD

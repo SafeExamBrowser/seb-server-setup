@@ -1,0 +1,13 @@
+{
+    "kind": "Secret",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "db-env",
+        "creationTimestamp": null
+    },
+    "data": {
+        "DB_HOST": "c2ViLW15c3Fs",
+        "DB_PASSWORD": "c28tc2VjdXJl",
+        "DB_USER": "c2ViLXNlcnZlcg=="
+    }
+}

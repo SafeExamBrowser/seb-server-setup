@@ -1,0 +1,27 @@
+resources:
+  - namespace.yml
+  - deployment-webservice.yml
+  - service-webservice.yml
+  - deployment-guiservice.yml
+  - service-guiservice.yml
+
+configMapGenerator:
+  - name: application-webservice-prod-properties
+    files:
+      - config/webservice/spring/application-prod.properties
+  - name: logback-webservice-prod-xml
+    files:
+      - config/webservice/spring/logback-prod.xml
+  - name: webservice-jmx-remote-access
+    files:
+      - config/webservice/jmx/jmxremote.access
+
+  - name: application-guiservice-prod-properties
+    files:
+      - config/guiservice/spring/application-prod.properties
+  - name: logback-guiservice-prod-xml
+    files:
+      - config/guiservice/spring/logback-prod.xml
+  - name: guiservice-jmx-remote-access
+    files:
+      - config/guiservice/jmx/jmxremote.access

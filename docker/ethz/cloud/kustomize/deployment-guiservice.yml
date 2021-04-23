@@ -1,0 +1,60 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seb-guiservice
+  labels:
+    app: seb-guiservice
+spec:
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app: seb-guiservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: seb-guiservice
+    spec:
+      volumes:
+        - name: application-properties
+          configMap:
+            name: application-guiservice-prod-properties
+        - name: logback-xml
+          configMap:
+            name: logback-guiservice-prod-xml
+        - name: jmx-remote-access
+          configMap:
+            name: guiservice-jmx-remote-access
+      containers:
+        - name: seb-guiservice
+          image: bengig/seb-server:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: application-properties
+              mountPath: /sebserver/config/spring/application-prod.properties
+              readOnly: true
+            - name: logback-xml
+              mountPath: /sebserver/config/spring/logback-prod.xml
+              readOnly: true
+            - name: jmx-remote-access
+              mountPath: /sebserver/config/jmx/jmxremote.access
+          env:
+            - name: SEBSERVER_MODE
+              value: gui
+            - name: JAVA_HEAP_MIN
+              value: "1G"
+            - name: JAVA_HEAP_MAX
+              value: "8G"
+            - name: MONITORING_MODE
+              value: "false"
+            - name: JMX_PORT
+              value: "9090"
+            - name: spring_profils_active
+              value: "gui,prod-ws,prod"
+            - name: sebserver_password
+              valueFrom:
+                secretKeyRef:
+                  name: sebserver_credentials
+                  key: SEBSERVER_PWD

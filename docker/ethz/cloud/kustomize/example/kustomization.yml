@@ -1,0 +1,55 @@
+namespace: seb-server-prod
+nameSuffix: -prod
+
+replicas:
+  - name: seb-guiservice
+    count: 3
+
+images:
+  - name: CHANGEME
+    newTag: stable
+
+resources:
+  # Get the base configuration
+  - https://github.com/SafeExamBrowser/seb-server-setup/docker/ethz/cloud/kustomize
+  
+  # Add an ingress
+  - ingress.yml
+
+  # Add a secret with application variables
+  - app-env.json
+  # - app-env.yml  # if prepared with SealedSecret as shown in the README
+
+  # Same with DB connection variables
+  - db-env.json
+
+patchesStrategicMerge:
+  # Add/replace some variables 
+  - |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: seb-webservice
+    spec:
+      template:
+        spec:
+          containers:
+            - name: seb-webservice
+              env:
+                - name: sebserver_password
+                  valueFrom:
+                    secretKeyRef:
+                      name: app-env-prod
+                      key: SEBSERVER_PWD
+                - name: DB_HOST
+                  value: seb-db
+                - name: DB_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: db-env-prod
+                      key: DB_USER
+                - name: DB_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: db-env-prod
+                      key: DB_PASSWORD
