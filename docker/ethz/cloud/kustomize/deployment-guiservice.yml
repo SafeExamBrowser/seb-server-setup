@@ -28,7 +28,7 @@ spec:
             name: guiservice-jmx-remote-access
       containers:
         - name: seb-guiservice
-          image: bengig/seb-server:latest
+          image: anhefti/seb-server:latest
           ports:
             - containerPort: 8080
           volumeMounts:
@@ -41,8 +41,9 @@ spec:
             - name: jmx-remote-access
               mountPath: /sebserver/config/jmx/jmxremote.access
           env:
-            - name: SEBSERVER_MODE
-              value: gui
+# Not needed anymore since spring_profils_active is used directly
+#            - name: SEBSERVER_MODE
+#              value: gui
             - name: JAVA_HEAP_MIN
               value: "1G"
             - name: JAVA_HEAP_MAX
@@ -52,7 +53,23 @@ spec:
             - name: JMX_PORT
               value: "9090"
             - name: spring_profils_active
-              value: "gui,prod-ws,prod"
+              value: "gui,prod-gui,prod"
+              
+# NOTE: Set the below URL component settings from where the gui-service is externally available
+            - name: "sebserver_gui_http_external_scheme"
+              value: "https"
+            - name: "sebserver_gui_http_external_servername"
+              value: "localhost"
+            - name: "sebserver_gui_http_external_port"
+              value: "80"
+# NOTE: Set the below URL component settings from where the gui-service can connect to the web-service
+            - name: "sebserver_gui_http_webservice_scheme"
+              value: "https"
+            - name: "sebserver_gui_http_webservice_servername"
+              value: "localhost"
+            - name: "sebserver_gui_http_webservice_port"
+              value: "80"
+            
             - name: sebserver_password
               valueFrom:
                 secretKeyRef:

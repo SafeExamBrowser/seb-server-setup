@@ -28,7 +28,7 @@ spec:
             name: webservice-jmx-remote-access
       containers:
         - name: seb-webservice
-          image: bengig/seb-server:latest
+          image: anhefti/seb-server:latest
           ports:
             - containerPort: 8080
           volumeMounts:
@@ -49,13 +49,31 @@ spec:
               value: "9090"
             - name: spring_profils_active
               value: "ws,prod-ws,prod"
-            - name: sebserver_password
-              valueFrom:
-                secretKeyRef:
-                  name: sebserver_credentials
-                  key: SEBSERVER_PWD
+              
+# NOTE: Set the below settings for database connection
+            - name: "datastore_mariadb_server_address"
+              value: "seb-server-mariadb"
+            - name: "datastore_mariadb_server_port"
+              value: "3306"
+            - name: "spring_datasource_username"
+              value: "root"
             - name: sebserver_mariadb_password
               valueFrom:
                 secretKeyRef:
                   name: sebserver_mariadb_password
                   key: DB_SA_PWD
+                  
+# NOTE: Set the below URL component settings from where the the web-service is externally available
+            - name: "sebserver_webservice_http_external_scheme"
+              value: "https"
+            - name: "sebserver_webservice_http_external_servername"
+              value: "localhost"
+            - name: "sebserver_webservice_http_external_port"
+              value: "80"
+              
+            - name: sebserver_password
+              valueFrom:
+                secretKeyRef:
+                  name: sebserver_credentials
+                  key: SEBSERVER_PWD
+            
