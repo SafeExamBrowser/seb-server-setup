@@ -1,11 +1,7 @@
 version: '3.5'
 services:
   seb-guiservice:
-      build:
-          context: .
-          dockerfile: ../sebserver.Dockerfile
-          args:
-            - GIT_TAG=v1.1-latest
+      image: anhefti/seb-server:docker-build-test
       container_name: seb-guiservice
       volumes:
         - seb-server-config:/sebserver/config
