@@ -1,11 +1,12 @@
 version: '3.5'
 services:
   seb-webservice:
-      build:
-          context: .
-          dockerfile: ../sebserver.Dockerfile
-          args:
-            - GIT_TAG=v1.1-latest
+      image: anhefti/seb-server:docker-build-test
+#       build:
+#           context: .
+#           dockerfile: ../sebserver.Dockerfile
+#           args:
+#             - GIT_TAG=v1.1-latest
       container_name: seb-webservice
       volumes:
         - seb-server-config:/sebserver/config
