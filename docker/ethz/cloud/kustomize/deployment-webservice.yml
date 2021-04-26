@@ -63,13 +63,13 @@ spec:
                   name: sebserver_mariadb_password
                   key: DB_SA_PWD
                   
-# NOTE: Set the below URL component settings from where the the web-service is externally available
+# NOTE: Set the below URL component settings from where the web-service is externally available
             - name: "sebserver_webservice_http_external_scheme"
-              value: "https"
+              value: "http"
             - name: "sebserver_webservice_http_external_servername"
-              value: "localhost"
+              value: "seb-webservice"
             - name: "sebserver_webservice_http_external_port"
-              value: "80"
+              value: ""
               
             - name: sebserver_password
               valueFrom:

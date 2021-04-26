@@ -19,6 +19,17 @@ services:
         - spring_profiles_active=ws,prod-ws,prod
         - sebserver_password=${SEBSERVER_PWD}
         - sebserver_mariadb_password=${DB_SA_PWD}
+        
+        # NOTE: Set the below settings for database connection
+        - datastore_mariadb_server_address=seb-server-mariadb
+        - datastore_mariadb_server_port=3306
+        - spring_datasource_username=root
+
+        # NOTE: Set the below URL component settings from where the the web-service is externally available
+        - sebserver_webservice_http_external_scheme=https
+        - sebserver_webservice_http_external_servername=localhost
+        - sebserver_webservice_http_external_port=8080
+
       ports:
         - 8081:8080
       # - 9090:9090 # Connect this port to host if you want to use JMX (MONITORING_MODE=true)

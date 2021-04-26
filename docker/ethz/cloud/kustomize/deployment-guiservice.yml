@@ -57,18 +57,18 @@ spec:
               
 # NOTE: Set the below URL component settings from where the gui-service is externally available
             - name: "sebserver_gui_http_external_scheme"
-              value: "https"
+              value: "http"
             - name: "sebserver_gui_http_external_servername"
-              value: "localhost"
+              value: "seb-guiservice"
             - name: "sebserver_gui_http_external_port"
-              value: "80"
+              value: ""
 # NOTE: Set the below URL component settings from where the gui-service can connect to the web-service
             - name: "sebserver_gui_http_webservice_scheme"
-              value: "https"
+              value: "http"
             - name: "sebserver_gui_http_webservice_servername"
-              value: "localhost"
+              value: "seb-webservice"
             - name: "sebserver_gui_http_webservice_port"
-              value: "80"
+              value: ""
             
             - name: sebserver_password
               valueFrom:
