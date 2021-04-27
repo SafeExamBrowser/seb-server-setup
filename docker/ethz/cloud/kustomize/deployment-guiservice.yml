@@ -21,20 +21,20 @@ spec:
           configMap:
             name: application-guiservice-prod-properties
             items:
-              - key: "application-properties"
-                path: "application-properties"
+              - key: "application-prod.properties"
+                path: "application-prod.properties"
         - name: logback-xml
           configMap:
             name: logback-guiservice-prod-xml
             items:
-              - key: "logback-xml"
-                path: "logback-xml"
+              - key: "logback.xml"
+                path: "logback.xml"
         - name: jmx-remote-access
           configMap:
             name: guiservice-jmx-remote-access
             items:
-              - key: "jmx-remote-access"
-                path: "jmx-remote-access"
+              - key: "jmxremote.access"
+                path: "jmxremote.access"
       containers:
         - name: seb-guiservice
           image: anhefti/seb-server:latest
