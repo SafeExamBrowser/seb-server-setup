@@ -20,12 +20,21 @@ spec:
         - name: application-properties
           configMap:
             name: application-webservice-prod-properties
+            items:
+              - key: "application-properties"
+                path: "application-properties"
         - name: logback-xml
           configMap:
             name: logback-webservice-prod-xml
+            items:
+              - key: "logback-xml"
+                path: "logback-xml"
         - name: jmx-remote-access
           configMap:
             name: webservice-jmx-remote-access
+            items:
+              - key: "jmx-remote-access"
+                path: "jmx-remote-access"
       containers:
         - name: seb-webservice
           image: anhefti/seb-server:latest
@@ -33,11 +42,11 @@ spec:
             - containerPort: 8080
           volumeMounts:
             - name: application-properties
-              mountPath: /sebserver/config/spring/application-prod.properties
+              mountPath: /sebserver/config/spring
             - name: logback-xml
-              mountPath: /sebserver/config/spring/logback-prod.xml
+              mountPath: /sebserver/config/spring
             - name: jmx-remote-access
-              mountPath: /sebserver/config/jmx/jmxremote.access
+              mountPath: /sebserver/config/jmx
           env:
             - name: JAVA_HEAP_MIN
               value: "1G"
