@@ -14,8 +14,7 @@ services:
       environment:
         - JAVA_HEAP_MIN=1G
         - JAVA_HEAP_MAX=8G
-        - MONITORING_MODE=false
-        - JMX_PORT=9090
+        - JMX_PORT=
         - spring_profiles_active=gui,prod-gui,prod
         - sebserver_password=${SEBSERVER_PWD}
 
