@@ -70,8 +70,8 @@ spec:
             - name: "sebserver_gui_http_webservice_port"
               value: ""
             
-            - name: sebserver_password
+            - name: sebserverpassword
               valueFrom:
                 secretKeyRef:
-                  name: sebserver_credentials
+                  name: sebservercredentials
                   key: SEBSERVER_PWD

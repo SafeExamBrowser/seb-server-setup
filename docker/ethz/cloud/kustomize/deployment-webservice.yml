@@ -57,10 +57,10 @@ spec:
               value: "3306"
             - name: "spring_datasource_username"
               value: "root"
-            - name: sebserver_mariadb_password
+            - name: sebservermariadbpassword
               valueFrom:
                 secretKeyRef:
-                  name: sebserver_mariadb_password
+                  name: sebservermariadbpassword
                   key: DB_SA_PWD
                   
 # NOTE: Set the below URL component settings from where the web-service is externally available
@@ -71,9 +71,9 @@ spec:
             - name: "sebserver_webservice_http_external_port"
               value: ""
               
-            - name: sebserver_password
+            - name: sebserverpassword
               valueFrom:
                 secretKeyRef:
-                  name: sebserver_credentials
+                  name: sebservercredentials
                   key: SEBSERVER_PWD
             

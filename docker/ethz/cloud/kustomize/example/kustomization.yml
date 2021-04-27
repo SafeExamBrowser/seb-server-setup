@@ -6,15 +6,15 @@ replicas:
     count: 3
 
 images:
-  - name: CHANGEME
-    newTag: stable
+  - name: anhefti/seb-server
+    newTag: v1.1-latest
 
 resources:
   # Get the base configuration
-  - https://github.com/SafeExamBrowser/seb-server-setup/docker/ethz/cloud/kustomize
+  - https://github.com/SafeExamBrowser/seb-server-setup/docker/ethz/cloud/kustomize?ref=kustomize
   
   # Add an ingress
-  - ingress.yml
+  #  - ingress.yml
 
   # Add a secret with application variables
   - app-env.json
@@ -36,7 +36,7 @@ patchesStrategicMerge:
           containers:
             - name: seb-webservice
               env:
-                - name: sebserver_password
+                - name: sebserverpassword
                   valueFrom:
                     secretKeyRef:
                       name: app-env-prod
