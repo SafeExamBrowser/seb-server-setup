@@ -23,10 +23,6 @@ spec:
             items:
               - key: "application-prod.properties"
                 path: "application-prod.properties"
-        - name: logback-xml
-          configMap:
-            name: logback-guiservice-prod-xml
-            items:
               - key: "logback.xml"
                 path: "logback.xml"
         - name: jmx-remote-access
