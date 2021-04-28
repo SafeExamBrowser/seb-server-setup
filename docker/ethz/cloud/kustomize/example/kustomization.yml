@@ -39,17 +39,20 @@ patchesStrategicMerge:
                 - name: sebserverpassword
                   valueFrom:
                     secretKeyRef:
-                      name: app-env-prod
+                      name: sebservercredentials-prod
                       key: SEBSERVER_PWD
                 - name: DB_HOST
-                  value: seb-db
+                  valueFrom:
+                    secretKeyRef:
+                      name: sebservermariadbpassword-prod
+                      key: DB_HOST
                 - name: DB_USER
                   valueFrom:
                     secretKeyRef:
-                      name: db-env-prod
+                      name: sebservermariadbpassword-prod
                       key: DB_USER
-                - name: DB_PASSWORD
+                - name: sebservermariadbpassword
                   valueFrom:
                     secretKeyRef:
-                      name: db-env-prod
+                      name: sebservermariadbpassword-prod
                       key: DB_PASSWORD

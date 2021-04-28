@@ -2,10 +2,10 @@
     "kind": "Secret",
     "apiVersion": "v1",
     "metadata": {
-        "name": "app-env",
+        "name": "sebservercredentials",
         "creationTimestamp": null
     },
     "data": {
-        "SECRET": "YjVjYjBmMzJmNzJjYTA2MDU2MTQ2YzBjNzUyZjY1YTM0ODhiMDlhNA=="
+        "SEBSERVER_PWD": "YjVjYjBmMzJmNzJjYTA2MDU2MTQ2YzBjNzUyZjY1YTM0ODhiMDlhNA=="
     }
 }

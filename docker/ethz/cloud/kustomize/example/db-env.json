@@ -2,12 +2,12 @@
     "kind": "Secret",
     "apiVersion": "v1",
     "metadata": {
-        "name": "db-env",
+        "name": "sebservermariadbpassword",
         "creationTimestamp": null
     },
     "data": {
-        "DB_HOST": "c2ViLW15c3Fs",
-        "DB_PASSWORD": "c28tc2VjdXJl",
-        "DB_USER": "c2ViLXNlcnZlcg=="
+        "DB_HOST": "bWFyaWFkYg==",
+        "DB_PASSWORD": "MTIzNDU2",
+        "DB_USER": "c2Vi"
     }
 }
