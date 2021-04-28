@@ -60,7 +60,7 @@ spec:
               value: "3306"
             - name: "spring_datasource_username"
               value: "root"
-            - name: sebservermariadbpassword
+            - name: "spring_datasource_password"
               valueFrom:
                 secretKeyRef:
                   name: sebservermariadbpassword
@@ -74,7 +74,7 @@ spec:
             - name: "sebserver_webservice_http_external_port"
               value: ""
               
-            - name: sebserverpassword
+            - name: "sebserver_password"
               valueFrom:
                 secretKeyRef:
                   name: sebservercredentials

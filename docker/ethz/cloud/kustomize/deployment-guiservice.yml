@@ -71,7 +71,7 @@ spec:
             - name: "sebserver_gui_http_webservice_port"
               value: ""
             
-            - name: sebserverpassword
+            - name: "sebserver_password"
               valueFrom:
                 secretKeyRef:
                   name: sebservercredentials
