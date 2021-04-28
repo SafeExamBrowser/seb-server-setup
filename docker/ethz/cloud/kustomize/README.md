@@ -9,6 +9,10 @@ mandatory items:
 
  See the example directory for a usage introduction.
 
+Variables
+---------
+ - `DB_SA_PWD`: password for MariaDB database
+ - `DB_HOST`: MariaDB server hostname
 
 Versions
 --------
