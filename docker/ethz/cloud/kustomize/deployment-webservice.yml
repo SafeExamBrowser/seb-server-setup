@@ -39,8 +39,6 @@ spec:
           volumeMounts:
             - name: application-properties
               mountPath: /sebserver/config/spring
-            - name: logback-xml
-              mountPath: /sebserver/config/spring
             - name: jmx-remote-access
               mountPath: /sebserver/config/jmx
           env:
