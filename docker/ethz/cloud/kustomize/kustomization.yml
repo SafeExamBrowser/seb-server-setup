@@ -4,6 +4,7 @@ resources:
   - service-webservice.yml
   - deployment-guiservice.yml
   - service-guiservice.yml
+  - service-mariadb.yml
 
 configMapGenerator:
   - name: application-webservice-prod-properties
@@ -23,3 +24,7 @@ configMapGenerator:
   - name: guiservice-jmx-remote-access
     files:
       - config/guiservice/jmx/jmxremote.access
+
+  - name: mariadb-config
+    files:
+      - config/mariadb/config.cnf
