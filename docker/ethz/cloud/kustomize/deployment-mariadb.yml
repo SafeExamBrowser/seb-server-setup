@@ -23,7 +23,14 @@ spec:
               - key: "config.cnf"
                 path: "config.cnf"
       containers:
-        - env:
+        - name: seb-mariadb
+          image: mariadb/server:10.3
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mariadb-config
+              mountPath: /etc/mysql/conf.d
+          env:
             - name: MYSQL_INITDB_SKIP_TZINFO
               value: "1"
             - name: MYSQL_ROOT_PASSWORD
@@ -32,11 +39,4 @@ spec:
                 secretKeyRef:
                   name: sebservermariadbpassword
                   key: DB_SA_PWD
-          image: mariadb/server:10.3
-          name: seb-server-mariadb
-          ports:
-            - containerPort: 3306
-          volumeMounts:
-            - name: mariadb-config
-              mountPath: /etc/mysql/conf.d
 

@@ -4,6 +4,7 @@ resources:
   - service-webservice.yml
   - deployment-guiservice.yml
   - service-guiservice.yml
+  - deployment.mariadb.yml
   - service-mariadb.yml
 
 configMapGenerator:
