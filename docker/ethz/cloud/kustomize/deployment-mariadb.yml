@@ -13,7 +13,8 @@ spec:
       app: mariadb
   template:
     metadata:
-      label: mariadb
+      labels:
+        app: mariadb
     spec:
       volumes:
         - name: mariadb-config
