@@ -60,14 +60,14 @@ spec:
             - name: "sebserver_gui_http_external_scheme"
               value: "http"
             - name: "sebserver_gui_http_external_servername"
-              value: "seb-guiservice"
+              value: "seb-guiservice-prod"
             - name: "sebserver_gui_http_external_port"
               value: ""
 # NOTE: Set the below URL component settings from where the gui-service can connect to the web-service
             - name: "sebserver_gui_http_webservice_scheme"
               value: "http"
             - name: "sebserver_gui_http_webservice_servername"
-              value: "seb-webservice"
+              value: "seb-webservice-prod"
             - name: "sebserver_gui_http_webservice_port"
               value: ""
             

@@ -3,7 +3,7 @@ nameSuffix: -prod
 
 replicas:
   - name: seb-guiservice
-    count: 3
+    count: 1
 
 images:
   - name: anhefti/seb-server
@@ -41,16 +41,16 @@ patchesStrategicMerge:
                     secretKeyRef:
                       name: sebservercredentials-prod
                       key: SEBSERVER_PWD
-                - name: DB_HOST
-                  valueFrom:
-                    secretKeyRef:
-                      name: sebservermariadbpassword-prod
-                      key: DB_HOST
-                - name: DB_USER
-                  valueFrom:
-                    secretKeyRef:
-                      name: sebservermariadbpassword-prod
-                      key: DB_USER
+                      #                - name: DB_HOST
+                      #                  valueFrom:
+                      #                    secretKeyRef:
+                      #                      name: sebservermariadbhost-prod
+                      #                      key: DB_HOST
+                      #                - name: DB_USER
+                      #                  valueFrom:
+                      #                    secretKeyRef:
+                      #                      name: sebservermariadbuser-prod
+                      #                      key: DB_USER
                 - name: sebservermariadbpassword
                   valueFrom:
                     secretKeyRef:
