@@ -55,7 +55,7 @@ spec:
               
 # NOTE: Set the below settings for database connection
             - name: "datastore_mariadb_server_address"
-              value: "seb-server-mariadb"
+              value: "seb-mariadb-prod.seb-server-prod.svc.cluster.local"
             - name: "datastore_mariadb_server_port"
               value: "3306"
             - name: "spring_datasource_username"

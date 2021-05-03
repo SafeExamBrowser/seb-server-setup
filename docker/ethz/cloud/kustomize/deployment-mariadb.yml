@@ -2,24 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mariadb
+  name: seb-mariadb
   labels:
-    app: mariadb
+    app: seb-mariadb
 spec:
   minReadySeconds: 10
   replicas: 1
   selector:
     matchLabels:
-      app: mariadb
+      app: seb-mariadb
   template:
     metadata:
       labels:
-        app: mariadb
+        app: seb-mariadb
     spec:
       volumes:
-        - name: mariadb-config
+        - name: seb-mariadb-config
           configMap:
-            name: mariadb-config
+            name: seb-mariadb-config
             items:
               - key: "config.cnf"
                 path: "config.cnf"
@@ -29,7 +29,7 @@ spec:
           ports:
             - containerPort: 3306
           volumeMounts:
-            - name: mariadb-config
+            - name: seb-mariadb-config
               mountPath: /etc/mysql/conf.d
           env:
             - name: MYSQL_INITDB_SKIP_TZINFO
