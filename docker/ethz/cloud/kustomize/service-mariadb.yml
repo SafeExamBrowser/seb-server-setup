@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mariadb
+  name: seb-mariadb
 spec:
   ports:
     - name: "3306"

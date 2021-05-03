@@ -26,6 +26,6 @@ configMapGenerator:
     files:
       - config/guiservice/jmx/jmxremote.access
 
-  - name: mariadb-config
+  - name: seb-mariadb-config
     files:
       - config/mariadb/config.cnf
