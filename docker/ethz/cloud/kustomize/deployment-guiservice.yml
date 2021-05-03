@@ -53,7 +53,7 @@ spec:
               value: "false"
             - name: JMX_PORT
               value: "9090"
-            - name: spring_profils_active
+            - name: "spring_profiles_active"
               value: "gui,prod-gui,prod"
               
 # NOTE: Set the below URL component settings from where the gui-service is externally available

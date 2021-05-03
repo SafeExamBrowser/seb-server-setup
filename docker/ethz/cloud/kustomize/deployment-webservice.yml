@@ -50,7 +50,7 @@ spec:
               value: "false"
             - name: JMX_PORT
               value: "9090"
-            - name: spring_profils_active
+            - name: "spring_profiles_active"
               value: "ws,prod-ws,prod"
               
 # NOTE: Set the below settings for database connection
