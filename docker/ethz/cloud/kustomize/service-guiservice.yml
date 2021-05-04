@@ -10,4 +10,4 @@ spec:
       targetPort: 8080
   type: ClusterIP
   selector:
-    app: seb-server-gui
+    app: seb-guiservice
