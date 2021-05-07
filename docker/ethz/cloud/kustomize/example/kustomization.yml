@@ -44,10 +44,7 @@ patchesStrategicMerge:
                 - name: "spring_datasource_username"
                   value: "root"
                 - name: "spring_datasource_password"
-                  valueFrom:
-                    secretKeyRef:
-                      name: sebservermariadbpassword
-                      key: DB_SA_PWD
+                  value: "changeme"
                 # NOTE: Set the below URL component settings from where the web-service is externally available
                 - name: "sebserver_webservice_http_external_scheme"
                   value: "http"
@@ -55,23 +52,8 @@ patchesStrategicMerge:
                   value: "seb-webservice"
                 - name: "sebserver_webservice_http_external_port"
                   value: ""
-#              valueFrom:
-#                secretKeyRef:
-#                - name: sebservercredentials-prod
-#                  key: SEBSERVER_PWD
-#                    - name: DB_HOST
-#                      valueFrom:
-#                        secretKeyRef:
-#                          name: sebservermariadbhost-prod
-#                          key: DB_HOST
-#                    - name: DB_USER
-#                      valueFrom:
-#                        secretKeyRef:
-#                          name: sebservermariadbuser-prod
-#                          key: DB_USER
-#                - name: sebservermariadbpassword
-#                  valueFrom:
-#                    secretKeyRef:
-#                      name: sebservermariadbpassword-prod
-#                      key: DB_PASSWORD
-#
+                - name: "sebserver_password"
+                  valueFrom:
+                    secretKeyRef:
+                      name: sebservercredentials
+                      key: SEBSERVER_PWD
