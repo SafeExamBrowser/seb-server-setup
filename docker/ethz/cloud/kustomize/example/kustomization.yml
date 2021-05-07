@@ -12,9 +12,9 @@ images:
 resources:
   # Get the base configuration
   - https://github.com/SafeExamBrowser/seb-server-setup/docker/ethz/cloud/kustomize?ref=kustomize
-  
+
   # Add an ingress
-  #  - ingress.yml
+  - ingress.yml
 
   # Add a secret with application variables
   - app-env.json
@@ -37,22 +37,48 @@ patchesStrategicMerge:
             - name: seb-webservice
               env:
                 - name: sebserverpassword
+                  value: "changeme"
+                - name: "sebserver_password"
                   valueFrom:
                     secretKeyRef:
-                      name: sebservercredentials-prod
+                      name: sebservercredentials
                       key: SEBSERVER_PWD
-                      #                - name: DB_HOST
-                      #                  valueFrom:
-                      #                    secretKeyRef:
-                      #                      name: sebservermariadbhost-prod
-                      #                      key: DB_HOST
-                      #                - name: DB_USER
-                      #                  valueFrom:
-                      #                    secretKeyRef:
-                      #                      name: sebservermariadbuser-prod
-                      #                      key: DB_USER
-                - name: sebservermariadbpassword
+                # NOTE: Set the below settings for database connection
+                - name: "datastore_mariadb_server_address"
+                  value: "seb-mariadb-prod.seb-server-prod.svc.cluster.local"
+                - name: "datastore_mariadb_server_port"
+                  value: "3306"
+                - name: "spring_datasource_username"
+                  value: "root"
+                - name: "spring_datasource_password"
                   valueFrom:
                     secretKeyRef:
-                      name: sebservermariadbpassword-prod
-                      key: DB_PASSWORD
+                      name: sebservermariadbpassword
+                      key: DB_SA_PWD
+                # NOTE: Set the below URL component settings from where the web-service is externally available
+                - name: "sebserver_webservice_http_external_scheme"
+                  value: "http"
+                - name: "sebserver_webservice_http_external_servername"
+                  value: "seb-webservice"
+                - name: "sebserver_webservice_http_external_port"
+                  value: ""
+#              valueFrom:
+#                secretKeyRef:
+#                - name: sebservercredentials-prod
+#                  key: SEBSERVER_PWD
+#                    - name: DB_HOST
+#                      valueFrom:
+#                        secretKeyRef:
+#                          name: sebservermariadbhost-prod
+#                          key: DB_HOST
+#                    - name: DB_USER
+#                      valueFrom:
+#                        secretKeyRef:
+#                          name: sebservermariadbuser-prod
+#                          key: DB_USER
+#                - name: sebservermariadbpassword
+#                  valueFrom:
+#                    secretKeyRef:
+#                      name: sebservermariadbpassword-prod
+#                      key: DB_PASSWORD
+#
