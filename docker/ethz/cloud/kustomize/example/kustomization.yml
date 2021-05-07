@@ -36,13 +36,6 @@ patchesStrategicMerge:
           containers:
             - name: seb-webservice
               env:
-                - name: sebserverpassword
-                  value: "changeme"
-                - name: "sebserver_password"
-                  valueFrom:
-                    secretKeyRef:
-                      name: sebservercredentials
-                      key: SEBSERVER_PWD
                 # NOTE: Set the below settings for database connection
                 - name: "datastore_mariadb_server_address"
                   value: "seb-mariadb-prod.seb-server-prod.svc.cluster.local"
