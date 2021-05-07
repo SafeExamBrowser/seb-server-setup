@@ -43,3 +43,9 @@ If you have SealedSecrets deployed, encrypt the data just generated:
 kubeseal --format=yaml <app-env.json -n sealed-secrets --namespace=local-system --scope=namespace-wide >app-env.yml
 ```
 
+Usage
+--------------------
+to distribute "SebSever Cloud" to Kubernetes run:
+``` 
+kustomize build . | kubectl apply -f -
+```
