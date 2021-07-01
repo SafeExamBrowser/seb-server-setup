@@ -1,5 +1,5 @@
 resources:
-  - namespace.yml
+#  - namespace.yml
   - deployment-webservice.yml
   - service-webservice.yml
   - deployment-guiservice.yml
