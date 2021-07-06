@@ -8,7 +8,7 @@ resources:
   - service-mariadb.yml
 
 configMapGenerator:
-  - name: application-webservice-prod-properties
+  - name: application-webservice-properties
     files:
       - config/webservice/spring/application-prod.properties
       - config/webservice/spring/logback-prod.xml
@@ -17,7 +17,7 @@ configMapGenerator:
     files:
       - config/webservice/jmx/jmxremote.access
 
-  - name: application-guiservice-prod-properties
+  - name: application-guiservice-properties
     files:
       - config/guiservice/spring/application-prod.properties
       - config/guiservice/spring/logback-prod.xml
