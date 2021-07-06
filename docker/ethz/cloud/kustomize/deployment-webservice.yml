@@ -19,7 +19,7 @@ spec:
       volumes:
         - name: application-properties
           configMap:
-            name: application-webservice-prod-properties
+            name: application-webservice-properties
             items:
               - key: "application-prod.properties"
                 path: "application-prod.properties"

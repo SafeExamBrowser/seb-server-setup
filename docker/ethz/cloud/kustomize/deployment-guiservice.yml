@@ -19,7 +19,7 @@ spec:
       volumes:
         - name: application-properties
           configMap:
-            name: application-guiservice-prod-properties
+            name: application-guiservice-properties
             items:
               - key: "application-prod.properties"
                 path: "application-prod.properties"
