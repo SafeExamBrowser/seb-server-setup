@@ -34,6 +34,7 @@ spec:
       containers:
         - name: seb-guiservice
           image: anhefti/seb-server:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           volumeMounts:
