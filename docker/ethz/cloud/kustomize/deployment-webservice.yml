@@ -33,7 +33,7 @@ spec:
                 path: "jmxremote.access"
       containers:
         - name: seb-webservice
-          image: anhefti/seb-server:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           volumeMounts:
