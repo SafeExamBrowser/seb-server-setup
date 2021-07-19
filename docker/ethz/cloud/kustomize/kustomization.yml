@@ -6,6 +6,7 @@ resources:
   - service-guiservice.yml
   - deployment-mariadb.yml
   - service-mariadb.yml
+  - pvc-mariadb.yml
 
 configMapGenerator:
   - name: application-webservice-properties

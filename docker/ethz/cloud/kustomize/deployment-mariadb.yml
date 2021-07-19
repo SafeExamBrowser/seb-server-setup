@@ -23,6 +23,9 @@ spec:
             items:
               - key: "config.cnf"
                 path: "config.cnf"
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysql-pv-claim
       containers:
         - name: seb-mariadb
           image: mariadb:10.6
@@ -31,6 +34,8 @@ spec:
           volumeMounts:
             - name: seb-mariadb-config
               mountPath: /etc/mysql/conf.d
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
           env:
             - name: MYSQL_INITDB_SKIP_TZINFO
               value: "1"
