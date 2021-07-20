@@ -62,6 +62,11 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
 
 3. If some specific configuration is needed, this can be done within this step. See :ref:`configuration-label`. for more details on how to configure the services
 
+.. note::
+    Check that the spring configuration properties "sebserver.webservice.http.external.*" are set correctly to the URL where the SEB Server 
+    can be accessed from the public Internet. Usually your server has an URL like https://example.com. so use "https" for the scheme, "example.com"
+    for the servername and specify the port if it differs from default port (80/443).
+    
 4. build the docker images. 
 
  .. code-block:: bash
