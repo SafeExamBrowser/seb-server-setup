@@ -12,3 +12,6 @@ spec:
   selector:
     app: seb-webservice
   sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10
