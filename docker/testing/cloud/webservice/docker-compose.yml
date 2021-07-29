@@ -1,11 +1,7 @@
 version: '3.5'
 services:
   seb-webservice:
-      build:
-          context: .
-          dockerfile: ../sebserver.Dockerfile
-          args:
-            - GIT_TAG=v1.1-latest
+      image: "anhefti/seb-server:v1.2-stable"
       container_name: seb-webservice
       volumes:
         - seb-server-config:/sebserver/config
@@ -14,14 +10,29 @@ services:
       environment:
         - JAVA_HEAP_MIN=1G
         - JAVA_HEAP_MAX=8G
-        - MONITORING_MODE=false
-        - JMX_PORT=9090
+        - JMX_PORT=
         - spring_profiles_active=ws,prod-ws,prod
         - sebserver_password=${SEBSERVER_PWD}
         - sebserver_mariadb_password=${DB_SA_PWD}
+        
+        # Set the below settings for database connection. 
+        # NOTE: This can also point to an internal address when the db server is in the same network
+        - datastore_mariadb_server_address=seb-server-mariadb
+        - datastore_mariadb_server_port=3306
+        - spring_datasource_username=root
+
+        # Set the below URL component settings from where the the web-service is externally available
+        # NOTE: This must be the address from that the service is externally available (not network inernal address)
+        - sebserver_webservice_http_external_scheme=https
+        - sebserver_webservice_http_external_servername=seb-webservice.ch
+        - sebserver_webservice_http_external_port=
+
+        # JMX settings
+        - MONITORING_MODE=false
+        #- JMX_PORT=9090
       ports:
-        - 8081:8080
-      # - 9090:9090 # Connect this port to host if you want to use JMX (MONITORING_MODE=true)
+        - 8080:8080
+        #- 9090:9090 # Connect this port to host if you want to use JMX (MONITORING_MODE=true)
       networks:
         - seb-server-network
       restart: unless-stopped

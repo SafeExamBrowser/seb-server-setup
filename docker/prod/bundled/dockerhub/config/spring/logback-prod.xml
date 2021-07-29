@@ -8,8 +8,9 @@
     </appender>
   
   <springProfile name="prod">
-    <root level="DEBUG" additivity="true">
+    <root level="WARN" additivity="true">
       <appender-ref ref="STDOUT" />
+      <appender-ref ref="FILE" />
     </root>
     
   </springProfile>

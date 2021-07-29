@@ -32,8 +32,13 @@ To update an already installed and bundled SEB Server service, following the ste
       If you want the latest minor version use version tags like 1.0-latest or 1.1-latest.
          
 3. Do some additional configuration if needed.
-     
-         
+    
+.. note::
+    Since SEB Server version 1.2.x there is a new setup procedure (dockerhub). If you use this setup, you have to provide the passwords that
+    was given on startup again. Do not use another password for the SEBSERVER_PWD and only adapt the DB_SA_PWD if your database has a new password for the user.
+    You can just copy or recreate the .env in the working directory that contains the needed password or you can give them with the docker-compose up command later on.
+    
+    
 4. Rebuild the image with the new SEB Server version
 
  .. code-block:: bash

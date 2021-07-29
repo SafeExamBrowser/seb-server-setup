@@ -1,11 +1,7 @@
 version: '3.5'
 services:
   seb-guiservice:
-      build:
-          context: .
-          dockerfile: ../sebserver.Dockerfile
-          args:
-            - GIT_TAG=v1.1-latest
+      image: "anhefti/seb-server:v1.2-stable"
       container_name: seb-guiservice
       volumes:
         - seb-server-config:/sebserver/config
@@ -14,13 +10,27 @@ services:
       environment:
         - JAVA_HEAP_MIN=1G
         - JAVA_HEAP_MAX=8G
-        - MONITORING_MODE=false
-        - JMX_PORT=9090
         - spring_profiles_active=gui,prod-gui,prod
         - sebserver_password=${SEBSERVER_PWD}
+
+        # Set the below URL component settings from where the gui-service is externally available
+        # NOTE: This must be the address from that the service is externally available (not network inernal address)
+        - sebserver_gui_http_external_scheme=https
+        - sebserver_gui_http_external_servername=seb-guiservice.ch
+        - sebserver_gui_http_external_port=
+
+        # Set the below URL component settings from where the gui-service can connect to the web-service
+        # NOTE: This can also point to an internal address when the web-service is in the same network as the gui-service is
+        - sebserver_gui_http_webservice_scheme=http
+        - sebserver_gui_http_webservice_servername=seb-webservice
+        - sebserver_gui_http_webservice_port=8080
+
+        # JMX settings
+        - MONITORING_MODE=false
+        #- JMX_PORT=9090
       ports:
         - 80:8080
-      # - 9090:9090 # Connect this port to host if you want to use JMX (MONITORING_MODE=true)
+        #- 9090:9090 # Connect this port to host if you want to use JMX (MONITORING_MODE=true)
       networks:
         - seb-server-network
       restart: unless-stopped
