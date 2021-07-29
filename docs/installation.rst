@@ -15,7 +15,7 @@ A docker compose configuration for a bundled setup looks pretty much the same fo
  file system. And probably some other needed commands that presets things for the specific setup. 
  
 - **mariadb** This is the MariaDB service that is bound to the internal network as well as exposing its default port to the host
- network by default. This service uses the official "mariadb/server:10.3" image for the service and the configuration that is provided
+ network by default. This service uses the official "mariadb/server:10.5" image for the service and the configuration that is provided
  within the config/mariadb7 folder. The MariaDB container is started with the given internal password as the root password. This service
  uses a separated named docker volume to store the data (seb-server-mariadb). 
  
