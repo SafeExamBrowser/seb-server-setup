@@ -101,9 +101,10 @@ used by the seb-server service if JMX is enabled. For more details on how to con
    At least you should check the application-prod.properties file in the spring config directory, if everything is set properly.
    
    Also set the mandatory settings defined in the docker-compose.yml according to your setup:
-   - sebserver_webservice_http_external_scheme: Defines the scheme of the external URL (http or https) 
-   - sebserver_webservice_http_external_servername: Defines the server name of the external URL (e.g.: sebserver.ethz.ch)
-   - sebserver_webservice_http_external_port: Defines the port of the external URL. Mandatory only if it differs from default (http:80,https:433)
+   
+- sebserver_webservice_http_external_scheme: Defines the scheme of the external URL (http or https) 
+- sebserver_webservice_http_external_servername: Defines the server name of the external URL (e.g.: sebserver.ethz.ch)
+- sebserver_webservice_http_external_port: Defines the port of the external URL. Mandatory only if it differs from default (http:80,https:433)
 
 4. build the docker images. 
 
@@ -252,9 +253,10 @@ used by the seb-server service if JMX is enabled. For more details on how to con
    At least you should check the application-prod.properties file in the spring config directory, if everything is set properly.
    
    Also set the mandatory settings defined in the docker-compose.yml according to your setup:
-   - sebserver_webservice_http_external_scheme: Defines the scheme of the external URL (http or https) 
-   - sebserver_webservice_http_external_servername: Defines the server name of the external URL (e.g.: sebserver.ethz.ch)
-   - sebserver_webservice_http_external_port: Defines the port of the external URL. Mandatory only if it differs from default (http:80,https:433)
+   
+- sebserver_webservice_http_external_scheme: Defines the scheme of the external URL (http or https) 
+- sebserver_webservice_http_external_servername: Defines the server name of the external URL (e.g.: sebserver.ethz.ch)
+- sebserver_webservice_http_external_port: Defines the port of the external URL. Mandatory only if it differs from default (http:80,https:433)
 
 4. build the docker images. 
 
@@ -405,10 +407,11 @@ used by the seb-server service if JMX is enabled. For more details on how to con
    At least you should check the application-prod.properties file in the spring config directory, if everything is set properly.
    
    Also set the mandatory settings defined in the docker-compose.yml according to your setup:
-   - sebserver_webservice_http_external_scheme: Defines the scheme of the external URL (http or https) 
-   - sebserver_webservice_http_external_servername: Defines the server name of the external URL (e.g.: sebserver.ethz.ch)
-   - sebserver_webservice_http_external_port: Defines the port of the external URL. Mandatory only if it differs from default (http:80,https:433)
-    
+   
+- sebserver_webservice_http_external_scheme: Defines the scheme of the external URL (http or https) 
+- sebserver_webservice_http_external_servername: Defines the server name of the external URL (e.g.: sebserver.ethz.ch)
+- sebserver_webservice_http_external_port: Defines the port of the external URL. Mandatory only if it differs from default (http:80,https:433)
+ 
 4. You have to replace the self-signed certificates that are provided just for documentation purposes by going in to the configuration sub
    directory config/nginx/certs and replace the localhost.crt and localhost.key file with your signed certificate and key file.
 
