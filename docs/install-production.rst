@@ -144,9 +144,9 @@ or
     $ docker ps --all
     $ docker logs ${container name}
         
-    .. image:: images/dockerServicesTestUp.png
-        :align: center
-        :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/dockerServicesTestUp.png
+.. image:: images/dockerServicesTestUp.png
+    :align: center
+    :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/dockerServicesTestUp.png
         
 8. If there where no changes to the default configuration the SEB Server is now running on port 80 and can be accessed with a browser on http(s)://server-address
    There is one pre-configured institution and one user-account with SEB Server Administrator role to manage the server. 
@@ -295,9 +295,9 @@ used by the seb-server service if JMX is enabled. For more details on how to con
     $ docker ps --all
     $ docker logs ${container name}
         
-    .. image:: images/dockerServicesTestUp.png
-        :align: center
-        :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/dockerServicesTestUp.png
+.. image:: images/dockerServicesTestUp.png
+    :align: center
+    :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/dockerServicesTestUp.png
         
 8. If there where no changes to the default configuration the SEB Server is now running on port 80 and can be accessed with a browser on http(s)://server-address
    There is one pre-configured institution and one user-account with SEB Server Administrator role to manage the server. 
@@ -452,10 +452,10 @@ used by the seb-server service if JMX is enabled. For more details on how to con
     $ docker ps --all
     $ docker logs ${container name}
         
-    .. image:: images/dockerServicesTestUp.png
-        :align: center
-        :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/dockerServicesTestUp.png
-        
+.. image:: images/dockerServicesTestUp.png
+    :align: center
+    :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/dockerServicesTestUp.png
+    
 9. If there where no changes to the default configuration the SEB Server is now running on port 80 and can be accessed with a browser on http(s)://server-address
    There is one pre-configured institution and one user-account with SEB Server Administrator role to manage the server. 
    The username and generated password of the initial admin account can be found on the logs:
