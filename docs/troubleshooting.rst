@@ -100,7 +100,7 @@ Now the initial user-account should be created again and the credentials should 
 - **Version** : 1.0.0
 - **Domain**  : general bundled setups
 - **Problem** : The initial password file setup was not correctly done for the first time or you need or want to reset the password.
-- **Solution** : You have to remove the configuration volume form the docker engine and create the password file again. Then restarting the service.
+- **Solution** : You have to remove the configuration volume from the docker engine and create the password file again. Then restarting the service.
 
 .. note::
    Do this with care! If there is already data stored that was encrypted for security reasons with a password that was originally set on the

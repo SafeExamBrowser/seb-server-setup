@@ -77,7 +77,7 @@ For MariaDB the official public image is used to build-up the MariaDB server ser
 
 The configuration for each service is located in the local /config directory separated by folders for each concern. The "spring" folder
 contains all the Spring and Spring-Boot based configurations and is used by the seb-server service. The "mariadb" folder contains the
-usual mariadb configuration file that is loaded form the seb-server-mariadb service on startup. The "nginx" folder contains a usual 
+usual mariadb configuration file that is loaded from the seb-server-mariadb service on startup. The "nginx" folder contains a usual 
 nginx reverse-proxy configuration and is used by the reverse-proxy service. The "jmx" folder contains JMX related configurations and is also
 used by the seb-server service if JMX is enabled. For more details on how to configure each service see ref:`configuration-label`
 
@@ -120,7 +120,7 @@ used by the seb-server service if JMX is enabled. For more details on how to con
 
 .. note::
     The passwords must be given also when the service is stopped and restarted again.. You can either let the .env file 
-    be within the installation directory as is. Or you can delete the .env file form the host and copy or create it again when
+    be within the installation directory as is. Or you can delete the .env file from the host and copy or create it again when
     an update or restart of the container is needed. Note that it is very important that the SEBSERVER_PWD do not change and the same
     SEBSERVER_PWD is used for updates and restarts as it was for the initial setup. Otherwise data will be lost due to encryption with
     unknown or incorrect passwords. The password should be in the responsibility of a system administrator and handled with appropriate care.
@@ -229,7 +229,7 @@ For MariaDB the official public image is used to build-up the MariaDB server ser
 
 The configuration for each service is located in the local /config directory separated by folders for each concern. The "spring" folder
 contains all the Spring and Spring-Boot based configurations and is used by the seb-server service. The "mariadb" folder contains the
-usual mariadb configuration file that is loaded form the seb-server-mariadb service on startup. The "nginx" folder contains a usual 
+usual mariadb configuration file that is loaded from the seb-server-mariadb service on startup. The "nginx" folder contains a usual 
 nginx reverse-proxy configuration and is used by the reverse-proxy service. The "jmx" folder contains JMX related configurations and is also
 used by the seb-server service if JMX is enabled. For more details on how to configure each service see ref:`configuration-label`
 
@@ -375,7 +375,7 @@ of the installation process.
 
 The docker setup consists of two docker-files, "sebserver.Docker" that defines and builds an image for the SEB Server, "setup.Docker" that 
 defines the initial setup job and a docker-compose.yml file that orchestrate the setup of the needed containers/services. 
-The build of the image for SEB Server first clones the defines version of the SEB Server source repository form GitHub and build the SEB Server 
+The build of the image for SEB Server first clones the defines version of the SEB Server source repository from GitHub and build the SEB Server 
 with Maven that leads to a self-contained, spring-boot-based, jar artifact that will be run with a usual java command on container startup. 
 For MariaDB the defined public image is been used to build-up the MariaDB server service.
 
@@ -383,7 +383,7 @@ For MariaDB the defined public image is been used to build-up the MariaDB server
 
 The configuration for each service are located in the local /config directory separated by folders for each concern. The "spring" folder
 contains all the Spring and Spring-Boot based configurations and is used by the seb-server service. The "mariadb" folder contains the
-usual mariadb configuration file that is loaded form the seb-server-mariadb service on startup. The "nginx" folder contains a usual 
+usual mariadb configuration file that is loaded from the seb-server-mariadb service on startup. The "nginx" folder contains a usual 
 nginx reverse-proxy configuration and is used by the reverse-proxy service. The "jmx" folder contains JMX related configurations and is also
 used by the seb-server service if JMX is enabled. For more details on how to configure each service see ref:`configuration-label`
 
@@ -538,7 +538,7 @@ you have to edit some configuration files at step 3. of the installation process
  
     $ chmod 600 jmxremote.password
     
-- Go further form here with the normal installation process
+- Go further from here with the normal installation process
     
 - After starting up the SEB Server successfully you should be able to remotely connect with a JMX monitoring tool to the server. Make sure
   you have a secured connection over SSH with a tunnel for example. 

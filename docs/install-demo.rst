@@ -37,7 +37,7 @@ With the default configuration, the MariaDB server is exposed on port 3306 and t
 **Setup:**
 
 The docker setup consists of a Dockerfile that defines and builds an image for the SEB Server and a docker-compose.yml file that orchestrate the setup of the needed containers/services. 
-The build of the image for SEB Server first clones the defines version of the SEB Server source repository form GitHub and build the SEB Server with Maven that leads to a self-contained, spring-boot-based, 
+The build of the image for SEB Server first clones the defines version of the SEB Server source repository from GitHub and build the SEB Server with Maven that leads to a self-contained, spring-boot-based, 
 jar artifact that will be run with a usual java command on container startup. For MariaDB the defined public image is been used to build-up the MariaDB server service.
 
 **Configuration**

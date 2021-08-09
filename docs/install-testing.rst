@@ -45,7 +45,7 @@ initial password handling that is needed in the initial setup. And all is bundle
 **Setup:**
 
 The docker setup consists of two docker-files, "sebserver.Docker" that defines and builds an image for the SEB Server, "setup.Docker" that defines the initial setup job and a docker-compose.yml file that orchestrate the setup of the needed containers/services. 
-The build of the image for SEB Server first clones the defines version of the SEB Server source repository form GitHub and build the SEB Server with Maven that leads to a self-contained, spring-boot-based, 
+The build of the image for SEB Server first clones the defines version of the SEB Server source repository from GitHub and build the SEB Server with Maven that leads to a self-contained, spring-boot-based, 
 jar artifact that will be run with a usual java command on container startup. For MariaDB the defined public image is been used to build-up the MariaDB server service.
 
 **Configuration**
