@@ -10,7 +10,6 @@
   <springProfile name="prod">
     <root level="WARN" additivity="true">
       <appender-ref ref="STDOUT" />
-      <appender-ref ref="FILE" />
     </root>
     
   </springProfile>
