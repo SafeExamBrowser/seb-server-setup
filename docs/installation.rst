@@ -10,41 +10,41 @@ different docker-compose configuration to set up SEB Server in a distributed env
 
 A docker compose configuration for a bundled setup looks pretty much the same for each setup and consists of four services:
 
-- **seb-server-setup** This service is just to setup everything in advanced and uses a Docker container for that runs a some
- initial actions to bind the volumes and copy the initial password, make it internally available by also deleting it from the hosts
- file system. And probably some other needed commands that presets things for the specific setup. 
+- **seb-server-setup** This service is just to setup everything in advance and uses a Docker container for that runs some
+  initial actions to bind the volumes and copy the initial password, make it internally available by also deleting it from the hosts
+  file system. And probably some other needed commands that presets things for the specific setup. 
  
 - **mariadb** This is the MariaDB service that is bound to the internal network as well as exposing its default port to the host
- network by default. This service uses the official "mariadb/server:10.5" image for the service and the configuration that is provided
- within the config/mariadb7 folder. The MariaDB container is started with the given internal password as the root password. This service
- uses a separated named docker volume to store the data (seb-server-mariadb). 
+  network by default. This service uses the official "mariadb/server:10.5" image for the service and the configuration that is provided
+  within the config/mariadb7 folder. The MariaDB container is started with the given internal password as the root password. This service
+  uses a separated named docker volume to store the data (seb-server-mariadb). 
  
 .. note::
     The named volume of the MariaDB service is not mapped to the host file system for default. 
     If you have to do so, for backup and restore procedure for example, you can configure this within the docker-compose setup.
  
-- **seb-server** This is the main server service that starts the Spring-Boot application within the container. This service uses the 
- configuration in the folder: config/spring. The server is bound only to the internal docker network on port 8080 for default and also
- connect to the database within the internal docker network that is created with the docker-compose setup (seb-server-network). The service
- uses a separated named volume for logging as well (seb-server-logs). To install, update or down-grade to a particular SEB Server version
- you can set the SEBSERVER_VERSION attribute.
+- **seb-server** This is the main server service that starts the Spring-Boot application within the container. This service uses the
+  configuration in the folder: config/spring. The server is bound only to the internal docker network on port 8080 for default and also
+  connects to the database within the internal docker network that is created with the docker-compose setup (seb-server-network). The service
+  uses a separated named volume for logging as well (seb-server-logs). To install, update or down-grade to a particular SEB Server version
+  you can set the SEBSERVER_VERSION attribute.
  
 .. note::
-    The SEBSERVER_VERSION attribute relates on a Git tag of the seb-server repository (without the "v" prefix). Usually you want to point to 
+    The SEBSERVER_VERSION attribute relates on a Git tag of the seb-server repository (without the "v" prefix). Usually you want to point to
     the exact version of the SEB Server by using `sematic versioning <https://semver.org/>`_ like 1.0.0 or 1.0.1 or you can set the latest
     minor version to always get the latest specific minor version with all patches on installation or update. If you want the latest minor version
     use version tags like 1.0-latest or 1.1-latest.
  
-- **reverse-proxy** This service uses a nginx server as reverse-proxy to connect the bundle to the host network. In a basic setup this 
- usually just maps the host HTTP port (80) to the internal HTTP port (8080). In a setup with end to end TLS this service is used to manage
- the TLS part and must be provided with the certificate(s) to use. The configuration of the proxy service is located in the folder confg/nginx/
+- **reverse-proxy** This service uses a nginx server as reverse-proxy to connect the bundle to the host network. In a basic setup this
+  usually just maps the host HTTP port (80) to the internal HTTP port (8080). In a setup with end to end TLS this service is used to manage
+  the TLS part and must be provided with the certificate(s) to use. The configuration of the proxy service is located in the folder confg/nginx/
  
 **Docker Compose for distributed setup**
  
 Default setups for distributed environments to install SEB Server as a cloud service for example are not provided yet. You can use the pre-defined components
 from a bundled setup and adapt and use it for your distributed environments. Please also contact a system administrator or cloud administrator
 of your company/institution to find a solution that fits best within your needs and given IT environment. If you have questions or need help / report bugs, 
-please use the `issue tracker <https://github.com/SafeExamBrowser/seb-server-setup/issues>`_  on Github for reporting.
+please use the `issue tracker <https://github.com/SafeExamBrowser/seb-server-setup/issues>`_  on GitHub for reporting.
 
 **HTTPS / TLS Configuration**
 
@@ -53,11 +53,10 @@ There are manly two strategies to configure HTTPS / TLS for a SEB Server;
     - The HTTPS / TLS is handled by a reverse-proxy that is exposed to the Internet and forwards the requests over HTTP to the SEB Server that in this
     case has only an simple HTTP connector and is not exposed to the Internet but to the internal network with the reverse proxy
     - The HTTPS / TLS is handled by the SEB Server itself (end to end). 
-    
-    .. note:: 
-    
-        It is highly recommended to use the first approach here that is easier to install then the end to end approach. 
-    There are some prepared installations for the second approach within the seb-server-setup repository (tls) but they are experimental yet
+
+.. note::
+    It is highly recommended to use the first approach here that is easier to install then the end to end approach. 
+    There are some prepared installations for the second approach within the seb-server-setup repository (tls) but they are experimental yet.
 
 General Installation Process
 -----------------------------
@@ -69,7 +68,7 @@ configurations and various configuration files within the "config" sub-directory
 
 This is an example structure of an installation strategy sub-directory. The installation directory docker/testing/basic/ in this case 
 provides a setup for testing with a mariadb service, a seb-server single instance service and a reverse proxy service that is bundled and
-exposed to the host network by the proxy
+exposed to the host network by the proxy.
 
 ::
     
@@ -106,7 +105,7 @@ A usual installation process for SEB Server mostly look something like the follo
             |    - Docker : https://docs.docker.com/install/
             |    - Docker-Compose : https://docs.docker.com/compose/install/
     
-3. In the installation directory of your choice clone the seb-server-setup repository of desired version from guthub.
+3. In the installation directory of your choice clone the seb-server-setup repository of desired version from GitHub.
     
 4. Navigate into the installation strategy sub-directory you want to install from and edit/prepare the configuration for your needs.
     

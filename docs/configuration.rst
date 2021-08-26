@@ -20,7 +20,7 @@ to each relevant setting.
 
 The settings can be divided into three categories, global settings, gui-service settings and web-service settings.
 If the SEB Server is deployed as stand-alone server then all the properties are in one properties file with the
-setup specific related suffix. If the gui and the web-service is deployed separately there will be two property files
+setup specific related suffix. If the gui and the web-service is deployed separately there will be two property files: 
 one for the gui server containing the global settings and all gui-service related settings and one for the webservice
 with also the global settings and all webservice related settings.
 
@@ -233,7 +233,7 @@ Since SEB Server version 1.1.0:
 Reverse Proxy Configuration
 ---------------------------
 
-Docker internal SEB Server setup uses a nginx reverse proxy for communication with the host and the Internet. The configuration is places
+Docker internal SEB Server setup uses a nginx reverse proxy for communication with the host and the Internet. The configuration is placed
 in the app.conf file and will be loaded by nginx on startup of the container. The configuration usually has all the pre-settings needed
 for working correctly within the specific setup context. If there is the need to have a different configuration for the nginx reverse proxy
 we refer to the `nginx configuration documentation <http://nginx.org/en/docs/>`_ 

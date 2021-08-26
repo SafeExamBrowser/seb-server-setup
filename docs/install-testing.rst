@@ -50,7 +50,7 @@ jar artifact that will be run with a usual java command on container startup. Fo
 
 **Configuration**
 
-There is the SEB Server Spring configuration in place: ref:`seb-server-configuration-label` as well as a reverse-proxy configuration: ref:`proxy-configuration-label`
+There is the SEB Server Spring configuration in place :ref:`seb-server-configuration-label` as well as a reverse-proxy configuration :ref:`proxy-configuration-label`
 
 **Installation:**
 
@@ -68,7 +68,7 @@ There is the SEB Server Spring configuration in place: ref:`seb-server-configura
     $ git clone -b v1.1-latest https://github.com/SafeExamBrowser/seb-server-setup.git
     $ cd seb-server-setup/docker/testing/basic/
 
-3. If some specific configuration is needed, this can be done within this step. See:ref:`configuration-label`. for more details on how to configure the services
+3. If some specific configuration is needed, this can be done within this step. See:ref:`configuration-label`. for more details on how to configure the services.
    At least you should check the application-prod.properties file in the spring config directory, if everything is set properly.
    
 .. note::
