@@ -4,7 +4,7 @@ Production
 **Info:**
 
 
-For production we provide currently three different default setups. Both for bundled environments. 
+For production we provide currently three different default setups, all of them for bundled environments. 
 
 .. note::
     There is a new SEB Server setup approach since SEB Server version 1.2 where the docker image is not part of the setup repository
@@ -69,7 +69,7 @@ This setup uses docker compose to build and run all needed containers. The docke
         
 **Setup:**
 
-This setup contains a docker-compose.yml file that orchestrate the setup of the needed containers/services and a configuration sub-directory
+This setup contains a docker-compose.yml file that orchestrates the setup of the needed containers/services and a configuration sub-directory
 for all needed components. The docker image for SEB Server will be automatically fetched from docker-hub.
 For MariaDB the official public image is used to build-up the MariaDB server service.
 
@@ -79,7 +79,7 @@ The configuration for each service is located in the local /config directory sep
 contains all the Spring and Spring-Boot based configurations and is used by the seb-server service. The "mariadb" folder contains the
 usual mariadb configuration file that is loaded from the seb-server-mariadb service on startup. The "nginx" folder contains a usual 
 nginx reverse-proxy configuration and is used by the reverse-proxy service. The "jmx" folder contains JMX related configurations and is also
-used by the seb-server service if JMX is enabled. For more details on how to configure each service see ref:`configuration-label`
+used by the seb-server service if JMX is enabled. For more details on how to configure each service see :ref:`configuration-label`.
 
 **Installation:**
 
@@ -97,7 +97,7 @@ used by the seb-server service if JMX is enabled. For more details on how to con
     $ git clone -b v1.1-latest https://github.com/SafeExamBrowser/seb-server-setup.git
     $ cd seb-server-setup/docker/prod/bundled/dockerhub/
 
-3. If some specific configuration is needed, this can be done within this step. See:ref:`configuration-label`. for more details on how to configure the services
+3. If some specific configuration is needed, this can be done within this step. See :ref:`configuration-label` for more details on how to configure the services.
    At least you should check the application-prod.properties file in the spring config directory, if everything is set properly.
    
    Also set the mandatory settings defined in the docker-compose.yml according to your setup:
@@ -119,7 +119,7 @@ used by the seb-server service if JMX is enabled. For more details on how to con
     $ printf %s "SEBSERVER_PWD=somePassword\nDB_SA_PWD=passwordForDataBase" >> .env
 
 .. note::
-    The passwords must be given also when the service is stopped and restarted again.. You can either let the .env file 
+    The passwords must be given also when the service is stopped and restarted again. You can either let the .env file 
     be within the installation directory as is. Or you can delete the .env file from the host and copy or create it again when
     an update or restart of the container is needed. Note that it is very important that the SEBSERVER_PWD do not change and the same
     SEBSERVER_PWD is used for updates and restarts as it was for the initial setup. Otherwise data will be lost due to encryption with
@@ -220,7 +220,7 @@ password handling that is needed for the initial setup. All this is bundled toge
 **Setup:**
 
 The docker setup consists of two docker-files, "sebserver.Docker" that defines and builds an image for the SEB Server and "setup.Docker" that 
-defines the initial setup job. And a docker-compose.yml file that orchestrate the setup of the needed containers/services. 
+defines the initial setup job. And a docker-compose.yml file that orchestrates the setup of the needed containers/services. 
 The build of the docker image for SEB Server first clones the configured version of the SEB Server source repository from GitHub and builds the SEB Server 
 with the Maven build tool that leads to a self-contained, spring-boot-based jar artifact that is run with a usual java command on the container startup. 
 For MariaDB the official public image is used to build-up the MariaDB server service.
@@ -231,7 +231,7 @@ The configuration for each service is located in the local /config directory sep
 contains all the Spring and Spring-Boot based configurations and is used by the seb-server service. The "mariadb" folder contains the
 usual mariadb configuration file that is loaded from the seb-server-mariadb service on startup. The "nginx" folder contains a usual 
 nginx reverse-proxy configuration and is used by the reverse-proxy service. The "jmx" folder contains JMX related configurations and is also
-used by the seb-server service if JMX is enabled. For more details on how to configure each service see ref:`configuration-label`
+used by the seb-server service if JMX is enabled. For more details on how to configure each service see :ref:`configuration-label`.
 
 **Installation:**
 
@@ -249,7 +249,7 @@ used by the seb-server service if JMX is enabled. For more details on how to con
     $ git clone -b v1.1-latest https://github.com/SafeExamBrowser/seb-server-setup.git
     $ cd seb-server-setup/docker/prod/bundled/basic/
 
-3. If some specific configuration is needed, this can be done within this step. See:ref:`configuration-label`. for more details on how to configure the services
+3. If some specific configuration is needed, this can be done within this step. See :ref:`configuration-label` for more details on how to configure the services.
    At least you should check the application-prod.properties file in the spring config directory, if everything is set properly.
    
    Also set the mandatory settings defined in the docker-compose.yml according to your setup:
@@ -374,7 +374,7 @@ of the installation process.
 **Setup:**
 
 The docker setup consists of two docker-files, "sebserver.Docker" that defines and builds an image for the SEB Server, "setup.Docker" that 
-defines the initial setup job and a docker-compose.yml file that orchestrate the setup of the needed containers/services. 
+defines the initial setup job and a docker-compose.yml file that orchestrates the setup of the needed containers/services. 
 The build of the image for SEB Server first clones the defines version of the SEB Server source repository from GitHub and build the SEB Server 
 with Maven that leads to a self-contained, spring-boot-based, jar artifact that will be run with a usual java command on container startup. 
 For MariaDB the defined public image is been used to build-up the MariaDB server service.
@@ -385,7 +385,7 @@ The configuration for each service are located in the local /config directory se
 contains all the Spring and Spring-Boot based configurations and is used by the seb-server service. The "mariadb" folder contains the
 usual mariadb configuration file that is loaded from the seb-server-mariadb service on startup. The "nginx" folder contains a usual 
 nginx reverse-proxy configuration and is used by the reverse-proxy service. The "jmx" folder contains JMX related configurations and is also
-used by the seb-server service if JMX is enabled. For more details on how to configure each service see ref:`configuration-label`
+used by the seb-server service if JMX is enabled. For more details on how to configure each service see :ref:`configuration-label`.
 
 **Installation:**
 
@@ -403,7 +403,7 @@ used by the seb-server service if JMX is enabled. For more details on how to con
     $ git clone https://github.com/SafeExamBrowser/seb-server-setup.git
     $ cd seb-server-setup/docker/prod/bundled/basic/
 
-3. If some specific configuration is needed, this can be done within this step. See:ref:`configuration-label`. for more details on how to configure the services
+3. If some specific configuration is needed, this can be done within this step. See :ref:`configuration-label` for more details on how to configure the services.
    At least you should check the application-prod.properties file in the spring config directory, if everything is set properly.
    
    Also set the mandatory settings defined in the docker-compose.yml according to your setup:

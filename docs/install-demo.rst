@@ -36,7 +36,7 @@ With the default configuration, the MariaDB server is exposed on port 3306 and t
     
 **Setup:**
 
-The docker setup consists of a Dockerfile that defines and builds an image for the SEB Server and a docker-compose.yml file that orchestrate the setup of the needed containers/services. 
+The docker setup consists of a Dockerfile that defines and builds an image for the SEB Server and a docker-compose.yml file that orchestrates the setup of the needed containers/services. 
 The build of the image for SEB Server first clones the defines version of the SEB Server source repository from GitHub and build the SEB Server with Maven that leads to a self-contained, spring-boot-based, 
 jar artifact that will be run with a usual java command on container startup. For MariaDB the defined public image is been used to build-up the MariaDB server service.
 
@@ -60,7 +60,7 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
         $ git clone -b v1.1-latest https://github.com/SafeExamBrowser/seb-server-setup.git
         $ cd seb-server-setup/docker/demo
 
-3. If some specific configuration is needed, this can be done within this step. See :ref:`configuration-label`. for more details on how to configure the services
+3. If some specific configuration is needed, this can be done within this step. See :ref:`configuration-label` for more details on how to configure the services
 
 .. note::
     Check that the spring configuration properties "sebserver.webservice.http.external.*" are set correctly to the URL where the SEB Server 
