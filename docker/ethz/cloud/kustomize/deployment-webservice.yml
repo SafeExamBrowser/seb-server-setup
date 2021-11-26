@@ -23,7 +23,7 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchExpressions:
-                    - key: service-type
+                    - key: app
                       operator: In
                       values:
                         - seb-webservice
