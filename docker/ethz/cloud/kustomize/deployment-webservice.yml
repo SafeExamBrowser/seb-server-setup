@@ -49,6 +49,9 @@ spec:
         - name: seb-webservice
           image: anhefti/seb-server:latest
           imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "600Mi"
           ports:
             - containerPort: 8080
           volumeMounts:
