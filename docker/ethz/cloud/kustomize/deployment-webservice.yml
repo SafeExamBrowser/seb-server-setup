@@ -52,6 +52,8 @@ spec:
           resources:
             requests:
               memory: "600Mi"
+            limits:
+              memory: "3Gi"
           ports:
             - containerPort: 8080
           volumeMounts:
