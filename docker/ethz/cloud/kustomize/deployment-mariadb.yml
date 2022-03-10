@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seb-mariadb
+  labels:
+    app: seb-mariadb
+spec:
+  minReadySeconds: 10
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seb-mariadb
+  template:
+    metadata:
+      labels:
+        app: seb-mariadb
+    spec:
+      volumes:
+        - name: seb-mariadb-config
+          configMap:
+            name: seb-mariadb-config
+            items:
+              - key: "config.cnf"
+                path: "config.cnf"
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysql-pv-claim
+      containers:
+        - name: seb-mariadb
+          image: mariadb:10.6
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: seb-mariadb-config
+              mountPath: /etc/mysql/conf.d
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+          env:
+            - name: MYSQL_INITDB_SKIP_TZINFO
+              value: "1"
+            - name: MYSQL_ROOT_PASSWORD
+#              value: somePW
+              valueFrom:
+                secretKeyRef:
+                  name: sebservermariadbpassword
+                  key: DB_SA_PWD
+

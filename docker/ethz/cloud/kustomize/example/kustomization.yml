@@ -1,0 +1,59 @@
+namespace: seb-server-prod
+nameSuffix: -prod
+
+replicas:
+  - name: seb-guiservice
+    count: 1
+
+images:
+  - name: anhefti/seb-server
+    newTag: v1.1-latest
+
+resources:
+  # Get the base configuration
+  - https://github.com/SafeExamBrowser/seb-server-setup/docker/ethz/cloud/kustomize?ref=kustomize
+
+  # Add an ingress
+  - ingress.yml
+
+  # Add a secret with application variables
+  - app-env.json
+  # - app-env.yml  # if prepared with SealedSecret as shown in the README
+
+  # Same with DB connection variables
+  - db-env.json
+
+patchesStrategicMerge:
+  # Add/replace some variables 
+  - |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: seb-webservice
+    spec:
+      template:
+        spec:
+          containers:
+            - name: seb-webservice
+              env:
+                # NOTE: Set the below settings for database connection
+                - name: "datastore_mariadb_server_address"
+                  value: "seb-mariadb-prod.seb-server-prod.svc.cluster.local"
+                - name: "datastore_mariadb_server_port"
+                  value: "3306"
+                - name: "spring_datasource_username"
+                  value: "root"
+                - name: "spring_datasource_password"
+                  value: "123456"
+                # NOTE: Set the below URL component settings from where the web-service is externally available
+                - name: "sebserver_webservice_http_external_scheme"
+                  value: "http"
+                - name: "sebserver_webservice_http_external_servername"
+                  value: "seb-webservice"
+                - name: "sebserver_webservice_http_external_port"
+                  value: ""
+                - name: "sebserver_password"
+                  valueFrom:
+                    secretKeyRef:
+                      name: sebservercredentials
+                      key: SEBSERVER_PWD

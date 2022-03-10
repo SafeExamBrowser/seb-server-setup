@@ -36,7 +36,6 @@ services:
       networks:
         - seb-server-network
       restart: unless-stopped
-      
 
 volumes:
   seb-server-config:

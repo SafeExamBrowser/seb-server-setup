@@ -1,0 +1,32 @@
+resources:
+#  - namespace.yml
+  - deployment-webservice.yml
+  - service-webservice.yml
+  - deployment-guiservice.yml
+  - service-guiservice.yml
+  - deployment-mariadb.yml
+  - service-mariadb.yml
+  - pvc-mariadb.yml
+
+configMapGenerator:
+  - name: application-webservice-properties
+    files:
+      - config/webservice/spring/application-prod.properties
+      - config/webservice/spring/logback-prod.xml
+      
+  - name: webservice-jmx-remote-access
+    files:
+      - config/webservice/jmx/jmxremote.access
+
+  - name: application-guiservice-properties
+    files:
+      - config/guiservice/spring/application-prod.properties
+      - config/guiservice/spring/logback-prod.xml
+      
+  - name: guiservice-jmx-remote-access
+    files:
+      - config/guiservice/jmx/jmxremote.access
+
+  - name: seb-mariadb-config
+    files:
+      - config/mariadb/config.cnf

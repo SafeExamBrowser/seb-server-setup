@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seb-webservice
+  labels:
+    app: seb-webservice
+spec:
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app: seb-webservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: seb-webservice
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - seb-webservice
+                        - seb-guiservice
+                        - seb-mariadb
+                topologyKey: kubernetes.io/hostname
+      volumes:
+        - name: application-properties
+          configMap:
+            name: application-webservice-properties
+            items:
+              - key: "application-prod.properties"
+                path: "application-prod.properties"
+              - key: "logback-prod.xml"
+                path: "logback-prod.xml"
+        - name: jmx-remote-access
+          configMap:
+            name: webservice-jmx-remote-access
+            items:
+              - key: "jmxremote.access"
+                path: "jmxremote.access"
+      containers:
+        - name: seb-webservice
+          image: anhefti/seb-server:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "600Mi"
+            limits:
+              memory: "3Gi"
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: application-properties
+              mountPath: /sebserver/config/spring
+            - name: jmx-remote-access
+              mountPath: /sebserver/config/jmx
+          env:
+            - name: JAVA_HEAP_MIN
+              value: "1G"
+            - name: JAVA_HEAP_MAX
+              value: "8G"
+            - name: MONITORING_MODE
+              value: "false"
+            - name: JMX_PORT
+              value: "9090"
+            - name: "spring_profiles_active"
+              value: "ws,prod-ws,prod"

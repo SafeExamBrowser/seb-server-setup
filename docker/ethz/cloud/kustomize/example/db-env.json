@@ -1,0 +1,14 @@
+{
+    "kind": "Secret",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "sebservermariadbpassword",
+        "creationTimestamp": null
+    },
+    "data": {
+        "DB_HOST": "bWFyaWFkYg==",
+        "DB_PASSWORD": "MTIzNDU2",
+        "DB_SA_PWD": "MTIzNDU2",
+        "DB_USER": "c2Vi"
+    }
+}
