@@ -29,7 +29,7 @@ services:
           context: .
           dockerfile: sebserver.Dockerfile
           args:
-              - SEBSERVER_VERSION=1.2-stable
+              - SEBSERVER_VERSION=1.3-stable
       container_name: seb-server
       volumes:
         - seb-server-config:/sebserver/config

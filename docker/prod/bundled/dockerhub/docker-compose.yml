@@ -16,7 +16,7 @@ services:
     restart: unless-stopped
 
   seb-server:
-      image: "anhefti/seb-server:v1.2-stable"
+      image: "anhefti/seb-server:v1.3-stable"
       container_name: seb-server
       volumes:
         - seb-server-config:/sebserver/config

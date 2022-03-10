@@ -7,7 +7,7 @@ replicas:
 
 images:
   - name: anhefti/seb-server
-    newTag: v1.1-latest
+    newTag: v1.3-stable
 
 resources:
   # Get the base configuration

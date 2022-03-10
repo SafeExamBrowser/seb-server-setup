@@ -47,7 +47,7 @@ spec:
                 path: "jmxremote.access"
       containers:
         - name: seb-guiservice
-          image: anhefti/seb-server:latest
+          image: anhefti/seb-server:v1.3-stable
           imagePullPolicy: Always
           resources:
             requests:
