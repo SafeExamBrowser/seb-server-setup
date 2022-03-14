@@ -57,3 +57,38 @@ patchesStrategicMerge:
                     secretKeyRef:
                       name: sebservercredentials
                       key: SEBSERVER_PWD
+  - |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: seb-guiservice
+    spec:
+      template:
+        spec:
+          containers:
+            - name: seb-guiservice
+              env:
+                # NOTE: Set the below URL component settings from where
+                # the gui-service can connect to the web-service
+                - name: "sebserver_gui_http_webservice_scheme"
+                  value: "http"
+                - name: "sebserver_gui_http_webservice_servername"
+                  value: "seb-webservice-prod.seb-server-prod.svc.cluster.local"
+                - name: "sebserver_gui_http_webservice_port"
+                  value: "8080"
+                - name: "sebserver_gui_http_external_servername"
+                  value: "localhost"
+                - name: "sebserver_gui_http_external_scheme"
+                  value: "http"
+  - |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: seb-mariadb
+    spec:
+      template:
+        spec:
+          containers:
+            - name: seb-mariadb
+              image: mariadb:10.6
+
