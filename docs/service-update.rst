@@ -1,3 +1,8 @@
+.. note::
+    The update depends on your setup. Please be aware that if you have adapted a specified setup for your needs
+    you need to also adapt the following update procedure.
+
+
 To update an already installed and bundled SEB Server service, follow the steps below:
 
 1. Shout down the SEB Server setup docker services with

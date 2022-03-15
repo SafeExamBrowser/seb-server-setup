@@ -1,3 +1,7 @@
+.. note::
+    The reset depends on your setup. Please be aware that if you have adapted a specified setup for your needs
+    you need to also adapt the following reset procedure.
+
 To reset a SEB Server installation either to delete the installation or the be able to install from scratch, you have to shout down the service
 and prune the docker system entirely. To do so, use the following steps.
 

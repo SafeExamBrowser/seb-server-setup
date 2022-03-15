@@ -1,8 +1,6 @@
 Kustomization Final Deployment Example
 ======================================
 
-**Not working yet**
-
 Note on Secrets in Git
 --------------
 
