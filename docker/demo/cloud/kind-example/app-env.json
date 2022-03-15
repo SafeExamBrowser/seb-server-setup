@@ -1,0 +1,11 @@
+{
+    "kind": "Secret",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "sebservercredentials",
+        "creationTimestamp": null
+    },
+    "data": {
+        "SEBSERVER_PWD": "YjVjYjBmMzJmNzJjYTA2MDU2MTQ2YzBjNzUyZjY1YTM0ODhiMDlhNA=="
+    }
+}

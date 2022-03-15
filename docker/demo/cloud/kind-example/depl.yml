@@ -1,0 +1,275 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: seb-server-prod
+---
+apiVersion: v1
+data:
+  application-prod.properties: "spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration\r\n\r\n##########################################################\r\n### Global Server Settings\r\n\r\n# Server address (set for docker internal)\r\nserver.address=0.0.0.0\r\n# Server http port\r\nserver.port=8080\r\n# The servlet context path\r\nserver.servlet.context-path=/\r\n\r\n# Logging\r\n# Default logging level in the form  \"logging.level\" + namespace=LEVEL \r\nlogging.config=/sebserver/config/spring/logback-prod.xml\r\nlogging.level.ROOT=WARN\r\nlogging.level.ch=DEBUG\r\n\r\n##########################################################\r\n### SEB Server GUI configuration\r\n\r\n# External URL settings\r\n# NOTE: Set this external URL settings for specified environment to the URL on that the SEB Server is available.\r\n#       For example: https://sebserver.ethz.ch\r\n#       scheme=https, servername=sebserver.ethz.ch and port=\r\nsebserver.gui.http.external.scheme=https\r\nsebserver.gui.http.external.servername=localhost\r\nsebserver.gui.http.external.port=\r\n\r\n# Webservice URL Settings\r\n# NOTE: Set this URL for specified environment to the URL on that the GUI service can connect the Web-Service\r\n#       For example docker network internal: http://seb-server-network:8081\r\n#       scheme=http, servername=seb-server-network and port=8081\r\n#       Or another example, over the Internet: https://sebwebservice.ethz.ch\r\n#       scheme=https, servername=sebwebservice.ethz.ch and port=\r\nsebserver.gui.http.webservice.scheme=http\r\nsebserver.gui.http.webservice.servername=seb-webservice\r\nsebserver.gui.http.webservice.port=8080\r\nsebserver.gui.entrypoint=/gui\r\n\r\nsebserver.gui.external.messages=file:/sebserver/config/spring/messages\r\nsebserver.gui.multilingual=false\r\nsebserver.gui.supported.languages=en\r\nsebserver.gui.theme=css/sebserver.css\r\nsebserver.gui.list.page.size=20\r\nsebserver.gui.date.displayformat=de\r\n\r\n# defines the polling interval that is used to poll the webservice for client connection data on a monitored exam page\r\nsebserver.gui.webservice.poll-interval=1000\r\n\r\nsebserver.gui.seb.client.config.download.filename=SEBServerSettings.seb\r\nsebserver.gui.seb.exam.config.download.filename=SEBExamSettings.seb\r\n\r\n\r\n"
+kind: ConfigMap
+metadata:
+  name: application-guiservice-prod-properties-prod-69cc55g4cg
+  namespace: seb-server-prod
+---
+apiVersion: v1
+data:
+  application-prod.properties: "##########################################################\r\n### Global Server Settings\r\n\r\n# Server address (set for docker internal)\r\nserver.address=0.0.0.0\r\n# Server http port\r\nserver.port=8080\r\n# The servlet context path\r\nserver.servlet.context-path=/\r\n\r\n# Logging\r\n# Default logging level in the form  \"logging.level\" + namespace=LEVEL \r\nlogging.config=/sebserver/config/spring/logback-prod.xml\r\nlogging.level.ROOT=WARN\r\nlogging.level.ch=DEBUG\r\n\r\n\r\n##########################################################\r\n### SEB Server Webservice configuration\r\n\r\nsebserver.test.property=This is a basic single-webservice productive setup\r\n\r\n# webservice database server connection\r\n# NOTE: Set this DB access settings for specified environment\r\ndatastore.mariadb.server.address=seb-server-mariadb\r\ndatastore.mariadb.server.port=3306\r\nspring.datasource.username=root\r\n\r\n# data source configuration\r\nspring.datasource.hikari.initializationFailTimeout=30000\r\nspring.datasource.hikari.connectionTimeout=30000\r\nspring.datasource.hikari.idleTimeout=600000\r\nspring.datasource.hikari.maxLifetime=1800000\r\n\r\n### webservice networking\r\n# NOTE: Set this external URL settings for specified environment. The URL on that the SEB Server is available.\r\n#       For example: https://sebserver.ethz.ch\r\n#       scheme=https, servername=sebserver.ethz.ch and port=\r\nsebserver.webservice.http.external.scheme=https\r\nsebserver.webservice.http.external.servername=localhost\r\nsebserver.webservice.http.external.port=\r\nsebserver.webservice.http.redirect.gui=/gui\r\n\r\n# webservice API\r\nsebserver.webservice.distributed=true\r\nsebserver.webservice.api.admin.endpoint=/admin-api/v1\r\nsebserver.webservice.api.admin.accessTokenValiditySeconds=3600\r\nsebserver.webservice.api.admin.refreshTokenValiditySeconds=25200\r\nsebserver.webservice.api.exam.config.init.permittedProcesses=config/initialPermittedProcesses.xml\r\nsebserver.webservice.api.exam.config.init.prohibitedProcesses=config/initialProhibitedProcesses.xml\r\nsebserver.webservice.api.exam.endpoint=/exam-api\r\nsebserver.webservice.api.exam.endpoint.discovery=${sebserver.webservice.api.exam.endpoint}/discovery\r\nsebserver.webservice.api.exam.endpoint.v1=${sebserver.webservice.api.exam.endpoint}/v1\r\nsebserver.webservice.api.exam.accessTokenValiditySeconds=3600\r\nsebserver.webservice.api.exam.event-handling-strategy=ASYNC_BATCH_STORE_STRATEGY\r\nsebserver.webservice.api.exam.enable-indicator-cache=true\r\nsebserver.webservice.api.pagination.maxPageSize=500\r\n# comma separated list of known possible OpenEdX API access token request endpoints\r\nsebserver.webservice.lms.openedx.api.token.request.paths=/oauth2/access_token\r\n"
+kind: ConfigMap
+metadata:
+  name: application-webservice-prod-properties-prod-4th8tfd7kb
+  namespace: seb-server-prod
+---
+apiVersion: v1
+data:
+  jmxremote.access: "admin readwrite\r\nuser  readonly"
+kind: ConfigMap
+metadata:
+  name: guiservice-jmx-remote-access-prod-9ch7t9dkkb
+  namespace: seb-server-prod
+---
+apiVersion: v1
+data:
+  logback-prod.xml: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<configuration debug=\"false\" scan=\"false\">\r\n\r\n    <appender name=\"STDOUT\" class=\"ch.qos.logback.core.ConsoleAppender\">\r\n      <encoder>\r\n        <pattern>%d{HH:mm:ss.SSS} %-5level [%thread]:[%logger] %msg%n</pattern>\r\n      </encoder>\r\n    </appender>\r\n    \r\n  <springProfile name=\"prod\">\r\n\r\n    <root level=\"DEBUG\" additivity=\"true\">\r\n      <appender-ref ref=\"STDOUT\" />\r\n    </root>\r\n    \r\n  </springProfile>\r\n  \r\n</configuration>"
+kind: ConfigMap
+metadata:
+  name: logback-guiservice-prod-xml-prod-5ch6g2444m
+  namespace: seb-server-prod
+---
+apiVersion: v1
+data:
+  logback-prod.xml: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<configuration debug=\"false\" scan=\"false\">\r\n\r\n    <appender name=\"STDOUT\" class=\"ch.qos.logback.core.ConsoleAppender\">\r\n      <encoder>\r\n        <pattern>%d{HH:mm:ss.SSS} %-5level [%thread]:[%logger] %msg%n</pattern>\r\n      </encoder>\r\n    </appender>\r\n    \r\n  <springProfile name=\"prod\">\r\n\r\n    <root level=\"INFO\" additivity=\"true\">\r\n      <appender-ref ref=\"STDOUT\" />\r\n    </root>\r\n    \r\n  </springProfile>\r\n  \r\n</configuration>\r\n"
+kind: ConfigMap
+metadata:
+  name: logback-webservice-prod-xml-prod-fgkmbccgt7
+  namespace: seb-server-prod
+---
+apiVersion: v1
+data:
+  jmxremote.access: "admin readwrite\r\nuser  readonly"
+kind: ConfigMap
+metadata:
+  name: webservice-jmx-remote-access-prod-9ch7t9dkkb
+  namespace: seb-server-prod
+---
+apiVersion: v1
+data:
+  SECRET: YjVjYjBmMzJmNzJjYTA2MDU2MTQ2YzBjNzUyZjY1YTM0ODhiMDlhNA==
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: app-env-prod
+  namespace: seb-server-prod
+---
+apiVersion: v1
+data:
+  DB_HOST: c2ViLW15c3Fs
+  DB_PASSWORD: c28tc2VjdXJl
+  DB_USER: c2ViLXNlcnZlcg==
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: db-env-prod
+  namespace: seb-server-prod
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: seb-guiservice-prod
+  namespace: seb-server-prod
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: seb-server-gui
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: seb-webservice-prod
+  namespace: seb-server-prod
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: seb-webservice
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: seb-guiservice
+  name: seb-guiservice-prod
+  namespace: seb-server-prod
+spec:
+  minReadySeconds: 10
+  replicas: 3
+  selector:
+    matchLabels:
+      app: seb-guiservice
+  template:
+    metadata:
+      labels:
+        app: seb-guiservice
+    spec:
+      containers:
+      - env:
+        - name: JAVA_HEAP_MIN
+          value: 1G
+        - name: JAVA_HEAP_MAX
+          value: 8G
+        - name: MONITORING_MODE
+          value: "false"
+        - name: JMX_PORT
+          value: "9090"
+        - name: spring_profils_active
+          value: gui,prod-gui,prod
+        - name: sebserver_gui_http_external_scheme
+          value: http
+        - name: sebserver_gui_http_external_servername
+          value: seb-guiservice
+        - name: sebserver_gui_http_external_port
+          value: ""
+        - name: sebserver_gui_http_webservice_scheme
+          value: http
+        - name: sebserver_gui_http_webservice_servername
+          value: seb-webservice
+        - name: sebserver_gui_http_webservice_port
+          value: ""
+        - name: sebserverpassword
+          valueFrom:
+            secretKeyRef:
+              key: SEBSERVER_PWD
+              name: sebservercredentials
+        image: anhefti/seb-server:v1.3-stable
+        name: seb-guiservice
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: /sebserver/config/spring
+          name: application-properties
+          readOnly: true
+        - mountPath: /sebserver/config/spring
+          name: logback-xml
+          readOnly: true
+        - mountPath: /sebserver/config/jmx
+          name: jmx-remote-access
+      volumes:
+      - configMap:
+          items:
+          - key: application-prod.properties
+            path: application-prod.properties
+          name: application-guiservice-prod-properties-prod-69cc55g4cg
+        name: application-properties
+      - configMap:
+          items:
+          - key: logback.xml
+            path: logback.xml
+          name: logback-guiservice-prod-xml-prod-5ch6g2444m
+        name: logback-xml
+      - configMap:
+          items:
+          - key: jmxremote.access
+            path: jmxremote.access
+          name: guiservice-jmx-remote-access-prod-9ch7t9dkkb
+        name: jmx-remote-access
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: seb-webservice
+  name: seb-webservice-prod
+  namespace: seb-server-prod
+spec:
+  minReadySeconds: 10
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seb-webservice
+  template:
+    metadata:
+      labels:
+        app: seb-webservice
+    spec:
+      containers:
+      - env:
+        - name: sebserverpassword
+          valueFrom:
+            secretKeyRef:
+              key: SEBSERVER_PWD
+              name: app-env-prod
+        - name: DB_HOST
+          value: seb-db
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              key: DB_USER
+              name: db-env-prod
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: DB_PASSWORD
+              name: db-env-prod
+        - name: JAVA_HEAP_MIN
+          value: 1G
+        - name: JAVA_HEAP_MAX
+          value: 8G
+        - name: MONITORING_MODE
+          value: "false"
+        - name: JMX_PORT
+          value: "9090"
+        - name: spring_profils_active
+          value: ws,prod-ws,prod
+        - name: datastore_mariadb_server_address
+          value: seb-server-mariadb
+        - name: datastore_mariadb_server_port
+          value: "3306"
+        - name: spring_datasource_username
+          value: root
+        - name: sebservermariadbpassword
+          valueFrom:
+            secretKeyRef:
+              key: DB_SA_PWD
+              name: sebservermariadbpassword
+        - name: sebserver_webservice_http_external_scheme
+          value: http
+        - name: sebserver_webservice_http_external_servername
+          value: seb-webservice
+        - name: sebserver_webservice_http_external_port
+          value: ""
+        image: anhefti/seb-server:v1.3-stable
+        name: seb-webservice
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: /sebserver/config/spring
+          name: logback-xml
+        - mountPath: /sebserver/config/jmx
+          name: jmx-remote-access
+      volumes:
+      - configMap:
+          items:
+          - key: application-prod.properties
+            path: application-prod.properties
+          name: application-webservice-prod-properties-prod-4th8tfd7kb
+        name: application-properties
+      - configMap:
+          items:
+          - key: logback.xml
+            path: logback.xml
+          name: logback-webservice-prod-xml-prod-fgkmbccgt7
+        name: logback-xml
+      - configMap:
+          items:
+          - key: jmxremote.access
+            path: jmxremote.access
+          name: webservice-jmx-remote-access-prod-9ch7t9dkkb
+        name: jmx-remote-access
