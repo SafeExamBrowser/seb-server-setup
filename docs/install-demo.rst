@@ -213,37 +213,43 @@ or via override in docker/demo/cloud/kind-example/kustomization.yml within the r
 .. note::
     The spring property names can be overriden in the respective yml by change the "." separator with a "_" separator.
 
-4. Create the docker-container with the Kubernetes cluster and initialize Ingress
+4. Create the docker-container with the Kubernetes cluster and initialize Ingress.
 
-Linux: exec kind_deploy.sh
+- Linux: exec kind_deploy.sh
 
  .. code-block:: bash
+ 
     $ .\kind_deploy
 
-Windows: 
+- Windows: 
 
  .. code-block:: bash
+ 
     $ kind create cluster --config=kindcluster.yaml
     $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
 
 Now you should be able to show the Ingress pots:
 
  .. code-block:: bash
+ 
     $ kubectl get pods -n ingress-nginx
     
 5. Create a namespace for the services:
 
  .. code-block:: bash
+ 
     $ kubectl create ns seb-server-prod
 
 6. Build the services from the template:
 
  .. code-block:: bash
+ 
     $ kustomize build . | kubectl apply -f -
 
 Now you should be able to show the services, pods and logs with:
 
  .. code-block:: bash
+ 
     $ kubectl get pods -n seb-server-prod
     $ kubectl get svc -n seb-server-prod
     $ kubectl logs seb-guiservice-prod-[f45588cfc-4944h] -n seb-server-prod
@@ -270,4 +276,10 @@ Now you should be able to show the services, pods and logs with:
     
 .. note::
     We highly recommend to change the generated password from the initial admin account immediately after first login. 
+    
+9. You can delete the whole kind cluster with:
+
+ .. code-block:: bash
+ 
+    $ kind delete cluster
 
