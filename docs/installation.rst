@@ -41,7 +41,7 @@ A docker compose configuration for a bundled setup looks pretty much the same fo
  
 **Distributed setup example with Kind (Kubernetes in docker)**
 
-Since version 1.3 there is a distributed setup example for Kind :ref:`install-kind-label` that can be used as a starting point to setup a fully
+Since version 1.3 there is a distributed setup example for Kind :ref:`installkind-label` that can be used as a starting point to setup a fully
 distributed and scalable SEB Server service in the cluster with Kubernetes.
  
 **Docker Compose for distributed setup**

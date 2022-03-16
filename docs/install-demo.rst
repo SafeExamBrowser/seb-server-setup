@@ -8,7 +8,7 @@ The Basic Demo is the same demo setup as it exited before version 1.3, a single 
 The Kubernetes Kind Example setup is a new demo and example setup for Kubernetes kind that can also act as a starting point
 or template for a Kubernetes based production ready setup.
 
-.. _install-demo-label:
+.. _installdemo-label:
 Basic Demo
 ..........
 
@@ -125,7 +125,7 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
 .. include:: service-backup.rst
 
 
-.. _install-kind-label:
+.. _installkind-label:
 Kubernetes Kind Example
 ........................
 
