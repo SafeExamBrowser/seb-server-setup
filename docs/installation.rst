@@ -39,6 +39,11 @@ A docker compose configuration for a bundled setup looks pretty much the same fo
   usually just maps the host HTTP port (80) to the internal HTTP port (8080). In a setup with end to end TLS this service is used to manage
   the TLS part and must be provided with the certificate(s) to use. The configuration of the proxy service is located in the folder confg/nginx/
  
+**Distributed setup example with Kind (Kubernetes in docker)**
+
+Since version 1.3 there is a distributed setup example for Kind :ref:`install-kind-label` that can be used as a starting point to setup a fully
+distributed and scalable SEB Server service in the cluster with Kubernetes.
+ 
 **Docker Compose for distributed setup**
  
 Default setups for distributed environments to install SEB Server as a cloud service for example are not provided yet. You can use the pre-defined components
