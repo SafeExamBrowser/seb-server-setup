@@ -9,6 +9,7 @@ The Kubernetes Kind Example setup is a new demo and example setup for Kubernetes
 or template for a Kubernetes based production ready setup.
 
 .. _installdemo-label:
+
 Basic Demo
 ..........
 
@@ -126,6 +127,7 @@ There is only the SEB Server Spring configuration in place so far for the Demo s
 
 
 .. _installkind-label:
+
 Kubernetes Kind Example
 ........................
 
