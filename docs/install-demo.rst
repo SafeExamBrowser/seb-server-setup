@@ -247,6 +247,10 @@ Now you should be able to show the Ingress pods:
  .. code-block:: bash
  
     $ kustomize build . | kubectl apply -f -
+    
+.. note::
+    If there is an error on the kustomize startup, make shure the ingress has already started propperly by using: $ kubectl get pods -n ingress-nginx
+    and try again to run the kustomize template.
 
 Now you should be able to show the services, pods and logs with:
 
