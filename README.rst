@@ -70,7 +70,7 @@ Bugfixes:
 - Fixed Sorting of exam in exam list
 - Fixed LMS Lockup quizzes filter
 - Fixed Exam proctoring settings verification
-- Various proctoring issues for proctoring with Zoom
+- Various proctoring issues for optional proctoring with Zoom
 
 
 Changes:
