@@ -11,7 +11,7 @@ images:
 
 resources:
   # Get the base configuration
-  - https://github.com/SafeExamBrowser/seb-server-setup/docker/ethz/cloud/kustomize?ref=v1.3-latest
+  - https://github.com/SafeExamBrowser/seb-server-setup/docker/ethz/cloud/kustomize?ref=v1.4-latest
 
   # Add an ingress
   - ingress.yml

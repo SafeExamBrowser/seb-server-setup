@@ -205,7 +205,7 @@ Each service configuration folder contains then separate configuration folder fo
 
  .. code-block:: bash
     
-    $ git clone https://github.com/SafeExamBrowser/seb-server-setup.git -b v1.3-latest
+    $ git clone https://github.com/SafeExamBrowser/seb-server-setup.git -b v1.4-latest
     $ cd seb-server-setup/docker/demo/cloud/kind-example
 
 3. If some specific configuration is needed, this can be done within this step. See :ref:`configuration-label` for more details on how to configure the services.
