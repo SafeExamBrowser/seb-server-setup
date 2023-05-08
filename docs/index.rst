@@ -3,17 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-About SEB Server
-================
-
-.. include:: ../README.rst
-
 SEB Server Installation Guide
 =============================
 
 .. toctree::
    :maxdepth: 3
    
+    about
+     :maxdepth: 1
    overview
    installation
    configuration

@@ -7,11 +7,11 @@ replicas:
 
 images:
   - name: anhefti/seb-server
-    newTag: v1.4-stable
+    newTag: v1.5-stable
 
 resources:
   # Get the base configuration
-  - https://github.com/SafeExamBrowser/seb-server-setup/docker/ethz/cloud/kustomize?ref=v1.4-latest
+  - https://github.com/SafeExamBrowser/seb-server-setup/docker/ethz/cloud/kustomize?ref=v1.5-latest
 
   # Add an ingress
   - ingress.yml
