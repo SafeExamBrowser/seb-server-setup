@@ -9,7 +9,7 @@ SEB Server Installation Guide
 .. toctree::
    :maxdepth: 3
    
-    about
+   about
      :maxdepth: 1
    overview
    installation
