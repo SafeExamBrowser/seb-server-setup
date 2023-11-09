@@ -32,7 +32,9 @@ services:
         - sebserver_webservice_http_external_servername=
         - sebserver_webservice_http_external_port=
         
-
+      # NOTE: Use this to expose SEB Server to host http
+      #ports:
+      #  - 80:8080
       logging:
         driver: "json-file"
         options:
@@ -50,9 +52,8 @@ services:
     container_name: seb-server-proxy
     volumes:
       - ./config/nginx:/etc/nginx/conf.d
-      - ./config/nginx/certs:/sebserver/config/certs
     ports:
-      - 443:443
+      - 80:80
     networks:
       - seb-server-network
     depends_on:
