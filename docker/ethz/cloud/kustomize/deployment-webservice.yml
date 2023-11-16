@@ -56,6 +56,12 @@ spec:
               memory: "3Gi"
           ports:
             - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /sebserver/check
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
           volumeMounts:
             - name: application-properties
               mountPath: /sebserver/config/spring
