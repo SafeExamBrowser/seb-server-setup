@@ -14,39 +14,78 @@ services:
     restart: unless-stopped
 
   seb-server:
-      image: "anhefti/seb-server:v1.5-stable"
-      container_name: seb-server
-      platform: linux/x86_64
-      volumes:
-        - seb-server-config:/sebserver/config
-        - ./config/spring:/sebserver/config/spring
-      environment:
+    image: "anhefti/seb-server:v1.5-stable"
+    container_name: seb-server
+    platform: linux/x86_64
+    volumes:
+      - seb-server-config:/sebserver/config
+      - ./config/spring:/sebserver/config/spring
+    environment:
+      - JAVA_HEAP_MIN=1G
+      - JAVA_HEAP_MAX=8G
+      - spring_profiles_active=gui,ws,prod-ws,prod-gui,prod
+      - sebserver_password=${SEBSERVER_PWD}
+      - sebserver_mariadb_password=${DB_SA_PWD}
+      
+      # Set the below URL component settings from where the the web-service is externally available
+      # NOTE: This must be the address from that the service is externally available (not network inernal address)
+      - sebserver_webservice_http_external_scheme=${SEBSERVER_IP}
+      - sebserver_webservice_http_external_servername=${SEBSERVER_NAME}
+      - sebserver_webservice_http_external_port=${SEBSERVER_PORT}
+      
+    # NOTE: Use this to expose SEB Server to host http
+    # ports:
+    #   - 80:8080
+    logging:
+      driver: "json-file"
+      options:
+          mode: "non-blocking"
+          max-size: "200k"
+          max-file: "10"
+    networks:
+        - seb-server-network
+    depends_on:
+        - "mariadb"
+    restart: unless-stopped
+
+  sps-server:
+    image: "anhefti/seb-sps:v0.1-latest"
+    platform: linux/amd64
+    container_name: sps-server
+    environment:
         - JAVA_HEAP_MIN=1G
-        - JAVA_HEAP_MAX=8G
-        - spring_profiles_active=gui,ws,prod-ws,prod-gui,prod
-        - sebserver_password=${SEBSERVER_PWD}
-        - sebserver_mariadb_password=${DB_SA_PWD}
-        
-        # Set the below URL component settings from where the the web-service is externally available
-        # NOTE: This must be the address from that the service is externally available (not network inernal address)
-        - sebserver_webservice_http_external_scheme=${SEBSERVER_IP}
-        - sebserver_webservice_http_external_servername=${SEBSERVER_NAME}
-        - sebserver_webservice_http_external_port=${SEBSERVER_PORT}
-        
-      # NOTE: Use this to expose SEB Server to host http
-      # ports:
-      #   - 80:8080
-      logging:
-        driver: "json-file"
-        options:
-            mode: "non-blocking"
-            max-size: "200k"
-            max-file: "10"
-      networks:
-          - seb-server-network
-      depends_on:
-          - "mariadb"
-      restart: unless-stopped
+        - JAVA_HEAP_MAX=6G
+        - SERVER_PORT=8090
+        - spring_profiles_active=demo
+        - datastore_mariadb_server_port=3306
+        - datastore_mariadb_server_address=seb-server-mariadb
+        - mariadb_password=somePW
+        - sebserver_password=internalSecret
+        - sebserver_client_secret=somePW
+        - sps_data_store_adapter=FULL_RDBMS
+        - sps_gui_redirect_port=3000
+        - spsgui_client_secret=somePW
+
+    volumes:
+        - ./config:/sebsps/config
+    ports:
+        - 8090:8090
+    networks:
+        - seb-server-network
+    depends_on:
+        - "mariadb"
+    restart: unless-stopped
+
+  sps-gui:
+    image: naritter/seb-sps-gui:v0.1-latest
+    container_name: sps-gui
+    env_file:
+        - ./config/env_files/client/.env
+        - ./config/env_files/server/.env
+    ports:
+        - 3000:3000
+    networks:
+        - seb-server-network
 
   reverse-proxy:
     image: "nginx:latest"
