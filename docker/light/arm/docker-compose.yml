@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
 
   seb-server:
-      image: "anhefti/seb-server:v1.5-stable"
+      image: "anhefti/seb-server:sprint-testing"
       container_name: seb-server
       platform: linux/x86_64
       volumes:
