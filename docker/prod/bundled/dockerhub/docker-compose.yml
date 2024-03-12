@@ -5,8 +5,6 @@ services:
     container_name: seb-server-mariadb
     environment:
         - MYSQL_ROOT_PASSWORD=${DB_SA_PWD}
-    ports:
-        - 3306:3306
     volumes:
         - seb-server-config:/etc/mysql/conf.d
         - seb-server-mariadb:/var/lib/mysql
@@ -27,8 +25,8 @@ services:
         - spring_profiles_active=gui,ws,prod-ws,prod-gui,prod
         - sebserver_password=${SEBSERVER_PWD}
         - sebserver_mariadb_password=${DB_SA_PWD}
-        
-        # Set the below URL component settings from where the the web-service is externally available
+
+        # Set the below URL component settings from where the web-service is externally available
         # NOTE: This must be the address from that the service is externally available (not network inernal address)
         - sebserver_webservice_http_external_scheme=https
         - sebserver_webservice_http_external_servername=
