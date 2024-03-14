@@ -16,7 +16,7 @@ services:
   seb-server:
       image: "anhefti/seb-server:ssl-testing"
       container_name: seb-server
-      platform: linux/x86_64
+      platform: linux/amd64
       volumes:
         - seb-server-config:/sebserver/config
         - ./config/spring:/sebserver/config/spring
