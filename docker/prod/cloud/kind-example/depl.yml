@@ -99,6 +99,10 @@ spec:
     targetPort: 8080
   selector:
     app: seb-webservice
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10
   type: ClusterIP
 ---
 apiVersion: apps/v1
