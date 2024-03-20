@@ -12,6 +12,8 @@ services:
         - JAVA_HEAP_MAX=8G
         - JMX_PORT=
         - spring_profiles_active=ws,prod-ws,prod
+
+        # Set your passwords for DB connection and SEB Server encryption here
         - sebserver_password=${SEBSERVER_PWD}
         - sebserver_mariadb_password=${DB_SA_PWD}
         
@@ -25,7 +27,10 @@ services:
         # NOTE: This must be the address from that the service is externally available (not network inernal address)
         - sebserver_webservice_http_external_scheme=https
         - sebserver_webservice_http_external_servername=seb-webservice.ch
-        - sebserver_webservice_http_external_port=
+
+        # This uses the new ping batch processing strategy for improve performance for bundled setups.
+        # To reset to old ping blocking processing strategy set BLOCKING instead of BATCH here.
+        - sebserver_webservice_ping_service_strategy=BATCH
 
         # JMX settings
         - MONITORING_MODE=false

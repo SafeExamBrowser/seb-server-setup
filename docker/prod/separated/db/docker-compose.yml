@@ -4,10 +4,7 @@ services:
     image: "mariadb:10.5"
     container_name: seb-server-mariadb
     environment:
-        - MYSQL_ROOT_PASSWORD=somePW
-        # workaround: https://github.com/docker-library/mariadb/issues/262 
-        # TODO this seems to be fixed now... try to remove and test
-        - MYSQL_INITDB_SKIP_TZINFO=1
+        - MYSQL_ROOT_PASSWORD=
     volumes:
         - mariadb-data:/var/lib/mysql
         - ./mariadb:/etc/mysql/conf.d

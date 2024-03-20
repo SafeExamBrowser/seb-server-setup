@@ -4,6 +4,9 @@ services:
     image: "mariadb:10.5"
     container_name: seb-server-mariadb
     environment:
+        # Set your DB root password here.
+        # Note: If you don't want to use the DB root account for connection you have to configure this within the DB
+        #       fist and then set also the user in seb-server service below with spring_datasource_username
         - MYSQL_ROOT_PASSWORD=${DB_SA_PWD}
     volumes:
         - seb-server-config:/etc/mysql/conf.d
@@ -23,15 +26,22 @@ services:
         - JAVA_HEAP_MIN=1G
         - JAVA_HEAP_MAX=8G
         - spring_profiles_active=gui,ws,prod-ws,prod-gui,prod
+
+        # Set your passwords for DB connection and SEB Server encryption here
         - sebserver_password=${SEBSERVER_PWD}
         - sebserver_mariadb_password=${DB_SA_PWD}
+        #- spring_datasource_username=root
 
         # Set the below URL component settings from where the web-service is externally available
         # NOTE: This must be the address from that the service is externally available (not network inernal address)
         - sebserver_webservice_http_external_scheme=https
         - sebserver_webservice_http_external_servername=
         - sebserver_webservice_http_external_port=
-        
+
+        # This uses the new ping batch processing strategy for improve performance for bundled setups.
+        # To reset to old ping blocking processing strategy set BLOCKING instead of BATCH here.
+        - sebserver_webservice_ping_service_strategy=BATCH
+
         # JMX settings
         - MONITORING_MODE=false
         # - JMX_PORT=9090

@@ -11,6 +11,8 @@ services:
         - JAVA_HEAP_MIN=1G
         - JAVA_HEAP_MAX=8G
         - spring_profiles_active=gui,prod-gui,prod
+
+        # Set your passwords SEB Server encryption here
         - sebserver_password=${SEBSERVER_PWD}
 
         # Set the below URL component settings from where the gui-service is externally available
