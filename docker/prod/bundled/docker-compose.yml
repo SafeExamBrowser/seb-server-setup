@@ -33,7 +33,7 @@ services:
         #- spring_datasource_username=root
 
         # Set the below URL component settings from where the web-service is externally available
-        # NOTE: This must be the address from that the service is externally available (not network inernal address)
+        # NOTE: This must be the address from that the service is externally available (not network internal address)
         - sebserver_webservice_http_external_scheme=https
         - sebserver_webservice_http_external_servername=
         - sebserver_webservice_http_external_port=

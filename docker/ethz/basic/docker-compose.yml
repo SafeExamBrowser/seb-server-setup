@@ -15,8 +15,8 @@ services:
         - SEBSERVER_SECRET=${SEBSERVER_PWD}
         - sebserver_mariadb_password=${DB_SA_PWD}
         
-        # Set the below URL component settings from where the the web-service is externally available
-        # NOTE: This must be the address from that the service is externally available (not network inernal address)
+        # Set the below URL component settings from where the web-service is externally available
+        # NOTE: This must be the address from that the service is externally available (not network internal address)
         - sebserver_webservice_http_external_scheme=https
         - sebserver_webservice_http_external_servername=
         - sebserver_webservice_http_external_port=
