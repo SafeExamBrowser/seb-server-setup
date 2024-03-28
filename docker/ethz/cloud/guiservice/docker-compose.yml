@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   seb-guiservice:
-      image: "anhefti/seb-server:v1.5-stable"
+      image: "anhefti/seb-server:v1.6-stable"
       container_name: seb-guiservice
       volumes:
         - seb-server-config:/sebserver/config
@@ -14,7 +14,7 @@ services:
         - sebserver_password=${SEBSERVER_PWD}
 
         # Set the below URL component settings from where the gui-service is externally available
-        # NOTE: This must be the address from that the service is externally available (not network inernal address)
+        # NOTE: This must be the address from that the service is externally available (not network internal address)
         - sebserver_gui_http_external_scheme=https
         - sebserver_gui_http_external_servername=seb-guiservice.ch
         - sebserver_gui_http_external_port=

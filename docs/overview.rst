@@ -61,15 +61,11 @@ if existing, names then different SEB Server setups like "bundled", "basic", "tl
                     [basic bundled setup]
                 - tls
                     [bundled setup with tls endpoint]
-          - distributed
-                [not yet available]
+          - cloud
+                [cloud setup example (Kind)]
+          - separated
+                [separated setup without tls]
 
-        - testing
-            - basic
-                [a basic bundled stup of testing]
-            - tls 
-                [experimental]
-        - ..?
       
 At each endpoint (e.g.: docker/prod/bundled/basic/) there is a root installation directory with docker-files for the services, a docker-compose definition and a "config" directory
 containing service related configurations like Spring configuration for the SEB Server, MariaDB configuration for the database and/or
