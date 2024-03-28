@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   seb-guiservice:
-      image: "anhefti/seb-server:v1.6-latest"
+      image: "anhefti/seb-server:v1.6-stable"
       container_name: seb-guiservice
       volumes:
         - seb-server-config:/sebserver/config
