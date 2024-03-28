@@ -125,6 +125,5 @@ For detailed setup and installation please see the detailed installation guide f
    :maxdepth: 1
    
    install-demo
-   install-testing
    install-production
 
