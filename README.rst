@@ -131,8 +131,6 @@ Getting started with SEB Server
 For a complete SEB Server user guide please go to `SEB Server User Guide <https://seb-server.readthedocs.io/en/latest/#>`_
 
 
-    :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server/dev-1.5/docs/images/setup_1.png
-
 SEB Server Version 1.6 is out
 -------------------------------
 
