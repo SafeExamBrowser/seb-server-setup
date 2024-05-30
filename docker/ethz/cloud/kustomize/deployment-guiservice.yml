@@ -96,9 +96,5 @@ spec:
               value: "seb-webservice-prod"
             - name: "sebserver_gui_http_webservice_port"
               value: "80"
-            
             - name: "sebserver_password"
-              valueFrom:
-                secretKeyRef:
-                  name: sebservercredentials
-                  key: SEBSERVER_PWD
+              value: "CHANGE_ME"
