@@ -4,7 +4,7 @@ services:
     image: "mariadb:10.5"
     container_name: seb-server-mariadb
     environment:
-      - MYSQL_ROOT_PASSWORD=${SEBSERVER_PWD}
+      - MARIADB_ROOT_PASSWORD=${SEBSERVER_PWD}
     volumes:
       - seb-server-mariadb:/var/lib/mysql
     ports:
