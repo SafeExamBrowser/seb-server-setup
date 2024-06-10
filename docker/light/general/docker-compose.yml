@@ -22,12 +22,13 @@ services:
       environment:
         - JAVA_HEAP_MIN=1G
         - JAVA_HEAP_MAX=8G
-        - spring_profiles_active=gui,ws,prod-ws,prod-gui,prod
+        - spring_profiles_active=gui,ws,prod-ws,prod-gui,mariadb_password
+        
         - sebserver_password=${SEBSERVER_PWD}
         - sebserver_mariadb_password=${DB_SA_PWD} 
+
         - sps_sebserver_client_secret=${SPS_SEBSERVER_CLIENT_SECRET}
         - sps_sebserver_password=${SPS_SEBSERVER_PASSWORD}
-        # https://moodle-app6.let.ethz.ch/mod/quiz/view.php?id=3646
 
         # Set the below URL component settings from where the the web-service is externally available
         # NOTE: This must be the address from that the service is externally available (not network inernal address)
@@ -68,6 +69,7 @@ services:
         - sps_data_store_adapter=FULL_RDBMS
         - sps_gui_redirect_port=3000
         - spsgui_client_secret=somePW
+        - sps_init_sebserveraccount_password=admin
 
     volumes:
         - ./config:/sebsps/config
