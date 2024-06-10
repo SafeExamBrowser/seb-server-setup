@@ -1,0 +1,50 @@
+version: '3.5'
+services:
+  mariadb:
+    image: "mariadb:10.5"
+    container_name: seb-server-mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=${SEBSERVER_PWD}
+    volumes:
+      - seb-server-mariadb:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - seb-server-network
+    restart: unless-stopped
+
+  seb-server:
+    image: "anhefti/seb-server:v1.6-stable"
+    container_name: seb-server
+    environment:
+      - JAVA_HEAP_MIN=1G
+      - JAVA_HEAP_MAX=6G
+      - spring_profiles_active=gui,ws,prod-ws,prod-gui,prod
+      - spring_flyway_locations=classpath:config/sql/base,classpath:config/sql/demo
+      - datastore_mariadb_server_address=seb-server-mariadb
+      - datastore_mariadb_server_port=3306
+      - sebserver_password=${SEBSERVER_PWD}
+      - sebserver_mariadb_password=${SEBSERVER_PWD}
+      - sebserver_init_adminaccount_init_pwd=${USER_PWD}
+
+      # Set the below URL component settings from where the the web-service is externally available
+      # NOTE: This must be the address from that the service is externally available (not network internal address)
+      - sebserver_webservice_http_external_scheme=http
+      - sebserver_webservice_http_external_servername=localhost
+      - sebserver_webservice_http_external_port=8080
+
+    ports:
+      - 8080:8080
+    networks:
+      - seb-server-network
+    depends_on:
+      - "mariadb"
+    restart: unless-stopped
+
+networks:
+  seb-server-network:
+    name: seb-server-network
+
+volumes:
+  seb-server-mariadb:
+    name: seb-server-db

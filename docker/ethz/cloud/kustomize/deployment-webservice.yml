@@ -47,7 +47,7 @@ spec:
                 path: "jmxremote.access"
       containers:
         - name: seb-webservice
-          image: anhefti/seb-server:v1.5-stable
+          image: anhefti/seb-server:v1.6-stable
           imagePullPolicy: Always
           resources:
             requests:
@@ -78,3 +78,37 @@ spec:
               value: "9090"
             - name: "spring_profiles_active"
               value: "ws,prod-ws,prod"
+            - name: "datastore_mariadb_server_port"
+              value: "3306"
+            - name: "spring_datasource_username"
+              value: "CHANGE_ME"
+            - name: "spring_datasource_password"
+              value: "CHANGE_ME"
+            - name: "datastore_mariadb_server_address"
+              value: "sebserver-db.example.com"
+            - name: "sebserver_webservice_http_external_servername"
+              value: "sebserver-webservice.example.com"
+            - name: "sebserver_webservice_http_external_scheme"
+              value: "https"
+            - name: "sebserver_webservice_http_external_port"
+              value: "443"
+            - name: "sebserver_webservice_distributed"
+              value: "true"
+            - name: "logging_level_root"
+              value: "INFO"
+            - name: "logging_level_ch"
+              value: "INFO"
+            - name: "logging_level_ch_ethz_seb_sebserver_webservice_weblayer_api"
+              value: "INFO"
+            - name: "spring_datasource_hikari_leakDetectionThreshold"
+              value: "5000"
+            - name: "logging_level_ch_ethz_seb_sebserver_webservice_servicelayer_session_impl"
+              value: "INFO"
+            - name: "logging_level_ch_ethz_seb_sebserver_webservice_servicelayer_session_impl_proctoring"
+              value: "INFO"
+            - name: "sebserver_webservice_api_exam_accessTokenValiditySeconds"
+              value: "43200"
+            - name: "com_sun_management_jmxremote_authenticate"
+              value: "false"
+            - name: "sebserver_password"
+              value: "CHANGE_ME"
