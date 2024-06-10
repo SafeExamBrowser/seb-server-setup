@@ -30,9 +30,9 @@ services:
 
         # Set the below URL component settings from where the the web-service is externally available
         # NOTE: This must be the address from that the service is externally available (not network inernal address)
-        # - sebserver_webservice_http_external_scheme=${SEBSERVER_IP}
-        # - sebserver_webservice_http_external_servername=${SEBSERVER_NAME}
-        # - sebserver_webservice_http_external_port=${SEBSERVER_PORT}
+        - sebserver_webservice_http_external_scheme=${SEBSERVER_IP}
+        - sebserver_webservice_http_external_servername=${SEBSERVER_NAME}
+        - sebserver_webservice_http_external_port=${SEBSERVER_PORT}
 
       # NOTE: Use this to expose SEB Server to host http
       #ports:
