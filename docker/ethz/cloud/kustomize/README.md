@@ -23,8 +23,8 @@ Variables webservice
  - `sebserver_webservice_http_external_port`: Webservice external URL port (empty for default http(80) https(443))
  
  
- Variables guiservice
----------------------
+Variables guiservice
+--------------------
 
  - `spring_profiles_active` : SEB Server profiles. For a productive guiservice setup "gui,prod-gui,prod"
  - `sebserver_password` | `SEBSERVER_PWD` : SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
@@ -34,6 +34,70 @@ Variables webservice
  - `sebserver_gui_http_webservice_scheme`: Webservice connection URL scheme (http/https)
  - `sebserver_gui_http_webservice_servername` : Webservice connection URL host name
  - `sebserver_gui_http_webservice_port` : Webservice connection URL port (empty for default http(80) https(443))
+
+Replacing values with secret references
+---------------------------------------
+To replace a variable value
+
+```yaml
+- name: sebserver_password
+  value: password_123456
+```
+with a key reference
+
+```yaml
+- name: sebserver_password
+  valueFrom:
+    secretKeyRef:
+      name: sebservercredentials
+      key: SEBSERVER_PWD
+```
+you first have to delete the variable, then add it again. Otherwise you will end up with
+```yaml
+- name: sebserver_password
+  value: password_123456
+  valueFrom:
+    secretKeyRef:
+      name: sebservercredentials
+      key: SEBSERVER_PWD
+```
+which is valid YAML, but refused by Kubernetes.
+
+Delete with a patch:
+```yaml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seb-webservice
+spec:
+  template:
+    spec:
+      containers:
+        - name: seb-webservice
+          env:
+            - name: sebserver_password
+              $patch: delete
+```
+then patch it back:
+```yaml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seb-webservice
+spec:
+  template:
+    spec:
+      containers:
+        - name: seb-webservice
+          env:
+            - name: sebserver_password
+              valueFrom:
+                secretKeyRef:
+                  name: sebservercredentials
+                  key: SEBSERVER_PWD
+```
 
 
 Versions

@@ -28,6 +28,8 @@ spec:
                       values:
                         - seb-webservice
                         - seb-guiservice
+                        - sps-webservice
+                        - sps-guiservice
                         - seb-mariadb
                 topologyKey: kubernetes.io/hostname
       volumes:

@@ -1,0 +1,66 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sps-guiservice
+  name: sps-guiservice
+spec:
+  minReadySeconds: 10
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sps-guiservice
+  template:
+    metadata:
+      labels:
+        app: sps-guiservice
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - seb-webservice
+                        - seb-guiservice
+                        - sps-webservice
+                        - sps-guiservice
+                        - seb-mariadb
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - env:
+            - name: NODE_ENV
+              value: prod
+            - name: VITE_SERVER_URL
+              value: https://sps-dev.ethz.ch
+            - name: PROCTOR_SERVER_URL
+              value: 'http://sps-webservice-dev'
+            - name: PROCTOR_SERVER_PORT
+              value: '8090'
+            - name: PROCTOR_DEFAULT_URL
+              value: /admin-api/v1
+            - name: PROCTOR_SERVER_USERNAME
+              value: spsGuiClient
+            - name: PROCTOR_SERVER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sebservercredentials
+                  key: PROCTOR_SERVER_PASSWORD
+            - name: SEB_SERVER_INTEGRATED_MODE
+              value: 'true'
+            - name: VITE_SERVER_PORT
+              value: '443'
+            - name: SERVER_PORT
+              value: '3000'
+          name: sps-guiservice
+          image: naritter/seb-sps-gui:v0.1-latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              name: tcp3000
+              protocol: TCP
