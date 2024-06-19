@@ -1,0 +1,84 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sps-webservice
+  labels:
+    app: sps-webservice
+spec:
+  minReadySeconds: 10
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sps-webservice
+  template:
+    metadata:
+      labels:
+        app: sps-webservice
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - seb-webservice
+                        - seb-guiservice
+                        - sps-webservice
+                        - sps-guiservice
+                        - seb-mariadb
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: sps-webservice
+          image: anhefti/seb-sps:v0.1-latest
+          imagePullPolicy: Always
+          env:
+            - name: "JAVA_HEAP_MIN"
+              value: "1G"
+            - name: "JAVA_HEAP_MAX"
+              value: "6G"
+            - name: "SERVER_PORT"
+              value: "8090"
+            - name: "spring_profiles_active"
+              value: "prod"
+            - name: "datastore_mariadb_server_port"
+              value: "3306"
+            - name: "datastore_mariadb_server_address"
+              value: "sebserver-db-dev.ethz.ch"
+            - name: spring_datasource_username
+              value: sebserver
+            - name: spring_datasource_password
+              value: password_123456
+            - name: "sebserver_client_secret"
+              value: shared_secret
+            - name: "sps_data_store_adapter"
+              value: "FULL_RDBMS"
+            - name: "sps_webservice_http_external_servername"
+              value: "sps-webservice-dev.ethz.ch"
+            - name: "sps_webservice_http_external_scheme"
+              value: "https"
+            - name: "sps_webservice_http_external_port"
+              value: "443"
+            - name: "spsgui_client_secret"
+              value: sps_password_123456
+            - name: "sps_init_sebserveraccount_password"
+              value: sps2seb_password_123456
+            - name: "sebserver_password"
+              value: seb_password_123456
+          ports:
+            - containerPort: 8090
+          volumeMounts:
+            - mountPath: /sebsps/config/spring
+              name: application-properties-sps
+              readOnly: true
+      volumes:
+        - name: application-properties-sps
+          configMap:
+            items:
+              - key: application-properties-sps
+                path: application-properties-sps
+            name: application-properties-sps

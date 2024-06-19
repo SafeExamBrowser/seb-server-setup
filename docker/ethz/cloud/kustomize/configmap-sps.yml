@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+data:
+  application-properties-sps: ""
+kind: ConfigMap
+metadata:
+  name: application-properties-sps
+  namespace: seb-server-test
