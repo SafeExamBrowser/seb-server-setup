@@ -2,19 +2,19 @@ version: '3.5'
 services:
   mariadb: 
     image: "mariadb:10.5"
-    container_name: seb-server-mariadb
+    container_name: seb-server-light-mariadb
     environment:
         - MYSQL_ROOT_PASSWORD=${DB_SA_PWD}
     volumes:
         - seb-server-config:/etc/mysql/conf.d
-        - seb-server-mariadb:/var/lib/mysql
+        - seb-server-light-mariadb:/var/lib/mysql
         - ./config/mariadb/config.cnf:/etc/mysql/conf.d/config.cnf
     networks:
         - seb-server-network
     restart: unless-stopped
 
   seb-server:
-      image: "anhefti/seb-server:ssl-testing"
+      image: "anhefti/seb-server:sprint-testing"
       container_name: seb-server
       platform: linux/amd64
       volumes:
@@ -58,7 +58,7 @@ services:
         - SERVER_PORT=8090
         - spring_profiles_active=demo
         - datastore_mariadb_server_port=3306
-        - datastore_mariadb_server_address=seb-server-mariadb
+        - datastore_mariadb_server_address=seb-server-light-mariadb
         - mariadb_password=somePW
         - sebserver_password=internalSecret
         - sebserver_client_secret=somePW
@@ -108,5 +108,5 @@ networks:
 volumes:
   seb-server-config:
     name: seb-server-config
-  seb-server-mariadb:
-    name: seb-server-mariadb
+  seb-server-light-mariadb:
+    name: seb-server-light-mariadb
