@@ -28,7 +28,7 @@ services:
         - sebserver_password=${SEBSERVER_PWD}
         - sebserver_mariadb_password=${DB_SA_PWD}
 
-         - sps_sebserver_client_secret=${SPS_SEBSERVER_CLIENT_SECRET}
+        - sps_sebserver_client_secret=${SPS_SEBSERVER_CLIENT_SECRET}
         - sps_sebserver_password=${SPS_SEBSERVER_PASSWORD}
 
         # Set the below URL component settings from where the the web-service is externally available
