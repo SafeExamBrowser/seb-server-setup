@@ -24,14 +24,19 @@ services:
         - JAVA_HEAP_MIN=1G
         - JAVA_HEAP_MAX=8G
         - spring_profiles_active=gui,ws,prod-ws,prod-gui,prod
+
         - sebserver_password=${SEBSERVER_PWD}
         - sebserver_mariadb_password=${DB_SA_PWD}
 
+         - sps_sebserver_client_secret=${SPS_SEBSERVER_CLIENT_SECRET}
+        - sps_sebserver_password=${SPS_SEBSERVER_PASSWORD}
+
         # Set the below URL component settings from where the the web-service is externally available
         # NOTE: This must be the address from that the service is externally available (not network inernal address)
-        # - sebserver_webservice_http_external_scheme=${SEBSERVER_IP}
-        # - sebserver_webservice_http_external_servername=${SEBSERVER_NAME}
-        # - sebserver_webservice_http_external_port=${SEBSERVER_PORT}
+        - sebserver_webservice_http_external_scheme=${SEBSERVER_IP}
+        - sebserver_webservice_http_external_servername=${SEBSERVER_NAME}
+        - sebserver_webservice_http_external_port=${SEBSERVER_PORT}
+        - sebserver_feature_exam_seb_screenProctoring_bundled_url=http://127.0.0.1:8090
 
       # NOTE: Use this to expose SEB Server to host http
       # ports:

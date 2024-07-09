@@ -37,7 +37,6 @@ services:
         - sebserver_webservice_http_external_port=${SEBSERVER_PORT}
         - sebserver_feature_exam_seb_screenProctoring_bundled_url=http://127.0.0.1:8090
 
-
       # NOTE: Use this to expose SEB Server to host http
       #ports:
       #  - 80:8080
