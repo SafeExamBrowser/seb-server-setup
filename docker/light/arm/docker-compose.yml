@@ -36,7 +36,7 @@ services:
         - sebserver_webservice_http_external_scheme=${SEBSERVER_IP}
         - sebserver_webservice_http_external_servername=${SEBSERVER_NAME}
         - sebserver_webservice_http_external_port=${SEBSERVER_PORT}
-        - sebserver_feature_exam_seb_screenProctoring_bundled_url=http://127.0.0.1:8090
+        - sebserver_feature_exam_seb_screenProctoring_bundled_url=${PROCTOR_SERVER_URL}
 
       # NOTE: Use this to expose SEB Server to host http
       # ports:
@@ -70,6 +70,7 @@ services:
         - sps_data_store_adapter=FULL_RDBMS
         - sps_gui_redirect_port=3000
         - spsgui_client_secret=somePW
+        - sps_init_sebserveraccount_password=admin
 
     volumes:
         - ./config:/sebsps/config
