@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
 
   seb-server:
-      image: "anhefti/seb-server:ssl-testing"
+      image: "anhefti/seb-server:sprint-testing"
       container_name: seb-server
       volumes:
         - seb-server-config:/sebserver/config
