@@ -90,6 +90,6 @@ spec:
             - name: "sebserver_gui_http_webservice_scheme"
               value: "https"
             - name: "sebserver_gui_http_webservice_servername"
-              value: "seb-webservice"
+              value: "sebserver-webservice"
             - name: "sebserver_gui_http_webservice_port"
               value: "443"

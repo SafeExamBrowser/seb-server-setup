@@ -76,7 +76,7 @@ spec:
             - name: "sps_webservice_http_external_scheme"
               value: "https"
             - name: "sps_webservice_http_external_servername"
-              value: "sps-webservice-dev.ethz.ch"
+              value: "sps-webservice.ethz.ch"
             - name: "sps_webservice_http_external_port"
               value: "443"
           ports:
