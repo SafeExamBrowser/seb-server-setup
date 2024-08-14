@@ -9,34 +9,59 @@ mandatory items:
 
  See the example directory for a usage introduction.
 
-Variables webservice
---------------------
-
- - `spring_profiles_active` : SEB Server profiles. For a productive webservice setup "ws,prod-ws,prod"
- - `sebserver_password` | `SEBSERVER_PWD` : SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
- - `spring_datasource_password` | `DB_SA_PWD`: password for MariaDB database
+Variables sebserver webservice
+------------------------------
+ - `JAVA_HEAP_MIN`: Minimum heap memory space given to the JVM process
+ - `JAVA_HEAP_MAX`: Maximum heap memory space given to the JVM process
+ - `sebserver_password`: SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
+ - `spring_profiles_active`: SEB Server profiles. For a productive webservice setup "ws,prod-ws,prod"
+ - `spring_datasource_password`: password for MariaDB database
  - `spring_datasource_username`: MariaDB user name
  - `datastore_mariadb_server_address`: MariaDB server hostname
  - `datastore_mariadb_server_port`: MariaDB port
  - `sebserver_webservice_http_external_scheme`: Webservice external URL scheme (http/https)
  - `sebserver_webservice_http_external_servername`: Webservice external URL host name
  - `sebserver_webservice_http_external_port`: Webservice external URL port (empty for default http(80) https(443))
+ - `sebserver_webservice_autologin_url`: External URL from where the sebserver guiservice is available. See also `sebserver_gui_http_external_servername`
+ - `sebserver_feature_exam_seb_screenProctoring_bundled_url`: The URL on which the screen proctoring webservice is externally available
+ - `sps_sebserver_client_secret`: SEB Servers client secret to connect to screen proctoring service. This must match with the same setting in screen proctoring (sps) webservice
+ - `sps_sebserver_password`: SEB Servers screen proctoring service maintenance account password. This must match with the same setting in screen proctoring (sps) webservice
  
- 
-Variables guiservice
---------------------
+Variables sebserver guiservice
+------------------------------
 
+ - `JAVA_HEAP_MIN`: Minimum heap memory space given to the JVM process
+ - `JAVA_HEAP_MAX`: Maximum heap memory space given to the JVM process
+ - `sebserver_password` : SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
  - `spring_profiles_active` : SEB Server profiles. For a productive guiservice setup "gui,prod-gui,prod"
- - `sebserver_password` | `SEBSERVER_PWD` : SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
  - `sebserver_gui_http_external_scheme`: Guiservice external URL scheme (http/https)
  - `sebserver_gui_http_external_servername`: Guiservice external URL host name
  - `sebserver_gui_http_external_port`: Guiservice external URL port (empty for default http(80) https(443))
- - `sebserver_gui_http_webservice_scheme`: Webservice connection URL scheme (http/https)
- - `sebserver_gui_http_webservice_servername` : Webservice connection URL host name
- - `sebserver_gui_http_webservice_port` : Webservice connection URL port (empty for default http(80) https(443))
+ - `sebserver_gui_http_webservice_scheme`: Webservice external connection URL scheme (http/https)
+ - `sebserver_gui_http_webservice_servername` : Webservice external connection URL host name.
+ - `sebserver_gui_http_webservice_port` : Webservice external connection URL port (empty for default http(80) https(443))
+
+Variables screen proctoring (sps) webservice
+--------------------------------------------
+
+- `JAVA_HEAP_MIN`: Minimum heap memory space given to the JVM process
+- `JAVA_HEAP_MAX`: Maximum heap memory space given to the JVM process
+- `sebserver_password`: SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
+- `spring_profiles_active`: SEB Server profiles. For a productive webservice setup "prod"
+- `spring_datasource_password`: password for MariaDB database
+- `spring_datasource_username`: MariaDB user name
+- `datastore_mariadb_server_address`: MariaDB server hostname
+- `datastore_mariadb_server_port`: MariaDB port
+- `sps_data_store_adapter`: Image (Screen Shot) data store adapter. "FULL_RDBMS" for storing images into DB or "S3_RDBMS" for S3 compatible storage
+- 
+Variables sebserver screen proctoring (sps) guiservice
+------------------------------------------------------
+
+TODO
 
 Replacing values with secret references
 ---------------------------------------
+
 To replace a variable value
 
 ```yaml

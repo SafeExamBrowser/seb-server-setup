@@ -4,7 +4,7 @@ services:
     image: "mariadb:10.5"
     container_name: seb-server-mariadb
     environment:
-      - MYSQL_ROOT_PASSWORD=${SEBSERVER_PWD}
+      - MARIADB_ROOT_PASSWORD=${SEBSERVER_PWD}
     volumes:
       - seb-server-mariadb:/var/lib/mysql
     ports:
@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
 
   seb-server:
-    image: "anhefti/seb-server:v1.6-stable"
+    image: "anhefti/seb-server:v2.0-stable"
     container_name: seb-server
     environment:
       - JAVA_HEAP_MIN=1G

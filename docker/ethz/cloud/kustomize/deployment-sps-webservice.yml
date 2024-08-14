@@ -34,41 +34,51 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: sps-webservice
-          image: anhefti/seb-sps:v0.1-latest
+          image: anhefti/seb-sps:v0.1-stable
           imagePullPolicy: Always
           env:
             - name: "JAVA_HEAP_MIN"
               value: "1G"
             - name: "JAVA_HEAP_MAX"
               value: "6G"
-            - name: "SERVER_PORT"
-              value: "8090"
             - name: "spring_profiles_active"
               value: "prod"
+            - name: "sebserver_password"
+              value: "SET_PASSWORD"
+# NOTE: Database settings. Account must be able to create / delete table
             - name: "datastore_mariadb_server_port"
               value: "3306"
             - name: "datastore_mariadb_server_address"
               value: "sebserver-db-dev.ethz.ch"
-            - name: spring_datasource_username
-              value: sebserver
-            - name: spring_datasource_password
-              value: password_123456
-            - name: "sebserver_client_secret"
-              value: shared_secret
+            - name: "spring_datasource_username"
+              value: "sebserver"
+            - name: "spring_datasource_password"
+              value: "SET_PASSWORD"
             - name: "sps_data_store_adapter"
               value: "FULL_RDBMS"
-            - name: "sps_webservice_http_external_servername"
-              value: "sps-webservice-dev.ethz.ch"
+# NOTE: S3 storage connection details in case S3 storage shall be used to store image data (screen shots)
+            - name: "sps_s3_endpointUrl"
+              value: "SET_S3_URL"
+            - name: "s3_accessKey"
+              value: "SET_PASSWORD"
+            - name: "sps_s3_bucketName"
+              value: "sebserver"
+            - name: "sps_s3_store_batch"
+              value: "true"
+# NOTE: SEB Server connection settings
+            - name: "sebserver_client_secret"
+              value: "SET_PASSWORD"
+            - name: "spsgui_client_secret"
+              value: "SET_PASSWORD"
+            - name: "sps_init_sebserveraccount_password"
+              value: "SET_PASSWORD"
+# NOTE: External URL settings
             - name: "sps_webservice_http_external_scheme"
               value: "https"
+            - name: "sps_webservice_http_external_servername"
+              value: "sps-webservice-dev.ethz.ch"
             - name: "sps_webservice_http_external_port"
               value: "443"
-            - name: "spsgui_client_secret"
-              value: sps_password_123456
-            - name: "sps_init_sebserveraccount_password"
-              value: sps2seb_password_123456
-            - name: "sebserver_password"
-              value: seb_password_123456
           ports:
             - containerPort: 8090
           volumeMounts:

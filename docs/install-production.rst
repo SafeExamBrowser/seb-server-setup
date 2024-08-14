@@ -223,7 +223,7 @@ Like in the example:
     version: '3.5'
     services:
       seb-webservice:
-          image: "anhefti/seb-server:v1.6-latest"
+          image: "anhefti/seb-server:v12.0-stable"
           container_name: seb-webservice
           volumes:
             - seb-server-config:/sebserver/config

@@ -33,33 +33,30 @@ spec:
                         - seb-mariadb
                 topologyKey: kubernetes.io/hostname
       containers:
-        - env:
-            - name: NODE_ENV
-              value: prod
-            - name: VITE_SERVER_URL
-              value: https://sps-dev.ethz.ch
-            - name: PROCTOR_SERVER_URL
-              value: 'http://sps-webservice-dev'
-            - name: PROCTOR_SERVER_PORT
-              value: '8090'
-            - name: PROCTOR_DEFAULT_URL
-              value: /admin-api/v1
-            - name: PROCTOR_SERVER_USERNAME
-              value: spsGuiClient
-            - name: PROCTOR_SERVER_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: sebservercredentials
-                  key: PROCTOR_SERVER_PASSWORD
-            - name: SEB_SERVER_INTEGRATED_MODE
-              value: 'true'
-            - name: VITE_SERVER_PORT
-              value: '443'
-            - name: SERVER_PORT
-              value: '3000'
-          name: sps-guiservice
-          image: naritter/seb-sps-gui:v0.1-latest
+        - name: sps-guiservice
+          image: naritter/seb-sps-gui:v0.1-stable
           imagePullPolicy: Always
+          env:
+            - name: "NODE_ENV"
+              value: "prod"
+            - name: "VITE_SERVER_URL"
+              value: "https://sps-dev.ethz.ch"
+            - name: "PROCTOR_SERVER_URL"
+              value: "http://sps-webservice-dev"
+            - name: "PROCTOR_SERVER_PORT"
+              value: "8090"
+            - name: "PROCTOR_DEFAULT_URL"
+              value: "/admin-api/v1"
+            - name: "PROCTOR_SERVER_USERNAME"
+              value: "spsGuiClient"
+            - name: "PROCTOR_SERVER_PASSWORD"
+              value: "SET_PASSWORD"
+            - name: "SEB_SERVER_INTEGRATED_MODE"
+              value: "true"
+            - name: "VITE_SERVER_PORT"
+              value: "443"
+            - name: "SERVER_PORT"
+              value: "3000"
           ports:
             - containerPort: 3000
               name: tcp3000
