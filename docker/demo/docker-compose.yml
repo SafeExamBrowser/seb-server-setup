@@ -21,6 +21,9 @@ services:
       - JAVA_HEAP_MIN=1G
       - JAVA_HEAP_MAX=8G
       - spring_profiles_active=ws,gui,demo
+      - logging_level_ROOT=INFO
+      - logging_level_ch=DEBUG
+
       - sebserver_password=${SEBSERVER_PWD}
 
       # Data Base settings
@@ -60,10 +63,15 @@ services:
         - JAVA_HEAP_MAX=6G
         - SERVER_PORT=8090
         - spring_profiles_active=prod,demo
+        - logging_level_ROOT=INFO
+        - logging_level_ch=DEBUG
+
+        - sebserver_password=${SEBSERVER_PWD}
+
         - datastore_mariadb_server_port=3306
         - datastore_mariadb_server_address=seb-server-demo-mariadb
         - mariadb_password=${SEBSERVER_PWD}
-        - sebserver_password=${SEBSERVER_PWD}
+
         - sebserver_client_secret=${SEBSERVER_PWD}
         - spsgui_client_secret=${SEBSERVER_PWD}
         - sps_data_store_adapter=FULL_RDBMS
