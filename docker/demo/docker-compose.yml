@@ -33,17 +33,14 @@ services:
       # Set the below URL component settings from where the web-service is externally available
       # NOTE: This must be the address from that the service is externally available (not network internal address)
       - sebserver_webservice_http_external_scheme=http
-      - sebserver_webservice_http_external_servername=localhost
+      - sebserver_webservice_http_external_servername=127.0.0.1
       - sebserver_webservice_http_external_port=8080
+      - sebserver_webservice_autologin_url=http://127.0.0.1
 
       # NOTE: Screen Proctoring settings and passwords
       - sebserver_feature_exam_seb_screenProctoring_bundled_url=http://sps-server:8090
       - sps_sebserver_client_secret=${SEBSERVER_PWD}
       - sps_sebserver_password=${SEBSERVER_PWD}
-
-      # NOTE: External webservice URL settings
-      - sebserver_webservice_http_external_servername=localhost
-      - sebserver_webservice_autologin_url=http://localhost
 
     ports:
       - 8080:8080
@@ -95,7 +92,7 @@ services:
       - VITE_SERVER_PORT=3000
       - NODE_ENV=prod
       - SERVER_PORT=3000
-      - PROCTOR_SERVER_URL=http://sps-server
+      - PROCTOR_SERVER_URL=http://127.0.0.1
       - PROCTOR_SERVER_PORT=8090
       - PROCTOR_DEFAULT_URL=/admin-api/v1
       - PROCTOR_SERVER_USERNAME=spsGuiClient
