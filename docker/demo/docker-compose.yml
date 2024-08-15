@@ -72,6 +72,7 @@ services:
         - sps_webservice_http_external_servername=localhost
         - sps_webservice_http_external_port=8090
         - sps_gui_redirect_port=3000
+        - sps_gui_redirect_url=http://localhost:3000
         - sps_init_sebserveraccount_password=${SEBSERVER_PWD}
         - spring_flyway_locations=classpath:config/sql/base,classpath:config/sql/demo
     volumes:
