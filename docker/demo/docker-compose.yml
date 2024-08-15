@@ -2,13 +2,13 @@ version: '3.5'
 services:
   mariadb:
     image: "mariadb:10.5"
-    container_name: seb-server-mariadb
+    container_name: seb-server-demo-mariadb
     environment:
       - MYSQL_ROOT_PASSWORD=${SEBSERVER_PWD}
     ports:
       - 3306:3306
     volumes:
-      - seb-server-mariadb:/var/lib/mysql
+      - seb-server-demo-mariadb:/var/lib/mysql
       - ./config/mariadb/config.cnf:/etc/mysql/conf.d/config.cnf
     networks:
       - seb-server-network
@@ -57,7 +57,7 @@ services:
         - SERVER_PORT=8090
         - spring_profiles_active=prod,demo
         - datastore_mariadb_server_port=3306
-        - datastore_mariadb_server_address=seb-server-mariadb
+        - datastore_mariadb_server_address=seb-server-demo-mariadb
         - mariadb_password=${SEBSERVER_PWD}
         - sebserver_password=${SEBSERVER_PWD}
         - sebserver_client_secret=${SEBSERVER_PWD}
@@ -94,5 +94,5 @@ networks:
     name: seb-server-network
 
 volumes:
-  seb-server-mariadb:
+  seb-server-demo-mariadb:
     name: seb-server-db
