@@ -21,8 +21,6 @@ services:
       - JAVA_HEAP_MIN=1G
       - JAVA_HEAP_MAX=8G
       - spring_profiles_active=ws,gui,demo
-      - logging_level_ROOT=INFO
-      - logging_level_ch=DEBUG
 
       - sebserver_password=${SEBSERVER_PWD}
 
@@ -39,7 +37,7 @@ services:
       - sebserver_webservice_http_external_port=8080
 
       # NOTE: Screen Proctoring settings and passwords
-      - sebserver_feature_exam_seb_screenProctoring_bundled_url=http://localhost:8090
+      - sebserver_feature_exam_seb_screenProctoring_bundled_url=sps-server:8090
       - sps_sebserver_client_secret=${SEBSERVER_PWD}
       - sps_sebserver_password=${SEBSERVER_PWD}
 
@@ -63,8 +61,6 @@ services:
         - JAVA_HEAP_MAX=6G
         - SERVER_PORT=8090
         - spring_profiles_active=prod,demo
-        - logging_level_ROOT=INFO
-        - logging_level_ch=DEBUG
 
         - sebserver_password=${SEBSERVER_PWD}
 
@@ -99,7 +95,7 @@ services:
       - VITE_SERVER_PORT=3000
       - NODE_ENV=prod
       - SERVER_PORT=3000
-      - PROCTOR_SERVER_URL=http://sps-server
+      - PROCTOR_SERVER_URL=sps-server
       - PROCTOR_SERVER_PORT=8090
       - PROCTOR_DEFAULT_URL=/admin-api/v1
       - PROCTOR_SERVER_USERNAME=spsGuiClient
