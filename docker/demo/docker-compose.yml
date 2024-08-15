@@ -38,14 +38,12 @@ services:
       - sebserver_webservice_autologin_url=http://localhost
 
       # NOTE: Screen Proctoring settings and passwords
-      - sebserver_feature_exam_seb_screenProctoring_bundled_url=http://localhost:8090
+      - sebserver_feature_exam_seb_screenProctoring_bundled_url=http://host.docker.internal:8090
       - sps_sebserver_client_secret=${SEBSERVER_PWD}
       - sps_sebserver_password=${SEBSERVER_PWD}
 
     ports:
       - 8080:8080
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     networks:
       - seb-server-network
     depends_on:
@@ -80,8 +78,6 @@ services:
       - .:/sebsps/config/spring
     ports:
       - 8090:8090
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     networks:
         - seb-server-network
     depends_on:
