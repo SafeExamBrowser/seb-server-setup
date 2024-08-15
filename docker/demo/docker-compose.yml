@@ -17,7 +17,6 @@ services:
   seb-server:
     image: "anhefti/seb-server:v2.0-stable"
     container_name: seb-server
-    platform: linux/x86_64
     environment:
       - JAVA_HEAP_MIN=1G
       - JAVA_HEAP_MAX=8G
@@ -54,7 +53,6 @@ services:
   sps-server:
     image: "anhefti/seb-sps:v1.0-stable"
     container_name: sps-server
-    platform: linux/x86_64
     environment:
         - JAVA_HEAP_MIN=1G
         - JAVA_HEAP_MAX=6G
@@ -89,7 +87,6 @@ services:
   sps-gui:
     image: naritter/seb-sps-gui:v1.0-stable
     container_name: sps-gui
-    platform: linux/x86_64
     environment:
       - VITE_SERVER_URL=http://localhost
       - VITE_SERVER_PORT=3000
