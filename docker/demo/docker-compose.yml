@@ -81,8 +81,7 @@ services:
     image: naritter/seb-sps-gui:v1.0-stable
     container_name: sps-gui
     env_file:
-      - ./config/sps_gui/client/.env
-      - ./config/sps_gui/server/.env
+      - .env
     ports:
       - 3000:3000
     networks:
