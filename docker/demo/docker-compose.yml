@@ -37,7 +37,7 @@ services:
       - sebserver_webservice_http_external_port=8080
 
       # NOTE: Screen Proctoring settings and passwords
-      - sebserver_feature_exam_seb_screenProctoring_bundled_url=sps-server:8090
+      - sebserver_feature_exam_seb_screenProctoring_bundled_url=http://sps-server:8090
       - sps_sebserver_client_secret=${SEBSERVER_PWD}
       - sps_sebserver_password=${SEBSERVER_PWD}
 
@@ -72,7 +72,7 @@ services:
         - spsgui_client_secret=${SEBSERVER_PWD}
         - sps_data_store_adapter=FULL_RDBMS
         - sps_webservice_http_external_scheme=http
-        - sps_webservice_http_external_servername=localhost
+        - sps_webservice_http_external_servername=sps-server
         - sps_webservice_http_external_port=8090
         - sps_gui_redirect_port=3000
         - sps_init_sebserveraccount_password=${SEBSERVER_PWD}
@@ -95,7 +95,7 @@ services:
       - VITE_SERVER_PORT=3000
       - NODE_ENV=prod
       - SERVER_PORT=3000
-      - PROCTOR_SERVER_URL=sps-server
+      - PROCTOR_SERVER_URL=http://sps-server
       - PROCTOR_SERVER_PORT=8090
       - PROCTOR_DEFAULT_URL=/admin-api/v1
       - PROCTOR_SERVER_USERNAME=spsGuiClient
