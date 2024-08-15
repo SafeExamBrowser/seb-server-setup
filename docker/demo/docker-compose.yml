@@ -38,7 +38,7 @@ services:
       - sebserver_webservice_autologin_url=http://0.0.0.0
 
       # NOTE: Screen Proctoring settings and passwords
-      - sebserver_feature_exam_seb_screenProctoring_bundled_url=http://sps-server:8090
+      - sebserver_feature_exam_seb_screenProctoring_bundled_url=http://0.0.0.0:8090
       - sps_sebserver_client_secret=${SEBSERVER_PWD}
       - sps_sebserver_password=${SEBSERVER_PWD}
 
