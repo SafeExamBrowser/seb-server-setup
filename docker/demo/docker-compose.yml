@@ -86,8 +86,17 @@ services:
   sps-gui:
     image: naritter/seb-sps-gui:v1.0-stable
     container_name: sps-gui
-    env_file:
-      - .env
+    environment:
+      - VITE_SERVER_URL=localhost
+      - VITE_SERVER_PORT=3000
+      - NODE_ENV=prod
+      - SERVER_PORT=3000
+      - PROCTOR_SERVER_URL=http://sps-server
+      - PROCTOR_SERVER_PORT=8090
+      - PROCTOR_DEFAULT_URL=/admin-api/v1
+      - PROCTOR_SERVER_USERNAME=spsGuiClient
+      - PROCTOR_SERVER_PASSWORD=${SEBSERVER_PWD}
+      - SEB_SERVER_INTEGRATED_MODE=true
     ports:
       - 3000:3000
     networks:
