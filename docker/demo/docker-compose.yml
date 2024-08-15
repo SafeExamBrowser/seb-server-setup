@@ -33,17 +33,19 @@ services:
       # Set the below URL component settings from where the web-service is externally available
       # NOTE: This must be the address from that the service is externally available (not network internal address)
       - sebserver_webservice_http_external_scheme=http
-      - sebserver_webservice_http_external_servername=0.0.0.0
+      - sebserver_webservice_http_external_servername=localhost
       - sebserver_webservice_http_external_port=8080
-      - sebserver_webservice_autologin_url=http://0.0.0.0
+      - sebserver_webservice_autologin_url=http://localhost
 
       # NOTE: Screen Proctoring settings and passwords
-      - sebserver_feature_exam_seb_screenProctoring_bundled_url=http://0.0.0.0:8090
+      - sebserver_feature_exam_seb_screenProctoring_bundled_url=http://localhost:8090
       - sps_sebserver_client_secret=${SEBSERVER_PWD}
       - sps_sebserver_password=${SEBSERVER_PWD}
 
     ports:
       - 8080:8080
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - seb-server-network
     depends_on:
@@ -78,6 +80,8 @@ services:
       - .:/sebsps/config/spring
     ports:
       - 8090:8090
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
         - seb-server-network
     depends_on:
