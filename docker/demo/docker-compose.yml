@@ -59,6 +59,7 @@ services:
         - JAVA_HEAP_MIN=1G
         - JAVA_HEAP_MAX=6G
         - SERVER_PORT=8090
+        - spring_config_location=classpath:/config/
         - spring_profiles_active=prod,demo
         - datastore_mariadb_server_port=3306
         - datastore_mariadb_server_address=seb-server-demo-mariadb
