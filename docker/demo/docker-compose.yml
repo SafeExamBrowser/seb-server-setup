@@ -59,7 +59,6 @@ services:
         - JAVA_HEAP_MIN=1G
         - JAVA_HEAP_MAX=6G
         - SERVER_PORT=8090
-        - spring_config_location=classpath:/config/
         - spring_profiles_active=prod,demo
         - datastore_mariadb_server_port=3306
         - datastore_mariadb_server_address=seb-server-demo-mariadb
@@ -74,6 +73,8 @@ services:
         - sps_gui_redirect_port=3000
         - sps_init_sebserveraccount_password=${SEBSERVER_PWD}
         - spring_flyway_locations=classpath:config/sql/base,classpath:config/sql/demo
+    volumes:
+      - .:/sebsps/config/spring
     ports:
       - 8090:8090
     networks:
