@@ -42,3 +42,6 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+
+# mac specific finder file
+.DS_Store
