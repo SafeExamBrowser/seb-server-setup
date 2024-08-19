@@ -9,7 +9,7 @@ services:
         - 3306:3306
     volumes:
         - seb-server-config:/etc/mysql/conf.d
-        - seb-server-mariadb:/var/lib/mysql
+        - seb-server-test-mariadb:/var/lib/mysql
         - ./config/mariadb/config.cnf:/etc/mysql/conf.d/config.cnf
     networks:
         - seb-server-network
