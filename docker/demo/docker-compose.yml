@@ -42,6 +42,10 @@ services:
       - sps_sebserver_client_secret=${SEBSERVER_PWD}
       - sps_sebserver_password=${SEBSERVER_PWD}
 
+      # Logging: DEBUG for most interesting namespaces
+      - logging_level_ch_ethz_seb_sebserver_webservice_servicelayer_session_impl=DEBUG
+      - logging_level_ch_ethz_seb_sebserver_webservice_servicelayer_session_impl_proctoring=DEBUG
+
     ports:
       - 8080:8080
     networks:
@@ -75,6 +79,11 @@ services:
         - sps_gui_redirect_url=http://${CLIENT_EXTERNAL_DNS_NAME}:3000
         - sps_init_sebserveraccount_password=${SEBSERVER_PWD}
         - spring_flyway_locations=classpath:config/sql/base,classpath:config/sql/demo
+
+        # Logging: DEBUG for most interesting namespaces
+        - logging_level_ch_ethz_seb_sps_server_servicelayer_impl=DEBUG
+        - logging_level_ch_ethz_seb_sps_server_weblayer=DEBUG
+
     volumes:
       - .:/sebsps/config/spring
     ports:
