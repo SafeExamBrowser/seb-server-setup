@@ -34,7 +34,7 @@ services:
       # Data Base settings
       # NOTE: these must match with the DB connection settings on mariadb service
       - sebserver_mariadb_password=${SEBSERVER_PWD}
-      - datastore_mariadb_server_address=seb-server-demo-mariadb
+      - datastore_mariadb_server_address=seb-server-test-mariadb
       - datastore_mariadb_server_port=3306
       - spring_flyway_locations=classpath:config/sql/base,classpath:config/sql/demo
 
@@ -80,7 +80,7 @@ services:
       # Data Base settings
       # NOTE: these must match with the DB connection settings on mariadb service
       - datastore_mariadb_server_port=3306
-      - datastore_mariadb_server_address=seb-server-demo-mariadb
+      - datastore_mariadb_server_address=seb-server-test-mariadb
       - mariadb_password=${SEBSERVER_PWD}
       - spring_flyway_locations=classpath:config/sql/base,classpath:config/sql/demo
       - sps_data_store_adapter=FULL_RDBMS
