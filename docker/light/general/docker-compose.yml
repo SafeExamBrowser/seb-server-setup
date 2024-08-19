@@ -1,5 +1,4 @@
 name: seb-server-light
-version: '3.5'
 services:
   mariadb:
     image: "mariadb:10.5"
@@ -37,7 +36,7 @@ services:
       - sebserver_webservice_http_external_servername=localhost
       - sebserver_webservice_http_external_port=8080
       - sebserver_webservice_autologin_url=http://host.docker.internal
-      - sebserver_webservic_light_setup=true
+      - sebserver_webservice_light_setup=true
 
 
       # NOTE: Screen Proctoring settings and passwords
