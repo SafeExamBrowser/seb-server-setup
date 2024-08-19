@@ -36,7 +36,7 @@ services:
       - sebserver_mariadb_password=${SEBSERVER_PWD}
       - datastore_mariadb_server_address=seb-server-test-mariadb
       - datastore_mariadb_server_port=3306
-      - spring_flyway_locations=classpath:config/sql/base,classpath:config/sql/demo,filesystem:/sebserver/config/sql/base
+      - spring_flyway_locations=classpath:config/sql/base,classpath:config/sql/demo,filesystem:/sebserver/config/spring/sql
 
       # Set the below URL component settings from where the web-service is externally available
       # NOTE: This must be the address from that the service is externally available (not network internal address)
