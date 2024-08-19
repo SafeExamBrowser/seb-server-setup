@@ -10,7 +10,7 @@ services:
         - MYSQL_ROOT_PASSWORD=${DB_SA_PWD}
     volumes:
         - seb-server-config:/etc/mysql/conf.d
-        - seb-server-mariadb:/var/lib/mysql
+        - seb-server-prod-mariadb:/var/lib/mysql
         - ./config/mariadb/config.cnf:/etc/mysql/conf.d/config.cnf
     networks:
         - seb-server-network
