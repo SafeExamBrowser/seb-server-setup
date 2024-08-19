@@ -2,7 +2,7 @@ version: '3.5'
 services:
   mariadb: 
     image: "mariadb:10.5"
-    container_name: seb-server-mariadb
+    container_name: seb-server-test-mariadb
     environment:
         - MYSQL_ROOT_PASSWORD=${SEBSERVER_PWD}
     ports:
@@ -148,5 +148,5 @@ networks:
 volumes:
   seb-server-config:
     name: seb-server-config
-  seb-server-mariadb:
-    name: seb-server-mariadb
+  seb-server-test-mariadb:
+    name: seb-server-test-db
