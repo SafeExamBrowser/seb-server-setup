@@ -42,9 +42,9 @@ services:
         # Set the below URL component settings from where the web-service is externally available
         # NOTE: This must be the address from that the service is externally available (not network internal address)
         - sebserver_webservice_http_external_scheme=https
-        - sebserver_webservice_http_external_servername=${DNS_NAME}
+        - sebserver_webservice_http_external_servername=${DNS_NAME}/seb
         - sebserver_webservice_http_external_port=
-        - sebserver_webservice_autologin_url=http://${DNS_NAME}
+        - sebserver_webservice_autologin_url=http://${DNS_NAME}/seb
 
         # Screen Proctoring settings and passwords
         # NOTE: these must match with the respective equivalents on sps-server
@@ -109,8 +109,6 @@ services:
 
     volumes:
       - .:/sebsps/config/spring
-    ports:
-      - 8090:8090
     networks:
       - seb-server-network
     depends_on:
@@ -138,8 +136,6 @@ services:
 
       # Screen Proctoring SEB Server integration mode. NOTE: always true for this setup
       - SEB_SERVER_INTEGRATED_MODE=true
-    ports:
-      - 3000:3000
     networks:
       - seb-server-network
     restart: unless-stopped
