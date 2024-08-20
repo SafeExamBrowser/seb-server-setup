@@ -48,7 +48,7 @@ services:
 
         # Screen Proctoring settings and passwords
         # NOTE: these must match with the respective equivalents on sps-server
-        - sebserver_feature_exam_seb_screenProctoring_bundled_url=https://${DNS_NAME}:444
+        - sebserver_feature_exam_seb_screenProctoring_bundled_url=https://${DNS_NAME}:4430
         - sps_sebserver_client_secret=${SEBSERVER_PWD}
         - sps_sebserver_password=${SEBSERVER_PWD}
 
@@ -95,7 +95,7 @@ services:
       # NOTE: This must be the address from that the service is externally available (not network internal address)
       - sps_webservice_http_external_scheme=https
       - sps_webservice_http_external_servername=${DNS_NAME}
-      - sps_webservice_http_external_port=444
+      - sps_webservice_http_external_port=4430
 
       # SEB Server client connection detail settings
       - sebserver_client_secret=${SEBSERVER_PWD}
@@ -125,11 +125,11 @@ services:
 
       # VITE server settings
       - VITE_SERVER_URL=https://${DNS_NAME}
-      - VITE_SERVER_PORT=445
+      - VITE_SERVER_PORT=4431
 
       # Screen Proctoring webservice connection settings
       - PROCTOR_SERVER_URL=https://${DNS_NAME}
-      - PROCTOR_SERVER_PORT=444
+      - PROCTOR_SERVER_PORT=4430
       - PROCTOR_DEFAULT_URL=/admin-api/v1
       - PROCTOR_SERVER_USERNAME=spsGuiClient
       - PROCTOR_SERVER_PASSWORD=${SEBSERVER_PWD}
@@ -148,8 +148,8 @@ services:
       - ./config/nginx/certs:/sebserver/config/certs
     ports:
       - 443:443
-      - 444:444
-      - 445:445
+      - 4430:4430
+      - 4431:4431
     networks:
       - seb-server-network
     depends_on:
