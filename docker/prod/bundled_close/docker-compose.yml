@@ -48,7 +48,7 @@ services:
 
         # Screen Proctoring settings and passwords
         # NOTE: these must match with the respective equivalents on sps-server
-        - sebserver_feature_exam_seb_screenProctoring_bundled_url=https://${DNS_NAME}:4431
+        - sebserver_feature_exam_seb_screenProctoring_bundled_url=https://${DNS_NAME}:4430/sps.web
         - sps_sebserver_client_secret=${SEBSERVER_PWD}
         - sps_sebserver_password=${SEBSERVER_PWD}
 
@@ -95,12 +95,12 @@ services:
       # NOTE: This must be the address from that the service is externally available (not network internal address)
       - sps_webservice_http_external_scheme=https
       - sps_webservice_http_external_servername=${DNS_NAME}
-      - sps_webservice_http_external_port=4431
+      - sps_webservice_http_external_port=4430
 
       # SEB Server client connection detail settings
       - sebserver_client_secret=${SEBSERVER_PWD}
-      - sps_gui_redirect_port=4432
-      - sps_gui_redirect_url=https://${DNS_NAME}
+      - sps_gui_redirect_port=
+      - sps_gui_redirect_url=https://${DNS_NAME}:4430/sps-gui
       - sps_webservice_sebserver_bundle=true
 
       # Screen Proctoring GUI client connection detail settings
@@ -125,11 +125,11 @@ services:
 
       # VITE server settings
       - VITE_SERVER_URL=https://${DNS_NAME}
-      - VITE_SERVER_PORT=4432
+      - VITE_SERVER_PORT=4430
 
       # Screen Proctoring webservice connection settings
-      - PROCTOR_SERVER_URL=https://${DNS_NAME}
-      - PROCTOR_SERVER_PORT=4431
+      - PROCTOR_SERVER_URL=https://${DNS_NAME}:4430/sps-web
+      - PROCTOR_SERVER_PORT=
       - PROCTOR_DEFAULT_URL=/admin-api/v1
       - PROCTOR_SERVER_USERNAME=spsGuiClient
       - PROCTOR_SERVER_PASSWORD=${SEBSERVER_PWD}
@@ -148,8 +148,6 @@ services:
       - ./config/nginx/certs:/sebserver/config/certs
     ports:
       - 4430:4430
-      - 4431:4431
-      - 4432:4432
     networks:
       - seb-server-network
     depends_on:
