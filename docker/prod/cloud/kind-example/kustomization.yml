@@ -7,11 +7,11 @@ replicas:
 
 images:
   - name: anhefti/seb-server
-    newTag: v1.5-stable
+    newTag: v2.0-stable
 
 resources:
   # Get the base configuration
-  - https://github.com/SafeExamBrowser/seb-server-setup/docker/ethz/cloud/kustomize?ref=v1.5-latest
+  - https://github.com/SafeExamBrowser/seb-server-setup/docker/ethz/cloud/kustomize?ref=v2.0-stable
 
   # Add an ingress
   - ingress.yml
@@ -36,27 +36,38 @@ patchesStrategicMerge:
           containers:
             - name: seb-webservice
               env:
-                # NOTE: Set the below settings for database connection
-                - name: "datastore_mariadb_server_address"
-                  value: "seb-mariadb-prod.seb-server-prod.svc.cluster.local"
-                - name: "datastore_mariadb_server_port"
-                  value: "3306"
-                - name: "spring_datasource_username"
-                  value: "root"
-                - name: "spring_datasource_password"
-                  value: "123456"
-                # NOTE: Set the below URL component settings from where the web-service is externally available
-                - name: "sebserver_webservice_http_external_scheme"
-                  value: "http"
-                - name: "sebserver_webservice_http_external_servername"
-                  value: "seb-webservice"
-                - name: "sebserver_webservice_http_external_port"
-                  value: ""
+                - name: "JAVA_HEAP_MIN"
+                  value: "1G"
+                - name: "JAVA_HEAP_MAX"
+                  value: "8G"
+                - name: "spring_profiles_active"
+                  value: "ws,prod-ws,prod"
+    
+                # NOTE: The internal SEB Server password. The same must be set in guiservice
                 - name: "sebserver_password"
-                  valueFrom:
-                    secretKeyRef:
-                      name: sebservercredentials
-                      key: SEBSERVER_PWD
+                  value: "SET_PASSWORD"
+    
+                # NOTE: Database settings. Account must be able to create / delete table
+                - name: "datastore_mariadb_server_address"
+                  value: "SET_DOMAIN_OF_DB_SERVER"
+                - name: "spring_datasource_username"
+                  value: "SET_DATABASE_USER_NAME"
+                - name: "spring_datasource_password"
+                  value: "SET_DATABASE_PASSWORD"
+    
+                # NOTE: Screen Proctoring settings and passwords
+                - name: "sebserver_feature_exam_seb_screenProctoring_bundled_url"
+                  value: "SET_URL_TO_SCREEN_PROCTORING_SERVICE"
+                - name: "sps_sebserver_client_secret"
+                  value: "SET_PASSWORD"
+                - name: "sps_sebserver_password"
+                  value: "SET_PASSWORD"
+    
+                # NOTE: External webservice URL settings
+                - name: "sebserver_webservice_http_external_servername"
+                  value: "SET_EXTERNAL_DOMAIN_NAME_OF_WEBSERVICE"
+                - name: "sebserver_webservice_autologin_url"
+                  value: "SET_EXTERNAL_DOMAIN_NAME_OF_WEBSERVICE"
   - |-
     apiVersion: apps/v1
     kind: Deployment
@@ -68,18 +79,105 @@ patchesStrategicMerge:
           containers:
             - name: seb-guiservice
               env:
-                # NOTE: Set the below URL component settings from where
-                # the gui-service can connect to the web-service
-                - name: "sebserver_gui_http_webservice_scheme"
-                  value: "http"
-                - name: "sebserver_gui_http_webservice_servername"
-                  value: "seb-webservice-prod.seb-server-prod.svc.cluster.local"
-                - name: "sebserver_gui_http_webservice_port"
-                  value: "8080"
-                - name: "sebserver_gui_http_external_servername"
-                  value: "localhost"
-                - name: "sebserver_gui_http_external_scheme"
-                  value: "http"
+              - name: JAVA_HEAP_MIN
+                value: "1G"
+              - name: JAVA_HEAP_MAX
+                value: "8G"
+              - name: "spring_profiles_active"
+                value: "gui,prod-gui,prod"
+    
+              # NOTE: The internal SEB Server password must be set the same as in webservice
+              - name: "sebserver_password"
+                value: "SET_PASSWORD"
+    
+              # NOTE: Set the below URL component settings from where the gui-service is externally available
+              - name: "sebserver_gui_http_external_scheme"
+                value: "https"
+              - name: "sebserver_gui_http_external_servername"
+                value: "SET_EXTERNAL_DOMAIN_OF_SEB_SERVER_GUI"
+              # NOTE: Set the below URL component settings from where the gui-service can connect to the web-service
+              - name: "sebserver_gui_http_webservice_scheme"
+                value: "https"
+              - name: "sebserver_gui_http_webservice_servername"
+                value: "SET_EXTERNAL_DOMAIN_NAME_OF_WEBSERVICE"
+    - |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: sps-webservice
+    spec:
+      template:
+        spec:
+          containers:
+            - name: sps-webservice
+              env:
+              - name: "JAVA_HEAP_MIN"
+                value: "1G"
+              - name: "JAVA_HEAP_MAX"
+                value: "6G"
+              - name: "spring_profiles_active"
+                value: "prod"
+              - name: "sebserver_password"
+                value: "SET_PASSWORD"
+    
+              # NOTE: Database settings. Account must be able to create / delete table
+              - name: "datastore_mariadb_server_port"
+                value: "3306"
+              - name: "datastore_mariadb_server_address"
+                value: "SET_DOMAIN_OF_DB_SERVER"
+              - name: "spring_datasource_username"
+                value: "SET_DATABASE_USER_NAME"
+              - name: "spring_datasource_password"
+                value: "SET_DATABASE_PASSWORD"
+              - name: "sps_data_store_adapter"
+                value: "FULL_RDBMS"
+    
+              # NOTE: S3 storage connection details in case S3 storage shall be used to store image data (screen shots)
+              - name: "sps_s3_endpointUrl"
+                value: "SET_S3_URL"
+              - name: "s3_accessKey"
+                value: "SET_PASSWORD"
+              - name: "sps_s3_bucketName"
+                value: "sebserver"
+              - name: "sps_s3_store_batch"
+                value: "true"
+    
+              # NOTE: SEB Server connection settings
+              - name: "sebserver_client_secret"
+                value: "SET_PASSWORD"
+              - name: "spsgui_client_secret"
+                value: "SET_PASSWORD"
+              - name: "sps_init_sebserveraccount_password"
+                value: "SET_PASSWORD"
+    
+              # NOTE: External URL settings
+              - name: "sps_webservice_http_external_scheme"
+                value: "https"
+              - name: "sps_webservice_http_external_servername"
+                value: "SET_EXTERNAL_DOMAIN_OF_SPS_WEBSERVICE"
+  - |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: sps-guiservice
+    spec:
+      template:
+        spec:
+          containers:
+            - name: sps-guiservice
+              env:
+              - name: "NODE_ENV"
+                value: "prod"
+              - name: "VITE_SERVER_URL"
+                value: "SET_EXTERNAL_URL_OF_SPS_GUI"
+              - name: "PROCTOR_SERVER_URL"
+                value: "SET_EXTERNAL_URL_TO_SPS_WEBSERVICE"
+              - name: "PROCTOR_DEFAULT_URL"
+                value: "/admin-api/v1"
+              - name: "PROCTOR_SERVER_PASSWORD"
+                value: "SET_PASSWORD"
+              - name: "SERVER_PORT"
+                value: "3000"
   - |-
     apiVersion: apps/v1
     kind: Deployment
