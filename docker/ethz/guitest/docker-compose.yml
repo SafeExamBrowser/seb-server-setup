@@ -93,7 +93,6 @@ services:
 
       # SEB Server client connection detail settings
       - sebserver_client_secret=${SEBSERVER_PWD}
-      - sps_gui_redirect_port=3000
       - sps_gui_redirect_url=http://${CLIENT_EXTERNAL_DNS_NAME}:3000
       - sps_webservice_sebserver_bundle=true
 

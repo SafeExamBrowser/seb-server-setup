@@ -44,7 +44,7 @@ services:
         - sebserver_webservice_http_external_scheme=https
         - sebserver_webservice_http_external_servername=${DNS_NAME}
         - sebserver_webservice_http_external_port=4430
-        - sebserver_webservice_autologin_url=https://${DNS_NAME}
+        - sebserver_webservice_autologin_url=https://${DNS_NAME}:4430
 
         # Screen Proctoring settings and passwords
         # NOTE: these must match with the respective equivalents on sps-server
@@ -99,8 +99,7 @@ services:
 
       # SEB Server client connection detail settings
       - sebserver_client_secret=${SEBSERVER_PWD}
-      - sps_gui_redirect_port=4432
-      - sps_gui_redirect_url=https://${DNS_NAME}
+      - sps_gui_redirect_url=https://${DNS_NAME}:4432
       - sps_webservice_sebserver_bundle=true
 
       # Screen Proctoring GUI client connection detail settings
