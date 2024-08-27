@@ -34,7 +34,7 @@ individually. For both setups a setup example and sample configuration are provi
 
 The image below shows a fully bundled setup were all is fit together within one Docker-Compose setup and a Docker Network
 
-.. image:: images/overall-architecture.png
+.. image:: images/bundled_setup.png
     :align: center
     :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/rel-2.0/docs/images/bundled_setup.png
 
@@ -60,7 +60,7 @@ The following diagram shows cloud based setup where all services are setup separ
 are externally connected within dedicated DNS names and URLs while an Ingress (or similar routing service) makes the
 TLS termination and internal routing / load balancing to the running services.
 
-.. image:: images/overall-architecture-scaled.png
+.. image:: images/cloud_setup.png
     :align: center
     :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/rel-2.0/docs/images/cloud_setup.png
 

@@ -125,24 +125,3 @@ For detailed setup and installation please see the detailed installation guide f
    
    install-demo
    install-production
-
-Major Version Migration from SEB Server Version 1.x to Version 2.x
---------------------------------------------------------------------
-
-Since this major version update not only includes a usual DB migration but also new services that need to be setup, a migration
-from SEB Server 1.x to version 2.x needs special treating and it is not going to work by just adapting the version tags for the images.
-
-There are basically two different ways to go on with this migration.
-If you are able to make a database backup and restore, setting up an entire new SEB Server would be the easiest way. But if
-you want to reuse our internal/integrated database without migrating the data form old database to a new one, you need to take
-care to merge your old setup configuration with the new one.x
-
-If possible we recommend the first approaches:
-
-1. Make sure you have all essential settings like passwords for SEB Server and Database connection from your existing SEB Server setup at hand
-2. Make a backup of your existing SEB Server database or schema, with an SQL dump or similar technique you are familiar with.
-3. Install SEB Server with a total new installation as described within the install section.
-4. Once the new SEB Server setup is up and running, drop the existing SEBServer database schema in the new database created and restore it from your backup data
-5. Now the SEBServer database schema is back to 1.x version but SEB Server will automatically migrate it to new version when it detects a migration needed on next startup
-   Use docker-compose down / docker-compose up -d to restart the services. Make sure the seb-server service migrated the database to new version by have a look into the logs (docker logs seb-server)
-6. You should now be able to access the new SEB Server with old data and old logins.
