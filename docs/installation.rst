@@ -8,11 +8,7 @@ different docker-compose configuration to set up SEB Server in a distributed env
 
 **Docker Compose for bundled setup**
 
-A docker compose configuration for a bundled setup looks pretty much the same for each setup and consists of four services:
-
-- **seb-server-setup** This service is just to setup everything in advance and uses a Docker container for that runs some
-  initial actions to bind the volumes and copy the initial password, make it internally available by also deleting it from the hosts
-  file system. And probably some other needed commands that presets things for the specific setup. 
+A docker compose configuration for a bundled setup looks pretty much the same for each setup and consists of the following services:
  
 - **mariadb** This is the MariaDB service that is bound to the internal network as well as exposing its default port to the host
   network by default. This service uses the official "mariadb/server:10.5" image for the service and the configuration that is provided
@@ -34,22 +30,24 @@ A docker compose configuration for a bundled setup looks pretty much the same fo
     the exact version of the SEB Server by using `sematic versioning <https://semver.org/>`_ like 1.0.0 or 1.0.1 or you can set the latest
     minor version to always get the latest specific minor version with all patches on installation or update. If you want the latest minor version
     use version tags like 1.0-latest or 1.1-latest.
+
+- **sps-webservice** This is the webservice API for the new screen proctoring feature that is separated from the SEB Server for performance and scaling reasons.
+  This is a usual Java/Spring Boot application like seb-server and implements screen proctoring maintenance API as well as screen proctoring session API
+  for SEB connections. This service also needs a connection to a database store. This can either be the same database server as seb-server service
+  or another database for performance reasons. It is also possible to configure an additional S3 compatible storage to just store the screen shots.
+
+- **sps-guiservice** This is the service for the new graphical user interface for screen proctoring that runs in NodeJS and uses Vue
+  Java Script framework. This service connects to the sps-webservice and uses the API to get and maintain screen proctoring data.
  
-- **reverse-proxy** This service uses a nginx server as reverse-proxy to connect the bundle to the host network. In a basic setup this
-  usually just maps the host HTTP port (80) to the internal HTTP port (8080). In a setup with end to end TLS this service is used to manage
-  the TLS part and must be provided with the certificate(s) to use. The configuration of the proxy service is located in the folder confg/nginx/
+- **reverse-proxy** This service uses a nginx server as reverse-proxy to connect the bundle to the host network. In the bundled setup with
+  open Ports this maps the configured ports to the internal services and makes TLS termination for each used port. In the bundled setup with
+  routing this uses only one default port TLS termination and routes the traffic to the different services by adding dedicated endpoint
+  prefixes to routs for sps-webservice (/sps-web/) and sps-guiservice (/sps-gui/).
  
 **Distributed setup example with Kind (Kubernetes in docker)**
 
 Since version 1.3 there is a distributed setup example for Kind that can be used as a starting point to setup a fully
-distributed and scalable SEB Server service in the cluster with Kubernetes. The setup instructions are located within the "Demo" setup section.
- 
-**Docker Compose for distributed setup**
- 
-Default setups for distributed environments to install SEB Server as a cloud service for example are not provided yet. You can use the pre-defined components
-from a bundled setup and adapt and use it for your distributed environments. Please also contact a system administrator or cloud administrator
-of your company/institution to find a solution that fits best within your needs and given IT environment. If you have questions or need help / report bugs, 
-please use the `issue tracker <https://github.com/SafeExamBrowser/seb-server-setup/issues>`_  on GitHub for reporting.
+distributed and scalable SEB Server service in the cluster with Kubernetes.
 
 **HTTPS / TLS Configuration**
 
@@ -114,10 +112,11 @@ A usual installation process for SEB Server mostly look something like the follo
     
 4. Navigate into the installation strategy sub-directory you want to install from and edit/prepare the configuration for your needs.
     
-5. Build the docker images with docker-compose build.
-    
-6. Bring the docker containers up and running with docker-compose up, and do some suggested health checks.
+5. Complete the configuration and apply all needed settings for your setup
 
+6. Pull the docker images form Dockerhub by using docker-compose pull command
+    
+7. Bring the docker containers up and running with docker-compose up, and do some suggested checks.
 
 For detailed setup and installation please see the detailed installation guide for the particular setup; demo, testing and production.
 

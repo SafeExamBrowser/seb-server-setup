@@ -43,7 +43,7 @@ services:
       - sebserver_webservice_autologin_url=http://${SERVER_EXTERNAL_DNS_NAME}
 
       # Screen Proctoring settings and passwords
-      # NOTE: these must match with the respective equivalents on sps-server
+      # NOTE: these must match with the respective equivalents on sps-webservice
       - sebserver_feature_exam_seb_screenProctoring_bundled_url=http://${SERVER_EXTERNAL_DNS_NAME}:8090
       - sps_sebserver_client_secret=${SEBSERVER_PWD}
       - sps_sebserver_password=${SEBSERVER_PWD}
@@ -60,9 +60,9 @@ services:
       - "mariadb"
     restart: unless-stopped
 
-  sps-server:
+  sps-webservice:
     image: "anhefti/seb-sps:v1.0-stable"
-    container_name: sps-server
+    container_name: sps-webservice
     environment:
       # Service runtime settings
       - JAVA_HEAP_MIN=1G
@@ -111,9 +111,9 @@ services:
         - "mariadb"
     restart: unless-stopped
 
-  sps-gui:
+  sps-guiservice:
     image: naritter/seb-sps-gui:v1.0-stable
-    container_name: sps-gui
+    container_name: sps-guiservice
     environment:
       # Service runtime settings
       - NODE_ENV=prod

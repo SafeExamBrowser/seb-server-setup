@@ -4,54 +4,48 @@ Production
 **Info:**
 
 
-For production we provide currently three different default setups, all of them for bundled environments. 
+For production we provide currently three different default setups or examples, two if them for bundled setups and one
+as an example for a cloud based setup with kubernetes kind example configurations.
 
 .. note::
     There is a new SEB Server setup approach since SEB Server version 1.2 where the docker image is not part of the setup repository
-    anymore but is built and published by the main SEB Server repository within docker hub. 
-    
-    If you are new to SEB Server and this is your first installation, we recommend to stick with the new approach that can be found
-    in the setup directory docker/prod/bundled/dockerhub/
-    
-    It is still possible to use the older approach if you already have setup your SEB Server and are going to update the installation
-    to another version.
-    
-The first bundled setup is the usual basic setup with no HTTPS/TLS in place that can be used if the SEB Server shall be running in 
-an environment that is already protected with an end to end TLS handling. Usually SEB Server will then run behind a reverse-proxy that handles the
-TLS encryption on HTTPS and forward the decrypted traffic directly to the SEB Server on HTTP. We recommend such a setup because it is usually also
-preferred by system administration and may already be in place within your IT environment. The other setup "tls" integrates the HTTPS/TLS handling
-with the docker setup of SEB Server. The reverse-proxy that usually shadows the SEB Server within the docker-compose setup is used to terminate the
-TLS handling and you have to configure and manage your certificates within the setup as described later in detail.
+    anymore but is built and published by the main SEB Server repository within docker hub.
 
-.. note::
-    If you want to setup SEB Server for a cloud environment you have to adapt the available docker and docker-compose configurations to apply to
-    your best-practices and standards. Please for now have a look into the testing setup directory docker/testing/cloud/ where you can find a
-    experimental setup for cloud environments with separated database, webservice and guiservice.
+    And since SEB Server version 2.0 there are two new services that are included within the SEB Server installation but
+    simplified setup process completely based on Docker-Compose for bundled setups, pulling images form Dockerhub.one
+
+    If you already have a SEB Server installation and want to migrate from a former installation with major version 1.X
+    to the new major version 2.x, please consult the Major Version Migration Guide
     
+The two bundled setup differ in the external DNS binding setup where the fist setup exposes the new services for screen proctoring
+within dedicated HTTP ports (not the default ports) while the second setup uses the integrated nginx proxy to route incoming
+request for screen proctoring from the default HTTP port to the dedicated services internally.
+The fist approach is easier to apply and probably more performant but needs two extra ports that can be accessed by the respective DNS name.
+For example if you have a DNS name "seb.example.com" then the seb-server service is exposed on the default ssl port (443) as usual
+but the screen proctoring services needs another port to be exposed to. Default is 4431 and 4432 that also needs to be open and
+accessible from the Internet.
     
-    
-Bundled Setup (one host)
+Bundled Setup with dedicated Port mapping
 ...............................
 
-This is the preferred way to setup a bundled SEB Server instance where all components (database, guiservice and webservice) run together within 
+This is the preferred way to setup a bundled SEB Server instance where all components run together within
 the same machine or host and within the same docker network.
 A simple and integrated MariaDB setup that uses just the official MariaDB Docker image, and a reverse proxy using the official nginx:latest Docker image. 
 This setup uses docker compose to build and run all needed containers. The docker image for SEB Server is been downloaded from docker hub.
 
 ::
 
-        installation strategy sub-directory.........docker/prod/bundled/dockerhub/
-        seb-server configuration....................docker/prod/bundled/dockerhub/config/spring
-        maria-db configuration......................docker/prod/bundled/dockerhub/config/mariadb
-        reverse-proxy configuration.................docker/prod/bundled/dockerhub/config/nginx
-        jmx configuration...........................docker/prod/bundled/dockerhub/config/jmx
-        single server setup.........................true
+        installation strategy sub-directory.........docker/prod/bundled/
+        seb-server configuration....................docker/prod/bundled/config/spring
+        maria-db configuration......................docker/prod/bundled/config/mariadb
+        reverse-proxy configuration.................docker/prod/bundled/config/nginx
+        jmx configuration...........................docker/prod/bundled/config/jmx
+        single server setup.........................yes
         secured (TLS)...............................configurable (needs own TLS certificates)
-        integrated mariadb service..................true
+        integrated mariadb service..................yes (can be configured to connect to external DB)
         initial data setup..........................auto generated Institution and SEB Administrator
         data setup on reload........................Spring - Flyway migration setup
-        integrated reverse proxy....................true
-        automated backup-restore service............false
+        integrated reverse proxy....................yes, with separated Port mapping for new services
         recommended machine requirements............CPU: x86_64/4 Cores/2-3 GHz, Mem 32GB, Disk Space min 100GB
         
 **Requirements:**
@@ -71,6 +65,7 @@ This setup uses docker compose to build and run all needed containers. The docke
 This setup contains a docker-compose.yml file that orchestrates the setup of the needed containers/services and a configuration sub-directory
 for all needed components. The docker image for SEB Server will be automatically fetched from docker-hub.
 For MariaDB the official public image is used to build-up the MariaDB server service.
+The setup also contains a .env File that contains all settings that needs to be set to run with the default configuration.
 
 **Configuration**
 
@@ -96,40 +91,37 @@ used by the seb-server service if JMX is enabled. For more details on how to con
     $ git clone -b v1.1-latest https://github.com/SafeExamBrowser/seb-server-setup.git
     $ cd seb-server-setup/docker/prod/bundled/dockerhub/
 
-3. If some specific configuration is needed, this can be done within this step. See :ref:`configuration-label` for more details on how to configure the services.
-   At least you should check the application-prod.properties file in the spring config directory, if everything is set properly.
-   
-   Also set the mandatory settings defined in the docker-compose.yml according to your setup:
-   
-- sebserver_webservice_http_external_scheme: Defines the scheme of the external URL (http or https) 
-- sebserver_webservice_http_external_servername: Defines the server name of the external URL (e.g.: sebserver.ethz.ch)
-- sebserver_webservice_http_external_port: Defines the port of the external URL. Mandatory only if it differs from default (http:80,https:433)
+3. Open the existing .env file and apply the needed settings for the setup as the .env file example shows:
 
-4. build the docker images. 
+    SEBSERVER_PWD: The SEB Server password is needed for various reasons. This password must be always the same and should be securely stored somewhere
+    DB_SA_PWD=somePW: The super user password for the data base connection. If you don't want to use the super user to connect to database you need to configure this within the docker-compose file for all services that needs a database connection.
+    DNS_NAME: The DNS name where your host is available from the Internet
+    BASE_PORT: The default port for HTTP connection. Usually 443 that is default for HTTPS connections
+    SPS_WEB_PORT: The additional open SSL port for the screen proctoring webservice API
+    SPS_GUI_PORT: The additional open SSL port for the screen proctoring guiservice (graphical user interface)
+
+    .. note::
+        The passwords must be given also when the service is stopped and restarted again. You can either let the .env file
+        be within the installation directory as is. Or you can delete the .env file from the host and copy or create it again when
+        an update or restart of the container is needed. Note that it is very important that the SEBSERVER_PWD do not change and the same
+        SEBSERVER_PWD is used for updates and restarts as it was for the initial setup. Otherwise data will be lost due to encryption with
+        unknown or incorrect passwords. The password should be in the responsibility of a system administrator and handled with appropriate care.
+
+4. Go to the nginx configuration folder and put your own valid SSL certificates to the "cert" subdirectory. The integrated reverse proxy will then use this certificates to secure all given connection ports.
+If you have changed the default ports in step 3. you must also change it for the reverse proxy by open the app.conf file and change the port settings there accordingly.
+
+5. Pull the Docker images from Dockerhub
 
  .. code-block:: bash
     
-    $ docker-compose build --no-cache
-        
-5. Now we have to give the needed passwords for an initial startup. This can either be done by creating an .env file on the working directory
-   or by give the needed passwords as environment variables on the service startup within the next step.
-
- .. code-block:: bash
-    $ printf %s "SEBSERVER_PWD=somePassword\nDB_SA_PWD=passwordForDataBase" >> .env
-
-.. note::
-    The passwords must be given also when the service is stopped and restarted again. You can either let the .env file 
-    be within the installation directory as is. Or you can delete the .env file from the host and copy or create it again when
-    an update or restart of the container is needed. Note that it is very important that the SEBSERVER_PWD do not change and the same
-    SEBSERVER_PWD is used for updates and restarts as it was for the initial setup. Otherwise data will be lost due to encryption with
-    unknown or incorrect passwords. The password should be in the responsibility of a system administrator and handled with appropriate care.
+    $ docker-compose pull
 
 6. Start the services. If you want to give the needed password here instead within an .env file, you can add them as environment variables within the call
 
  .. code-block:: bash
     
-    $ docker-compose up -d 
-    
+    $ docker-compose up -d
+
 or
 
  .. code-block:: bash
@@ -145,11 +137,15 @@ or
         
 .. image:: images/dockerServicesTestUp.png
     :align: center
-    :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/master/docs/images/dockerServicesTestUp.png
+    :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/rel-2.0/docs/images/docker-ps.png
         
-8. If there where no changes to the default configuration the SEB Server is now running on port 80 and can be accessed with a browser on http(s)://server-address
+8. If there where no changes to the default configuration the SEB Server is now running on port 443/4431/4432 and can be accessed with a browser on http(s)://server-address
    There is one pre-configured institution and one user-account with SEB Server Administrator role to manage the server. 
    The username and generated password of the initial admin account can be found on the logs:
+
+   .. code-block:: bash
+
+       $ docker logs seb-server
 
 ::
 
@@ -166,111 +162,23 @@ or
     [SEB SERVER INIT] ----> !!!! NOTE: Do not forget to login and reset the generated admin password immediately !!!!
     [SEB SERVER INIT] ----> ***********************************************************************************************************************************************************************
 
-    
+
 .. note::
     We highly recommend to change the generated password from the initial admin account immediately after first login. 
 
 
-.. _installseparated-label:
 
-Separated Setup
-....................
 
-This install provides separated docker and docker-compose setups for each involved service. This setup is
-mostly recommend when you want to setup the SEB Server components on different hosts for better performance
-but do not have the ability to work on the cloud with Kubernetes for example.
 
-::
 
-        installation strategy sub-directory.........docker/prod/separated/
-        maria-db setup-directory....................docker/prod/separated/db/
-        seb-server webservice setup-directory.......docker/prod/separated/webservice/
-        seb-server guiservice setup-directory.......docker/prod/separated/guiservice/
-        single server setup.........................false
-        integrated mariadb service..................false
-        initial data setup..........................auto generated Institution and SEB Administrator
-        data setup on reload........................Spring - Flyway migration setup
-        integrated reverse proxy....................false
-        automated backup-restore service............false
-        recommended machine requirements............CPU: x86_64/4 Cores/2-3 GHz, Mem 32GB, Disk Space min 100GB
 
-.. note::
-    If you are interested in setting up SEB Server for the cloud and use Kubernetes, the next chapter gives you a Kind example for this.
 
-The three involved Services on SEB Server are:
 
-- The Database: This is a MariaDB database that can also be external or already existing.
-The other services needs access to the database and must also be able to create and modify a new data schema.
-- The Webservice: This service implements the main part of SEB Server (business functions) and must have access
-to the Database service. This service provides then an HTTP Rest API for GUI services.
-- The Guiservice. This service implements the SEB Server user interface and must have access to the Webservice.
-
-The above bundled installation puts all this three services into one single docker-compose installation and all
-services run on the same host. But if you want to split the services up on different hosts you can start with this
-examples to setup each service on a different host. The setup procedure is the same for all services, like described
-in the above bundled setup, although the different services needs different configurations.
-
-TLS setup is not part of this setup since this is mostly be done on the host level. If not, you can relay on the reverse
-proxy configuration of the bundled setup to setup each service with its own reverse proxy that terminates the TLS
-connection within the docker-network.
-
-Please have a look at each of the above described service installation directory and in the docker-compose.yml file of
-the respective setup directory. There you find the environment variables that has to be set specific to your setup.
-Like in the example:
-
- .. code-block:: docker-compose
-
-    version: '3.5'
-    services:
-      seb-webservice:
-          image: "anhefti/seb-server:v12.0-stable"
-          container_name: seb-webservice
-          volumes:
-            - seb-server-config:/sebserver/config
-            - ./config/spring:/sebserver/config/spring
-            - ./config/jmx:/sebserver/config/jmx
-          environment:
-            - JAVA_HEAP_MIN=1G
-            - JAVA_HEAP_MAX=8G
-            - JMX_PORT=
-            - spring_profiles_active=ws,prod-ws,prod
-
-            # Set your passwords for DB connection and SEB Server encryption here
-            - sebserver_password=${SEBSERVER_PWD}
-            - sebserver_mariadb_password=${DB_SA_PWD}
-
-            # Set the below settings for database connection.
-            # NOTE: This can also point to an internal address when the db server is in the same network
-            - datastore_mariadb_server_address=seb-server-mariadb
-            - datastore_mariadb_server_port=3306
-            - spring_datasource_username=root
-
-            # Set the below URL component settings from where the web-service is externally available
-            # NOTE: This must be the address from that the service is externally available (not network internal address)
-            - sebserver_webservice_http_external_scheme=https
-            - sebserver_webservice_http_external_servername=seb-webservice.ch
-
-            # This uses the new ping batch processing strategy for improve performance for bundled setups.
-            # To reset to old ping blocking processing strategy set BLOCKING instead of BATCH here.
-            - sebserver_webservice_ping_service_strategy=BATCH
-
-            # JMX settings
-            - MONITORING_MODE=false
-            #- JMX_PORT=9090
-          ports:
-            - 8080:8080
-            #- 9090:9090 # Connect this port to host if you want to use JMX (MONITORING_MODE=true)
-          networks:
-            - seb-server-network
-          restart: unless-stopped
-
-Also don't forget to set needed passwords in the respective ".env" file for the installation and adapt the files in
-the config directory according to your needs.
 
 
 .. _installkind-label:
 
-Kubernetes Kind Example
+Cloud based Kubernetes Kind Example
 ........................
 
 This setup provides an example for a distributed and scalable cloud setup with Kubernetes and Kind.

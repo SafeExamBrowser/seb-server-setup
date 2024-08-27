@@ -2,7 +2,7 @@ version: '3.5'
 services:
   mariadb: 
     image: "mariadb:10.5"
-    container_name: seb-server-prod-mariadb
+    container_name: seb-server-mariadb
     environment:
         # Set your DB root password here.
         # Note: If you don't want to use the DB root account for connection you have to configure this within the DB
@@ -10,7 +10,7 @@ services:
         - MYSQL_ROOT_PASSWORD=${DB_SA_PWD}
     volumes:
         - seb-server-config:/etc/mysql/conf.d
-        - seb-server-prod-mariadb:/var/lib/mysql
+        - seb-server-mariadb:/var/lib/mysql
         - ./config/mariadb/config.cnf:/etc/mysql/conf.d/config.cnf
     networks:
         - seb-server-network
@@ -36,7 +36,7 @@ services:
         # NOTE: these must match with the DB connection settings on mariadb service
         - spring_datasource_username=root
         - sebserver_mariadb_password=${DB_SA_PWD}
-        - datastore_mariadb_server_address=seb-server-prod-mariadb
+        - datastore_mariadb_server_address=seb-server-mariadb
         - datastore_mariadb_server_port=3306
 
         # Set the below URL component settings from where the web-service is externally available
@@ -47,7 +47,7 @@ services:
         - sebserver_webservice_autologin_url=https://${DNS_NAME}:${BASE_PORT}
 
         # Screen Proctoring settings and passwords
-        # NOTE: these must match with the respective equivalents on sps-server
+        # NOTE: these must match with the respective equivalents on sps-webservice
         - sebserver_feature_exam_seb_screenProctoring_bundled_url=https://${DNS_NAME}:${SPS_WEB_PORT}
         - sps_sebserver_client_secret=${SEBSERVER_PWD}
         - sps_sebserver_password=${SEBSERVER_PWD}
@@ -69,9 +69,9 @@ services:
           - "mariadb"
       restart: unless-stopped
 
-  sps-server:
+  sps-webservice:
     image: "anhefti/seb-sps:v1.0-stable"
-    container_name: sps-server
+    container_name: sps-webservice
     environment:
       # Service runtime settings
       - JAVA_HEAP_MIN=1G
@@ -88,7 +88,7 @@ services:
       - spring_datasource_username=root
       - spring_datasource_password=${SEBSERVER_PWD}
       - datastore_mariadb_server_port=3306
-      - datastore_mariadb_server_address=seb-server-prod-mariadb
+      - datastore_mariadb_server_address=seb-server-mariadb
       - sps_data_store_adapter=FULL_RDBMS
 
       # Set the below URL component settings from where the screen proctoring web-service is externally available
@@ -114,9 +114,9 @@ services:
       - "mariadb"
     restart: unless-stopped
 
-  sps-gui:
+  sps-guiservice:
     image: naritter/seb-sps-gui:v1.0-stable
-    container_name: sps-gui
+    container_name: sps-guiservice
     environment:
       # Service runtime settings
       - NODE_ENV=prod
@@ -163,5 +163,5 @@ networks:
 volumes:
   seb-server-config:
     name: seb-server-config
-  seb-server-prod-mariadb:
-    name: seb-server-prod-mariadb
+  seb-server-mariadb:
+    name: seb-server-mariadb
