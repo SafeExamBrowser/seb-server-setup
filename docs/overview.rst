@@ -38,6 +38,7 @@ The image below shows a fully bundled setup were all is fit together within one 
     :align: center
     :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/rel-2.0/docs/images/bundled_setup.png
 
+_
 
 - A: Docker Compose / Network on Host Server. This is been created with the given docker-compose.yml configuration
 - B: Reverse Proxy with TLS termination for production and internal service routing
@@ -46,7 +47,7 @@ The image below shows a fully bundled setup were all is fit together within one 
 - E: Screen Proctoring werbservice container (Java / Spring Boot). Screen Proctoring Maintenance API, SEB Client Session and Screen Shot API and GUI Proctoring API
 - F: Maria DB Server container. Can also be external if an external DB Server is used. SEB Server- and SPS Webservice need a connection to the DB server and each creates DB schema for itself. It is also possible ot have two different DB server for SEB Server and SPS Webservice.
 
-
+_
 
 - 1: Browser application to access the SEB Server and SPS GUI on that respective URL. Usually SEB server is avialable unther the root URL https://example.com and the SPS Guiservice is avialable under https://example.com/gui-service/
 - 2: SEB Client connecting to SEB Server and SPS webservice. SEB Clients directly connect to webservices of SEB Server and Screen Proctoring. The Proxy makes the routing.
