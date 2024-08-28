@@ -3,9 +3,14 @@
 Setup Initial Log Guide
 -----------------------
 
+When the SEB Server services start up for the first time or after an update you can make some checks according to the logs.
+Following the startup logs of each service is shown with some additional comments about the information the logs give.
+
 **SEB Server Service Startup Log**
 
-get with docker log seb.server. Example and comments:
+ .. code-block:: bash
+    
+    $ docker logs ${container name}
 
 ::
     
@@ -14,6 +19,9 @@ get with docker log seb.server. Example and comments:
     08:00:38.118 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->  / __|| __|| _ ) / __| ___  _ _ __ __ ___  _ _
     08:00:38.118 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->  \__ \| _| | _ \ \__ \/ -_)| '_|\ V // -_)| '_|
     08:00:38.118 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->  |___/|___||___/ |___/\___||_|   \_/ \___||_|
+    
+    **The first sections shows the version, active profiles and context path of the service**
+    
     08:00:38.118 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->
     08:00:38.118 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->
     08:00:38.118 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> Version: v2.0-stable-f632cc9
@@ -22,6 +30,9 @@ get with docker log seb.server. Example and comments:
     08:00:38.119 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->
     08:00:38.119 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> Context Path: /
     08:00:38.119 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->
+    
+    **This section shows the seb-guiservice startup information**
+    
     08:00:38.119 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *********************************************************
     08:00:38.119 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *** GUI Service starting up...                        ***
     08:00:38.119 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *********************************************************
@@ -41,6 +52,9 @@ get with docker log seb.server. Example and comments:
     08:00:38.120 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *********************************************************
     08:00:38.120 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *** GUI Service successfully successfully started up! ***
     08:00:38.120 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *********************************************************
+    
+    **This section shows the seb-sebservice startup info**
+    
     08:00:38.121 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *********************************************************
     08:00:38.121 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *** Webservice starting up...                         ***
     08:00:38.121 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *********************************************************
@@ -48,6 +62,9 @@ get with docker log seb.server. Example and comments:
     08:00:38.121 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> Register Webservice: 9c68d959-b0c0-4611-b5cb-c8d39cfe58c6_v2.0-stable-f632cc9
     08:00:38.226 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> Successfully register Webservice instance. uuid: 9c68d959-b0c0-4611-b5cb-c8d39cfe58c6_v2.0-stable-f632cc9, address: 172.19.0.4
     08:00:38.226 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->
+    
+    **Here the database migration starts and gives info about migration that are applied and might be failed too**
+    
     08:00:38.226 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> ** Migration check START **
     08:00:38.226 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> Check database status
     08:00:38.311 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> Found pending migrations: 2
@@ -59,6 +76,9 @@ get with docker log seb.server. Example and comments:
     08:00:38.612 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> ** Migration check END **
     08:00:38.612 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->
     08:00:38.612 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->
+    
+    **Internal service init information and additional consistency check information**
+    
     08:00:38.612 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> Initialize Services...
     08:00:38.612 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->
     08:00:38.612 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->
@@ -84,6 +104,9 @@ get with docker log seb.server. Example and comments:
     08:00:38.725 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ------>
     08:00:38.725 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ------> Run SEBInstructionService...
     08:00:38.731 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ------> No pending SEB client instructions found on persistent storage
+    
+    **Started up webservice information about common settings**
+    
     08:00:38.731 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *********************************************************
     08:00:38.731 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *** Webservice Info:                                  ***
     08:00:38.731 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *********************************************************

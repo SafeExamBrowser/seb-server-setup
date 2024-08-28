@@ -97,9 +97,9 @@ SEB Server version. There is an entry for each platform with a beta or testing r
 .. csv-table::
    :header: "Platform / OS", "Release Version"
 
-   "SEB Client for iOS", "3.3.2"
-   "SEB Client for Mac", "3.3.2"
-   "SEB Client for Windows", "3.7.0"
+   "SEB Client for iOS", ""
+   "SEB Client for Mac", ""
+   "SEB Client for Windows", "3.8.0"
 
 
 Project Background
