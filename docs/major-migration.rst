@@ -46,19 +46,19 @@ care to merge your old setup configuration with the new one.x
 **For the second approaches please use the following guide:**
 
 1. Make sure you have all essential settings like passwords for SEB Server and Database connection from your existing SEB Server setup at hand and backed up
-
+    
 2. Make a backup of your existing SEB Server database or schema, with an SQL dump or similar technique you are familiar with. This is just in case you want to go back and restore the old installation
-
+    
 3. Stop all services with docker-compose down on the old installation.
-
+    
 4. Checkout the latest 2.0 version of the SEB Server setup repo "seb-server-setup" with:
 
 .. code-block:: bash
     
     $ git checkout $ git checkout tags/v2.0-latest
 
-
- or
+or
+ 
 .. code-block:: bash
     
     $ git clone -b v2.0-latest https://github.com/SafeExamBrowser/seb-server-setup.git

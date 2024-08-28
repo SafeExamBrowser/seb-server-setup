@@ -62,7 +62,7 @@ There are manly two strategies to configure HTTPS / TLS for a SEB Server;
     There are some prepared installations for the second approach within the seb-server-setup repository (tls) but they are experimental yet.
 
 General Installation Process
------------------------------
+............................
 
 First we will have a look at the overall installation process that can be applied to all bundled installation strategies we have discussed 
 in section :ref:`installation-repo-label`. 
