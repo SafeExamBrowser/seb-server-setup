@@ -49,7 +49,7 @@ The image below shows a fully bundled setup were all is fit together within one 
 
 **Connections and Routing: 1 - 9**
 
-- **1**: Browser application to access the SEB Server and SPS GUI on that respective URL. Usually SEB server is avialable unther the root URL https://example.com and the SPS Guiservice is avialable under https://example.com/gui-service/
+- **1**: Browser application to access the SEB Server and SPS GUI on that respective URL. Usually SEB server is available under the root URL https://example.com and the SPS Guiservice is available under https://example.com/gui-service/
 - **2**: SEB Client connecting to SEB Server and SPS webservice. SEB Clients directly connect to webservices of SEB Server and Screen Proctoring. The Proxy makes the routing.
 - **3**: Proxy routing SEB Server webservice and GUI traffic
 - **4**: Proxy routing Screen Proctoring GUI requests to sps GUI service
