@@ -1,5 +1,5 @@
 General Installation Instructions
-============
+----------------------------------
 
 All provided setups are pre-configured docker-compose setups that suppose to work well with a general installation process and fit with
 usual IT environment. The setups are mainly categorized into bundled setups and distributed setups where a bundled setup is a single

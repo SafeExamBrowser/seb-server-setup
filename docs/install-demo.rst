@@ -48,7 +48,7 @@ to clone the seb-server-setup repository on your local install machine and work 
 
 3. Open the ".env" file with a text editor and set the needed environment variables:
 
-::
+.. glossary::
     
     SEBSERVER_PWD: The SEB Server password is needed for various reasons. This password must be always the same and should be securely stored somewhere
     CLIENT_EXTERNAL_DNS_NAME: The DNS name for clients connecting to SEB Server. When deploy locally this is localhost. IP address or DNS name for dedicated host

@@ -102,14 +102,14 @@ For more details on how to configure each service see :ref:`configuration-label`
 
 3. Open the existing .env file and apply the needed settings for the setup as the .env file example shows:
 
-::
+.. glossary::
     
-    SEBSERVER_PWD: The SEB Server password is needed for various reasons. This password must be always the same and should be securely stored somewhere
-    DB_SA_PWD=somePW: The super user password for the data base connection. If you don't want to use the super user to connect to database you need to configure this within the docker-compose file for all services that needs a database connection.
-    DNS_NAME: The DNS name where your host is available from the Internet
-    BASE_PORT: The default port for HTTP connection. Usually 443 that is default for HTTPS connections
-    SPS_WEB_PORT: The additional open SSL port for the screen proctoring webservice API
-    SPS_GUI_PORT: The additional open SSL port for the screen proctoring guiservice (graphical user interface)
+    - SEBSERVER_PWD: The SEB Server password is needed for various reasons. This password must be always the same and should be securely stored somewhere
+    - DB_SA_PWD=somePW: The super user password for the data base connection. If you don't want to use the super user to connect to database you need to configure this within the docker-compose file for all services that needs a database connection.
+    - DNS_NAME: The DNS name where your host is available from the Internet
+    - BASE_PORT: The default port for HTTP connection. Usually 443 that is default for HTTPS connections
+    - SPS_WEB_PORT: The additional open SSL port for the screen proctoring webservice API
+    - SPS_GUI_PORT: The additional open SSL port for the screen proctoring guiservice (graphical user interface)
 
 .. note::
     The passwords must be given also when the service is stopped and restarted again. You can either let the .env file
@@ -331,7 +331,7 @@ Base environment variables for every service:
 
 **Base environment variables sebserver webservice**
 
-::
+.. glossary::
     
     - `JAVA_HEAP_MIN`: Minimum heap memory space given to the JVM process
     - `JAVA_HEAP_MAX`: Maximum heap memory space given to the JVM process
@@ -351,7 +351,7 @@ Base environment variables for every service:
 
 **Base environment variables sebserver guiservice**
 
-::
+.. glossary::
     
     - `JAVA_HEAP_MIN`: Minimum heap memory space given to the JVM process
     - `JAVA_HEAP_MAX`: Maximum heap memory space given to the JVM process
@@ -366,7 +366,7 @@ Base environment variables for every service:
 
 **Base environment variables screen proctoring (sps) webservice**
 
-::
+.. glossary::
     
     - `JAVA_HEAP_MIN`: Minimum heap memory space given to the JVM process
     - `JAVA_HEAP_MAX`: Maximum heap memory space given to the JVM process
@@ -387,7 +387,7 @@ Base environment variables for every service:
 
 **Base environment variables sebserver screen proctoring (sps) guiservice**
 
-::
+.. glossary::
     
     - `NODE_ENV`: Node environment profile. "prod" for production setup
     - `SERVER_PORT`: Internal service port mapping. Default is "3000"
