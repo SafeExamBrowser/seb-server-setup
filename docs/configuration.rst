@@ -23,6 +23,7 @@ service dedicated configuration files. For the Java/Spring services these are th
 **SEB Server Webservice Settings**
 
 .. glossary::
+    
     logging.level.ROOT
         - The initial log-level for all loggers
         - See `Spring Logging <https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/boot-features-logging.html>`_
@@ -155,6 +156,7 @@ service dedicated configuration files. For the Java/Spring services these are th
 
 
 .. glossary::
+    
     sebserver.gui.external.messages
         - Defines the path where SEB Server GUI shall load additional wording files that overrides the internal wording
         - Within the Spring configuration of SEB Server you are able to define a messages_[iso-language-code].properties file where you are able to override the default wording of SEB Server or to provide wording for additional languages.

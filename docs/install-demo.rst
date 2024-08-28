@@ -43,14 +43,23 @@ You can either copy the two files in /docker/demo directory to a preferred local
 to clone the seb-server-setup repository on your local install machine and work on the cloned directory.
 
 1. Get the two needed files ".env" and "docker-compose.yml" form the docker/demo directory of this seb-server-setup repository
+
 2. Place this two files into a preferred local install directory.
+
 3. Open the ".env" file with a text editor and set the needed environment variables:
+
+::
+    
     SEBSERVER_PWD: The SEB Server password is needed for various reasons. This password must be always the same and should be securely stored somewhere
     CLIENT_EXTERNAL_DNS_NAME: The DNS name for clients connecting to SEB Server. When deploy locally this is localhost. IP address or DNS name for dedicated host
     SERVER_EXTERNAL_DNS_NAME: The DNS name for internal communication. When deploy locally this is host.docker.internal. IP address or DNS name for dedicated host
+    
 4. Use "docker-compose pull" to let docker pull all needed images first
+
 5. Use "docker-compose up -d" to start the docker containers.
+
 6. Use "docker logs seb-server" to view the logs of SEB Server startup.
+
 7. Go to http://localhost:8080 and login with user name: "super-admin" and password "admin"
 
 .. note::

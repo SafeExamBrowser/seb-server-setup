@@ -102,6 +102,8 @@ For more details on how to configure each service see :ref:`configuration-label`
 
 3. Open the existing .env file and apply the needed settings for the setup as the .env file example shows:
 
+::
+    
     SEBSERVER_PWD: The SEB Server password is needed for various reasons. This password must be always the same and should be securely stored somewhere
     DB_SA_PWD=somePW: The super user password for the data base connection. If you don't want to use the super user to connect to database you need to configure this within the docker-compose file for all services that needs a database connection.
     DNS_NAME: The DNS name where your host is available from the Internet
@@ -109,12 +111,12 @@ For more details on how to configure each service see :ref:`configuration-label`
     SPS_WEB_PORT: The additional open SSL port for the screen proctoring webservice API
     SPS_GUI_PORT: The additional open SSL port for the screen proctoring guiservice (graphical user interface)
 
-    .. note::
-        The passwords must be given also when the service is stopped and restarted again. You can either let the .env file
-        be within the installation directory as is. Or you can delete the .env file from the host and copy or create it again when
-        an update or restart of the container is needed. Note that it is very important that the SEBSERVER_PWD do not change and the same
-        SEBSERVER_PWD is used for updates and restarts as it was for the initial setup. Otherwise data will be lost due to encryption with
-        unknown or incorrect passwords. The password should be in the responsibility of a system administrator and handled with appropriate care.
+.. note::
+    The passwords must be given also when the service is stopped and restarted again. You can either let the .env file
+    be within the installation directory as is. Or you can delete the .env file from the host and copy or create it again when
+    an update or restart of the container is needed. Note that it is very important that the SEBSERVER_PWD do not change and the same
+    SEBSERVER_PWD is used for updates and restarts as it was for the initial setup. Otherwise data will be lost due to encryption with
+    unknown or incorrect passwords. The password should be in the responsibility of a system administrator and handled with appropriate care.
 
 4. Go to the nginx configuration folder and put your own valid SSL certificates to the "cert" subdirectory. The integrated reverse proxy will then use this certificates to secure all given connection ports.
 If you have changed the default ports in step 3. you must also change it for the reverse proxy by open the app.conf file and change the port settings there accordingly.
@@ -329,63 +331,71 @@ Base environment variables for every service:
 
 **Base environment variables sebserver webservice**
 
-- `JAVA_HEAP_MIN`: Minimum heap memory space given to the JVM process
-- `JAVA_HEAP_MAX`: Maximum heap memory space given to the JVM process
-- `sebserver_password`: SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
-- `spring_profiles_active`: SEB Server profiles. For a productive webservice setup "ws,prod-ws,prod"
-- `spring_datasource_password`: password for MariaDB database
-- `spring_datasource_username`: MariaDB user name
-- `datastore_mariadb_server_address`: MariaDB server hostname
-- `datastore_mariadb_server_port`: MariaDB port
-- `sebserver_webservice_http_external_scheme`: Webservice external URL scheme (http/https)
-- `sebserver_webservice_http_external_servername`: Webservice external URL host name
-- `sebserver_webservice_http_external_port`: Webservice external URL port (empty for default http(80) https(443))
-- `sebserver_webservice_autologin_url`: External URL from where the sebserver guiservice is available. See also `sebserver_gui_http_external_servername`
-- `sebserver_feature_exam_seb_screenProctoring_bundled_url`: The URL on which the screen proctoring webservice is externally available
-- `sps_sebserver_client_secret`: SEB Servers client secret to connect to screen proctoring service. This must match with the sebserver_client_secret setting in screen proctoring (sps) webservice
-- `sps_sebserver_password`: SEB Servers screen proctoring service maintenance account password. This must match with the same setting in screen proctoring (sps) webservice
+::
+    
+    - `JAVA_HEAP_MIN`: Minimum heap memory space given to the JVM process
+    - `JAVA_HEAP_MAX`: Maximum heap memory space given to the JVM process
+    - `sebserver_password`: SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
+    - `spring_profiles_active`: SEB Server profiles. For a productive webservice setup "ws,prod-ws,prod"
+    - `spring_datasource_password`: password for MariaDB database
+    - `spring_datasource_username`: MariaDB user name
+    - `datastore_mariadb_server_address`: MariaDB server hostname
+    - `datastore_mariadb_server_port`: MariaDB port
+    - `sebserver_webservice_http_external_scheme`: Webservice external URL scheme (http/https)
+    - `sebserver_webservice_http_external_servername`: Webservice external URL host name
+    - `sebserver_webservice_http_external_port`: Webservice external URL port (empty for default http(80) https(443))
+    - `sebserver_webservice_autologin_url`: External URL from where the sebserver guiservice is available. See also `sebserver_gui_http_external_servername`
+    - `sebserver_feature_exam_seb_screenProctoring_bundled_url`: The URL on which the screen proctoring webservice is externally available
+    - `sps_sebserver_client_secret`: SEB Servers client secret to connect to screen proctoring service. This must match with the sebserver_client_secret setting in screen proctoring (sps) webservice
+    - `sps_sebserver_password`: SEB Servers screen proctoring service maintenance account password. This must match with the same setting in screen proctoring (sps) webservice
 
 **Base environment variables sebserver guiservice**
 
-- `JAVA_HEAP_MIN`: Minimum heap memory space given to the JVM process
-- `JAVA_HEAP_MAX`: Maximum heap memory space given to the JVM process
-- `sebserver_password` : SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
-- `spring_profiles_active` : SEB Server profiles. For a productive guiservice setup "gui,prod-gui,prod"
-- `sebserver_gui_http_external_scheme`: Guiservice external URL scheme (http/https)
-- `sebserver_gui_http_external_servername`: Guiservice external URL host name
-- `sebserver_gui_http_external_port`: Guiservice external URL port (empty for default http(80) https(443))
-- `sebserver_gui_http_webservice_scheme`: Webservice external connection URL scheme (http/https)
-- `sebserver_gui_http_webservice_servername` : Webservice external connection URL host name.
-- `sebserver_gui_http_webservice_port` : Webservice external connection URL port (empty for default http(80) https(443))
+::
+    
+    - `JAVA_HEAP_MIN`: Minimum heap memory space given to the JVM process
+    - `JAVA_HEAP_MAX`: Maximum heap memory space given to the JVM process
+    - `sebserver_password` : SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
+    - `spring_profiles_active` : SEB Server profiles. For a productive guiservice setup "gui,prod-gui,prod"
+    - `sebserver_gui_http_external_scheme`: Guiservice external URL scheme (http/https)
+    - `sebserver_gui_http_external_servername`: Guiservice external URL host name
+    - `sebserver_gui_http_external_port`: Guiservice external URL port (empty for default http(80) https(443))
+    - `sebserver_gui_http_webservice_scheme`: Webservice external connection URL scheme (http/https)
+    - `sebserver_gui_http_webservice_servername` : Webservice external connection URL host name.
+    - `sebserver_gui_http_webservice_port` : Webservice external connection URL port (empty for default http(80) https(443))
 
 **Base environment variables screen proctoring (sps) webservice**
 
-- `JAVA_HEAP_MIN`: Minimum heap memory space given to the JVM process
-- `JAVA_HEAP_MAX`: Maximum heap memory space given to the JVM process
-- `sebserver_password`: SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
-- `spring_profiles_active`: SEB Server profiles. For a productive webservice setup "prod"
-- `spring_datasource_password`: password for MariaDB database
-- `spring_datasource_username`: MariaDB user name
-- `datastore_mariadb_server_address`: MariaDB server hostname
-- `datastore_mariadb_server_port`: MariaDB port
-- `sps_data_store_adapter`: Image (Screenshots) data store adapter. "FULL_RDBMS" for storing images into DB or "S3_RDBMS" for S3 compatible storage
-- `sps_webservice_http_external_scheme`: Webservice external URL scheme (http/https)
-- `sps_webservice_http_external_servername`: Webservice external URL host name
-- `sps_webservice_http_external_port`: Webservice external URL port (empty for default http(80) https(443))
-- `sps_gui_redirect_url`: SPS GUI external URL used for redirect and autologin link creation
-- `sebserver_client_secret`: Client secret for SEB Server binding. SEB Server must use this to connect to screen proctoring service. See also sps_sebserver_client_secret
-- `spsgui_client_secret`: Client secret for screen proctoring GUI service binding. SPS GUI service must use this to connect to the SPS webservice
-- `sps_init_sebserveraccount_password`: Password for the SEB Server user account that is used by SEB Server to manage SPS service data. This account is initially generated by the SPS service if it doesn't exist
+::
+    
+    - `JAVA_HEAP_MIN`: Minimum heap memory space given to the JVM process
+    - `JAVA_HEAP_MAX`: Maximum heap memory space given to the JVM process
+    - `sebserver_password`: SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
+    - `spring_profiles_active`: SEB Server profiles. For a productive webservice setup "prod"
+    - `spring_datasource_password`: password for MariaDB database
+    - `spring_datasource_username`: MariaDB user name
+    - `datastore_mariadb_server_address`: MariaDB server hostname
+    - `datastore_mariadb_server_port`: MariaDB port
+    - `sps_data_store_adapter`: Image (Screenshots) data store adapter. "FULL_RDBMS" for storing images into DB or "S3_RDBMS" for S3 compatible storage
+    - `sps_webservice_http_external_scheme`: Webservice external URL scheme (http/https)
+    - `sps_webservice_http_external_servername`: Webservice external URL host name
+    - `sps_webservice_http_external_port`: Webservice external URL port (empty for default http(80) https(443))
+    - `sps_gui_redirect_url`: SPS GUI external URL used for redirect and autologin link creation
+    - `sebserver_client_secret`: Client secret for SEB Server binding. SEB Server must use this to connect to screen proctoring service. See also sps_sebserver_client_secret
+    - `spsgui_client_secret`: Client secret for screen proctoring GUI service binding. SPS GUI service must use this to connect to the SPS webservice
+    - `sps_init_sebserveraccount_password`: Password for the SEB Server user account that is used by SEB Server to manage SPS service data. This account is initially generated by the SPS service if it doesn't exist
 
 **Base environment variables sebserver screen proctoring (sps) guiservice**
 
-- `NODE_ENV`: Node environment profile. "prod" for production setup
-- `SERVER_PORT`: Internal service port mapping. Default is "3000"
-- `VITE_SERVER_URL`: The external URL of the VITE server
-- `VITE_SERVER_PORT`: The port mapping for above VITE server URL if needed. If not needed (default ports http/https) this can be empty
-- `PROCTOR_SERVER_URL`: The external URL of the screen proctoring webservice. This can also be internal URL connection to sps-webservice
-- `PROCTOR_SERVER_PORT`: Port mapping for above screen proctoring webservice URL if needed. If not needed (default ports http/https) this can be empty
-- `PROCTOR_DEFAULT_URL`: Default webservice root API endpoint. Usually "/admin-api/v1"
-- `PROCTOR_SERVER_USERNAME`: Client id name for sps-guiservice to connect to sps-webservice. Default is "spsGuiClient"
-- `PROCTOR_SERVER_PASSWORD`: Client secret for sps-guiservice to connect to sps-webservice. Must match with spsgui_client_secret
-- `SEB_SERVER_INTEGRATED_MODE`: Integration mode. Default is true
+::
+    
+    - `NODE_ENV`: Node environment profile. "prod" for production setup
+    - `SERVER_PORT`: Internal service port mapping. Default is "3000"
+    - `VITE_SERVER_URL`: The external URL of the VITE server
+    - `VITE_SERVER_PORT`: The port mapping for above VITE server URL if needed. If not needed (default ports http/https) this can be empty
+    - `PROCTOR_SERVER_URL`: The external URL of the screen proctoring webservice. This can also be internal URL connection to sps-webservice
+    - `PROCTOR_SERVER_PORT`: Port mapping for above screen proctoring webservice URL if needed. If not needed (default ports http/https) this can be empty
+    - `PROCTOR_DEFAULT_URL`: Default webservice root API endpoint. Usually "/admin-api/v1"
+    - `PROCTOR_SERVER_USERNAME`: Client id name for sps-guiservice to connect to sps-webservice. Default is "spsGuiClient"
+    - `PROCTOR_SERVER_PASSWORD`: Client secret for sps-guiservice to connect to sps-webservice. Must match with spsgui_client_secret
+    - `SEB_SERVER_INTEGRATED_MODE`: Integration mode. Default is true
