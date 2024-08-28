@@ -1,3 +1,6 @@
+Service Reset
+-------------
+
 .. note::
     The reset depends on your setup. Please be aware that if you have adapted a specified setup for your needs
     you need to also adapt the following reset procedure.
@@ -22,16 +25,13 @@ and prune the docker system entirely. To do so, use the following steps.
 
  .. code-block:: bash
     
-    $ docker volume prune
+    $ docker volume prune --all
         
 3. Make sure you have no other currently inactive services that you need and then prune the docker system.
    This will remove all dangling containers and images as well as networks.
    
  .. code-block:: bash
    
-    $ docker system prune
+    $ docker system prune --all
         
 4. After this cleanup you are able to start with a new installation from scratch.
-    
-        
- 

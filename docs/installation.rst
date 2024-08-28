@@ -127,3 +127,6 @@ For detailed setup and installation please see the detailed installation guide f
    install-production
    major-migration
    initial-log
+   service-update
+   service-reset
+   service-backup

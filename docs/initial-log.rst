@@ -8,7 +8,7 @@ Setup Initial Log Guide
 get with docker log seb.server. Example and comments:
 
 ::
-
+    
     08:00:38.110 INFO  [main]:[ch.ethz.seb.sebserver.SEBServer] Started SEBServer in 12.343 seconds (JVM running for 12.825)
     08:00:38.118 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->   ___  ___  ___   ___
     08:00:38.118 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->  / __|| __|| _ ) / __| ___  _ _ __ __ ___  _ _
@@ -166,9 +166,11 @@ get with docker log seb.server. Example and comments:
     08:00:38.737 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *********************************************************
 
 
- **SPS Webservice example Log**
-::
 
+ **SPS Webservice example Log**
+
+::
+    
     2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT]  _______ _______ _______      _______ _______ ______   __   __ ___ _______ _______
     2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |       |       |  _    |    |       |       |    _ | |  | |  |   |       |       |
     2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |  _____|    ___| |_|   |    |  _____|    ___|   | || |  |_|  |   |       |    ___|

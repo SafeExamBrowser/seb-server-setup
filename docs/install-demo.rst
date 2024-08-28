@@ -56,16 +56,5 @@ to clone the seb-server-setup repository on your local install machine and work 
 .. note::
 
     Since this is a demo installation it may not be necessary but we highly recommend to change the generated password from the initial admin account immediately after first login. 
-    
-**Service Update**
 
-.. include:: service-update.rst
-
-**Service Reset**
-
-.. include:: service-reset.rst
-        
-**Service Backup / Restore**
-
-.. include:: service-backup.rst
 

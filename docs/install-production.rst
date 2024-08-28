@@ -5,7 +5,7 @@ Production Setup
 
 **Info:**
 
-For production we provide currently three different default setups or examples, two if them for bundled setups and one
+For production we provide currently two different default setups or examples, a fully bundled setups and one
 as an example for a cloud based setup with kubernetes kind example configurations.
 
 .. note::
@@ -18,15 +18,17 @@ as an example for a cloud based setup with kubernetes kind example configuration
     If you already have a SEB Server installation and want to migrate from a former installation with major version 1.X
     to the new major version 2.x, please consult the Major Version Migration Guide
     
-The two bundled setup differ in the external DNS binding setup where the fist setup exposes the new services for screen proctoring
-within dedicated HTTP ports (not the default ports) while the second setup uses the integrated nginx proxy to route incoming
-request for screen proctoring from the default HTTP port to the dedicated services internally.
-The fist approach is easier to apply and probably more performant but needs two extra ports that can be accessed by the respective DNS name.
-For example if you have a DNS name "seb.example.com" then the seb-server service is exposed on the default ssl port (443) as usual
-but the screen proctoring services needs another port to be exposed to. Default is 4431 and 4432 that also needs to be open and
-accessible from the Internet.
+The bundled setup currently uses dedicated port mapping. Therefore it needs to have at least three different ports open and
+available to connect to from the Internet. This is usually the default SSL port 443 and two other ports that can also be used
+for HTTPS like 4431 and 4432. This is needed because the two new services has their own API and accessible over HTTPS on 
+the available DNS endpoint. 
 
-.. _bundledsetup1-label:
+.. note::
+    We are currently working on a solution that uses URL path routing instead of port mapping but unfortunately this seems to be
+    the usual case for a docker packed NodeJS/Vue service and currently we are still trying to find a solution with URL path 
+    routing that covers all your needs and features
+
+.. _bundledsetup-label:
 
 Bundled Setup with dedicated Port mapping
 ...............................
@@ -146,12 +148,12 @@ or
    There is one pre-configured institution and one user-account with SEB Server Administrator role to manage the server. 
    The username and generated password of the initial admin account can be found on the logs:
 
-   .. code-block:: bash
-
-       $ docker logs seb-server
+.. code-block:: bash
+    
+    $ docker logs seb-server
 
 ::
-
+    
     [SEB SERVER INIT] ---->   ___  ___  ___   ___
     [SEB SERVER INIT] ---->  / __|| __|| _ ) / __| ___  _ _ __ __ ___  _ _ 
     [SEB SERVER INIT] ---->  \__ \| _| | _ \ \__ \/ -_)| '_|\ V // -_)| '_|
@@ -170,20 +172,6 @@ For a complete initial log guide pleas read: :ref:`logguide-label`
 
 .. note::
     We highly recommend to change the generated password from the initial admin account immediately after first login. 
-
-
-.. _bundledsetup2-label:
-
-Bundled Setup with internal Service routing
-...........................................
-
-TODO
-
-
-
-
-
-
 
 
 .. _installkind-label:

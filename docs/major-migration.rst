@@ -1,3 +1,5 @@
+.. _majorversionupdate-label:
+
 Major Version Migration
 -----------------------
 
@@ -20,6 +22,7 @@ care to merge your old setup configuration with the new one.x
     If you use an external database, you are just fine and you can connect the it within the new setup just like usual. The migration will then be applied on fist service startup
 
 .. code-block:: bash
+    
     $ docker-compose down
     $ docker volume ls
     $ docker volume rm seb-server-config
@@ -27,11 +30,14 @@ care to merge your old setup configuration with the new one.x
 4. Install SEB Server with a total new installation as described within the install section: :ref:`prodsetup-label`
 
 .. code-block:: bash
+    
     $ git checkout $ git checkout tags/v2.0-latest
 
 5. Once the new SEB Server setup is up and running, check if migration of the database was successfully. :ref:`logguide-label` for more information.
 6. You should now be able to access the new SEB Server with old data and old logins.
 
+_
+__
 
 **For the second approaches please use the following guide:**
 
@@ -41,17 +47,20 @@ care to merge your old setup configuration with the new one.x
 4. Checkout the latest 2.0 version of the SEB Server setup repo "seb-server-setup" with:
 
 .. code-block:: bash
+    
     $ git checkout $ git checkout tags/v2.0-latest
 
  or
 
 .. code-block:: bash
+    
     $ git clone -b v2.0-latest https://github.com/SafeExamBrowser/seb-server-setup.git
 
 5. Apply all needed settings from your restored data and also apply new needed settings accordingly. Please consult also the new installation guide for this: :ref:`prodsetup-label`
 6. Start the new Setup with and consult the logs (docker logs seb-server), check that all is okay and DB migration was successfully applied. Also consult the :ref:`logguide-label` for more information.
 
 .. code-block:: bash
+    
     $ docker-compose pull
     $ docker-compose up -d
 
