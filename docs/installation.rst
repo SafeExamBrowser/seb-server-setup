@@ -125,3 +125,5 @@ For detailed setup and installation please see the detailed installation guide f
    
    install-demo
    install-production
+   major-migration
+   initial-log
