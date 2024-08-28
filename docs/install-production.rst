@@ -78,7 +78,11 @@ The configuration for each service is located in the local /config directory sep
 contains all the Spring and Spring-Boot based configurations and is used by the seb-server service. The "mariadb" folder contains the
 usual mariadb configuration file that is loaded from the seb-server-mariadb service on startup. The "nginx" folder contains a usual 
 nginx reverse-proxy configuration and is used by the reverse-proxy service. The "jmx" folder contains JMX related configurations and is also
-used by the seb-server service if JMX is enabled. For more details on how to configure each service see :ref:`configuration-label`.
+used by the seb-server service if JMX is enabled. 
+
+For a reference of the base environment variables see: :ref:`baseenv-label` 
+
+For more details on how to configure each service see :ref:`configuration-label`.
 
 **Installation:**
 
@@ -92,7 +96,7 @@ used by the seb-server service if JMX is enabled. For more details on how to con
 2. Get a clone of the seb-server-setup repository and navigate to the demo setup folder
 
  .. code-block:: bash
-    
+     
     $ git clone -b v1.1-latest https://github.com/SafeExamBrowser/seb-server-setup.git
     $ cd seb-server-setup/docker/prod/bundled/dockerhub/
 
@@ -134,7 +138,7 @@ or
     $ SEBSERVER_PWD=somePassword DB_SA_PWD=passwordForDataBase docker-compose up -d 
         
 7. Check if the containers are started and running. The output should look something like the following.
-
+    
  .. code-block:: bash
     
     $ docker ps --all
@@ -189,30 +193,7 @@ You can use this as a staring point or template for a Kubernetes based productio
 
 ::
 
-        installation strategy sub-directory.........docker/prod/cloud/kind-example
-        seb-server configuration....................docker/prod/cloud/kustomize/config/
-        single server setup.........................false
-        secured (TLS)...............................false
-        integrated mariadb service..................true
-        initial data setup..........................auto generated Institution and SEB Administrator
-        integrated reverse proxy....................ingress
-        automated backup-restore service............false
-        exposed database port.......................false
-        exposed JMX port............................false
-
-
 **Requirements:**
-
-- Git if not already installed
-- Docker and Docker-Compose if not already installed
-
-.. note::
-
-    The newest versions of Git and Docker are recommended. For installation see:
-        |    - Git : https://www.atlassian.com/git/tutorials/install-git
-        |    - Docker : https://docs.docker.com/install/
-        |    - Docker-Compose : https://docs.docker.com/compose/install/
-
 
 - kind: https://kind.sigs.k8s.io/docs/user/quick-start/#installing-from-release-binaries
 - kubectl: https://kubernetes.io/docs/tasks/tools/
@@ -225,7 +206,7 @@ Kind, kubectl and kustomize can be installed as binaries so that they are availa
 
 **Setup:**
 
-The demo setup consists of some kind setup descriptors, the kustomization.yaml and a deploy script.
+The example setup consists of some kind setup descriptors, the kustomization.yaml and a deploy script.
 The kustomization.yaml file first sets common values which are modified most: image version and replica count.
 It then uses the base config published in this repository (docker/ethz/cloud/kustomize/) and extends it to a demo deployment.
 
@@ -236,9 +217,11 @@ The different services are webservice, guiservice and mariadb. This corresponds 
 Each service configuration folder contains then separate configuration folder for each individual concern of the service.
 "spring" folder contains all the Spring and Spring-Boot based configurations and the jmx folder contains configuration for JMX binding (experimental)
 
+For a reference of the base environment variables see: :ref:`baseenv-label` 
+
 .. note::
-    If you need TLS encryption which is specific to your setup environment, plese refer to https://cert-manager.io/docs/
-    There are also some commented placholder for certificate handling within the file: ingress.yml within the example
+    If you need TLS encryption which is specific to your setup environment, please refer to https://cert-manager.io/docs/
+    There are also some commented placeholder for certificate handling within the file: ingress.yml within the example
 
 **Installation:**
 
@@ -252,48 +235,48 @@ Each service configuration folder contains then separate configuration folder fo
 2. Get a clone of the seb-server-setup repository and navigate to the demo setup folder
 
  .. code-block:: bash
-
+    
     $ git clone https://github.com/SafeExamBrowser/seb-server-setup.git -b v1.4-latest
-    $ cd seb-server-setup/docker/demo/cloud/kind-example
+    $ cd seb-server-setup/docker/prod/cloud/kind-example
 
 3. If some specific configuration is needed, this can be done within this step. See :ref:`configuration-label` for more details on how to configure the services.
 Spring based configuration settings can be set either in the respective application-prod.properties files in docker/ethz/cloud/kustomize/config/
 or via override in docker/demo/cloud/kind-example/kustomization.yml within the respective service.
 
 .. note::
-    The spring property names can be overriden in the respective yml by change the "." separator with a "_" separator.
+    The spring property names can be override in the respective yml by change the "." separator with a "_" separator.
 
 4. Create the docker-container with the Kubernetes cluster and initialize Ingress.
 
 - Linux: exec kind_deploy.sh
 
  .. code-block:: bash
-
+    
     $ .\kind_deploy
 
 - Windows:
 
  .. code-block:: bash
-
+    
     $ kind create cluster --config=kindcluster.yaml
     $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
 
 Now you should be able to show the Ingress pods:
 
  .. code-block:: bash
-
+    
     $ kubectl get pods -n ingress-nginx
 
 5. Create a namespace for the services:
 
  .. code-block:: bash
-
+    
     $ kubectl create ns seb-server-prod
 
 6. Build the services from the template:
 
  .. code-block:: bash
-
+    
     $ kustomize build . | kubectl apply -f -
 
 .. note::
@@ -303,7 +286,7 @@ Now you should be able to show the Ingress pods:
 Now you should be able to show the services, pods and logs with:
 
  .. code-block:: bash
-
+    
     $ kubectl get pods -n seb-server-prod
     $ kubectl get svc -n seb-server-prod
     $ kubectl logs seb-guiservice-prod-[f45588cfc-4944h] -n seb-server-prod
@@ -334,6 +317,75 @@ Now you should be able to show the services, pods and logs with:
 9. You can delete the whole kind cluster with:
 
  .. code-block:: bash
-
+    
     $ kind delete cluster
 
+
+.. _baseenv-label:
+
+Base environment variables for every service:
+.............................................
+
+
+**Base environment variables sebserver webservice**
+
+- `JAVA_HEAP_MIN`: Minimum heap memory space given to the JVM process
+- `JAVA_HEAP_MAX`: Maximum heap memory space given to the JVM process
+- `sebserver_password`: SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
+- `spring_profiles_active`: SEB Server profiles. For a productive webservice setup "ws,prod-ws,prod"
+- `spring_datasource_password`: password for MariaDB database
+- `spring_datasource_username`: MariaDB user name
+- `datastore_mariadb_server_address`: MariaDB server hostname
+- `datastore_mariadb_server_port`: MariaDB port
+- `sebserver_webservice_http_external_scheme`: Webservice external URL scheme (http/https)
+- `sebserver_webservice_http_external_servername`: Webservice external URL host name
+- `sebserver_webservice_http_external_port`: Webservice external URL port (empty for default http(80) https(443))
+- `sebserver_webservice_autologin_url`: External URL from where the sebserver guiservice is available. See also `sebserver_gui_http_external_servername`
+- `sebserver_feature_exam_seb_screenProctoring_bundled_url`: The URL on which the screen proctoring webservice is externally available
+- `sps_sebserver_client_secret`: SEB Servers client secret to connect to screen proctoring service. This must match with the sebserver_client_secret setting in screen proctoring (sps) webservice
+- `sps_sebserver_password`: SEB Servers screen proctoring service maintenance account password. This must match with the same setting in screen proctoring (sps) webservice
+
+**Base environment variables sebserver guiservice**
+
+- `JAVA_HEAP_MIN`: Minimum heap memory space given to the JVM process
+- `JAVA_HEAP_MAX`: Maximum heap memory space given to the JVM process
+- `sebserver_password` : SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
+- `spring_profiles_active` : SEB Server profiles. For a productive guiservice setup "gui,prod-gui,prod"
+- `sebserver_gui_http_external_scheme`: Guiservice external URL scheme (http/https)
+- `sebserver_gui_http_external_servername`: Guiservice external URL host name
+- `sebserver_gui_http_external_port`: Guiservice external URL port (empty for default http(80) https(443))
+- `sebserver_gui_http_webservice_scheme`: Webservice external connection URL scheme (http/https)
+- `sebserver_gui_http_webservice_servername` : Webservice external connection URL host name.
+- `sebserver_gui_http_webservice_port` : Webservice external connection URL port (empty for default http(80) https(443))
+
+**Base environment variables screen proctoring (sps) webservice**
+
+- `JAVA_HEAP_MIN`: Minimum heap memory space given to the JVM process
+- `JAVA_HEAP_MAX`: Maximum heap memory space given to the JVM process
+- `sebserver_password`: SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
+- `spring_profiles_active`: SEB Server profiles. For a productive webservice setup "prod"
+- `spring_datasource_password`: password for MariaDB database
+- `spring_datasource_username`: MariaDB user name
+- `datastore_mariadb_server_address`: MariaDB server hostname
+- `datastore_mariadb_server_port`: MariaDB port
+- `sps_data_store_adapter`: Image (Screenshots) data store adapter. "FULL_RDBMS" for storing images into DB or "S3_RDBMS" for S3 compatible storage
+- `sps_webservice_http_external_scheme`: Webservice external URL scheme (http/https)
+- `sps_webservice_http_external_servername`: Webservice external URL host name
+- `sps_webservice_http_external_port`: Webservice external URL port (empty for default http(80) https(443))
+- `sps_gui_redirect_url`: SPS GUI external URL used for redirect and autologin link creation
+- `sebserver_client_secret`: Client secret for SEB Server binding. SEB Server must use this to connect to screen proctoring service. See also sps_sebserver_client_secret
+- `spsgui_client_secret`: Client secret for screen proctoring GUI service binding. SPS GUI service must use this to connect to the SPS webservice
+- `sps_init_sebserveraccount_password`: Password for the SEB Server user account that is used by SEB Server to manage SPS service data. This account is initially generated by the SPS service if it doesn't exist
+
+**Base environment variables sebserver screen proctoring (sps) guiservice**
+
+- `NODE_ENV`: Node environment profile. "prod" for production setup
+- `SERVER_PORT`: Internal service port mapping. Default is "3000"
+- `VITE_SERVER_URL`: The external URL of the VITE server
+- `VITE_SERVER_PORT`: The port mapping for above VITE server URL if needed. If not needed (default ports http/https) this can be empty
+- `PROCTOR_SERVER_URL`: The external URL of the screen proctoring webservice. This can also be internal URL connection to sps-webservice
+- `PROCTOR_SERVER_PORT`: Port mapping for above screen proctoring webservice URL if needed. If not needed (default ports http/https) this can be empty
+- `PROCTOR_DEFAULT_URL`: Default webservice root API endpoint. Usually "/admin-api/v1"
+- `PROCTOR_SERVER_USERNAME`: Client id name for sps-guiservice to connect to sps-webservice. Default is "spsGuiClient"
+- `PROCTOR_SERVER_PASSWORD`: Client secret for sps-guiservice to connect to sps-webservice. Must match with spsgui_client_secret
+- `SEB_SERVER_INTEGRATED_MODE`: Integration mode. Default is true
