@@ -106,7 +106,7 @@ For more details on how to configure each service see :ref:`configuration-label`
     
     SEBSERVER_PWD 
         - The SEB Server password is needed for various reasons. This password must be always the same and should be securely stored somewhere
-    DB_SA_PWD=somePW 
+    DB_SA_PWD
         - The super user password for the data base connection. If you don't want to use the super user to connect to database you need to configure this within the docker-compose file for all services that needs a database connection.
     DNS_NAME
         - The DNS name where your host is available from the Internet
