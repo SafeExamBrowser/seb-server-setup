@@ -1,0 +1,94 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sps-webservice
+  labels:
+    app: sps-webservice
+spec:
+  minReadySeconds: 10
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sps-webservice
+  template:
+    metadata:
+      labels:
+        app: sps-webservice
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - seb-webservice
+                        - seb-guiservice
+                        - sps-webservice
+                        - sps-guiservice
+                        - seb-mariadb
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: sps-webservice
+          image: anhefti/seb-sps:v0.1-stable
+          imagePullPolicy: Always
+          env:
+            - name: "JAVA_HEAP_MIN"
+              value: "1G"
+            - name: "JAVA_HEAP_MAX"
+              value: "6G"
+            - name: "spring_profiles_active"
+              value: "prod"
+            - name: "sebserver_password"
+              value: "SET_PASSWORD"
+# NOTE: Database settings. Account must be able to create / delete table
+            - name: "datastore_mariadb_server_port"
+              value: "3306"
+            - name: "datastore_mariadb_server_address"
+              value: "sebserver-db-dev.ethz.ch"
+            - name: "spring_datasource_username"
+              value: "sebserver"
+            - name: "spring_datasource_password"
+              value: "SET_PASSWORD"
+            - name: "sps_data_store_adapter"
+              value: "FULL_RDBMS"
+# NOTE: S3 storage connection details in case S3 storage shall be used to store image data (screen shots)
+            - name: "sps_s3_endpointUrl"
+              value: "SET_S3_URL"
+            - name: "s3_accessKey"
+              value: "SET_PASSWORD"
+            - name: "sps_s3_bucketName"
+              value: "sebserver"
+            - name: "sps_s3_store_batch"
+              value: "true"
+# NOTE: SEB Server connection settings
+            - name: "sebserver_client_secret"
+              value: "SET_PASSWORD"
+            - name: "spsgui_client_secret"
+              value: "SET_PASSWORD"
+            - name: "sps_init_sebserveraccount_password"
+              value: "SET_PASSWORD"
+# NOTE: External URL settings
+            - name: "sps_webservice_http_external_scheme"
+              value: "https"
+            - name: "sps_webservice_http_external_servername"
+              value: "sps-webservice.ethz.ch"
+            - name: "sps_webservice_http_external_port"
+              value: "443"
+          ports:
+            - containerPort: 8090
+          volumeMounts:
+            - mountPath: /sebsps/config/spring
+              name: application-properties-sps
+              readOnly: true
+      volumes:
+        - name: application-properties-sps
+          configMap:
+            items:
+              - key: application-properties-sps
+                path: application-properties-sps
+            name: application-properties-sps

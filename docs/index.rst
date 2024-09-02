@@ -13,6 +13,7 @@ SEB Server Installation Guide
      :maxdepth: 1
    overview
    installation
+   production
    configuration
    troubleshooting
 

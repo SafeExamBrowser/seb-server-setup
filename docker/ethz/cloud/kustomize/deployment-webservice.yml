@@ -28,6 +28,8 @@ spec:
                       values:
                         - seb-webservice
                         - seb-guiservice
+                        - sps-webservice
+                        - sps-guiservice
                         - seb-mariadb
                 topologyKey: kubernetes.io/hostname
       volumes:
@@ -47,7 +49,7 @@ spec:
                 path: "jmxremote.access"
       containers:
         - name: seb-webservice
-          image: anhefti/seb-server:v1.6-stable
+          image: anhefti/seb-server:v2.0-stable
           imagePullPolicy: Always
           resources:
             requests:
@@ -68,13 +70,31 @@ spec:
             - name: jmx-remote-access
               mountPath: /sebserver/config/jmx
           env:
-            - name: JAVA_HEAP_MIN
+            - name: "JAVA_HEAP_MIN"
               value: "1G"
-            - name: JAVA_HEAP_MAX
+            - name: "JAVA_HEAP_MAX"
               value: "8G"
-            - name: MONITORING_MODE
-              value: "false"
-            - name: JMX_PORT
-              value: "9090"
             - name: "spring_profiles_active"
               value: "ws,prod-ws,prod"
+# NOTE: The internal SEB Server password. The same must be set in guiservice
+            - name: "sebserver_password"
+              value: "SET_PASSWORD"
+# NOTE: Database settings. Account must be able to create / delete table
+            - name: "datastore_mariadb_server_address"
+              value: "sebserver-db-test.ethz.ch"
+            - name: "spring_datasource_username"
+              value: "sebserver"
+            - name: "spring_datasource_password"
+              value: "SET_PASSWORD"
+# NOTE: Screen Proctoring settings and passwords
+            - name: "sebserver_feature_exam_seb_screenProctoring_bundled_url"
+              value: "https://sps-webservice-test.ethz.ch"
+            - name: "sps_sebserver_client_secret"
+              value: "SET_PASSWORD"
+            - name: "sps_sebserver_password"
+              value: "SET_PASSWORD"
+# NOTE: External webservice URL settings
+            - name: "sebserver_webservice_http_external_servername"
+              value: "sebserver-webservice.ethz.ch"
+            - name: "sebserver_webservice_autologin_url"
+              value: "https://sebserver.ethz.ch"
