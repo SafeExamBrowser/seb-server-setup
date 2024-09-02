@@ -62,28 +62,41 @@ For a complete SEB Server user guide please go to `SEB Server User Guide <https:
 SEB Server Version 2.0 is out
 -------------------------------
 
+SEB Server Version 2.0
+
+With the new SEB Server release, SEB Server makes a major version change from 1.x to 2.x. This is mainly because of the new
+Screen Proctoring feature for SEB integrated into SEB Server and the removal of live proctoring with Zoom and Jitsi Meet
+that is no longer available for SEB Server version 2.x.
+
+
 The new major update of SEB Server from version 1 to version 2, comes with the new in-built feature of screen proctoring and also a extended but better bundled Docker setup.
 There are two new services that run beside the existing services like seb-server, mariadb and a proxy. This two new services are needed for the new screen proctoring feature
 and consists of a sps-webservice and sps-guiservice container. The sps-webservice runs the back-end for screen proctoring and needs a database connection to eiter the same
 database server as seb-server or to another one if SEB Server data and screen shots, meta data shall be stored on different database servers. The sps-guiservice implements
 the screen proctoring user interface that can be accessed within a browser application.
+For a migration from a running SEB Server setup with version 1.x to new major version 2.0, please also read the `migration guide <https://seb-server-setup.readthedocs.io/en/latest/major-migration.html>`_.
 
 New Features:
-
-TODO
+    - Screen Proctoring with SEB and SEB Server. Can be enabled and configured for an Exam. SEB takes and sends screen shots plus Metadata to SEB Server. With monitoring and search functionality.
+    - Moodle Integration: SEB Server Exam creation from Moodle site with new SEB Server Moodle Plugin 2.0.
+    - Moodle Integration: Auto Login to SEB Server monitoring for Moodle Teacher with dedicated privileges. Comes with Moodle Plugin 2.0
+    - Exam Test Run. There is now the possibility to apply an test run for an Exam that is in coming up status. Exam is then in "Running" like state and SEB clients can connect as well as supporter can monitor the exam.
 
 Improvements:
-
-TODO
-
+    - Improvement of user ID resolution and handshake completion for SEB connecting with SEB-Server. SEB client now sent as much client information as possible and finish up the SEB Server handshake more quickly.
+    - Connection Configuration Improve (or remove) Date Filter.
+    - DB Migration Table charset fix for all tables, set to "utf8mb4_general"
+    - New SEB Settings in SEB Server GUI for version 2.0
+    - Table sort direction selection and table column length selection stick to User Session
 
 Bugfixes:
-
-TODO
-
-Docker-Image:
-
-TODO
+    - Missing Pending Notification Page Update in Monitoring Detail view
+    - Importing an exam without template throws error
+    - LMS name resolving sometimes gets "null" values for names
+    - New Ready State is not involved within the Filter numbers
+    - Page of ASK Grants in Exam has table selection action problems
+    - Sorting of start and end-date in Assessment Tool Lookup not working as expected
+    - Running Exam without LMS is greyed out without reason
 
 
 SEB - SEB Server Compatibility
