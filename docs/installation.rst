@@ -7,8 +7,4 @@ Installation
    general_installation
    install-demo
    install-production
-   major-migration
    initial-log
-   service-update
-   service-reset
-   service-backup
