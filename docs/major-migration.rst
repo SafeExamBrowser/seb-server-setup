@@ -9,9 +9,9 @@ from SEB Server 1.x to version 2.x needs special treating and it is not going to
 There are basically two different ways to go on with this migration.
 If you are able to make a database backup and restore, setting up an entire new SEB Server would be the easiest way. But if
 you want to reuse our internal/integrated database without migrating the data form old database to a new one, you need to take
-care to merge your old setup configuration with the new one.x
+care to merge your old setup configuration with the new one.
 
-**We recommend the first approaches:**
+**We recommend the first approach:**
 
 1. Make sure you have all essential settings like passwords for SEB Server and Database connection from your existing SEB Server setup at hand
 
@@ -43,7 +43,7 @@ care to merge your old setup configuration with the new one.x
 
 ---------------------------------------------------------------------------------------------------------------------
 
-**For the second approaches please use the following guide:**
+**For the second approach please use the following guide:**
 
 1. Make sure you have all essential settings like passwords for SEB Server and Database connection from your existing SEB Server setup at hand and backed up
     
