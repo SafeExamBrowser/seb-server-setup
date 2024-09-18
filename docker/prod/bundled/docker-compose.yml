@@ -121,6 +121,7 @@ services:
       # Service runtime settings
       - NODE_ENV=prod
       - SERVER_PORT=3000
+      - LOG_LEVEL=info
 
       # VITE server settings
       - VITE_SERVER_URL=https://${DNS_NAME}
