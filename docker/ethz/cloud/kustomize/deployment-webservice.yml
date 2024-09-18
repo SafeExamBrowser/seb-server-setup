@@ -75,7 +75,7 @@ spec:
             - name: "JAVA_HEAP_MAX"
               value: "8G"
             - name: "spring_profiles_active"
-              value: "ws,prod-ws,prod"
+              value: "ws,prod"
 # NOTE: The internal SEB Server password. The same must be set in guiservice
             - name: "sebserver_password"
               value: "SET_PASSWORD"

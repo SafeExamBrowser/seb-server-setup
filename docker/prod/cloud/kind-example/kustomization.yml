@@ -41,7 +41,7 @@ patchesStrategicMerge:
                 - name: "JAVA_HEAP_MAX"
                   value: "8G"
                 - name: "spring_profiles_active"
-                  value: "ws,prod-ws,prod"
+                  value: "ws,prod"
     
                 # NOTE: The internal SEB Server password. The same must be set in guiservice
                 - name: "sebserver_password"
@@ -84,7 +84,7 @@ patchesStrategicMerge:
               - name: JAVA_HEAP_MAX
                 value: "8G"
               - name: "spring_profiles_active"
-                value: "gui,prod-gui,prod"
+                value: "gui,prod"
     
               # NOTE: The internal SEB Server password must be set the same as in webservice
               - name: "sebserver_password"
