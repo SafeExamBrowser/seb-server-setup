@@ -13,7 +13,7 @@ as an example for a cloud based setup with kubernetes kind example configuration
     anymore but is built and published by the main SEB Server repository within docker hub.
 
     And since SEB Server version 2.0 there are two new services that are included within the SEB Server installation but
-    simplified setup process completely based on Docker-Compose for bundled setups, pulling images form Dockerhub.one
+    simplified setup process completely based on Docker-Compose for bundled setups, pulling images from Dockerhub.
 
     If you already have a SEB Server installation and want to migrate from a former installation with major version 1.X
     to the new major version 2.x, please consult the Major Version Migration Guide
