@@ -23,7 +23,7 @@ services:
       environment:
         - JAVA_HEAP_MIN=1G
         - JAVA_HEAP_MAX=8G
-        - spring_profiles_active=gui,ws,prod-ws,prod-gui,prod
+        - spring_profiles_active=bundled,prod
 
         - sebserver_password=${SEBSERVER_PWD}
         - sebserver_mariadb_password=${DB_SA_PWD}

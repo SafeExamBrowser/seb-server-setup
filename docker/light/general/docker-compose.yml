@@ -20,8 +20,7 @@ services:
     environment:
       - JAVA_HEAP_MIN=1G
       - JAVA_HEAP_MAX=8G
-      - spring_profiles_active=ws,gui,demo
-
+      - spring_profiles_active=bundled,demo
       - sebserver_password=${SEBSERVER_PWD}
 
       # Data Base settings
