@@ -449,6 +449,8 @@ ________________________________________________________________________________
     
     NODE_ENV 
         - Node environment profile. "prod" for production setup
+    LOG_LEVEL
+        - Log level. Default is "info"
     SERVER_PORT 
         - Internal service port mapping. Default is "3000"
     VITE_SERVER_URL 

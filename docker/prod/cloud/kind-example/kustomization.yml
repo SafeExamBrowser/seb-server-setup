@@ -168,6 +168,8 @@ patchesStrategicMerge:
               env:
               - name: "NODE_ENV"
                 value: "prod"
+              - name: "LOG_LEVEL"
+                value: "info"
               - name: "VITE_SERVER_URL"
                 value: "SET_EXTERNAL_URL_OF_SPS_GUI"
               - name: "PROCTOR_SERVER_URL"
