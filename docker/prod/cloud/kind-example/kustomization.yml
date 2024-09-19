@@ -7,11 +7,11 @@ replicas:
 
 images:
   - name: anhefti/seb-server
-    newTag: v2.0-stable
+    newTag: sprint-testing
 
 resources:
   # Get the base configuration
-  - https://github.com/SafeExamBrowser/seb-server-setup/docker/ethz/cloud/kustomize?ref=v2.0-stable
+  - https://github.com/SafeExamBrowser/seb-server-setup/docker/ethz/cloud/kustomize?ref=sprint-testing
 
   # Add an ingress
   - ingress.yml

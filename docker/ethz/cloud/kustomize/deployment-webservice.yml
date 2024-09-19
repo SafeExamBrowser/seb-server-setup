@@ -49,7 +49,7 @@ spec:
                 path: "jmxremote.access"
       containers:
         - name: seb-webservice
-          image: anhefti/seb-server:v2.0-stable
+          image: anhefti/seb-server:sprint-testing
           imagePullPolicy: Always
           resources:
             requests:

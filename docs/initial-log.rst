@@ -24,7 +24,7 @@ Following the startup logs of each service is shown with some additional comment
     
     08:00:38.118 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->
     08:00:38.118 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->
-    08:00:38.118 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> Version: v2.0-stable-f632cc9
+    08:00:38.118 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> Version: sprint-testing-f632cc9
     08:00:38.118 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->
     08:00:38.119 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> Active profiles: [gui, ws, prod-ws, prod-gui, prod]
     08:00:38.119 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->
@@ -59,8 +59,8 @@ Following the startup logs of each service is shown with some additional comment
     08:00:38.121 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *** Webservice starting up...                         ***
     08:00:38.121 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *********************************************************
     08:00:38.121 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->
-    08:00:38.121 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> Register Webservice: 9c68d959-b0c0-4611-b5cb-c8d39cfe58c6_v2.0-stable-f632cc9
-    08:00:38.226 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> Successfully register Webservice instance. uuid: 9c68d959-b0c0-4611-b5cb-c8d39cfe58c6_v2.0-stable-f632cc9, address: 172.19.0.4
+    08:00:38.121 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> Register Webservice: 9c68d959-b0c0-4611-b5cb-c8d39cfe58c6_sprint-testing-f632cc9
+    08:00:38.226 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> Successfully register Webservice instance. uuid: 9c68d959-b0c0-4611-b5cb-c8d39cfe58c6_sprint-testing-f632cc9, address: 172.19.0.4
     08:00:38.226 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ---->
     
     **Here the database migration starts and gives info about migration that are applied and might be failed too**
@@ -98,7 +98,7 @@ Following the startup logs of each service is shown with some additional comment
     08:00:38.714 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ------> Activate exam run controller background task
     08:00:38.714 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] --------> Task runs on an interval of 60000 milliseconds
     08:00:38.714 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] --------> Real exam running time span is expanded on 3600000 before start and 3600000 milliseconds after ending
-    08:00:38.722 INFO  [main]:[ch.ethz.seb.sebserver.webservice.servicelayer.dao.impl.WebserviceInfoDAOImpl] Set webservice 9c68d959-b0c0-4611-b5cb-c8d39cfe58c6_v2.0-stable-f632cc9 as master
+    08:00:38.722 INFO  [main]:[ch.ethz.seb.sebserver.webservice.servicelayer.dao.impl.WebserviceInfoDAOImpl] Set webservice 9c68d959-b0c0-4611-b5cb-c8d39cfe58c6_sprint-testing-f632cc9 as master
     08:00:38.724 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ------>
     08:00:38.724 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ------> Activate SEB lost-ping-event update background task on a fix rate of: 5000 milliseconds
     08:00:38.725 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ------>
@@ -209,7 +209,7 @@ Following the startup logs of each service is shown with some additional comment
     2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |_______|_______|___|  |_|_______|_______|_|  |__|    |___|   |___|  |_|_______|_______| |___| |_______|___|  |_|___|_|  |__|_______|
     2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ---->
     2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ----> Version: v1.0-stable-9abbf93
+    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ----> Version: sprint-testing-9abbf93
     2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ---->
     2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ----> Active profiles: [prod]
     2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ---->
@@ -219,7 +219,7 @@ Following the startup logs of each service is shown with some additional comment
     2024-08-28 10:00:35 28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ----> *** Webservice starting up...                         ***
     2024-08-28 10:00:35 28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
     2024-08-28 10:00:35 28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:35 28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ----> Register Webservice: 96487e9f-e503-4d56-bcbd-7688f38ce12d_v1.0-stable-9abbf93
+    2024-08-28 10:00:35 28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ----> Register Webservice: 96487e9f-e503-4d56-bcbd-7688f38ce12d_sprint-testing-9abbf93
     2024-08-28 10:00:35 28.08.2024 08:00:35.934 INFO  [main]:[com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting...
     2024-08-28 10:00:36 28.08.2024 08:00:36.015 INFO  [main]:[com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Start completed.
     2024-08-28 10:00:36 28.08.2024 08:00:36.078 WARN  [main]:[org.mariadb.jdbc.message.server.ErrorPacket] Error: 1146-42S02: Table 'SEBScreenProctoring.webservice_server_info' doesn't exist
@@ -261,13 +261,13 @@ Following the startup logs of each service is shown with some additional comment
     2024-08-28 10:00:36 28.08.2024 08:00:36.982 INFO  [main]:[SERVICE_INIT] ---->
     2024-08-28 10:00:36 28.08.2024 08:00:36.982 INFO  [main]:[SERVICE_INIT] ----> **** Migration check END ********************************
     2024-08-28 10:00:36 28.08.2024 08:00:36.982 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.007 INFO  [main]:[SERVICE_INIT] ----> Successfully register Webservice instance. uuid: 96487e9f-e503-4d56-bcbd-7688f38ce12d_v1.0-stable-9abbf93, address: 172.19.0.5
+    2024-08-28 10:00:37 28.08.2024 08:00:37.007 INFO  [main]:[SERVICE_INIT] ----> Successfully register Webservice instance. uuid: 96487e9f-e503-4d56-bcbd-7688f38ce12d_sprint-testing-9abbf93, address: 172.19.0.5
     2024-08-28 10:00:37 28.08.2024 08:00:37.007 INFO  [main]:[SERVICE_INIT] ---->
     2024-08-28 10:00:37 28.08.2024 08:00:37.007 INFO  [main]:[SERVICE_INIT] ----> **** Initialize Services... *****************************
     2024-08-28 10:00:37 28.08.2024 08:00:37.007 INFO  [main]:[SERVICE_INIT] ---->
     2024-08-28 10:00:37 28.08.2024 08:00:37.015 INFO  [main]:[SERVICE_INIT] ------> Activate background update task
     2024-08-28 10:00:37 28.08.2024 08:00:37.015 INFO  [main]:[SERVICE_INIT] ------> Task runs on an update interval of 15000
-    2024-08-28 10:00:37 28.08.2024 08:00:37.039 INFO  [main]:[ch.ethz.seb.sps.server.datalayer.dao.impl.WebserviceInfoDAOImpl] Set webservice 96487e9f-e503-4d56-bcbd-7688f38ce12d_v1.0-stable-9abbf93 as master
+    2024-08-28 10:00:37 28.08.2024 08:00:37.039 INFO  [main]:[ch.ethz.seb.sps.server.datalayer.dao.impl.WebserviceInfoDAOImpl] Set webservice 96487e9f-e503-4d56-bcbd-7688f38ce12d_sprint-testing-9abbf93 as master
     2024-08-28 10:00:37 28.08.2024 08:00:37.042 INFO  [main]:[SERVICE_INIT] -------->
     2024-08-28 10:00:37 28.08.2024 08:00:37.042 INFO  [main]:[SERVICE_INIT] --------> This instance has become master!
     2024-08-28 10:00:37 28.08.2024 08:00:37.042 INFO  [main]:[SERVICE_INIT] -------->

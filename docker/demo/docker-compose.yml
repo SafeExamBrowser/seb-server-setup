@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
 
   seb-server:
-    image: "anhefti/seb-server:v2.0-stable"
+    image: "anhefti/seb-server:sprint-testing"
     container_name: seb-server
     environment:
       # Service runtime settings
@@ -61,7 +61,7 @@ services:
     restart: unless-stopped
 
   sps-webservice:
-    image: "anhefti/seb-sps:v1.0-stable"
+    image: "anhefti/seb-sps:sprint-testing"
     container_name: sps-webservice
     environment:
       # Service runtime settings
@@ -113,7 +113,7 @@ services:
     restart: unless-stopped
 
   sps-guiservice:
-    image: naritter/seb-sps-gui:v1.0-stable
+    image: naritter/seb-sps-gui:sprint-testing
     container_name: sps-guiservice
     environment:
       # Service runtime settings
