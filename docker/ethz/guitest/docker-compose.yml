@@ -25,7 +25,7 @@ services:
       # Service runtime settings
       - JAVA_HEAP_MIN=1G
       - JAVA_HEAP_MAX=8G
-      - spring_profiles_active=ws,gui,demo
+      - spring_profiles_active=bundled,demo
 
       # SEB Server password, internally used to en-/decrypt sensitive data secure internal communication
       # NOTE: These must match with the other sebserver_password set on other services
