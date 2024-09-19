@@ -97,6 +97,7 @@ Variables sebserver screen proctoring (sps) guiservice
 ------------------------------------------------------
 
 - `NODE_ENV`: Node environment profile. "prod" for production setup
+- `LOG_LEVEL`: Log level. Default is "info"
 - `SERVER_PORT`: Internal service port mapping. Default is "3000"
 - `VITE_SERVER_URL`: The external URL of the VITE server
 - `VITE_SERVER_PORT`: The port mapping for above VITE server URL if needed. If not needed (default ports http/https) this can be empty
