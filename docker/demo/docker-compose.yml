@@ -69,6 +69,7 @@ services:
       - JAVA_HEAP_MAX=6G
       - SERVER_PORT=8090
       - spring_profiles_active=prod,demo
+      - sps_webservice_distributed=false
 
       # SEB Server password, internally used to en-/decrypt sensitive data secure internal communication
       # NOTE: These must match with the other sebserver_password set on other services

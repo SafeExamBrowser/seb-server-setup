@@ -105,7 +105,7 @@ SEB - SEB Server Compatibility
 The table below shows available and upcoming SEB client versions that has SEB Server integration support and are compatible with particular 
 SEB Server version. There is an entry for each platform with a beta or testing release date and a official release date.
 
-**SEB Server Version 2.0.X
+**SEB Server Version 2.0.x**
 
 .. csv-table::
    :header: "Platform / OS", "Release Version"
