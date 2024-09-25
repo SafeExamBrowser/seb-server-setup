@@ -1,119 +1,151 @@
-name: seb-server-light
+version: '3.5'
 services:
   mariadb:
     image: "mariadb:10.5"
-    container_name: seb-server-light-mariadb
+    container_name: seb-server-demo-mariadb
     environment:
       - MYSQL_ROOT_PASSWORD=${SEBSERVER_PWD}
     ports:
       - 3306:3306
     volumes:
-      - seb-server-light-mariadb:/var/lib/mysql
+      - seb-server-demo-mariadb:/var/lib/mysql
       - ./config/mariadb/config.cnf:/etc/mysql/conf.d/config.cnf
     networks:
-      - seb-server-light-network
+      - seb-server-network
     restart: unless-stopped
 
   seb-server:
-    image: "anhefti/seb-server:sprint-testing"
+    image: "anhefti/seb-server:v2.0-stable"
     container_name: seb-server
     platform: linux/x86_64
     environment:
+      # Service runtime settings
       - JAVA_HEAP_MIN=1G
       - JAVA_HEAP_MAX=8G
       - spring_profiles_active=bundled,demo
+      - sebserver_test_property=This is a SEB Server Demo Setup
 
+      # SEB Server password, internally used to en-/decrypt sensitive data secure internal communication
+      # NOTE: These must match with the other sebserver_password set on other services
       - sebserver_password=${SEBSERVER_PWD}
 
       # Data Base settings
+      # NOTE: these must match with the DB connection settings on mariadb service
       - sebserver_mariadb_password=${SEBSERVER_PWD}
-      - datastore_mariadb_server_address=seb-server-light-mariadb
+      - datastore_mariadb_server_address=seb-server-demo-mariadb
       - datastore_mariadb_server_port=3306
       - spring_flyway_locations=classpath:config/sql/base,classpath:config/sql/demo
 
       # Set the below URL component settings from where the web-service is externally available
       # NOTE: This must be the address from that the service is externally available (not network internal address)
       - sebserver_webservice_http_external_scheme=http
-      - sebserver_webservice_http_external_servername=localhost
+      - sebserver_webservice_http_external_servername=${CLIENT_EXTERNAL_DNS_NAME}
       - sebserver_webservice_http_external_port=8080
-      - sebserver_webservice_autologin_url=http://host.docker.internal
-      - sebserver_webservice_light_setup=true
+      - sebserver_webservice_autologin_url=http://${SERVER_EXTERNAL_DNS_NAME}
 
-
-      # NOTE: Screen Proctoring settings and passwords
-      - sebserver_feature_exam_seb_screenProctoring_bundled_url=http://host.docker.internal:8090
+      # Screen Proctoring settings and passwords
+      # NOTE: these must match with the respective equivalents on sps-webservice
+      - sebserver_feature_exam_seb_screenProctoring_bundled_url=http://${SERVER_EXTERNAL_DNS_NAME}:8090
       - sps_sebserver_client_secret=${SEBSERVER_PWD}
       - sps_sebserver_password=${SEBSERVER_PWD}
+
+      # Logging: DEBUG for most interesting namespaces
+      - logging_level_ch_ethz_seb_sebserver_webservice_servicelayer_session_impl=DEBUG
+      - logging_level_ch_ethz_seb_sebserver_webservice_servicelayer_session_impl_proctoring=DEBUG
 
     ports:
       - 8080:8080
     networks:
-      - seb-server-light-network
+      - seb-server-network
     depends_on:
       - "mariadb"
     restart: unless-stopped
 
-  sps-server:
-    image: "anhefti/seb-sps:sprint-testing"
-    container_name: sps-server
+  sps-webservice:
+    image: "anhefti/seb-sps:v1.0-stable"
+    container_name: sps-webservice
     platform: linux/x86_64
     environment:
-        - JAVA_HEAP_MIN=1G
-        - JAVA_HEAP_MAX=6G
-        - SERVER_PORT=8090
-        - spring_profiles_active=prod,demo
+      # Service runtime settings
+      - JAVA_HEAP_MIN=1G
+      - JAVA_HEAP_MAX=6G
+      - SERVER_PORT=8090
+      - spring_profiles_active=bundled,demo
+      - sps_webservice_distributed=false
 
-        - sebserver_password=${SEBSERVER_PWD}
+      # SEB Server password, internally used to en-/decrypt sensitive data secure internal communication
+      # NOTE: These must match with the other sebserver_password set on other services
+      - sebserver_password=${SEBSERVER_PWD}
 
-        - datastore_mariadb_server_port=3306
-        - datastore_mariadb_server_address=seb-server-light-mariadb
-        - mariadb_password=${SEBSERVER_PWD}
+      # Data Base settings
+      # NOTE: these must match with the DB connection settings on mariadb service
+      - datastore_mariadb_server_port=3306
+      - datastore_mariadb_server_address=seb-server-demo-mariadb
+      - mariadb_password=${SEBSERVER_PWD}
+      - spring_flyway_locations=classpath:config/sql/base,classpath:config/sql/demo
+      - sps_data_store_adapter=FULL_RDBMS
 
-        - sebserver_client_secret=${SEBSERVER_PWD}
-        - spsgui_client_secret=${SEBSERVER_PWD}
-        - sps_data_store_adapter=FULL_RDBMS
-        - sps_webservice_http_external_scheme=http
-        - sps_webservice_http_external_servername=localhost
-        - sps_webservice_http_external_port=8090
-        - sps_gui_redirect_port=3000
-        - sps_gui_redirect_url=http://localhost:3000
-        - sps_init_sebserveraccount_password=${SEBSERVER_PWD}
-        - spring_flyway_locations=classpath:config/sql/base,classpath:config/sql/demo
+      # Set the below URL component settings from where the screen proctoring web-service is externally available
+      # NOTE: This must be the address from that the service is externally available (not network internal address)
+      - sps_webservice_http_external_scheme=http
+      - sps_webservice_http_external_servername=${CLIENT_EXTERNAL_DNS_NAME}
+      - sps_webservice_http_external_port=8090
+
+      # SEB Server client connection detail settings
+      - sebserver_client_secret=${SEBSERVER_PWD}
+      - sps_gui_redirect_url=http://${CLIENT_EXTERNAL_DNS_NAME}:3000
+      - sps_webservice_sebserver_bundle=true
+
+      # Screen Proctoring GUI client connection detail settings
+      - spsgui_client_secret=${SEBSERVER_PWD}
+      - sps_init_sebserveraccount_password=${SEBSERVER_PWD}
+
+      # Logging: DEBUG for most interesting namespaces
+      - logging_level_ch_ethz_seb_sps_server_servicelayer_impl=DEBUG
+      - logging_level_ch_ethz_seb_sps_server_weblayer=DEBUG
+
     volumes:
       - .:/sebsps/config/spring
     ports:
       - 8090:8090
     networks:
-        - seb-server-light-network
+        - seb-server-network
     depends_on:
         - "mariadb"
     restart: unless-stopped
 
-  sps-gui:
-    image: naritter/seb-sps-gui:sprint-testing
-    container_name: sps-gui
+  sps-guiservice:
+    image: naritter/seb-sps-gui:v1.0-stable
+    container_name: sps-guiservice
     platform: linux/x86_64
     environment:
-      - VITE_SERVER_URL=http://localhost
-      - VITE_SERVER_PORT=3000
+      # Service runtime settings
       - NODE_ENV=prod
       - SERVER_PORT=3000
-      - PROCTOR_SERVER_URL=http://host.docker.internal
+
+      # VITE server settings
+      - VITE_SERVER_URL=http://${CLIENT_EXTERNAL_DNS_NAME}
+      - VITE_SERVER_PORT=3000
+
+      # Screen Proctoring webservice connection settings
+      - PROCTOR_SERVER_URL=http://${SERVER_EXTERNAL_DNS_NAME}
       - PROCTOR_SERVER_PORT=8090
       - PROCTOR_DEFAULT_URL=/admin-api/v1
       - PROCTOR_SERVER_USERNAME=spsGuiClient
       - PROCTOR_SERVER_PASSWORD=${SEBSERVER_PWD}
+
+      # Screen Proctoring SEB Server integration mode. NOTE: always true for this setup
       - SEB_SERVER_INTEGRATED_MODE=true
     ports:
       - 3000:3000
     networks:
-      - seb-server-light-network
+      - seb-server-network
     restart: unless-stopped
 
 networks:
-  seb-server-light-network:
-    name: seb-server-light-network
+  seb-server-network:
+    name: seb-server-network
 
 volumes:
-  seb-server-light-mariadb:
-    name: seb-server-light-db
+  seb-server-demo-mariadb:
+    name: seb-server-db
