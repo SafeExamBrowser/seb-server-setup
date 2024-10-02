@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
 
   seb-server:
-      image: "anhefti/seb-server:v2.0-latest"
+      image: "anhefti/seb-server:v2.0-stable"
       container_name: seb-server
       volumes:
         - seb-server-config:/sebserver/config
@@ -70,7 +70,7 @@ services:
       restart: unless-stopped
 
   sps-server:
-    image: "anhefti/seb-sps:v1.0-latest"
+    image: "anhefti/seb-sps:v1.0-stable"
     container_name: sps-server
     environment:
       # Service runtime settings
@@ -117,7 +117,7 @@ services:
 
   sps-gui:
     #use the tag suffix "-single-host" to deploy the sps-gui on subpatch such as "/sps-gui
-    image: naritter/seb-sps-gui:v1.0-latest-single-host
+    image: naritter/seb-sps-gui:v1.0-stable-single-host
     container_name: sps-gui
     environment:
       # Service runtime settings
