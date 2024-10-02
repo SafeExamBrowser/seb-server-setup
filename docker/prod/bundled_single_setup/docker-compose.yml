@@ -43,12 +43,12 @@ services:
         # NOTE: This must be the address from that the service is externally available (not network internal address)
         - sebserver_webservice_http_external_scheme=https
         - sebserver_webservice_http_external_servername=${DNS_NAME}
-        - sebserver_webservice_http_external_port=4430
+        - sebserver_webservice_http_external_port=
         - sebserver_webservice_autologin_url=https://${DNS_NAME}
 
         # Screen Proctoring settings and passwords
         # NOTE: these must match with the respective equivalents on sps-server
-        - sebserver_feature_exam_seb_screenProctoring_bundled_url=https://${DNS_NAME}:4430/sps-web
+        - sebserver_feature_exam_seb_screenProctoring_bundled_url=https://${DNS_NAME}/sps-web
         - sps_sebserver_client_secret=${SEBSERVER_PWD}
         - sps_sebserver_password=${SEBSERVER_PWD}
 
@@ -70,7 +70,7 @@ services:
       restart: unless-stopped
 
   sps-server:
-    image: "anhefti/seb-sps:v2.0-latest"
+    image: "anhefti/seb-sps:v1.0-latest"
     container_name: sps-server-prod
     environment:
       # Service runtime settings
@@ -95,7 +95,7 @@ services:
       # NOTE: This must be the address from that the service is externally available (not network internal address)
       - sps_webservice_http_external_scheme=https
       - sps_webservice_http_external_servername=${DNS_NAME}
-      - sps_webservice_http_external_port=4430
+      - sps_webservice_http_external_port=
 
       # SEB Server client connection detail settings
       - sebserver_client_secret=${SEBSERVER_PWD}
@@ -117,7 +117,7 @@ services:
 
   sps-gui:
     #use the tag suffix "-single-host" to deploy the sps-gui on subpatch such as "/sps-gui
-    image: naritter/seb-sps-gui:v2.0-latest-single-host
+    image: naritter/seb-sps-gui:v1.0-latest-single-host
     container_name: sps-gui-prod
     environment:
       # Service runtime settings
@@ -129,7 +129,7 @@ services:
       - VITE_SERVER_PORT=4430/sps-gui
 
       # Screen Proctoring webservice connection settings
-      - PROCTOR_SERVER_URL=https://${DNS_NAME}:4430/sps-web
+      - PROCTOR_SERVER_URL=https://${DNS_NAME}/sps-web
       - PROCTOR_SERVER_PORT=
       - PROCTOR_DEFAULT_URL=/admin-api/v1
       - PROCTOR_SERVER_USERNAME=spsGuiClient
@@ -140,6 +140,7 @@ services:
     networks:
       - seb-server-network
     restart: unless-stopped
+    
   reverse-proxy:
     image: "nginx:latest"
     container_name: seb-server-prod-proxy
@@ -147,7 +148,7 @@ services:
       - ./config/nginx:/etc/nginx/conf.d
       - ./config/nginx/certs:/sebserver/config/certs
     ports:
-      - 4430:4430
+      - 443:443
     networks:
       - seb-server-network
     depends_on:
