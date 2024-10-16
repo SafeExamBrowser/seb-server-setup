@@ -117,6 +117,7 @@ services:
 
   sps-gui:
     #use the tag suffix "-single-host" to deploy the sps-gui on subpatch such as "/sps-gui
+    #Note: This is currently not working: https://github.com/SafeExamBrowser/seb-screen-proctoring-gui/issues/56
     image: naritter/seb-sps-gui:v1.0-stable-single-host
     container_name: sps-gui
     environment:
