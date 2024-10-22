@@ -186,6 +186,22 @@ For a complete initial log guide pleas read: :ref:`logguide-label`
     We highly recommend to change the generated password from the initial admin account immediately after first login. 
 
 
+Bundled Setup with single Port mapping
+...............................
+
+This is the same setup as the one above but uses only one single port that usually is the HTTPS default port 443. The
+traffic to the screen proctoring services is routed internally and the screen proctoring endpoints are the following:
+
+  - /sps-web/  --> https://sebserver.example.com/sps-web/ for the screen proctoring webservice
+  - /sps-gui/  --> https://sebserver.example.com/sps-gui/ for the screen proctoring gui
+  
+This URL suffixes should not be changed because also the docker image depends on it and it would not work correctly with
+the sps-gui docker image.
+
+For installation go to the install directory **/docker/prod/bundled_singe** and apply the installation steps from the 
+above installation guide. The steps are the very same for this setup bundle.
+
+
 .. _installkind-label:
 
 Cloud based Kubernetes Kind Example
