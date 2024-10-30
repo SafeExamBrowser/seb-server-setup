@@ -87,7 +87,7 @@ services:
       # Data Base settings
       # NOTE: these must match with the DB connection settings on mariadb service
       - spring_datasource_username=root
-      - spring_datasource_password=${SEBSERVER_PWD}
+      - spring_datasource_password=${DB_SA_PWD}
       - datastore_mariadb_server_port=3306
       - datastore_mariadb_server_address=seb-server-mariadb
       - sps_data_store_adapter=FULL_RDBMS
