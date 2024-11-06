@@ -97,6 +97,9 @@ services:
       - sps_webservice_http_external_servername=${DNS_NAME}
       - sps_webservice_http_external_port=
 
+      # Set the subpath of where the screen proctoring web-service is hosted
+      - sps_webservice_http_sub_path=
+
       # SEB Server client connection detail settings
       - sebserver_client_secret=${SEBSERVER_PWD}
       - sps_gui_redirect_port=
