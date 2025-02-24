@@ -4,10 +4,21 @@ nameSuffix: -prod
 replicas:
   - name: seb-guiservice
     count: 1
+  - name: seb-webservice
+    count: 1
+  - name: sps-webservice
+    count: 1
+  - name: sps-guiservice
+    count: 1
 
 images:
   - name: anhefti/seb-server
-    newTag: sprint-testing
+    newTag: v2.1-stable
+  - name: anhefti/seb-sps
+    newTag: v2.1-stable
+  - name: naritter/seb-sps-gui
+    newTag: v2.1-stable
+
 
 resources:
   # Get the base configuration
