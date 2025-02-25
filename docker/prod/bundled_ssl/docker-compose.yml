@@ -116,7 +116,7 @@ services:
     restart: unless-stopped
 
   sps-guiservice:
-    image: naritter/seb-sps-gui:v1.1-latest
+    image: naritter/seb-sps-gui:v1.1-latest-single-host
     container_name: sps-guiservice
     environment:
       # Service runtime settings
