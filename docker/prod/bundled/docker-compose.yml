@@ -43,7 +43,7 @@ services:
         # NOTE: This must be the address from that the service is externally available (not network internal address)
         - sebserver_webservice_http_external_scheme=https
         - sebserver_webservice_http_external_servername=${DNS_NAME}
-        - sebserver_webservice_http_external_port=${BASE_PORT}
+        - sebserver_webservice_http_external_port=
         - sebserver_webservice_autologin_url=https://${DNS_NAME}
 
         # Screen Proctoring settings and passwords
