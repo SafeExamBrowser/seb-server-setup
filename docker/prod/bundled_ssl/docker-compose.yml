@@ -69,15 +69,16 @@ services:
           - "mariadb"
       restart: unless-stopped
 
-  sps-server:
-    image: "anhefti/seb-sps:v1.0-stable"
-    container_name: sps-server
+  sps-webservice:
+    image: "anhefti/seb-sps:v1.1-latest"
+    container_name: sps-webservice
     environment:
       # Service runtime settings
       - JAVA_HEAP_MIN=1G
       - JAVA_HEAP_MAX=6G
       - SERVER_PORT=8090
       - spring_profiles_active=prod
+      - sps_webservice_distributed=false
 
       # SEB Server password, internally used to en-/decrypt sensitive data secure internal communication
       # NOTE: These must match with the other sebserver_password set on other services
@@ -97,12 +98,8 @@ services:
       - sps_webservice_http_external_servername=${DNS_NAME}
       - sps_webservice_http_external_port=
 
-      # Set the subpath of where the screen proctoring web-service is hosted
-      - sps_webservice_http_sub_path=
-
       # SEB Server client connection detail settings
       - sebserver_client_secret=${SEBSERVER_PWD}
-      - sps_gui_redirect_port=
       - sps_gui_redirect_url=https://${DNS_NAME}/sps-gui
       - sps_webservice_sebserver_bundle=true
 
@@ -118,11 +115,9 @@ services:
       - "mariadb"
     restart: unless-stopped
 
-  sps-gui:
-    #use the tag suffix "-single-host" to deploy the sps-gui on a subpath such as "/sps-gui
-    #Note: This is currently not working: https://github.com/SafeExamBrowser/seb-screen-proctoring-gui/issues/56
-    image: naritter/seb-sps-gui:v1.0-stable-single-host
-    container_name: sps-gui
+  sps-guiservice:
+    image: naritter/seb-sps-gui:v1.1-latest
+    container_name: sps-guiservice
     environment:
       # Service runtime settings
       - NODE_ENV=prod
@@ -134,7 +129,6 @@ services:
 
       # Screen Proctoring webservice connection settings
       - PROCTOR_SERVER_URL=https://${DNS_NAME}/sps-web
-      - PROCTOR_SERVER_PORT=
       - PROCTOR_DEFAULT_URL=/admin-api/v1
       - PROCTOR_SERVER_USERNAME=spsGuiClient
       - PROCTOR_SERVER_PASSWORD=${SEBSERVER_PWD}
@@ -144,7 +138,7 @@ services:
     networks:
       - seb-server-network
     restart: unless-stopped
-    
+
   reverse-proxy:
     image: "nginx:latest"
     container_name: seb-server-proxy

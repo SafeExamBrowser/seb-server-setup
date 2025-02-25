@@ -44,11 +44,11 @@ services:
         - sebserver_webservice_http_external_scheme=https
         - sebserver_webservice_http_external_servername=${DNS_NAME}
         - sebserver_webservice_http_external_port=${BASE_PORT}
-        - sebserver_webservice_autologin_url=https://${DNS_NAME}:${BASE_PORT}
+        - sebserver_webservice_autologin_url=https://${DNS_NAME}
 
         # Screen Proctoring settings and passwords
         # NOTE: these must match with the respective equivalents on sps-webservice
-        - sebserver_feature_exam_seb_screenProctoring_bundled_url=https://${DNS_NAME}:${SPS_WEB_PORT}
+        - sebserver_feature_exam_seb_screenProctoring_bundled_url=https://${DNS_NAME}/sps-web
         - sps_sebserver_client_secret=${SEBSERVER_PWD}
         - sps_sebserver_password=${SEBSERVER_PWD}
 
@@ -96,11 +96,11 @@ services:
       # NOTE: This must be the address from that the service is externally available (not network internal address)
       - sps_webservice_http_external_scheme=https
       - sps_webservice_http_external_servername=${DNS_NAME}
-      - sps_webservice_http_external_port=${SPS_WEB_PORT}
+      - sps_webservice_http_external_port=
 
       # SEB Server client connection detail settings
       - sebserver_client_secret=${SEBSERVER_PWD}
-      - sps_gui_redirect_url=https://${DNS_NAME}:${SPS_GUI_PORT}
+      - sps_gui_redirect_url=https://${DNS_NAME}/sps-gui
       - sps_webservice_sebserver_bundle=true
 
       # Screen Proctoring GUI client connection detail settings
@@ -122,15 +122,13 @@ services:
       # Service runtime settings
       - NODE_ENV=prod
       - SERVER_PORT=3000
-      - LOG_LEVEL=info
 
       # VITE server settings
       - VITE_SERVER_URL=https://${DNS_NAME}
-      - VITE_SERVER_PORT=${SPS_GUI_PORT}
+      - VITE_SERVER_PORT=/sps-gui
 
       # Screen Proctoring webservice connection settings
-      - PROCTOR_SERVER_URL=https://${DNS_NAME}
-      - PROCTOR_SERVER_PORT=${SPS_WEB_PORT}
+      - PROCTOR_SERVER_URL=https://${DNS_NAME}/sps-web
       - PROCTOR_DEFAULT_URL=/admin-api/v1
       - PROCTOR_SERVER_USERNAME=spsGuiClient
       - PROCTOR_SERVER_PASSWORD=${SEBSERVER_PWD}
@@ -148,9 +146,7 @@ services:
       - ./config/nginx:/etc/nginx/conf.d
       - ./config/nginx/certs:/sebserver/config/certs
     ports:
-      - ${BASE_PORT}:${BASE_PORT}
-      - ${SPS_WEB_PORT}:${SPS_WEB_PORT}
-      - ${SPS_GUI_PORT}:${SPS_GUI_PORT}
+      - 8080:8080
     networks:
       - seb-server-network
     depends_on:
