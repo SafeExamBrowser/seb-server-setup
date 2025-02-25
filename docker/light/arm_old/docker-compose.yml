@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
 
   seb-server:
-      image: "anhefti/seb-server:sprint-testing"
+      image: "anhefti/seb-server:v2.1-latest"
       container_name: seb-server
       platform: linux/amd64
       volumes:
@@ -54,7 +54,7 @@ services:
       restart: unless-stopped
 
   sps-server:
-    image: "anhefti/seb-sps:sprint-testing"
+    image: "anhefti/seb-sps:v1.1-latest"
     platform: linux/amd64
     container_name: sps-server
     environment:
@@ -83,7 +83,7 @@ services:
     restart: unless-stopped
 
   sps-gui:
-    image: naritter/seb-sps-gui:sprint-testing
+    image: naritter/seb-sps-gui:v1.1-latest
     container_name: sps-gui
     env_file:
         - ./config/env_files/client/.env
