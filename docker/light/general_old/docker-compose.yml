@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
 
   seb-server:
-      image: "anhefti/seb-server:v2.1-latest"
+      image: "anhefti/seb-server:v2.1-stable"
       container_name: seb-server
       volumes:
         - seb-server-config:/sebserver/config
@@ -53,7 +53,7 @@ services:
       restart: unless-stopped
 
   sps-server:
-    image: "anhefti/seb-sps:v1.1-latest"
+    image: "anhefti/seb-sps:v1.1-stable"
     container_name: sps-server
     environment:
         - JAVA_HEAP_MIN=1G
@@ -81,7 +81,7 @@ services:
     restart: unless-stopped
 
   sps-gui:
-    image: naritter/seb-sps-gui:v1.1-latest
+    image: naritter/seb-sps-gui:v1.1-stable
     container_name: sps-gui
     env_file:
         - ./config/env_files/client/.env
