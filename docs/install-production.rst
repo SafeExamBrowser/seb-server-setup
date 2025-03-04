@@ -31,7 +31,7 @@ sub-path routing to internal services.
 
 The setup process for both is similar, expect that for the bundled_ssl setup, you need to provide valid TLS certificates. 
 
-. note::
+.. note::
     If you use TLS certificated for HTTPS, you need to use valid certificates and not self-signed once, otherwise some services are not able to communicate properly and external systems that use to connect to SEB Server might deny the connection to SEB Server with a self singed certificate
 
 .. _bundledsetup-label:
