@@ -5,32 +5,38 @@ Production Setup
 
 **Info:**
 
-For production we provide currently two different default setups or examples, a fully bundled setups and one
+For production we provide currently three different default setups or examples, a fully bundled setups with and without TLS termination and one
 as an example for a cloud based setup with kubernetes kind example configurations.
 
 .. note::
-    There is a new SEB Server setup approach since SEB Server version 1.2 where the docker image is not part of the setup repository
-    anymore but is built and published by the main SEB Server repository within docker hub.
-
-    And since SEB Server version 2.0 there are two new services that are included within the SEB Server installation but
+    Since SEB Server version 2.0 there are two new services that are included within the SEB Server installation but
     simplified setup process completely based on Docker-Compose for bundled setups, pulling images from Dockerhub.
 
     If you already have a SEB Server installation and want to migrate from a former installation with major version 1.X
     to the new major version 2.x, please consult the Major Version Migration Guide
-    
-The bundled setup currently uses dedicated port mapping. Therefore it needs to have at least three different ports open and
-available to connect to from the Internet. This is usually the default SSL port 443 and two other ports that can also be used
-for HTTPS like 4431 and 4432. This is needed because the two new services has their own API and accessible over HTTPS on 
-the available DNS endpoint. 
+  
+The bundled setups are used to bundle the whole SEB Server setup and all its services together for deploying on one host machine or virtual host machine.
+This is accomplished with a docker-compose bundle consisting of the MariaDB database, all SEB Server service components and a reverse proxy to communicate
+with the outside. All service container are connected within a docker network and for default only the reverse proxy is exposed to the outside.
 
 .. note::
-    We are currently working on a solution that uses URL path routing instead of port mapping but unfortunately this seems to be
-    the usual case for a docker packed NodeJS/Vue service and currently we are still trying to find a solution with URL path 
-    routing that covers all our needs and features. Expecting this setup with the next SEB Server version 2.1 Q1 2025.
+    This new bundled solution now uses only one HTTP port and addresses the different services by sub-path-routing done by the reverse proxy.
+    
+The first bundled solution, called just "bundled", implements no TLS termination and can be used, if the host or virtual host itself already do
+a TLS termination with SSL certificate handling and all needed forwarding. In this case, the reverse proxy within the bundles setup only does 
+the internal sub-path routing to the respective internal services.
+
+The second bundled solution, called "bundled_ssl", implements a TLS termination with the included reverse proxy service that also does the 
+sub-path routing to internal services.
+
+The setup process for both is similar, expect that for the bundled_ssl setup, you need to provide valid TLS certificates. 
+
+. note::
+    If you use TLS certificated for HTTPS, you need to use valid certificates and not self-signed once, otherwise some services are not able to communicate properly and external systems that use to connect to SEB Server might deny the connection to SEB Server with a self singed certificate
 
 .. _bundledsetup-label:
 
-Bundled Setup with dedicated Port mapping
+Bundled Setup with or without TLS termination
 ...............................
 
 This is the preferred way to setup a bundled SEB Server instance where all components run together within
@@ -40,17 +46,17 @@ This setup uses docker compose to build and run all needed containers. The docke
 
 ::
 
-        installation strategy sub-directory.........docker/prod/bundled/
-        seb-server configuration....................docker/prod/bundled/config/spring
-        maria-db configuration......................docker/prod/bundled/config/mariadb
-        reverse-proxy configuration.................docker/prod/bundled/config/nginx
-        jmx configuration...........................docker/prod/bundled/config/jmx
+        installation strategy sub-directory.........docker/prod/bundled/ or docker/prod/bundled_ssl/
+        seb-server configuration..................../config/spring
+        maria-db configuration......................config/mariadb
+        reverse-proxy configuration................./config/nginx
+        jmx configuration.........................../config/jmx
         single server setup.........................yes
-        secured (TLS)...............................configurable (needs own TLS certificates)
+        secured (TLS)...............................docker/prod/bundled_ssl/ (needs own TLS certificates)
         integrated mariadb service..................yes (can be configured to connect to external DB)
         initial data setup..........................auto generated Institution and SEB Administrator
         data setup on reload........................Spring - Flyway migration setup
-        integrated reverse proxy....................yes, with separated Port mapping for new services
+        integrated reverse proxy....................yes, with sub-path routing ()and TLS termination if needed)
         recommended machine requirements............CPU: x86_64/4 Cores/2-3 GHz, Mem 32GB, Disk Space min 100GB
         
 **Requirements:**
@@ -110,12 +116,6 @@ For more details on how to configure each service see :ref:`configuration-label`
         - The super user password for the data base connection. If you don't want to use the super user to connect to database you need to configure this within the docker-compose file for all services that needs a database connection.
     DNS_NAME
         - The DNS name where your host is available from the Internet
-    BASE_PORT
-        - The default port for HTTP connection. Usually 443 that is default for HTTPS connections
-    SPS_WEB_PORT
-        - The additional open SSL port for the screen proctoring webservice API
-    SPS_GUI_PORT
-        - The additional open SSL port for the screen proctoring guiservice (graphical user interface)
 
 .. note::
     The passwords must be given also when the service is stopped and restarted again. You can either let the .env file
@@ -124,8 +124,7 @@ For more details on how to configure each service see :ref:`configuration-label`
     SEBSERVER_PWD is used for updates and restarts as it was for the initial setup. Otherwise data will be lost due to encryption with
     unknown or incorrect passwords. The password should be in the responsibility of a system administrator and handled with appropriate care.
 
-4. Go to the nginx configuration folder and put your own valid SSL certificates to the "cert" subdirectory. The integrated reverse proxy will then use this certificates to secure all given connection ports.
-If you have changed the default ports in step 3. you must also change it for the reverse proxy by open the app.conf file and change the port settings there accordingly.
+4. If you use the "bundled_ssl" setup where you want to do TLS termination within the setup, go to the nginx configuration folder and put your own valid SSL certificates to the "cert" subdirectory. The integrated reverse proxy will then use this certificates to secure all given connection ports.
 
 5. Pull the Docker images from Dockerhub
 
@@ -156,7 +155,7 @@ or
     :align: center
     :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/rel-2.0/docs/images/docker-ps.png
         
-8. If there where no changes to the default configuration the SEB Server is now running on port 443/4431/4432 and can be accessed with a browser on http(s)://server-address
+8. If there where no changes to the default configuration the SEB Server is now running on http(s)://DNS_NAME
    There is one pre-configured institution and one user-account with SEB Server Administrator role to manage the server. 
    The username and generated password of the initial admin account can be found on the logs:
 
@@ -186,6 +185,13 @@ For a complete initial log guide pleas read: :ref:`logguide-label`
     We highly recommend to change the generated password from the initial admin account immediately after first login. 
 
 
+Bundled Setup with external database
+...............................
+
+Both of the bundled setups can also be used with an external database. If you want to connect to an external database
+for eiter one or the other bundled setup, you can remove the database service within the docker-compose.yml file and
+apply/adapt the database connection details within the services: "seb-server" and "sps-webservice" to connect to your external
+database with a sufficient user that is able to also create a database schema and has table create and write privileges for that schemas.
 
 .. _installkind-label:
 
@@ -450,6 +456,8 @@ ________________________________________________________________________________
     
     NODE_ENV 
         - Node environment profile. "prod" for production setup
+    LOG_LEVEL
+        - Log level. Default is "info"
     SERVER_PORT 
         - Internal service port mapping. Default is "3000"
     VITE_SERVER_URL 

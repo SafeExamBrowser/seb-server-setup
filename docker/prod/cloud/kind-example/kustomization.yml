@@ -4,14 +4,25 @@ nameSuffix: -prod
 replicas:
   - name: seb-guiservice
     count: 1
+  - name: seb-webservice
+    count: 1
+  - name: sps-webservice
+    count: 1
+  - name: sps-guiservice
+    count: 1
 
 images:
   - name: anhefti/seb-server
-    newTag: v2.0-stable
+    newTag: v2.1-stable
+  - name: anhefti/seb-sps
+    newTag: v2.1-stable
+  - name: naritter/seb-sps-gui
+    newTag: v2.1-stable
+
 
 resources:
   # Get the base configuration
-  - https://github.com/SafeExamBrowser/seb-server-setup/docker/ethz/cloud/kustomize?ref=v2.0-stable
+  - https://github.com/SafeExamBrowser/seb-server-setup/docker/ethz/cloud/kustomize?ref=sprint-testing
 
   # Add an ingress
   - ingress.yml
@@ -41,7 +52,7 @@ patchesStrategicMerge:
                 - name: "JAVA_HEAP_MAX"
                   value: "8G"
                 - name: "spring_profiles_active"
-                  value: "ws,prod-ws,prod"
+                  value: "ws,prod"
     
                 # NOTE: The internal SEB Server password. The same must be set in guiservice
                 - name: "sebserver_password"
@@ -84,7 +95,7 @@ patchesStrategicMerge:
               - name: JAVA_HEAP_MAX
                 value: "8G"
               - name: "spring_profiles_active"
-                value: "gui,prod-gui,prod"
+                value: "gui,prod"
     
               # NOTE: The internal SEB Server password must be set the same as in webservice
               - name: "sebserver_password"
@@ -168,6 +179,8 @@ patchesStrategicMerge:
               env:
               - name: "NODE_ENV"
                 value: "prod"
+              - name: "LOG_LEVEL"
+                value: "info"
               - name: "VITE_SERVER_URL"
                 value: "SET_EXTERNAL_URL_OF_SPS_GUI"
               - name: "PROCTOR_SERVER_URL"

@@ -16,7 +16,7 @@ services:
     restart: unless-stopped
 
   seb-server:
-    image: "anhefti/seb-server:v2.0-stable"
+    image: "anhefti/seb-server:v2.1-stable"
     container_name: seb-server
     volumes:
       - seb-server-config:/sebserver/config
@@ -25,7 +25,7 @@ services:
       # Service runtime settings
       - JAVA_HEAP_MIN=1G
       - JAVA_HEAP_MAX=8G
-      - spring_profiles_active=ws,gui,demo
+      - spring_profiles_active=bundled,demo
 
       # SEB Server password, internally used to en-/decrypt sensitive data secure internal communication
       # NOTE: These must match with the other sebserver_password set on other services
@@ -64,14 +64,14 @@ services:
     restart: unless-stopped
 
   sps-server:
-    image: "anhefti/seb-sps:v1.0-stable"
+    image: "anhefti/seb-sps:v1.1-stable"
     container_name: sps-server
     environment:
       # Service runtime settings
       - JAVA_HEAP_MIN=1G
       - JAVA_HEAP_MAX=6G
       - SERVER_PORT=8090
-      - spring_profiles_active=prod,demo
+      - spring_profiles_active=bundled,demo
       - sps_webservice_distributed=false
 
       # SEB Server password, internally used to en-/decrypt sensitive data secure internal communication
@@ -116,7 +116,7 @@ services:
     restart: unless-stopped
 
   sps-gui:
-    image: naritter/seb-sps-gui:v1.0-stable
+    image: naritter/seb-sps-gui:v1.1-stable
     container_name: sps-gui
     environment:
       # Service runtime settings

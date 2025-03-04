@@ -15,13 +15,12 @@ services:
     restart: unless-stopped
 
   seb-server:
-    image: "anhefti/seb-server:v2.0-stable"
+    image: "anhefti/seb-server:v2.1-stable"
     container_name: seb-server
     environment:
       - JAVA_HEAP_MIN=1G
       - JAVA_HEAP_MAX=8G
-      - spring_profiles_active=ws,gui,demo
-
+      - spring_profiles_active=bundled,demo
       - sebserver_password=${SEBSERVER_PWD}
 
       # Data Base settings
@@ -53,7 +52,7 @@ services:
     restart: unless-stopped
 
   sps-server:
-    image: "anhefti/seb-sps:v1.0-stable"
+    image: "anhefti/seb-sps:v1.1-stable"
     container_name: sps-server
     environment:
         - JAVA_HEAP_MIN=1G
@@ -88,7 +87,7 @@ services:
     restart: unless-stopped
 
   sps-gui:
-    image: naritter/seb-sps-gui:v1.0-stable
+    image: naritter/seb-sps-gui:v1.1-stable
     container_name: sps-gui
     environment:
       - VITE_SERVER_URL=http://localhost

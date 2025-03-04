@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
 
   seb-server:
-      image: "anhefti/seb-server:sprint-testing"
+      image: "anhefti/seb-server:v2.1-stable"
       container_name: seb-server
       volumes:
         - seb-server-config:/sebserver/config
@@ -22,7 +22,7 @@ services:
       environment:
         - JAVA_HEAP_MIN=1G
         - JAVA_HEAP_MAX=8G
-        - spring_profiles_active=gui,ws,prod-ws,prod-gui,prod
+        - spring_profiles_active=bundled,prod
         
         - sebserver_password=${SEBSERVER_PWD}
         - sebserver_mariadb_password=${DB_SA_PWD} 
@@ -53,7 +53,7 @@ services:
       restart: unless-stopped
 
   sps-server:
-    image: "anhefti/seb-sps:sprint-testing"
+    image: "anhefti/seb-sps:v1.1-stable"
     container_name: sps-server
     environment:
         - JAVA_HEAP_MIN=1G
@@ -81,7 +81,7 @@ services:
     restart: unless-stopped
 
   sps-gui:
-    image: naritter/seb-sps-gui:sprint-testing
+    image: naritter/seb-sps-gui:v1.1-stable
     container_name: sps-gui
     env_file:
         - ./config/env_files/client/.env
