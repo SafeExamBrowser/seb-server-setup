@@ -96,6 +96,7 @@ services:
       - sps_webservice_http_external_scheme=https
       - sps_webservice_http_external_servername=${DNS_NAME}
       - sps_webservice_http_external_port=
+      - sps_webservice_http_sub_path=/sps-web
 
       # SEB Server client connection detail settings
       - sebserver_client_secret=${SEBSERVER_PWD}
