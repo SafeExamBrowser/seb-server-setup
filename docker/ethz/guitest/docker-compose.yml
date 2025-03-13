@@ -5,6 +5,7 @@ services:
     container_name: seb-server-test-mariadb
     environment:
         - MYSQL_ROOT_PASSWORD=${SEBSERVER_PWD}
+        - MARIADB_AUTO_UPGRADE=1
     ports:
         - 3306:3306
     volumes:

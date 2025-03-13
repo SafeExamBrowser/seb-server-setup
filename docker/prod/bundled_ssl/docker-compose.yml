@@ -8,6 +8,7 @@ services:
         # Note: If you don't want to use the DB root account for connection you have to configure this within the DB
         #       fist and then set also the user in seb-server service below with spring_datasource_username
         - MYSQL_ROOT_PASSWORD=${DB_SA_PWD}
+        - MARIADB_AUTO_UPGRADE=1
     volumes:
         - seb-server-config:/etc/mysql/conf.d
         - seb-server-mariadb:/var/lib/mysql
