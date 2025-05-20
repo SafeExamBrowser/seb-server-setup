@@ -34,7 +34,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: sps-webservice
-          image: anhefti/seb-sps:v0.1-stable
+          image: sebadmin/seb-sps:demo
           imagePullPolicy: Always
           env:
             - name: "JAVA_HEAP_MIN"
