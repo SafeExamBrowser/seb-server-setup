@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
 
   seb-server:
-      image: "anhefti/seb-server:v2.1-stable"
+      image: "anhefti/seb-server:v2.2-latest"
       container_name: seb-server
       volumes:
         - seb-server-config:/sebserver/config
@@ -71,7 +71,7 @@ services:
       restart: unless-stopped
 
   sps-webservice:
-    image: "anhefti/seb-sps:v1.1-stable"
+    image: "anhefti/seb-sps:v1.2-latest"
     container_name: sps-webservice
     environment:
       # Service runtime settings
@@ -118,7 +118,7 @@ services:
     restart: unless-stopped
 
   sps-guiservice:
-    image: "naritter/seb-sps-gui:v1.1-stable-single-host"
+    image: "naritter/seb-sps-gui:v1.2-latest-single-host"
     container_name: sps-guiservice
     environment:
       # Service runtime settings

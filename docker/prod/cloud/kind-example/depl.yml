@@ -152,7 +152,7 @@ spec:
             secretKeyRef:
               key: SEBSERVER_PWD
               name: sebservercredentials
-        image: anhefti/seb-server:v2.1-stable
+        image: anhefti/seb-server:v2.2-latest
         name: seb-guiservice
         ports:
         - containerPort: 8080
@@ -249,7 +249,7 @@ spec:
           value: seb-webservice
         - name: sebserver_webservice_http_external_port
           value: ""
-        image: anhefti/seb-server:v2.1-stable
+        image: anhefti/seb-server:v2.2-latest
         name: seb-webservice
         ports:
         - containerPort: 8080
