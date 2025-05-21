@@ -30,70 +30,45 @@ spec:
                         - seb-guiservice
                         - sps-webservice
                         - sps-guiservice
-                        - seb-mariadb
                 topologyKey: kubernetes.io/hostname
-      volumes:
-        - name: application-properties
-          configMap:
-            name: application-guiservice-properties
-            items:
-              - key: "application-prod.properties"
-                path: "application-prod.properties"
-              - key: "logback-prod.xml"
-                path: "logback-prod.xml"
-        - name: jmx-remote-access
-          configMap:
-            name: guiservice-jmx-remote-access
-            items:
-              - key: "jmxremote.access"
-                path: "jmxremote.access"
       containers:
         - name: seb-guiservice
           image: sebadmin/seb-server-gui:demo
           imagePullPolicy: Always
-          resources:
-            requests:
-              memory: "1200Mi"
-            limits:
-              memory: "3Gi"
           ports:
-            - containerPort: 8080
-          livenessProbe:
-            httpGet:
-              path: /sebserver/check
-              port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 5
-          volumeMounts:
-            - name: application-properties
-              mountPath: /sebserver/config/spring
-            - name: jmx-remote-access
-              mountPath: /sebserver/config/jmx
+            - containerPort: 8081
+          # livenessProbe:
+          #   httpGet:
+          #     path: /sebserver/check
+          #     port: 8080
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 5
           env:
-            - name: JAVA_HEAP_MIN
-              value: "1G"
-            - name: JAVA_HEAP_MAX
-              value: "8G"
-            - name: "spring_profiles_active"
-              value: "gui,prod"
-# NOTE: The internal SEB Server password must be set the same as in webservice
-            - name: "sebserver_password"
-              value: "SET_PASSWORD"
-# NOTE: Set the below URL component settings from where the gui-service is externally available
-            - name: "sebserver_gui_http_external_scheme"
-              value: "https"
-            - name: "sebserver_gui_http_external_servername"
-              value: "sebserver"
-            - name: "sebserver_gui_http_external_port"
-              value: "443"
-# NOTE: Set the below URL component settings from where the gui-service can connect to the web-service
-            - name: "sebserver_gui_http_webservice_scheme"
-              value: "https"
-            - name: "sebserver_gui_http_webservice_servername"
-              value: "sebserver-webservice"
-            - name: "sebserver_gui_http_webservice_port"
-              value: "443"
-            - name: "PROCTOR_SERVER_PASSWORD"
-              value: "SET_PASSWORD"
-            - name: "PROCTOR_SERVER_URL"
-              value: "http://sps-webservice"
+            - name: SEB_SERVER_PASSWORD
+              value: SET_PASSWORD
+            - name: SEB_SERVER_USERNAME
+              value: guiClient
+            - name: NODE_ENV
+              value: prod
+            - name: LOG_LEVEL
+              value: info
+            - name: SERVER_PORT
+              value: '8081'
+            - name: VITE_SERVER_URL
+              value: https://sebserver-gui-name.example.com
+            - name: VITE_SERVER_PORT
+              value: '443'
+            - name: SEB_SERVER_URL
+              value: http://seb-webservice
+            - name: SEB_SERVER_PORT
+              value: '8080'
+            - name: SEB_SERVER_DEFAULT_URL
+              value: /admin-api/v1
+            - name: PROCTOR_SERVER_PORT
+              value: '8090'
+            - name: PROCTOR_SERVER_URL
+              value: http://sps-webservice
+            - name: PROCTOR_SERVER_USERNAME
+              value: spsGuiClient
+            - name: PROCTOR_DEFAULT_URL
+              value: /admin-api/v1

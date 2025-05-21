@@ -24,9 +24,9 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 8080
+      port: 8081
       protocol: TCP
-      targetPort: 8080
-  type: ClusterIP
+      targetPort: 8081
   selector:
     app: seb-guiservice
+  type: ClusterIP
