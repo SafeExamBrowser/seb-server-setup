@@ -27,7 +27,7 @@ services:
         # Service runtime settings
         - JAVA_HEAP_MIN=1G
         - JAVA_HEAP_MAX=8G
-        - spring_profiles_active=gui,ws,prod-ws,prod-gui,prod
+        - spring_profiles_active=bundled,prod
 
         # SEB Server password, internally used to en-/decrypt sensitive data secure internal communication
         # NOTE: These must match with the other sebserver_password set on other services
@@ -70,15 +70,16 @@ services:
           - "mariadb"
       restart: unless-stopped
 
-  sps-server:
+  sps-webservice:
     image: "anhefti/seb-sps:v1.2-latest"
-    container_name: sps-server
+    container_name: sps-webservice
     environment:
       # Service runtime settings
       - JAVA_HEAP_MIN=1G
       - JAVA_HEAP_MAX=6G
       - SERVER_PORT=8090
       - spring_profiles_active=prod
+      - sps_webservice_distributed=false
 
       # SEB Server password, internally used to en-/decrypt sensitive data secure internal communication
       # NOTE: These must match with the other sebserver_password set on other services
@@ -87,7 +88,7 @@ services:
       # Data Base settings
       # NOTE: these must match with the DB connection settings on mariadb service
       - spring_datasource_username=root
-      - spring_datasource_password=${SEBSERVER_PWD}
+      - spring_datasource_password=${DB_SA_PWD}
       - datastore_mariadb_server_port=3306
       - datastore_mariadb_server_address=seb-server-mariadb
       - sps_data_store_adapter=FULL_RDBMS
@@ -117,10 +118,10 @@ services:
       - "mariadb"
     restart: unless-stopped
 
-  sps-gui:
+  sps-guiservice:
     #use the tag suffix "-single-host" to deploy the sps-gui on subpatch such as "/sps-gui
     image: naritter/seb-sps-gui:v1.2-latest-single-host
-    container_name: sps-gui
+    container_name: sps-guiservice
     environment:
       # Service runtime settings
       - NODE_ENV=prod
