@@ -13,11 +13,11 @@ replicas:
 
 images:
   - name: anhefti/seb-server
-    newTag: v2.1-stable
+    newTag: v2.2-latest
   - name: anhefti/seb-sps
-    newTag: v2.1-stable
+    newTag: v2.2-latest
   - name: naritter/seb-sps-gui
-    newTag: v2.1-stable
+    newTag: v2.2-latest
 
 
 resources:
