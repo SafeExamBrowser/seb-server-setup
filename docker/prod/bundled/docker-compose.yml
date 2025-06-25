@@ -1,4 +1,3 @@
-version: '3.5'
 services:
   mariadb: 
     image: "mariadb:10.5"
@@ -43,12 +42,12 @@ services:
         # NOTE: This must be the address from that the service is externally available (not network internal address)
         - sebserver_webservice_http_external_scheme=https
         - sebserver_webservice_http_external_servername=${DNS_NAME}
-        - sebserver_webservice_http_external_port=
+        - sebserver_webservice_http_external_port=443
         - sebserver_webservice_autologin_url=https://${DNS_NAME}
 
         # Screen Proctoring settings and passwords
         # NOTE: these must match with the respective equivalents on sps-webservice
-        - sebserver_feature_exam_seb_screenProctoring_bundled_url=https://${DNS_NAME}/sps-web
+        - sebserver_feature_exam_seb_screenProctoring_bundled_url=https://${DNS_NAME}/sps-web/
         - sps_sebserver_client_secret=${SEBSERVER_PWD}
         - sps_sebserver_password=${SEBSERVER_PWD}
 
@@ -97,11 +96,11 @@ services:
       - sps_webservice_http_external_scheme=https
       - sps_webservice_http_external_servername=${DNS_NAME}
       - sps_webservice_http_external_port=
-      - sps_webservice_http_sub_path=/sps-web
+      - sps_webservice_http_sub_path=/sps-web/
 
       # SEB Server client connection detail settings
       - sebserver_client_secret=${SEBSERVER_PWD}
-      - sps_gui_redirect_url=https://${DNS_NAME}/sps-gui
+      - sps_gui_redirect_url=https://${DNS_NAME}/sps-gui/
       - sps_webservice_sebserver_bundle=true
 
       # Screen Proctoring GUI client connection detail settings
@@ -126,10 +125,11 @@ services:
 
       # VITE server settings
       - VITE_SERVER_URL=https://${DNS_NAME}
-      - VITE_SERVER_PORT=/sps-gui
+      - VITE_SERVER_PORT=/sps-gui/
 
       # Screen Proctoring webservice connection settings
-      - PROCTOR_SERVER_URL=https://${DNS_NAME}/sps-web
+      - PROCTOR_SERVER_URL=https://${DNS_NAME}/sps-web/
+      - PROCTOR_SERVER_PORT=
       - PROCTOR_DEFAULT_URL=/admin-api/v1
       - PROCTOR_SERVER_USERNAME=spsGuiClient
       - PROCTOR_SERVER_PASSWORD=${SEBSERVER_PWD}
