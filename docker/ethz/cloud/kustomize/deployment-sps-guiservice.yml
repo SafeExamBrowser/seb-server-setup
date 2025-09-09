@@ -34,7 +34,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: sps-guiservice
-          image: naritter/seb-sps-gui:v0.1-stable
+          image: naritter/seb-sps-gui:v1.2-stable
           imagePullPolicy: Always
           env:
             - name: "NODE_ENV"

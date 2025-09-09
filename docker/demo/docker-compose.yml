@@ -5,6 +5,7 @@ services:
     container_name: seb-server-demo-mariadb
     environment:
       - MYSQL_ROOT_PASSWORD=${SEBSERVER_PWD}
+      - MARIADB_AUTO_UPGRADE=1
     ports:
       - 3306:3306
     volumes:
@@ -15,7 +16,7 @@ services:
     restart: unless-stopped
 
   seb-server:
-    image: "anhefti/seb-server:v2.1-stable"
+    image: "anhefti/seb-server:v2.2-stable"
     container_name: seb-server
     environment:
       # Service runtime settings
@@ -61,7 +62,7 @@ services:
     restart: unless-stopped
 
   sps-webservice:
-    image: "anhefti/seb-sps:v1.1-stable"
+    image: "anhefti/seb-sps:v1.2-stable"
     container_name: sps-webservice
     environment:
       # Service runtime settings
@@ -113,7 +114,7 @@ services:
     restart: unless-stopped
 
   sps-guiservice:
-    image: naritter/seb-sps-gui:v1.1-stable
+    image: naritter/seb-sps-gui:v1.2-stable
     container_name: sps-guiservice
     environment:
       # Service runtime settings

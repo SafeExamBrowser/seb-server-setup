@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
 
   seb-server:
-    image: "anhefti/seb-server:v2.1-stable"
+    image: "anhefti/seb-server:v2.2-stable"
     container_name: seb-server
     platform: linux/x86_64
     environment:
@@ -54,7 +54,7 @@ services:
     restart: unless-stopped
 
   sps-server:
-    image: "anhefti/seb-sps:v1.1-stable"
+    image: "anhefti/seb-sps:v1.2-stable"
     container_name: sps-server
     platform: linux/x86_64
     environment:
@@ -90,7 +90,7 @@ services:
     restart: unless-stopped
 
   sps-gui:
-    image: naritter/seb-sps-gui:v1.1-stable
+    image: naritter/seb-sps-gui:v1.2-stable
     container_name: sps-gui
     platform: linux/x86_64
     environment:
