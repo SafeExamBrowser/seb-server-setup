@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
 
   seb-server:
-    image: "anhefti/seb-server:v2.2-latest"
+    image: "anhefti/seb-server:v2.2-stable"
     container_name: seb-server
     environment:
       - JAVA_HEAP_MIN=1G
@@ -52,7 +52,7 @@ services:
     restart: unless-stopped
 
   sps-server:
-    image: "anhefti/seb-sps:v1.2-latest"
+    image: "anhefti/seb-sps:v1.2-stable"
     container_name: sps-server
     environment:
         - JAVA_HEAP_MIN=1G
@@ -87,7 +87,7 @@ services:
     restart: unless-stopped
 
   sps-gui:
-    image: naritter/seb-sps-gui:v1.2-latest
+    image: naritter/seb-sps-gui:v1.2-stable
     container_name: sps-gui
     environment:
       - VITE_SERVER_URL=http://localhost
