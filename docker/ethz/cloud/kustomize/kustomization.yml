@@ -4,7 +4,6 @@ resources:
   - deployment-guiservice.yml
   - service-seb.yml
   - deployment-sps-webservice.yml
-  - deployment-sps-guiservice.yml
   - service-sps.yml
   - configmap-sps.yml
   - deployment-mariadb.yml
