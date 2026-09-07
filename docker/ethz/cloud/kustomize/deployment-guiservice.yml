@@ -55,8 +55,8 @@ spec:
               value: '8081'
 #            - name: VITE_SERVER_URL
 #              value: https://sebserver-gui-name.example.com
-            - name: VITE_SERVER_PORT
-              value: '443'
+#            - name: VITE_SERVER_PORT
+#              value: '443'
             - name: SEB_SERVER_URL
               value: http://seb-webservice
             - name: SEB_SERVER_PORT
