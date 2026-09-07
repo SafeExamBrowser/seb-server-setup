@@ -89,6 +89,8 @@ spec:
 # NOTE: Screen Proctoring settings and passwords
             - name: "sebserver_feature_exam_seb_screenProctoring_bundled_url"
               value: "https://sps-webservice-test.ethz.ch"
+            - name: "sebserver_feature_exam_seb_screenProctoring_bundled_url_intern"
+              value: "http://sps-webservice:8090"
             - name: "sps_sebserver_client_secret"
               value: "SET_PASSWORD"
             - name: "sps_sebserver_password"
