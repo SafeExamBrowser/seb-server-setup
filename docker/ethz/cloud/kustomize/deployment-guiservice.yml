@@ -36,12 +36,6 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8081
-          # livenessProbe:
-          #   httpGet:
-          #     path: /sebserver/check
-          #     port: 8080
-          #   initialDelaySeconds: 10
-          #   periodSeconds: 5
           env:
             - name: SEB_SERVER_PASSWORD
               value: SET_PASSWORD
@@ -53,10 +47,6 @@ spec:
               value: info
             - name: SERVER_PORT
               value: '8081'
-#            - name: VITE_SERVER_URL
-#              value: https://sebserver-gui-name.example.com
-#            - name: VITE_SERVER_PORT
-#              value: '443'
             - name: SEB_SERVER_URL
               value: http://seb-webservice
             - name: SEB_SERVER_PORT
