@@ -79,6 +79,8 @@ spec:
             - name: "sebserver_password"
               value: "SET_PASSWORD"
 # NOTE: Database settings. Account must be able to create / delete table
+            - name: "datastore_mariadb_server_port"
+              value: "3306"
             - name: "datastore_mariadb_server_address"
               value: "sebserver-db-test.ethz.ch"
             - name: "spring_datasource_username"
