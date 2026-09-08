@@ -87,7 +87,10 @@ spec:
       volumes:
         - name: application-properties-sps
           configMap:
-            items:
-              - key: application-properties-sps
-                path: application-properties-sps
             name: application-properties-sps
+            items:
+              - key: "application-prod.properties"
+                path: "application-prod.properties"
+              - key: "logback-prod.xml"
+                path: "logback-prod.xml"
+
