@@ -101,3 +101,6 @@ spec:
               value: "sebserver-webservice.ethz.ch"
             - name: "sebserver_webservice_autologin_url"
               value: "https://sebserver.ethz.ch"
+# ETHZ specific settings
+            - name: "sebserver_feature_seb_screenProctoring_settings_show_disclaimer_enabled"
+              value: "true"
