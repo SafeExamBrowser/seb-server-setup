@@ -1,0 +1,71 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sps-webservice
+spec:
+  template:
+    spec:
+      containers:
+        - name: sps-webservice
+          imagePullPolicy: Always
+          env:
+            - name: datastore_mariadb_server_address
+              value: seb-db.your_domain.edu
+            - name: sps_webservice_http_external_servername
+              value: seb-sps.your_domain.edu
+            - name: spring_datasource_username
+              valueFrom:
+                secretKeyRef:
+                  name: sebservermariadbpassword
+                  key: DB_USER
+            - name: spring_datasource_password
+              valueFrom:
+                secretKeyRef:
+                  name: sebservermariadbpassword
+                  key: DB_PASSWORD
+            - name: "sebserver_client_secret"
+              valueFrom:
+                secretKeyRef:
+                  name: sebservercredentials
+                  key: sps_sebserver_client_secret
+            - name: "spsgui_client_secret"
+              valueFrom:
+                secretKeyRef:
+                  name: sebservercredentials
+                  key: PROCTOR_SERVER_PASSWORD
+            - name: "sps_init_sebserveraccount_password"
+              valueFrom:
+                secretKeyRef:
+                  name: sebservercredentials
+                  key: sps2seb_internal_password
+            - name: "sebserver_password"
+              valueFrom:
+                secretKeyRef:
+                  name: sebservercredentials
+                  key: SEBSERVER_PWD
+            - name: "s3_accessKey"
+              valueFrom:
+                secretKeyRef:
+                  name: sebservercredentials
+                  key: sps_s3_accessKey
+            - name: "s3_secretKey"
+              valueFrom:
+                secretKeyRef:
+                  name: sebservercredentials
+                  key: sps_s3_secretKey
+            - name: sps_s3_tls_cert
+              valueFrom:
+                secretKeyRef:
+                  name: sps-s3-tls-cert
+                  key: sps-s3-tls-cert
+            - name: sps_data_store_adapter
+              value: S3_RDBMS
+            - name: sps_s3_endpointUrl
+              value: https://seb-s3.your_domain.edu
+            - name: sps_s3_bucketName
+              value: seb-s3
+            - name: sps_s3_store_batch
+              value: 'false'
+            - name: sps_webservice_enable_swagger
+              value: 'true'

@@ -9,7 +9,7 @@
     
   <springProfile name="prod">
 
-    <root level="DEBUG" additivity="true">
+    <root level="INFO" additivity="true">
       <appender-ref ref="STDOUT" />
     </root>
     

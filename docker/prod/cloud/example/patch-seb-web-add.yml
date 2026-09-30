@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seb-webservice
+spec:
+  template:
+    spec:
+      containers:
+        - name: seb-webservice
+          imagePullPolicy: Always
+          env:
+            - name: spring_datasource_username
+              valueFrom:
+                secretKeyRef:
+                  name: sebservermariadbpassword
+                  key: DB_USER
+            - name: spring_datasource_password
+              valueFrom:
+                secretKeyRef:
+                  name: sebservermariadbpassword
+                  key: DB_PASSWORD
+            - name: sebserver_password
+              valueFrom:
+                secretKeyRef:
+                  name: sebservercredentials
+                  key: SEBSERVER_PWD
+            - name: sps_sebserver_client_secret
+              valueFrom:
+                secretKeyRef:
+                  name: sebservercredentials
+                  key: sps_sebserver_client_secret
+            - name: sps_sebserver_password
+              valueFrom:
+                secretKeyRef:
+                  name: sebservercredentials
+                  key: sps2seb_internal_password
+            - name: "datastore_mariadb_server_address"
+              value: "seb-db.your_domain.edu"
+            - name: "sebserver_webservice_http_external_servername"
+              value: "seb-web.your_domain.edu"
+            - name: "sebserver_feature_exam_seb_screenProctoring_bundled_url"
+              value: "https://seb-sps.your_domain.edu"
+            - name: "sebserver_feature_exam_seb_screenProctoring_bundled_url_intern"
+              value: "http://sps-webservice:8090"
+            - name: "sebserver_webservice_autologin_url"
+              value: "https://your_domain.edu"

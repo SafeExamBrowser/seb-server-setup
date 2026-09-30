@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seb-guiservice
+  labels:
+    app: seb-guiservice
+spec:
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app: seb-guiservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: seb-guiservice
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - seb-webservice
+                        - seb-guiservice
+                        - sps-webservice
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: seb-guiservice
+          image: sebadmin/seb-server-gui:demo
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SEB_SERVER_PASSWORD
+              value: SET_PASSWORD
+            - name: SEB_SERVER_USERNAME
+              value: guiClient
+            - name: NODE_ENV
+              value: prod
+            - name: LOG_LEVEL
+              value: info
+            - name: SERVER_PORT
+              value: '8081'
+            - name: SEB_SERVER_URL
+              value: http://seb-webservice
+            - name: SEB_SERVER_PORT
+              value: '8080'
+            - name: SEB_SERVER_DEFAULT_URL
+              value: /admin-api/v1
+            - name: PROCTOR_SERVER_PORT
+              value: '8090'
+            - name: PROCTOR_SERVER_URL
+              value: http://sps-webservice
+            - name: PROCTOR_SERVER_USERNAME
+              value: spsGuiClient
+            - name: PROCTOR_DEFAULT_URL
+              value: /admin-api/v1

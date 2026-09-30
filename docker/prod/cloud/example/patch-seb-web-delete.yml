@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seb-webservice
+spec:
+  template:
+    spec:
+      containers:
+        - name: seb-webservice
+          env:
+            - name: spring_datasource_username
+              $patch: delete
+            - name: spring_datasource_password
+              $patch: delete
+            - name: sebserver_password
+              $patch: delete
+            - name: sps_sebserver_password
+              $patch: delete
+            - name: sps_sebserver_client_secret
+              $patch: delete

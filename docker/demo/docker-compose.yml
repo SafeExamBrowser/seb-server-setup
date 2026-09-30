@@ -92,10 +92,14 @@ services:
       - sps_webservice_http_external_servername=${EXTERNAL_DNS_NAME}
       - sps_webservice_http_external_port=8090
 
+      # SEB Server API Account Settings
+      - sps_init_sebserveraccount_password=${SEBSERVER_PWD}
+
       # SEB Server client connection detail settings
       - sps_api_admin_sebserver_clientSecret=${SEBSERVER_PWD}
+
+      # GUI client connection detail settings
       - sps_api_admin_gui_clientSecret=${SEBSERVER_PWD}
-      - sps_init_sebserveraccount_password=${SEBSERVER_PWD}
 
       # Logging: DEBUG for most interesting namespaces
       - logging_level_ch_ethz_seb_sps_server_servicelayer_impl=DEBUG
