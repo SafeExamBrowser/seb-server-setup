@@ -15,7 +15,7 @@ one dedicated to screen proctoring.
 
 .. image:: images/overall-architecture.png
     :align: center
-    :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/rel-2.0/docs/images/overall-architecture.png
+    :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/dev-3.0/docs/images/overall-architecture.png
     
 The webservices uses a well defined REST API interface over HTTP and mainly JSON as a data structure for communication.
 The webservices also implements OAuth2 as a standard authorization and authentication method.
@@ -32,7 +32,7 @@ The image below shows a fully bundled setup were all is fit together within one 
 
 .. image:: images/bundled_setup.png
     :align: center
-    :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/rel-2.0/docs/images/bundled_setup.png
+    :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/dev-3.0/docs/images/bundled_setup.png
 
 **Services: A - F**
     
