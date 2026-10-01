@@ -10,23 +10,19 @@ and Spring Boot as a main-framework but also NodeJS and Vue framework for graphi
 The image below shows the overall architecture of the SEB Server which is basically split into two main parts, 
 a webservice and a Graphical User Interface (GUI) service. This two services can be deployed together in one server 
 instance or they can be deployed separately with the ability to scale the webservice for example up to the specified needs.
-
+There is also a separation of two different webservices, one for the overall functionality of SEB server and another
+one dedicated to screen proctoring.
 
 .. image:: images/overall-architecture.png
     :align: center
     :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/rel-2.0/docs/images/overall-architecture.png
     
-The webservice uses a well defined REST API interface over HTTP and mainly JSON as a data structure for communication. 
-The webservice also implements OAuth2 as a standard authorization and authentication method.
+The webservices uses a well defined REST API interface over HTTP and mainly JSON as a data structure for communication.
+The webservices also implements OAuth2 as a standard authorization and authentication method.
 
-The GUI service is written in Java and uses `Eclipse RAP <https://www.eclipse.org/rap/>`_ to create the HTML front-end and connect to and uses the REST API of 
-the webservice. While the webservice has no user-session based state and externalize state as much as possible (except some internal caching) to make horizontal 
-scaling possible, the GUI service has a session-state for the logged in users as it comes with the RAP framework.
-
-In Version 2.X of SEB Server there are two additional services for the new screen proctoring feature. The two services are
-separated webservice API and graphical user interface service just like the existing sebserver services. The separation is due
-to the needed possibility to individually scale each component when needed or separate data bases for SEB Server and
-screen proctoring since screen proctoring needs much more disk space when used.
+The GUI service is written in Vue and runs on NodeJS. It connects to both webservices
+While the webservice has no user-session based state and externalize state as much as possible (except some internal caching) to make horizontal
+scaling possible.
 
 There are basically two different setups for SEB Server. One that bundles all up to run SEB Server on one dedicated host
 including or excluding data storage. And a cloud based setup where each service runs individually and also can be scaled
