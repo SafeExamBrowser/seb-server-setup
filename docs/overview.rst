@@ -65,6 +65,9 @@ one dedicated host or be connected as a service that exists elsewhere.
     :align: center
     :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server-setup/dev-3.0/docs/images/cloud_setup.png
 
+
+
+
 .. _installation-repo-label:
 
 Installation Repository
@@ -80,7 +83,7 @@ installations are supported. On the second directory level installation purpose 
 SEB Server for demonstrations or "prod" for final productivity setup are defined. The third and forth directory level,
 if existing, names then different SEB Server setups like "bundled", "cloud". Below is an example of the seb-server-setup directory structure.
 
-At each endpoint (e.g.: docker/prod/bundled/basic/) there is a root installation directory with docker-files for the services, a docker-compose definition and a "config" directory
+At each endpoint (e.g.: docker/prod/bundled/) there is a root installation directory with docker-files for the services, a docker-compose definition and a "config" directory
 containing service related configurations like Spring configuration for the SEB Server, MariaDB configuration for the database and/or
 reverse proxy configuration.
 

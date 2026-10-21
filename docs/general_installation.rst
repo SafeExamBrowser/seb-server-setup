@@ -13,41 +13,38 @@ A docker compose configuration for a bundled setup looks pretty much the same fo
 - **mariadb** This is the MariaDB service that is bound to the internal network as well as exposing its default port to the host
   network by default. This service uses the official "mariadb/server:10.5" image for the service and the configuration that is provided
   within the config/mariadb7 folder. The MariaDB container is started with the given internal password as the root password. This service
-  uses a separated named docker volume to store the data (seb-server-mariadb). 
+  uses a separated named docker volume to store the data.
  
 .. note::
     The named volume of the MariaDB service is not mapped to the host file system for default. 
     If you have to do so, for backup and restore procedure for example, you can configure this within the docker-compose setup.
  
-- **seb-server** This is the main server service that starts the Spring-Boot application within the container. This service uses the
+- **seb-webservice** This is the main SEB server service that starts the Spring-Boot back-end application within the container. This service uses the
   configuration in the folder: config/spring. The server is bound only to the internal docker network on port 8080 for default and also
-  connects to the database within the internal docker network that is created with the docker-compose setup (seb-server-network). The service
-  uses a separated named volume for logging as well (seb-server-logs). To install, update or down-grade to a particular SEB Server version
-  you can set the SEBSERVER_VERSION attribute.
+  connects to the database within the internal docker network that is created with the docker-compose setup (seb-server-network).
  
 .. note::
+    (since 3.0)
+
     The SEBSERVER_VERSION attribute relates on a Git tag of the seb-server repository (without the "v" prefix). Usually you want to point to
     the exact version of the SEB Server by using `sematic versioning <https://semver.org/>`_ like 1.0.0 or 1.0.1 or you can set the latest
     minor version to always get the latest specific minor version with all patches on installation or update. If you want the latest minor version
     use version tags like 1.0-latest or 1.1-latest.
 
-- **sps-webservice** This is the webservice API for the new screen proctoring feature that is separated from the SEB Server for performance and scaling reasons.
+- **sps-webservice** This is the webservice back-end for the new screen proctoring feature that is separated from the SEB Server for performance and scaling reasons.
   This is a usual Java/Spring Boot application like seb-server and implements screen proctoring maintenance API as well as screen proctoring session API
-  for SEB connections. This service also needs a connection to a database store. This can either be the same database server as seb-server service
+  for SEB connections. This service also needs a connection to a database store. This can either be the same database server as seb-webservice
   or another database for performance reasons. It is also possible to configure an additional S3 compatible storage to just store the screen shots.
 
-- **sps-guiservice** This is the service for the new graphical user interface for screen proctoring that runs in NodeJS and uses Vue
-  Java Script framework. This service connects to the sps-webservice and uses the API to get and maintain screen proctoring data.
+- **seb-guiservice** This is the service for the new graphical user interface with screen proctoring integration that runs in NodeJS and uses Vue
+  Java Script framework. This service connects to the seb-webservice as well as to the sps-webservice and uses the API of both services.
  
-- **reverse-proxy** This service uses a nginx server as reverse-proxy to connect the bundle to the host network. In the bundled setup with
-  open Ports this maps the configured ports to the internal services and makes TLS termination for each used port. In the bundled setup with
-  routing this uses only one default port TLS termination and routes the traffic to the different services by adding dedicated endpoint
-  prefixes to routs for sps-webservice (/sps-web/) and sps-guiservice (/sps-gui/).
- 
-**Distributed setup example with Kind (Kubernetes in docker)**
-
-Since version 1.3 there is a distributed setup example for Kind that can be used as a starting point to setup a fully
-distributed and scalable SEB Server service in the cluster with Kubernetes.
+- **reverse-proxy** This service uses a nginx server as reverse-proxy to connect the bundle to the host network and applies
+the routing to internal back-end webservices namely seb-webservice and sps-webservice as well as to the seb-guiservice that
+is applied to the location "/". The seb-webservice is applied to the location /seb-web/ and the sps-webservice is applied
+to the location /sps-web/ for default. Depending on the setup you use, the nginx server is listen to a specific port by default.
+Please have a look into the nginx server configuration ./config/nginx/app.conf if the default fits your needs and adapt the
+nginx server configuration if necessary to work in your environment.
 
 **HTTPS / TLS Configuration**
 
@@ -55,11 +52,18 @@ There are manly two strategies to configure HTTPS / TLS for a SEB Server;
 
     - The HTTPS / TLS is handled by a reverse-proxy that is exposed to the Internet and forwards the requests over HTTP to the SEB Server that in this
     case has only an simple HTTP connector and is not exposed to the Internet but to the internal network with the reverse proxy
-    - The HTTPS / TLS is handled by the SEB Server itself (end to end). 
+    - The HTTPS / TLS is handled by the SEB Server itself (end to end).
 
 .. note::
-    It is highly recommended to use the first approach here that is easier to install then the end to end approach. 
+    It is highly recommended to use the first approach here that is easier to install then the end to end approach.
     There are some prepared installations for the second approach within the seb-server-setup repository (tls) but they are experimental yet.
+
+ 
+**Distributed setup example with Kind (Kubernetes in docker)**
+
+Since version 1.3 there is a distributed setup example for Kind that can be used as a starting point to setup a fully
+distributed and scalable SEB Server service in the cluster with Kubernetes.
+
 
 General Installation Process
 ............................
@@ -84,16 +88,17 @@ exposed to the host network by the proxy.
             - spring
                 application.properties
                 messages_en.properties
+        .env
         docker-compose.yml
-        sebserver.Dockerfile
-        setup.Dockerfile
         
-The docker based installation typically is composed of a config directory with all the related config files, one or more docker-files that
-defines images for installation related services and a docker-compose file that bundles all together. Configuration files as well as 
-docker files are pre-configured in a way that a minimum of additional settings has to be done to setup the service. Usually you have to define 
-the external URL on witch the service will be available in the spring application-[].properties configuration. And you have to create a file
-with the internal password before starting up the server. In more advanced setups, also more pre-settings may be needed, for a TLS based 
-setup for example, you have to replace the self signed certificates (that are only for example) with your own certificates. 
+The docker based installation typically is composed of a config directory with all the related config files and a docker-compose
+file that bundles all together. Configuration files as well as docker files are pre-configured in a way that a minimum of additional
+settings has to be done to setup the service.
+The most important settings are used as environment variables and extracted to an .env file with default values.
+For a specific setup you at least need to adapt this variables and most important, to set your own passwords for your setup.
+You also be able to remove the environment variables that contains passwords form the .env file and either use it directly
+or configure the setup to extract them from a secure volt if you have such. How to do this for particular cases is not
+part of this documentation and depends on your environment.
 
 A usual installation process for SEB Server mostly look something like the following:
 
@@ -112,7 +117,7 @@ A usual installation process for SEB Server mostly look something like the follo
     
 4. Navigate into the installation strategy sub-directory you want to install from and edit/prepare the configuration for your needs.
     
-5. Complete the configuration and apply all needed settings for your setup
+5. Adapt the .env File and complete the configuration and apply all needed settings for your setup
 
 6. Pull the docker images form Dockerhub by using docker-compose pull command
     

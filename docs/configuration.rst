@@ -11,7 +11,7 @@ the seb-server-setup repository are listed and documented here by the service th
 SEB Server Configuration
 ------------------------
 
-The most important settings for the SEB Server services configurations are located within the .env file and within
+The most important settings for the seb-webservice services configurations are located within the .env file and within
 the docker-compose.yml file within the respective service configuration.
 
 The .env file contains all environment variables that must be set for a dedicated setup.
@@ -20,29 +20,48 @@ database connection must be set, this can be done within the docker-compose.yml 
 At last but not least, more specific settings are located in the service specific config directory within the also
 service dedicated configuration files. For the Java/Spring services these are the application-prod.properties files.
 
-**SEB Server Webservice Settings**
+**SEB Server Webservice Settings (seb-webservice and sps-webservice)**
+
+.. note::
+    The most settings described below can either be defined in the docker-compose.yml file directly with underline
+    notation or within the configuration file: application-prod.properties in the spring subdirectory.
+    If you define it in docker-compose.yml make sure you apply it to the belonging service as well as always us the
+    underline notation (change "." with "_").
 
 .. glossary::
+
+    JAVA_HEAP_MIN
+        - The initial minimum heap memory space used by the JVM on init
+        - Note that this is a JVM env variable and can only be set in the docker-compose.yml file
+        - Default depends on setup. Minimum should be 1G and 2G for production
+        - seb-webservice and sps-webservice
+    JAVA_HEAP_MAX
+        - The maximal heap memory space the JVM process can claim
+        - Note that this is a JVM env variable and can only be set in the docker-compose.yml file
+        - Default depends on the setup. 4G - 8G depending on your environment should be enough.
+          Note that if you run all services on one host, the sum of all max memory consumption should be lower as
+          the available memory on the host.
+        - seb-webservice and sps-webservice
     
     logging.level.ROOT
         - The initial log-level for all loggers
         - See `Spring Logging <https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/boot-features-logging.html>`_
-        - Default is WARN
+        - Default is WARN, seb-webservice and sps-webservice
     logging.level.ch
         - The initial log-level for a given package - here for all SEB Server packages
         - See `Spring Logging <https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/boot-features-logging.html>`_
-        - Default is INFO
+        - Default is INFO, seb-webservice and sps-webservice
     logging.file
         - if defined the SEB Server logs to the specified file
         - See `Spring Logging <https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/boot-features-logging.html>`_
         - Default is /sebserver/log/sebserver.log. Note this path is also used in docker-compose to bind  the log directory to a named volume.
+
     sebserver.webservice.forceMaster
+    sps.webservice.distributed.forceMaster
         - Flag indicating a primary master service instance that claims to be master when active.
         - This can be used in fail-over setups with two SEB Server nodes running, one as the master and another
           as hot-backup. The master should then have this flag set to true to become master again after recovery.
         - Default is false
-
-
     sebserver.init.adminaccount.gen-on-init
         - Indicates whether initial admin account creation is on/off
         - If an initial admin account should be created on first startup of the SEB Server this must be set
@@ -126,10 +145,8 @@ service dedicated configuration files. For the Java/Spring services these are th
         - Defines a comma separated list of known Moodle LMS API token request paths.
         - This paths will be used by the web-service to try to connect to a Moodle LMS REST API and request an access token.
         - Default is "/login/token.php"
-
-
     sebserver.webservice.api.admin.request.limit
-        - A general request limit used for request limits on certain API endpoints
+        - A general request limit used for request limits on certain exposed API endpoints
         - This uses a bucked-algorithm where each request attempt removes a item from the bucket and if the bucket is empty no request is permittet
           Involved endpoints: user-account-registration
         - Default is 10
@@ -151,54 +168,34 @@ service dedicated configuration files. For the Java/Spring services these are th
         - The refill interval in minutes for the above object creation limit
         - Default is 3600
 
-
 **SEB Server GUI Service Settings**
 
-
 .. glossary::
-    
-    sebserver.gui.external.messages
-        - Defines the path where SEB Server GUI shall load additional wording files that overrides the internal wording
-        - Within the Spring configuration of SEB Server you are able to define a messages_[iso-language-code].properties file where you are able to override the default wording of SEB Server or to provide wording for additional languages.
-        - Default is file:/sebserver/config/spring/messages
-    sebserver.gui.multilingual
-        - Indicates if the multilingual feature is on or off
-        - Set this to true if the SEB Server GUI should be multi lingual. You have also to provide additional language files that contains the wording for the supported languages. See **sebserver.gui.external.messages**
-        - Default is false (only english is supported)
-    sebserver.gui.supported.languages
-        - Comma separated list of supported language codes (iso-language code)
-        - For example if you want to support the languages English (default) and German use "en,de". See also **sebserver.gui.external.messages** and **sebserver.gui.multilingual**
-        - Default is "en"
-    sebserver.gui.theme
-        - The RAP theme css file that should be used to override the default one
-        - Default is css/sebserver.css
-    sebserver.gui.list.page.size
-        - The default page size of lists in SEB Server GUI
-        - Default is set to 20
-    sebserver.gui.date.displayformat
-        - The locale tag for the display format to use
-        - This defines the formatting of dates and numbers within the formatting of the specified location tag
-    sebserver.gui.entrypoint
-        - The servlet endpoint where the GUI service servlet is located.
-    sebserver.gui.webservice.protocol
-    sebserver.gui.webservice.address
-    sebserver.gui.webservice.port
-        - The URL properties to define the URL with that the web service is accessed from the GUI component.
-        - On a single-bundled setup this must not be changed since GUI runs on the same server as the web-service and communicates over standard localhost settings. For a distributed environment this must define the URL to the web-service server.
-    sebserver.gui.webservice.poll-interval
-        - Defines the interval in milliseconds that the GUI service uses to poll the live monitoring data from web-service.
-    sebserver.gui.webservice.lms.disable.MOCKUP
-        - Indicates whether a mocking LMS for testing should be available in the LMS Setup section or not.
-    sebserver.gui.seb.client.config.download.filename
-        - Defines the download file name of a SEB client configuration.
-    sebserver.gui.seb.exam.config.download.filename
-        - Defines the download file name of a SEB exam configuration
-    sebserver.gui.http.external.scheme
-    sebserver.gui.http.external.servername
-    sebserver.gui.http.external.port
-        - The URL properties that defines the URL the gui service can be accessed from external
-        - On a single-bundled setup this must not be changed since GUI runs on the same server as the web-service and uses the defaults from the web-service
 
+    SEB_SERVER_URL
+        - The url used to connect to seb-webservice. The GUI service uses this to connect to the seb-webservice API
+        - This is mostly configured to connect internally over the Docker network, it is more secure and faster as well
+        - Default is "http://seb-webservice:8080" to internally connect to the docker service via docker networking
+    SEB_SERVER_USERNAME
+        - This is the client name used by the seb-guiservice to authenticate to seb-webservice
+        - Default is guiClient
+    SEB_SERVER_PASSWORD
+        - This is the password used by the seb-guiservice to authenticate to seb-webservice
+        - Note this is usually set be environment variable from the init and you do not have to set it manually
+        - Default comes form environment variable SEBSERVER_PWD
+
+    PROCTOR_SERVER_URL
+        - The url used to connect to sps-webservice. The GUI service uses this to connect to the sps-webservice API
+        - This is mostly configured to connect internally over the Docker network, it is more secure and faster as well
+        - Default is "http://sps-webservice:8090" to internally connect to the docker service via docker networking
+    PROCTOR_SERVER_USERNAME=
+        - This is the client name used by the sps-guiservice to authenticate to seb-webservice
+        - Default is spsGuiClient
+    PROCTOR_SERVER_PASSWORD
+        - This is the password used by the seb-guiservice to authenticate to sps-webservice
+        - Note this is usually set be environment variable from the init and you do not have to set it manually
+        - Default comes form environment variable SEBSERVER_PWD
+        
 .. _proxy-configuration-label:
 
 Reverse Proxy Configuration
