@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
 
   seb-webservice:
-    image: "sebadmin/seb-server:v3.0-latest"
+    image: "sebadmin/seb-server:${SEBSERVER_VERSION}"
     container_name: seb-webservice
     volumes:
       - seb-server-config:/sebserver/config
@@ -72,7 +72,7 @@ services:
     restart: unless-stopped
 
   sps-webservice:
-    image: "sebadmin/seb-sps:v3.0-latest"
+    image: "sebadmin/seb-sps:${SEBSERVER_VERSION}"
     container_name: sps-webservice
     environment:
       # Service runtime settings
@@ -119,7 +119,7 @@ services:
     restart: unless-stopped
 
   seb-guiservice:
-    image: sebadmin/seb-server-gui:v3.0-latest
+    image: sebadmin/seb-server-gui:${SEBSERVER_VERSION}
     container_name: seb-guiservice
     environment:
       # Service runtime settings
