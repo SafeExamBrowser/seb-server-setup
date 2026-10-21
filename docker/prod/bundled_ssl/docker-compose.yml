@@ -163,4 +163,4 @@ volumes:
   seb-server-config:
     name: seb-server-prod-config
   seb-db-prod:
-    name: seb-server-prod-mariadb
+    name: ${DB_VOLUME_NAME}

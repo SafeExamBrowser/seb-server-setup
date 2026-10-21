@@ -148,4 +148,4 @@ networks:
 
 volumes:
   seb-server-demo-db:
-    name: seb-demo-server-db
+    name: ${DB_VOLUME_NAME}
