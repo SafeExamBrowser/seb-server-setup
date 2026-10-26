@@ -9,11 +9,8 @@ For production we provide currently three different default setups or examples, 
 as an example for a cloud based setup with kubernetes kind example configurations.
 
 .. note::
-    Since SEB Server version 2.0 there are two new services that are included within the SEB Server installation but
-    simplified setup process completely based on Docker-Compose for bundled setups, pulling images from Dockerhub.
-
-    If you already have a SEB Server installation and want to migrate from a former installation with major version 1.X
-    to the new major version 2.x, please consult the Major Version Migration Guide
+    If you already have a SEB Server installation and want to migrate from a former installation with major version 2.X
+    to the new major version 3.x, please consult the Major Version Migration Guide first.
   
 The bundled setups are used to bundle the whole SEB Server setup and all its services together for deploying on one host machine or virtual host machine.
 This is accomplished with a docker-compose bundle consisting of the MariaDB database, all SEB Server service components and a reverse proxy to communicate
@@ -26,10 +23,10 @@ The first bundled solution, called just "bundled", implements no TLS termination
 a TLS termination with SSL certificate handling and all needed forwarding. In this case, the reverse proxy within the bundles setup only does 
 the internal sub-path routing to the respective internal services.
 
-The second bundled solution, called "bundled_ssl", implements a TLS termination with the included reverse proxy service that also does the 
+The second bundled solution, called "bundled_ssl", configures a TLS termination with the included reverse proxy service that also does the
 sub-path routing to internal services.
 
-The setup process for both is similar, expect that for the bundled_ssl setup, you need to provide valid TLS certificates. 
+The setup process for both is similar, expect that for the bundled_ssl setup, you need to provide a valid TLS certificates of your own.
 
 .. note::
     If you use TLS certificated for HTTPS, you need to use valid certificates and not self-signed once, otherwise some services are not able to communicate properly and external systems that use to connect to SEB Server might deny the connection to SEB Server with a self singed certificate
@@ -103,7 +100,7 @@ For more details on how to configure each service see :ref:`configuration-label`
 
  .. code-block:: bash
      
-    $ git clone -b v1.1-latest https://github.com/SafeExamBrowser/seb-server-setup.git
+    $ git clone -b v3.0-latest https://github.com/SafeExamBrowser/seb-server-setup.git
     $ cd seb-server-setup/docker/prod/bundled/dockerhub/
 
 3. Open the existing .env file and apply the needed settings for the setup as the .env file example shows:
@@ -199,7 +196,7 @@ Cloud based Kubernetes Kind Example
 ........................
 
 This setup provides an example for a distributed and scalable cloud setup with Kubernetes and Kind.
-You can use this as a staring point or template for a Kubernetes based production ready setup.
+You can use this as a starting point or template for a Kubernetes based production ready setup.
 
 .. note::
     Kubernetes secrets should never get into Git unencrpyted. This is only an example.
@@ -223,14 +220,15 @@ Kind, kubectl and kustomize can be installed as binaries so that they are availa
 
 The example setup consists of some kind setup descriptors, the kustomization.yaml and a deploy script.
 The kustomization.yaml file first sets common values which are modified most: image version and replica count.
-It then uses the base config published in this repository (docker/ethz/cloud/kustomize/) and extends it to a demo deployment.
+It then uses the base config published in this repository (docker/prod/cloud/) and extends it to a demo deployment.
 
 **Configuration**
 
-The configuration for each service is located in docker/ethz/cloud/kustomize/config/ directory separated by folders for each service.
-The different services are webservice, guiservice and mariadb. This corresponds to the three kubernetes services that are setup by this demo.
+The configuration for each service is located in docker/prod/cloud/config/ directory separated by folders for each service.
+The different services are webservice and mariadb. This corresponds to the kubernetes services that are setup by this template.
 Each service configuration folder contains then separate configuration folder for each individual concern of the service.
 "spring" folder contains all the Spring and Spring-Boot based configurations and the jmx folder contains configuration for JMX binding (experimental)
+The two webservices seb-webservice and sps-webservice both uses the same config directory in /webservice/spring, while the seb-server uses the root and sps-webservice the sub-directory called "sps"
 
 For a reference of the base environment variables see: :ref:`baseenv-label` 
 
@@ -251,15 +249,15 @@ For a reference of the base environment variables see: :ref:`baseenv-label`
 
  .. code-block:: bash
     
-    $ git clone https://github.com/SafeExamBrowser/seb-server-setup.git -b v1.4-latest
-    $ cd seb-server-setup/docker/prod/cloud/kind-example
+    $ git clone https://github.com/SafeExamBrowser/seb-server-setup.git -b v3.0-latest
+    $ cd seb-server-setup/docker/prod/cloud/example
 
 3. If some specific configuration is needed, this can be done within this step. See :ref:`configuration-label` for more details on how to configure the services.
-Spring based configuration settings can be set either in the respective application-prod.properties files in docker/ethz/cloud/kustomize/config/
-or via override in docker/demo/cloud/kind-example/kustomization.yml within the respective service.
+Spring based configuration settings can be set either in the respective application-prod.properties files in docker/prod/cloud/config/
+or via override in docker/prod/cloud/example/kustomization.yml within the respective service.
 
 .. note::
-    The spring property names can be override in the respective yml by change the "." separator with a "_" separator.
+    The spring property names can be override in the respective docker-compose.yml within the respective service, by change the "." separator with a "_" separator.
 
 4. Create the docker-container with the Kubernetes cluster and initialize Ingress.
 
@@ -295,7 +293,7 @@ Now you should be able to show the Ingress pods:
     $ kustomize build . | kubectl apply -f -
 
 .. note::
-    If there is an error on the kustomize startup, make shure the ingress has already started propperly by using: $ kubectl get pods -n ingress-nginx
+    If there is an error on the kustomize startup, make sure the ingress has already started properly by using: $ kubectl get pods -n ingress-nginx
     and try again to run the kustomize template.
 
 Now you should be able to show the services, pods and logs with:
@@ -344,7 +342,7 @@ Base environment variables for services
 .............................................
 
 
-**Base environment variables sebserver webservice**
+**Base environment variables SEB Server: seb-webservice**
 
 _________________________________________________________________________________________________________________
 
@@ -366,49 +364,26 @@ ________________________________________________________________________________
         - MariaDB server hostname
     datastore_mariadb_server_port 
         - MariaDB port
-    sebserver_webservice_http_external_scheme 
-        - Webservice external URL scheme (http/https)
+    sebserver_webservice_http_external_scheme
+        - Webservice external URL scheme (http/https) . This is used to provide SEB clients with connection URL to SEB Server
     sebserver_webservice_http_external_servername 
-        - Webservice external URL host name
+        - Webservice external URL host name. This is used to provide SEB clients with connection URL to SEB Server
     sebserver_webservice_http_external_port 
-        - Webservice external URL port (empty for default http(80) https(443))
+        - Webservice external URL port (empty for default http(80) https(443)). This is used to provide SEB clients with connection URL to SEB Server
     sebserver_webservice_autologin_url 
-        - External URL from where the sebserver guiservice is available. See also `sebserver_gui_http_external_servername`
+        - External URL from where the seb-guiservice is available.
     sebserver_feature_exam_seb_screenProctoring_bundled_url 
-        - The URL on which the screen proctoring webservice is externally available
+        - The URL on which the screen proctoring webservice is externally available. This is mostly used to provide SEB clients with external connection to SPS service.
+    sebserver_feature_exam_seb_screenProctoring_bundled_url_intern
+        - Internal URL connection to screen proctoring webservice. This is used by SEB server to internally connect to SPS service
+        - Default is http://sps-webservice:8090
     sps_sebserver_client_secret 
         - SEB Servers client secret to connect to screen proctoring service. This must match with the sebserver_client_secret setting in screen proctoring (sps) webservice
     sps_sebserver_password 
         - SEB Servers screen proctoring service maintenance account password. This must match with the same setting in screen proctoring (sps) webservice
 
-**Base environment variables sebserver guiservice**
 
-_________________________________________________________________________________________________________________
-
-.. glossary::
-    
-    JAVA_HEAP_MIN 
-        - Minimum heap memory space given to the JVM process
-    JAVA_HEAP_MAX 
-        - Maximum heap memory space given to the JVM process
-    sebserver_password 
-        - SEB Server internal password for encryption. NOTE: This password must be the same vor all webservice and gui instances
-    spring_profiles_active 
-        - SEB Server profiles. For a productive guiservice setup "gui,prod-gui,prod"
-    sebserver_gui_http_external_scheme 
-        - Guiservice external URL scheme (http/https)
-    sebserver_gui_http_external_servername 
-        - Guiservice external URL host name
-    sebserver_gui_http_external_port 
-        - Guiservice external URL port (empty for default http(80) https(443))
-    sebserver_gui_http_webservice_scheme 
-        - Webservice external connection URL scheme (http/https)
-    sebserver_gui_http_webservice_servername 
-        - Webservice external connection URL host name.
-    sebserver_gui_http_webservice_port 
-        - Webservice external connection URL port (empty for default http(80) https(443))
-
-**Base environment variables screen proctoring (sps) webservice**
+**Base environment variables screen proctoring: sps-webservice**
 
 _________________________________________________________________________________________________________________
 
@@ -430,16 +405,14 @@ ________________________________________________________________________________
         - MariaDB server hostname
     datastore_mariadb_server_port 
         - MariaDB port
-    sps_data_store_adapter 
+    sps_data_store_adaptersps_data_store_adapter
         - Image (Screenshots) data store adapter. "FULL_RDBMS" for storing images into DB or "S3_RDBMS" for S3 compatible storage
     sps_webservice_http_external_scheme 
-        - Webservice external URL scheme (http/https)
+        - Webservice external URL scheme (http/https). This is used to provide SEB Clients with connection URL
     sps_webservice_http_external_servername 
-        - Webservice external URL host name
+        - Webservice external URL host name . This is used to provide SEB Clients with connection URL
     sps_webservice_http_external_port 
-        - Webservice external URL port (empty for default http(80) https(443))
-    sps_gui_redirect_url 
-        - SPS GUI external URL used for redirect and autologin link creation
+        - Webservice external URL port (empty for default http(80) https(443)) . This is used to provide SEB Clients with connection URL
     sebserver_client_secret 
         - Client secret for SEB Server binding. SEB Server must use this to connect to screen proctoring service. See also sps_sebserver_client_secret
     spsgui_client_secret 
@@ -448,7 +421,7 @@ ________________________________________________________________________________
         - Password for the SEB Server user account that is used by SEB Server to manage SPS service data. This account is initially generated by the SPS service if it doesn't exist
 
 
-**Base environment variables sebserver screen proctoring (sps) guiservice**
+**Base environment variables sebserver GUI: seb-guiservice**
 
 _________________________________________________________________________________________________________________
 
@@ -460,19 +433,23 @@ ________________________________________________________________________________
         - Log level. Default is "info"
     SERVER_PORT 
         - Internal service port mapping. Default is "3000"
-    VITE_SERVER_URL 
-        - The external URL of the VITE server
-    VITE_SERVER_PORT 
-        - The port mapping for above VITE server URL if needed. If not needed (default ports http/https) this can be empty
+
+    SEB_SERVER_URL
+        - The url used to connect to seb-webservice. The GUI service uses this to connect to the seb-webservice API
+        - Default is http://seb-webservice:8080 that routs the calls internally within the docker network
+    SEB_SERVER_USERNAME
+        - This is the client name used by the seb-guiservice to authenticate to seb-webservice
+        - Default is "guiClient" as also defined as default in the seb-webservice
+    SEB_SERVER_PASSWORD
+        - This is the password used by the seb-guiservice to authenticate to seb-webservice
+        - Per default this is set from the env variable SEBSERVER_PWD
+
     PROCTOR_SERVER_URL 
-        - The external URL of the screen proctoring webservice. This can also be internal URL connection to sps-webservice
-    PROCTOR_SERVER_PORT 
-        - Port mapping for above screen proctoring webservice URL if needed. If not needed (default ports http/https) this can be empty
-    PROCTOR_DEFAULT_URL 
-        - Default webservice root API endpoint. Usually "/admin-api/v1"
+        - The url used to connect to seb-webservice. The GUI service uses this to connect to the sps-webservice API
+        - Default is http://sps-webservice:8090 that routs the calls internally within the docker network
     PROCTOR_SERVER_USERNAME 
-        - Client id name for sps-guiservice to connect to sps-webservice. Default is "spsGuiClient"
+        - This is the client name used by the sps-guiservice to authenticate to seb-webservice
+        - Default is spsGuiClient as also defined as default in the sps-webservice
     PROCTOR_SERVER_PASSWORD 
-        - Client secret for sps-guiservice to connect to sps-webservice. Must match with spsgui_client_secret
-    SEB_SERVER_INTEGRATED_MODE 
-        - Integration mode. Default is true
+        - This is the password used by the seb-guiservice to authenticate to sps-webservice
+        - Per default this is set from the env variable SEBSERVER_PWD

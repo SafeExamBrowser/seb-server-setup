@@ -189,6 +189,42 @@ Following the startup logs of each service is shown with some additional comment
     08:00:38.737 INFO  [main]:[ch.ethz.seb.SEB_SERVER_INIT] ----> *********************************************************
 
 
+   **the following section shows logging of specific migration tasks applied on fist update to 3.0**
+
+10:52:46.216 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ---->
+10:52:46.216 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ----> Check to apply reparation task for legacy Data for version 3.0
+10:52:46.216 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Wait to become master and SPS availability for at least 2 minutes"
+10:52:46.222 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------>
+10:52:46.222 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Start repairing legacy User Roles and add subsequent roles for InstitutionalAdmin and ExamAdmin if needed
+10:52:46.249 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Found Institutional Admin User with missing roles. Add missing roles: InstAdmin : 4190fa3e-4365-4fc2-9a85-68874bce6808
+10:52:46.276 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Successfully update User Roles for user: InstAdmin new roles: [EXAM_ADMIN, EXAM_SUPPORTER, INSTITUTIONAL_ADMIN]
+10:52:46.281 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Found Exam Admin User with missing roles. Add missing roles: ExamAdmin : 2a54a0fc-5987-4e23-ba23-d3f2b80fa68a
+10:52:46.296 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Successfully update User Roles for user: ExamAdmin new roles: [EXAM_ADMIN, EXAM_SUPPORTER]
+10:52:46.316 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Successfully finished repairing legacy User Roles
+10:52:46.320 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------>
+10:52:46.320 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Start repairing legacy Exams data...
+10:52:46.334 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Repair exam: 1 : b00b88a5-5a44-4c6e-bf57-11539d4e743e
+10:52:47.581 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ----------> Successfully synchronized Exam with SPS: 1 : b00b88a5-5a44-4c6e-bf57-11539d4e743e
+10:52:47.587 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Repair exam: 2 : 9a7db80d-23dd-424c-8cba-5d4dd4b5a849
+10:52:47.596 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ----------> Found invalid supervisor users for exam: 2 : 9a7db80d-23dd-424c-8cba-5d4dd4b5a849 old supervisor UUIDs [cb3a4075-4970-4496-a6f4-fb159c663863, c320e8a5-2b4a-4849-bc48-da358d826483, 67318279-db13-491a-b8ea-771a66ae3998, 9becca05-6254-4b2e-b529-90a2ae0b4d52], new supervisor UUIDs [cb3a4075-4970-4496-a6f4-fb159c663863, c320e8a5-2b4a-4849-bc48-da358d826483, 67318279-db13-491a-b8ea-771a66ae3998]
+10:52:47.697 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ----------> Successfully synchronized Exam with SPS: 2 : 9a7db80d-23dd-424c-8cba-5d4dd4b5a849
+10:52:47.703 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Repair exam: 3 : dd2db50e-8134-44a8-aaf1-ad99a6f0dcaf
+10:52:47.785 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ----------> Successfully synchronized Exam with SPS: 3 : dd2db50e-8134-44a8-aaf1-ad99a6f0dcaf
+10:52:47.793 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Successfully finished repairing legacy Exams
+10:52:47.797 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Start repairing legacy Exam Templates add set 'apply to groups' SPS collecting strategy if not set already...
+10:52:47.830 INFO  [asyncService-1]:[ch.ethz.seb.sebserver.webservice.servicelayer.exam.impl.ExamTemplateServiceImpl] **** Change collecting strategy form 'EXAM' to 'APPLY_SEB_GROUPS' for: ExamTemplate1
+10:52:48.007 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Successfully finished repairing legacy ExamTemplates and set SPS grouping strategy 'APPLY_SEB_GROUPS'
+10:52:48.008 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------>
+10:52:48.008 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Start SPS User Account synchronization
+10:52:48.011 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User sebserver-admin with SPS
+10:52:48.117 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User cb3a4075-4970-4496-a6f4-fb159c663863 with SPS
+10:52:48.191 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User 4190fa3e-4365-4fc2-9a85-68874bce6808 with SPS
+10:52:48.243 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User 2a54a0fc-5987-4e23-ba23-d3f2b80fa68a with SPS
+10:52:48.298 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User c320e8a5-2b4a-4849-bc48-da358d826483 with SPS
+10:52:48.356 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User 67318279-db13-491a-b8ea-771a66ae3998 with SPS
+10:52:48.412 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Finished initial SPS User Account synchronisation successfully
+
+
 
  **SPS Webservice example Log**
 

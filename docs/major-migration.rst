@@ -3,24 +3,36 @@
 Major Version Migration
 -----------------------
 
-Since this major version update not only includes a usual DB migration but also new services that need to be setup, a migration
-from SEB Server 1.x to version 2.x needs special treating and it is not going to work by just adapting the version tags for the images.
+The next Major version migration applies the update from SEB Server version 2.x to SEB Server version 3.0.
 
-There are basically two different ways to go on with this migration.
-If you are able to make a database backup and restore, setting up an entire new SEB Server would be the easiest way. But if
-you want to reuse our internal/integrated database without migrating the data form old database to a new one, you need to take
-care to merge your old setup configuration with the new one.
+This is a major version update that also affects the SEB Server Docker setup and changes container setups.
+With this version comes a completely new User Interface build with Vue and TypeScript. The new User Interface
+integrates the former SEB Server User Interface with the Screen Proctoring User Interface so that there is
+only one User Interface within a singe container now. The two former services, namely seb-server and sps-webservice
+are  mostly the same except the seb-server is renames to seb-webservice and does not provide the old User Interface anymore.
 
-**We recommend the first approach:**
+Since this changes the container setup slightly we recommend the following update procedure for a seamless update:
+
+ - Bundled Setups
+
+ For bundled setups the easiest way to update is to make a new setup beside the existing one and using the same DB connection
+ to connect to the existing database. You strictly require to use the SEBSERVER_PWD you used for your current setup also for the new setup.
+
+ If you use the internal MariaDB that comes with the docker compose, you have to make sure the existing db volume that was
+ named "seb-server-mariadb" by default, is not deleted and is reused by the new setup. We also recomment to make a DB
+ backup before update and migration applies to the data.
+
+ Step by step migration from SEB Server 2.x to SEB Server 3.0
+
 
 1. Make sure you have all essential settings like passwords for SEB Server and Database connection from your existing SEB Server setup at hand
 
 2. Make a backup of your existing SEB Server database or schema, with an SQL dump or similar technique you are familiar with. This is needed for safety reasons to be able to restore old data if needed
 
-3. Stop all docker services with and delete the existing configuration volumes in docker
+3. Stop all docker services and delete the existing configuration volumes in docker:
 
 .. code-block:: bash
-    
+
     $ docker-compose down
     $ docker volume ls
     $ docker volume rm seb-server-config
@@ -29,47 +41,35 @@ care to merge your old setup configuration with the new one.
     Do not delete the data base volume "seb-server-mariadb" since this are your current data and it will be migrated once the new service starting up.
     If you use an external database, you are just fine and you can connect the it within the new setup just like usual. The migration will then be applied on fist service startup
 
-
 4. Install SEB Server with a total new installation as described within the install section: :ref:`prodsetup-label`
 
 .. code-block:: bash
-    
-    $ git checkout $ git checkout tags/v2.0-latest
 
-5. Once the new SEB Server setup is up and running, check if migration of the database was successfully. :ref:`logguide-label` for more information.
-
-6. You should now be able to access the new SEB Server with old data and old logins.
-
-
----------------------------------------------------------------------------------------------------------------------
-
-**For the second approach please use the following guide:**
-
-1. Make sure you have all essential settings like passwords for SEB Server and Database connection from your existing SEB Server setup at hand and backed up
-    
-2. Make a backup of your existing SEB Server database or schema, with an SQL dump or similar technique you are familiar with. This is just in case you want to go back and restore the old installation
-    
-3. Stop all services with docker-compose down on the old installation.
-    
-4. Checkout the latest 2.0 version of the SEB Server setup repo "seb-server-setup" with:
-
-.. code-block:: bash
-    
-    $ git checkout $ git checkout tags/v2.0-latest
+    $ git checkout $ git checkout tags/v3.0-latest
 
 or
- 
-.. code-block:: bash
-    
-    $ git clone -b v2.0-latest https://github.com/SafeExamBrowser/seb-server-setup.git
 
-5. Apply all needed settings from your restored data and also apply new needed settings accordingly. Please consult also the new installation guide for this: :ref:`prodsetup-label`
+.. code-block:: bash
+
+    $ git clone -b v3.0-latest https://github.com/SafeExamBrowser/seb-server-setup.git
+
+5. Apply all needed settings from your former setup accordingly. Apply all settings you have changed or set in the .env or docker-compose.yml file, to configure your Setup as was configured. Beside of that all new settings come with default values that should work out-of-the-box. Please consult also the new installation guide for this: :ref:`prodsetup-label`
 
 6. Start the new Setup with and consult the logs (docker logs seb-server), check that all is okay and DB migration was successfully applied. Also consult the :ref:`logguide-label` for more information.
 
 .. code-block:: bash
-    
+
     $ docker-compose pull
     $ docker-compose up -d
 
 7. You should now be able to access the new SEB Server with old data and old logins.
+
+
+ - Cloud Setup
+
+ There are new templates for cloud setup that gives an example of what the new setup contains. You can compare this
+ to the setup you already have and adapt to the changes.
+
+ Since a cloud setup heavily depends on the cloud environment, please contact us via Alliance e-mail directly or on
+ github for further if needed.
+
