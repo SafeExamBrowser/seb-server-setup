@@ -44,9 +44,9 @@ The image below shows a very simplified diagram that locates the SEB Server in a
 Safe Exam Browser (SEB). The SEB Server communicates with the LMS for managing and prepare exams as well as with the SEB Client to ensure 
 a more automated and secure setup for high-stake exams.
 
-.. image:: https://raw.githubusercontent.com/SafeExamBrowser/seb-server/rel-2.0/docs/images/setup_1.png
+.. image:: https://raw.githubusercontent.com/SafeExamBrowser/seb-server/dev-3.0/docs/images/setup_1.png
     :align: center
-    :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server/rel-2.0/docs/images/setup_1.png
+    :target: https://raw.githubusercontent.com/SafeExamBrowser/seb-server/dev-3.0/docs/images/setup_1.png
 
 
 Install SEB Server
@@ -57,7 +57,6 @@ For a complete guide to install SEB Server please go to `SEB Server Installation
 Getting started with SEB Server
 -------------------------------
 
-
     **NOTE**
 
     The following is the SEB Server User Guide for the SEB Server version 2.x. Since there is no actual User Guide for version 3.0 yet
@@ -65,63 +64,80 @@ Getting started with SEB Server
 
 For a complete SEB Server user guide please go to `SEB Server User Guide <https://seb-server.readthedocs.io/en/latest/#>`_
 
-SEB Server Version 2.1 is out
+SEB Server Version 3.0 is out
 -------------------------------
 
-Within this new version 2.1 we implemented mostly new features for Screen Proctoring and make SEB Server and Screen Proctoring 
-more stable. We also stabilized the SEB Server Moodle Plugin integration for SEB Server Moodle Plugin Version 2.
-
-The new major update of SEB Server from version 1 to version 2, comes with the new in-built feature of screen proctoring and also a extended but better bundled Docker setup.
-There are two new services that run beside the existing services like seb-server, mariadb and a proxy. This two new services are needed for the new screen proctoring feature
-and consists of a sps-webservice and sps-guiservice container. The sps-webservice runs the back-end for screen proctoring and needs a database connection to eiter the same
-database server as seb-server or to another one if SEB Server data and screen shots, meta data shall be stored on different database servers. The sps-guiservice implements
-the screen proctoring user interface that can be accessed within a browser application.
-For a migration from a running SEB Server setup with version 1.x to new major version 2.0, please also read the `migration guide <https://seb-server-setup.readthedocs.io/en/latest/major-migration.html>`_.
+Within this new version 3.0 comes a whole new UI (user interface) that integrates the former SEB Server UI and
+the Screen Proctoring UI in one single UI built with Vue/Typescript. We also adapted the SEB Server setup
+accordingly and simplified it where possible. Beside of that we have some new features as well as better performance
 
 New Features:
-    - SEB Server - Screen Proctoring: Client group application for screen proctoring groups. Client groups applied in an exam can now be applied to screen proctoring to have the same groups.
-    - Screen Proctoring: Deletion of screen proctoring sessions for admin users
-    - Screen Proctoring: Application View search   
+    - Complete new modern Web-UI that integrates former SEB Server and Screen Proctoring UI
+    - New monitoring overview page where you can see all the most relevant monitoring data of a running Exam right away.
+    You can still show the list of SEB clients and filter it as usual while also go to single client details.
+    - Full screen proctoring integration within the new UI. You can see the screens of a client within monitoring
+    directly now on the clients detail view. You can also go directly to the gallery view by groups from the
+    new monitoring overview page. Screen Proctoring Search and Application Search are integrated too.
+    - Exam Template Wizard. A UI wizard that guides you through the steps of creating a Exam Template
+    that is used to import Exams later on. Configuration Templates are automatically generated out of the
+    given SEB Settings within the wizard. No need to maintain them separately anymore.
+    - Exam Import Wizard. A UI wizard that guides you through the steps of importing an Exam either form an integrated
+    Assessment Tool or by URL. Exam Configurations are generated automatically on import from the Exam Template settings.
+    No need to maintain them separately anymore.
+    - Scheduled Deletion. New feature the schedule a Exam deletion of all exams that are older then a given date.
+    The delete is scheduled to midnight of the current day and you are able to consult a report of all involved deletions.
+    As long as the scheduled deletion has not be started, you are always able to delete the task. After deletion, the task
+    can still be seen and the reports states successfully and none successfully deletions.
+    - Exclude from Deletion. This feature allows you to exclude certain Exams from a scheduled deletion task. You can mark
+    an Exam as excluded from deletion to prevent deletion of the Exam by a automated task.
 
 Improvements:
-   - SEB Server - SEB Settings: All new SEB Settings from SEB Win, SEB Mac and SEB iOS now in SEB Settings GUI
-   - SEB Server - Screen Proctoring: Apply Screen Proctoring to SEB Settings from Exam. When screen proctoring is enabled/disables on Exam, it is also enabled/disabled in the applied SEB Settings for SEB
-   - SEB Server - Screen Proctoring: Stabilise Screen Proctoring Feature and make SPS API Connection more stable
-   - SEB Server - Setup: Simplify Spring profiles
-   - SEB Server - Moodle Integration: Stabilise Moodle Plugin 2 Integration
-   - SEB Server - Moodle Integration: Make Teacher Accounts not selectable as Exam supporter
-   - SEB Server - Error Handling: Improve error message and logs in SEB Server
-   - SEB Server - ASK: ASK Monitoring: Make clearer note when SEB do not send an ASK 
-   - Screen Proctoring: Update to latest Spring Boot version 3.3.2
-   - Screen Proctoring: Add limit to Screenshot Queue to prevent out of memory
-   - Screen Proctoring: Make sure Exam Admin and Institution Admin see only supported Exams on SPS
+   - Improved User Roles. You only apply one single role for a user now and it gets all privileges from subsequent roles
+   - Analysis. There is a new analysis section where you can analyse finished exams after monitoring. Search screen proctoring
+   or download SEB logs of the Exam.
+   - Archivation. There is a new archivation section, where you can archive Exams and maintain excludes from deletion.
+   - Running on Java 21 ands Spring 3.5 now.
+   - New SEB Settings now all available in the UI
 
 Bugfixes:
-   - SEB Server - Moodle Integration: LMS Moodle external_id should not be greater than 255 chars
-   - SEB Server - Moodle Integration: Delete Teacher users when exam is deleted or assessment tool setup is deactivated
-   - SEB Server - Moodle Integration: using twice the same quiz name in a Moodle Course seems not working
-   - SEB Server - Monitoring: Notification symbol does not appear when locking a client from the list view
-   - Screen Proctoring: Prevent queue overflow on metadata store error (due to to long meta data for example)
-   - Screen Proctoring: Fix RDBMS and S3 store strategy to avoid multiple entries in screenshot_data table when retrying to store screenshot
-   - Screen Proctoring: S3 Storage: HTTP Connection leak on abandoned image requests (fast time line shift on recorder for example)
-   - Screen Proctoring: URLEncoded metadata in Header has problem with spaces replaces by '+'
-   - Screen Proctoring: Can't use screen proctoring with OLAT due to OLAT exam identifier
+   - Disable any Assessment Tool Setup causes disconnect Exams of other Assessment Tool Setup with Moodle integration.Setup
+   - Unsynced User Accounts SPS-SEB where new users not properly synchronized with screen proctoring service
+   - Exam Reimport from Moodle causes SPS data mismatch
+   - Fix duplicate client indicator entry recovery
+   - Inactive LMS are still involved in the Exam Update Task
+   - Missing SEB Settings allowVirtualMachine
+   - SEB Settings arguments with special chars (or other settings)
+   - Moodle Integration, Deletion when Moodle is not available leads to inconsistent connection state.
+   - Moodle Integration: Exam Import fails when there is no Connection Configuration
+   - Screen Proctoring, all clients are counted instead of only active clients
+   - Moodle Quiz Recovery error when quizzes in same course has like names --> Moodle Quiz Recovery is disabled now for default
+   - Access inconsistency for Exam Admin role on SEB Server with SPS Group (Gallery View)
+   - Save User Account, email, DAO inserts empty string instead of null
+   - Exam/Quiz description change from Moodle causes errors when description is deleted
+   - SEB Settings, URLs getting cut in SEB Config
+
+Missing Features:
+   - Consider that the new UI is MVP (minimal viable product). And despite the fact that almost all of the former features
+   as be implemented or integrated, there are some few missing features.
+   - User/Audit Logs are currently not viewable in the UI.
+
+For a migration from a running SEB Server setup with version 2.x to new major version 3.0, please also read the `migration guide <https://seb-server-setup.readthedocs.io/en/latest/major-migration.html>`_.
 
 
 SEB - SEB Server Compatibility
 ------------------------------
 
-The table below shows available and upcoming SEB client versions that has SEB Server integration support and are compatible with particular 
+The table below shows available and upcoming SEB client versions that has SEB Server integration support and are compatible with particular
 SEB Server version. There is an entry for each platform with a beta or testing release date and a official release date.
 
-**SEB Server Version 2.1.x**
+**SEB Server Version 3.0.x**
 
 .. csv-table::
    :header: "Platform / OS", "Release Version"
 
-   "SEB Client for iOS", "3.5"
-   "SEB Client for Mac", "3.5"
-   "SEB Client for Windows", "3.9"
+   "SEB Client for iOS", "3.7.1.1"
+   "SEB Client for Mac", "3.7.1.1"
+   "SEB Client for Windows", "3.10.3"
 
 
 Project Background
