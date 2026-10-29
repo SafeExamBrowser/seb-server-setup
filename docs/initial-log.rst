@@ -191,38 +191,38 @@ Following the startup logs of each service is shown with some additional comment
 
    **the following section shows logging of specific migration tasks applied on fist update to 3.0**
 
-10:52:46.216 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ---->
-10:52:46.216 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ----> Check to apply reparation task for legacy Data for version 3.0
-10:52:46.216 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Wait to become master and SPS availability for at least 2 minutes"
-10:52:46.222 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------>
-10:52:46.222 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Start repairing legacy User Roles and add subsequent roles for InstitutionalAdmin and ExamAdmin if needed
-10:52:46.249 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Found Institutional Admin User with missing roles. Add missing roles: InstAdmin : 4190fa3e-4365-4fc2-9a85-68874bce6808
-10:52:46.276 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Successfully update User Roles for user: InstAdmin new roles: [EXAM_ADMIN, EXAM_SUPPORTER, INSTITUTIONAL_ADMIN]
-10:52:46.281 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Found Exam Admin User with missing roles. Add missing roles: ExamAdmin : 2a54a0fc-5987-4e23-ba23-d3f2b80fa68a
-10:52:46.296 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Successfully update User Roles for user: ExamAdmin new roles: [EXAM_ADMIN, EXAM_SUPPORTER]
-10:52:46.316 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Successfully finished repairing legacy User Roles
-10:52:46.320 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------>
-10:52:46.320 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Start repairing legacy Exams data...
-10:52:46.334 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Repair exam: 1 : b00b88a5-5a44-4c6e-bf57-11539d4e743e
-10:52:47.581 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ----------> Successfully synchronized Exam with SPS: 1 : b00b88a5-5a44-4c6e-bf57-11539d4e743e
-10:52:47.587 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Repair exam: 2 : 9a7db80d-23dd-424c-8cba-5d4dd4b5a849
-10:52:47.596 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ----------> Found invalid supervisor users for exam: 2 : 9a7db80d-23dd-424c-8cba-5d4dd4b5a849 old supervisor UUIDs [cb3a4075-4970-4496-a6f4-fb159c663863, c320e8a5-2b4a-4849-bc48-da358d826483, 67318279-db13-491a-b8ea-771a66ae3998, 9becca05-6254-4b2e-b529-90a2ae0b4d52], new supervisor UUIDs [cb3a4075-4970-4496-a6f4-fb159c663863, c320e8a5-2b4a-4849-bc48-da358d826483, 67318279-db13-491a-b8ea-771a66ae3998]
-10:52:47.697 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ----------> Successfully synchronized Exam with SPS: 2 : 9a7db80d-23dd-424c-8cba-5d4dd4b5a849
-10:52:47.703 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Repair exam: 3 : dd2db50e-8134-44a8-aaf1-ad99a6f0dcaf
-10:52:47.785 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ----------> Successfully synchronized Exam with SPS: 3 : dd2db50e-8134-44a8-aaf1-ad99a6f0dcaf
-10:52:47.793 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Successfully finished repairing legacy Exams
-10:52:47.797 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Start repairing legacy Exam Templates add set 'apply to groups' SPS collecting strategy if not set already...
-10:52:47.830 INFO  [asyncService-1]:[ch.ethz.seb.sebserver.webservice.servicelayer.exam.impl.ExamTemplateServiceImpl] **** Change collecting strategy form 'EXAM' to 'APPLY_SEB_GROUPS' for: ExamTemplate1
-10:52:48.007 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Successfully finished repairing legacy ExamTemplates and set SPS grouping strategy 'APPLY_SEB_GROUPS'
-10:52:48.008 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------>
-10:52:48.008 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Start SPS User Account synchronization
-10:52:48.011 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User sebserver-admin with SPS
-10:52:48.117 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User cb3a4075-4970-4496-a6f4-fb159c663863 with SPS
-10:52:48.191 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User 4190fa3e-4365-4fc2-9a85-68874bce6808 with SPS
-10:52:48.243 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User 2a54a0fc-5987-4e23-ba23-d3f2b80fa68a with SPS
-10:52:48.298 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User c320e8a5-2b4a-4849-bc48-da358d826483 with SPS
-10:52:48.356 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User 67318279-db13-491a-b8ea-771a66ae3998 with SPS
-10:52:48.412 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Finished initial SPS User Account synchronisation successfully
+    10:52:46.216 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ---->
+    10:52:46.216 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ----> Check to apply reparation task for legacy Data for version 3.0
+    10:52:46.216 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Wait to become master and SPS availability for at least 2 minutes"
+    10:52:46.222 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------>
+    10:52:46.222 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Start repairing legacy User Roles and add subsequent roles for InstitutionalAdmin and ExamAdmin if needed
+    10:52:46.249 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Found Institutional Admin User with missing roles. Add missing roles: InstAdmin : 4190fa3e-4365-4fc2-9a85-68874bce6808
+    10:52:46.276 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Successfully update User Roles for user: InstAdmin new roles: [EXAM_ADMIN, EXAM_SUPPORTER, INSTITUTIONAL_ADMIN]
+    10:52:46.281 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Found Exam Admin User with missing roles. Add missing roles: ExamAdmin : 2a54a0fc-5987-4e23-ba23-d3f2b80fa68a
+    10:52:46.296 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Successfully update User Roles for user: ExamAdmin new roles: [EXAM_ADMIN, EXAM_SUPPORTER]
+    10:52:46.316 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Successfully finished repairing legacy User Roles
+    10:52:46.320 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------>
+    10:52:46.320 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Start repairing legacy Exams data...
+    10:52:46.334 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Repair exam: 1 : b00b88a5-5a44-4c6e-bf57-11539d4e743e
+    10:52:47.581 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ----------> Successfully synchronized Exam with SPS: 1 : b00b88a5-5a44-4c6e-bf57-11539d4e743e
+    10:52:47.587 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Repair exam: 2 : 9a7db80d-23dd-424c-8cba-5d4dd4b5a849
+    10:52:47.596 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ----------> Found invalid supervisor users for exam: 2 : 9a7db80d-23dd-424c-8cba-5d4dd4b5a849 old supervisor UUIDs [cb3a4075-4970-4496-a6f4-fb159c663863, c320e8a5-2b4a-4849-bc48-da358d826483, 67318279-db13-491a-b8ea-771a66ae3998, 9becca05-6254-4b2e-b529-90a2ae0b4d52], new supervisor UUIDs [cb3a4075-4970-4496-a6f4-fb159c663863, c320e8a5-2b4a-4849-bc48-da358d826483, 67318279-db13-491a-b8ea-771a66ae3998]
+    10:52:47.697 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ----------> Successfully synchronized Exam with SPS: 2 : 9a7db80d-23dd-424c-8cba-5d4dd4b5a849
+    10:52:47.703 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Repair exam: 3 : dd2db50e-8134-44a8-aaf1-ad99a6f0dcaf
+    10:52:47.785 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ----------> Successfully synchronized Exam with SPS: 3 : dd2db50e-8134-44a8-aaf1-ad99a6f0dcaf
+    10:52:47.793 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Successfully finished repairing legacy Exams
+    10:52:47.797 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Start repairing legacy Exam Templates add set 'apply to groups' SPS collecting strategy if not set already...
+    10:52:47.830 INFO  [asyncService-1]:[ch.ethz.seb.sebserver.webservice.servicelayer.exam.impl.ExamTemplateServiceImpl] **** Change collecting strategy form 'EXAM' to 'APPLY_SEB_GROUPS' for: ExamTemplate1
+    10:52:48.007 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Successfully finished repairing legacy ExamTemplates and set SPS grouping strategy 'APPLY_SEB_GROUPS'
+    10:52:48.008 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------>
+    10:52:48.008 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] ------> Start SPS User Account synchronization
+    10:52:48.011 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User sebserver-admin with SPS
+    10:52:48.117 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User cb3a4075-4970-4496-a6f4-fb159c663863 with SPS
+    10:52:48.191 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User 4190fa3e-4365-4fc2-9a85-68874bce6808 with SPS
+    10:52:48.243 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User 2a54a0fc-5987-4e23-ba23-d3f2b80fa68a with SPS
+    10:52:48.298 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User c320e8a5-2b4a-4849-bc48-da358d826483 with SPS
+    10:52:48.356 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Synchronize User 67318279-db13-491a-b8ea-771a66ae3998 with SPS
+    10:52:48.412 INFO  [asyncService-1]:[ch.ethz.seb.SEB_SERVER_REPAIR] --------> Finished initial SPS User Account synchronisation successfully
 
 
 
@@ -230,118 +230,122 @@ Following the startup logs of each service is shown with some additional comment
 
 ::
     
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT]  _______ _______ _______      _______ _______ ______   __   __ ___ _______ _______
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |       |       |  _    |    |       |       |    _ | |  | |  |   |       |       |
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |  _____|    ___| |_|   |    |  _____|    ___|   | || |  |_|  |   |       |    ___|
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] | |_____|   |___|       |    | |_____|   |___|   |_||_|       |   |       |   |___
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |_____  |    ___|  _   |     |_____  |    ___|    __  |       |   |      _|    ___|
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT]  _____| |   |___| |_|   |     _____| |   |___|   |  | ||     ||   |     |_|   |___
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |_______|_______|_______| ___|_______|_______|___|  |_|_|___|_|___|_______|_______|____ _______ _______ ______   ___ __    _ _______
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |       |       |    _ | |       |       |  |  | |    |       |    _ | |       |       |       |       |    _ | |   |  |  | |       |
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |  _____|       |   | || |    ___|    ___|   |_| |    |    _  |   | || |   _   |       |_     _|   _   |   | || |   |   |_| |    ___|
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] | |_____|       |   |_||_|   |___|   |___|       |    |   |_| |   |_||_|  | |  |       | |   | |  | |  |   |_||_|   |       |   | __
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |_____  |      _|    __  |    ___|    ___|  _    |    |    ___|    __  |  |_|  |      _| |   | |  |_|  |    __  |   |  _    |   ||  |
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT]  _____| |     |_|   |  | |   |___|   |___| | |   |    |   |   |   |  | |       |     |_  |   | |       |   |  | |   | | |   |   |_| |
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |_______|_______|___|  |_|_______|_______|_|  |__|    |___|   |___|  |_|_______|_______| |___| |_______|___|  |_|___|_|  |__|_______|
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ----> Version: sprint-testing-9abbf93
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ----> Active profiles: [prod]
-    2024-08-28 10:00:35 28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:35 28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ----> Context Path: /
-    2024-08-28 10:00:35 28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:35 28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
-    2024-08-28 10:00:35 28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ----> *** Webservice starting up...                         ***
-    2024-08-28 10:00:35 28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
-    2024-08-28 10:00:35 28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:35 28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ----> Register Webservice: 96487e9f-e503-4d56-bcbd-7688f38ce12d_sprint-testing-9abbf93
-    2024-08-28 10:00:35 28.08.2024 08:00:35.934 INFO  [main]:[com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting...
-    2024-08-28 10:00:36 28.08.2024 08:00:36.015 INFO  [main]:[com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Start completed.
-    2024-08-28 10:00:36 28.08.2024 08:00:36.078 WARN  [main]:[org.mariadb.jdbc.message.server.ErrorPacket] Error: 1146-42S02: Table 'SEBScreenProctoring.webservice_server_info' doesn't exist
-    2024-08-28 10:00:36 28.08.2024 08:00:36.168 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:36 28.08.2024 08:00:36.168 INFO  [main]:[SERVICE_INIT] ----> **** Migration check START ******************************
-    2024-08-28 10:00:36 28.08.2024 08:00:36.169 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:36 28.08.2024 08:00:36.169 INFO  [main]:[SERVICE_INIT] ----> Check database status
-    2024-08-28 10:00:36 28.08.2024 08:00:36.171 INFO  [main]:[org.flywaydb.core.internal.license.VersionPrinter] Flyway Community Edition 7.8.2 by Redgate
-    2024-08-28 10:00:36 28.08.2024 08:00:36.214 INFO  [main]:[org.flywaydb.core.internal.database.base.BaseDatabaseType] Database: jdbc:mariadb://seb-server-mariadb/SEBScreenProctoring (MariaDB 10.5)
-    2024-08-28 10:00:36 28.08.2024 08:00:36.276 INFO  [main]:[SERVICE_INIT] ----> Found pending migrations: 4
-    2024-08-28 10:00:36 28.08.2024 08:00:36.277 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
-    2024-08-28 10:00:36 28.08.2024 08:00:36.277 INFO  [main]:[SERVICE_INIT] ----> **** Start Migration ************************************
-    2024-08-28 10:00:36 28.08.2024 08:00:36.277 INFO  [main]:[org.flywaydb.core.internal.license.VersionPrinter] Flyway Community Edition 7.8.2 by Redgate
-    2024-08-28 10:00:36 28.08.2024 08:00:36.299 INFO  [main]:[org.flywaydb.core.internal.license.VersionPrinter] Flyway Community Edition 7.8.2 by Redgate
-    2024-08-28 10:00:36 28.08.2024 08:00:36.310 INFO  [main]:[org.flywaydb.core.internal.command.DbValidate] Successfully validated 4 migrations (execution time 00:00.003s)
-    2024-08-28 10:00:36 28.08.2024 08:00:36.320 INFO  [main]:[org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory] Creating Schema History table `SEBScreenProctoring`.`flyway_schema_history` ...
-    2024-08-28 10:00:36 28.08.2024 08:00:36.378 INFO  [main]:[org.flywaydb.core.internal.command.DbMigrate] Current version of schema `SEBScreenProctoring`: << Empty Schema >>
-    2024-08-28 10:00:36 28.08.2024 08:00:36.400 INFO  [main]:[org.flywaydb.core.internal.command.DbMigrate] Migrating schema `SEBScreenProctoring` to version "1 - create tables v1 0"
-    2024-08-28 10:00:36 28.08.2024 08:00:36.408 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.oauth_access_token' (SQL State:  - Error Code: 1051)
-    2024-08-28 10:00:36 28.08.2024 08:00:36.432 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.oauth_refresh_token' (SQL State:  - Error Code: 1051)
-    2024-08-28 10:00:36 28.08.2024 08:00:36.448 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.user' (SQL State:  - Error Code: 1051)
-    2024-08-28 10:00:36 28.08.2024 08:00:36.470 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.screenshot_data' (SQL State:  - Error Code: 1051)
-    2024-08-28 10:00:36 28.08.2024 08:00:36.494 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.screenshot' (SQL State:  - Error Code: 1051)
-    2024-08-28 10:00:36 28.08.2024 08:00:36.518 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.seb_group' (SQL State:  - Error Code: 1051)
-    2024-08-28 10:00:36 28.08.2024 08:00:36.544 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.session' (SQL State:  - Error Code: 1051)
-    2024-08-28 10:00:36 28.08.2024 08:00:36.576 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.client_access' (SQL State:  - Error Code: 1051)
-    2024-08-28 10:00:36 28.08.2024 08:00:36.597 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.entity_privilege' (SQL State:  - Error Code: 1051)
-    2024-08-28 10:00:36 28.08.2024 08:00:36.625 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.additional_attribute' (SQL State:  - Error Code: 1051)
-    2024-08-28 10:00:36 28.08.2024 08:00:36.642 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.webservice_server_info' (SQL State:  - Error Code: 1051)
-    2024-08-28 10:00:36 28.08.2024 08:00:36.659 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.audit_log' (SQL State:  - Error Code: 1051)
-    2024-08-28 10:00:36 28.08.2024 08:00:36.693 INFO  [main]:[org.flywaydb.core.internal.command.DbMigrate] Migrating schema `SEBScreenProctoring` to version "3 - add UUID to client access"
-    2024-08-28 10:00:36 28.08.2024 08:00:36.724 INFO  [main]:[org.flywaydb.core.internal.command.DbMigrate] Migrating schema `SEBScreenProctoring` to version "4 - add exam table"
-    2024-08-28 10:00:36 28.08.2024 08:00:36.901 INFO  [main]:[org.flywaydb.core.internal.command.DbMigrate] Migrating schema `SEBScreenProctoring` to version "5 - set charset utf8mb4"
-    2024-08-28 10:00:36 28.08.2024 08:00:36.965 INFO  [main]:[org.flywaydb.core.internal.command.DbMigrate] Successfully applied 4 migrations to schema `SEBScreenProctoring`, now at version v5 (execution time 00:00.592s)
-    2024-08-28 10:00:36 28.08.2024 08:00:36.967 INFO  [main]:[org.flywaydb.core.internal.license.VersionPrinter] Flyway Community Edition 7.8.2 by Redgate
-    2024-08-28 10:00:36 28.08.2024 08:00:36.982 INFO  [main]:[SERVICE_INIT] ----> Migration finished, new current version is: 5 --> set charset utf8mb4
-    2024-08-28 10:00:36 28.08.2024 08:00:36.982 INFO  [main]:[SERVICE_INIT] ----> **** End Migration **************************************
-    2024-08-28 10:00:36 28.08.2024 08:00:36.982 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
-    2024-08-28 10:00:36 28.08.2024 08:00:36.982 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:36 28.08.2024 08:00:36.982 INFO  [main]:[SERVICE_INIT] ----> **** Migration check END ********************************
-    2024-08-28 10:00:36 28.08.2024 08:00:36.982 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.007 INFO  [main]:[SERVICE_INIT] ----> Successfully register Webservice instance. uuid: 96487e9f-e503-4d56-bcbd-7688f38ce12d_sprint-testing-9abbf93, address: 172.19.0.5
-    2024-08-28 10:00:37 28.08.2024 08:00:37.007 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.007 INFO  [main]:[SERVICE_INIT] ----> **** Initialize Services... *****************************
-    2024-08-28 10:00:37 28.08.2024 08:00:37.007 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.015 INFO  [main]:[SERVICE_INIT] ------> Activate background update task
-    2024-08-28 10:00:37 28.08.2024 08:00:37.015 INFO  [main]:[SERVICE_INIT] ------> Task runs on an update interval of 15000
-    2024-08-28 10:00:37 28.08.2024 08:00:37.039 INFO  [main]:[ch.ethz.seb.sps.server.datalayer.dao.impl.WebserviceInfoDAOImpl] Set webservice 96487e9f-e503-4d56-bcbd-7688f38ce12d_sprint-testing-9abbf93 as master
-    2024-08-28 10:00:37 28.08.2024 08:00:37.042 INFO  [main]:[SERVICE_INIT] -------->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.042 INFO  [main]:[SERVICE_INIT] --------> This instance has become master!
-    2024-08-28 10:00:37 28.08.2024 08:00:37.042 INFO  [main]:[SERVICE_INIT] -------->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.061 INFO  [main]:[SERVICE_INIT] ----> Screenshot Store: 2 workers with update-interval: 1000 initialized
-    2024-08-28 10:00:37 28.08.2024 08:00:37.061 INFO  [main]:[SERVICE_INIT] ----> SessionServiceHealthControl initialized
-    2024-08-28 10:00:37 28.08.2024 08:00:37.064 INFO  [main]:[SERVICE_INIT] ----> Screenshot FULL_RDBMS Store: initialized
-    2024-08-28 10:00:37 28.08.2024 08:00:37.064 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.064 INFO  [main]:[SERVICE_INIT] ----> **** Services initialized *******************************
-    2024-08-28 10:00:37 28.08.2024 08:00:37.064 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.071 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.071 INFO  [main]:[SERVICE_INIT] ----> Create Initial SEB Server API Account with name: SEBServerAPIAccount
-    2024-08-28 10:00:37 28.08.2024 08:00:37.072 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.109 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
-    2024-08-28 10:00:37 28.08.2024 08:00:37.110 INFO  [main]:[SERVICE_INIT] ----> *** Webservice Info:                                  ***
-    2024-08-28 10:00:37 28.08.2024 08:00:37.110 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
-    2024-08-28 10:00:37 28.08.2024 08:00:37.110 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.110 INFO  [main]:[SERVICE_INIT] ----> JDBC connection pool max size: 10
-    2024-08-28 10:00:37 28.08.2024 08:00:37.110 INFO  [main]:[SERVICE_INIT] ----> Admin access token validity seconds: 3600
-    2024-08-28 10:00:37 28.08.2024 08:00:37.110 INFO  [main]:[SERVICE_INIT] ----> Admin refresh token validity seconds: 25200
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> SEB session access token validity seconds: 43200
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Webservice context path: /
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Internal Server address: 0.0.0.0
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Internal Server port: 8090
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Local-Host address: 172.19.0.5
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Local-Host name: 47e92ba78184
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Remote-Host address: 127.0.0.1
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Remote-Host name: localhost
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> External service URI: https://localhost:4431
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Remote-Host name: localhost
-    2024-08-28 10:00:37 28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.112 INFO  [main]:[SERVICE_INIT] ----> Setup: distributed / cloud setup
-    2024-08-28 10:00:37 28.08.2024 08:00:37.112 INFO  [main]:[SERVICE_INIT] ----> Bundle: SEB Server bundle
-    2024-08-28 10:00:37 28.08.2024 08:00:37.112 INFO  [main]:[SERVICE_INIT] ---->
-    2024-08-28 10:00:37 28.08.2024 08:00:37.112 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
-    2024-08-28 10:00:37 28.08.2024 08:00:37.112 INFO  [main]:[SERVICE_INIT] ----> *** Webservice successfully started up!               ***
-    2024-08-28 10:00:37 28.08.2024 08:00:37.112 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT]  _______ _______ _______      _______ _______ ______   __   __ ___ _______ _______
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |       |       |  _    |    |       |       |    _ | |  | |  |   |       |       |
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |  _____|    ___| |_|   |    |  _____|    ___|   | || |  |_|  |   |       |    ___|
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] | |_____|   |___|       |    | |_____|   |___|   |_||_|       |   |       |   |___
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |_____  |    ___|  _   |     |_____  |    ___|    __  |       |   |      _|    ___|
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT]  _____| |   |___| |_|   |     _____| |   |___|   |  | ||     ||   |     |_|   |___
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |_______|_______|_______| ___|_______|_______|___|  |_|_|___|_|___|_______|_______|____ _______ _______ ______   ___ __    _ _______
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |       |       |    _ | |       |       |  |  | |    |       |    _ | |       |       |       |       |    _ | |   |  |  | |       |
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |  _____|       |   | || |    ___|    ___|   |_| |    |    _  |   | || |   _   |       |_     _|   _   |   | || |   |   |_| |    ___|
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] | |_____|       |   |_||_|   |___|   |___|       |    |   |_| |   |_||_|  | |  |       | |   | |  | |  |   |_||_|   |       |   | __
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |_____  |      _|    __  |    ___|    ___|  _    |    |    ___|    __  |  |_|  |      _| |   | |  |_|  |    __  |   |  _    |   ||  |
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT]  _____| |     |_|   |  | |   |___|   |___| | |   |    |   |   |   |  | |       |     |_  |   | |       |   |  | |   | | |   |   |_| |
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] |_______|_______|___|  |_|_______|_______|_|  |__|    |___|   |___|  |_|_______|_______| |___| |_______|___|  |_|___|_|  |__|_______|
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ----> Version: sprint-testing-9abbf93
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ----> Active profiles: [prod]
+    28.08.2024 08:00:35.927 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ----> Context Path: /
+    28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
+    28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ----> *** Webservice starting up...                         ***
+    28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
+    28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:35.928 INFO  [main]:[SERVICE_INIT] ----> Register Webservice: 96487e9f-e503-4d56-bcbd-7688f38ce12d_sprint-testing-9abbf93
+    28.08.2024 08:00:35.934 INFO  [main]:[com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting...
+    28.08.2024 08:00:36.015 INFO  [main]:[com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Start completed.
+    28.08.2024 08:00:36.078 WARN  [main]:[org.mariadb.jdbc.message.server.ErrorPacket] Error: 1146-42S02: Table 'SEBScreenProctoring.webservice_server_info' doesn't exist
+    28.08.2024 08:00:36.168 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:36.168 INFO  [main]:[SERVICE_INIT] ----> **** Migration check START ******************************
+    28.08.2024 08:00:36.169 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:36.169 INFO  [main]:[SERVICE_INIT] ----> Check database status
+    28.08.2024 08:00:36.171 INFO  [main]:[org.flywaydb.core.internal.license.VersionPrinter] Flyway Community Edition 7.8.2 by Redgate
+    28.08.2024 08:00:36.214 INFO  [main]:[org.flywaydb.core.internal.database.base.BaseDatabaseType] Database: jdbc:mariadb://seb-server-mariadb/SEBScreenProctoring (MariaDB 10.5)
+    28.08.2024 08:00:36.276 INFO  [main]:[SERVICE_INIT] ----> Found pending migrations: 4
+    28.08.2024 08:00:36.277 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
+    28.08.2024 08:00:36.277 INFO  [main]:[SERVICE_INIT] ----> **** Start Migration ************************************
+    28.08.2024 08:00:36.277 INFO  [main]:[org.flywaydb.core.internal.license.VersionPrinter] Flyway Community Edition 7.8.2 by Redgate
+    28.08.2024 08:00:36.299 INFO  [main]:[org.flywaydb.core.internal.license.VersionPrinter] Flyway Community Edition 7.8.2 by Redgate
+    28.08.2024 08:00:36.310 INFO  [main]:[org.flywaydb.core.internal.command.DbValidate] Successfully validated 4 migrations (execution time 00:00.003s)
+    28.08.2024 08:00:36.320 INFO  [main]:[org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory] Creating Schema History table `SEBScreenProctoring`.`flyway_schema_history` ...
+    28.08.2024 08:00:36.378 INFO  [main]:[org.flywaydb.core.internal.command.DbMigrate] Current version of schema `SEBScreenProctoring`: << Empty Schema >>
+    28.08.2024 08:00:36.400 INFO  [main]:[org.flywaydb.core.internal.command.DbMigrate] Migrating schema `SEBScreenProctoring` to version "1 - create tables v1 0"
+    28.08.2024 08:00:36.408 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.oauth_access_token' (SQL State:  - Error Code: 1051)
+    28.08.2024 08:00:36.432 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.oauth_refresh_token' (SQL State:  - Error Code: 1051)
+    28.08.2024 08:00:36.448 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.user' (SQL State:  - Error Code: 1051)
+    28.08.2024 08:00:36.470 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.screenshot_data' (SQL State:  - Error Code: 1051)
+    28.08.2024 08:00:36.494 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.screenshot' (SQL State:  - Error Code: 1051)
+    28.08.2024 08:00:36.518 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.seb_group' (SQL State:  - Error Code: 1051)
+    28.08.2024 08:00:36.544 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.session' (SQL State:  - Error Code: 1051)
+    28.08.2024 08:00:36.576 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.client_access' (SQL State:  - Error Code: 1051)
+    28.08.2024 08:00:36.597 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.entity_privilege' (SQL State:  - Error Code: 1051)
+    28.08.2024 08:00:36.625 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.additional_attribute' (SQL State:  - Error Code: 1051)
+    28.08.2024 08:00:36.642 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.webservice_server_info' (SQL State:  - Error Code: 1051)
+    28.08.2024 08:00:36.659 WARN  [main]:[org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor] DB: Unknown table 'SEBScreenProctoring.audit_log' (SQL State:  - Error Code: 1051)
+    28.08.2024 08:00:36.693 INFO  [main]:[org.flywaydb.core.internal.command.DbMigrate] Migrating schema `SEBScreenProctoring` to version "3 - add UUID to client access"
+    28.08.2024 08:00:36.724 INFO  [main]:[org.flywaydb.core.internal.command.DbMigrate] Migrating schema `SEBScreenProctoring` to version "4 - add exam table"
+    28.08.2024 08:00:36.901 INFO  [main]:[org.flywaydb.core.internal.command.DbMigrate] Migrating schema `SEBScreenProctoring` to version "5 - set charset utf8mb4"
+    28.08.2024 08:00:36.965 INFO  [main]:[org.flywaydb.core.internal.command.DbMigrate] Successfully applied 4 migrations to schema `SEBScreenProctoring`, now at version v5 (execution time 00:00.592s)
+    28.08.2024 08:00:36.967 INFO  [main]:[org.flywaydb.core.internal.license.VersionPrinter] Flyway Community Edition 7.8.2 by Redgate
+    28.08.2024 08:00:36.982 INFO  [main]:[SERVICE_INIT] ----> Migration finished, new current version is: 5 --> set charset utf8mb4
+    28.08.2024 08:00:36.982 INFO  [main]:[SERVICE_INIT] ----> **** End Migration **************************************
+    28.08.2024 08:00:36.982 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
+    28.08.2024 08:00:36.982 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:36.982 INFO  [main]:[SERVICE_INIT] ----> **** Migration check END ********************************
+    28.08.2024 08:00:36.982 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:37.007 INFO  [main]:[SERVICE_INIT] ----> Successfully register Webservice instance. uuid: 96487e9f-e503-4d56-bcbd-7688f38ce12d_sprint-testing-9abbf93, address: 172.19.0.5
+    28.08.2024 08:00:37.007 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:37.007 INFO  [main]:[SERVICE_INIT] ----> **** Initialize Services... *****************************
+    28.08.2024 08:00:37.007 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:37.015 INFO  [main]:[SERVICE_INIT] ------> Activate background update task
+    28.08.2024 08:00:37.015 INFO  [main]:[SERVICE_INIT] ------> Task runs on an update interval of 15000
+    28.08.2024 08:00:37.039 INFO  [main]:[ch.ethz.seb.sps.server.datalayer.dao.impl.WebserviceInfoDAOImpl] Set webservice 96487e9f-e503-4d56-bcbd-7688f38ce12d_sprint-testing-9abbf93 as master
+    28.08.2024 08:00:37.042 INFO  [main]:[SERVICE_INIT] -------->
+    28.08.2024 08:00:37.042 INFO  [main]:[SERVICE_INIT] --------> This instance has become master!
+    28.08.2024 08:00:37.042 INFO  [main]:[SERVICE_INIT] -------->
+    28.08.2024 08:00:37.061 INFO  [main]:[SERVICE_INIT] ----> Screenshot Store: 2 workers with update-interval: 1000 initialized
+    28.08.2024 08:00:37.061 INFO  [main]:[SERVICE_INIT] ----> SessionServiceHealthControl initialized
+    28.08.2024 08:00:37.064 INFO  [main]:[SERVICE_INIT] ----> Screenshot FULL_RDBMS Store: initialized
+    28.08.2024 08:00:37.064 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:37.064 INFO  [main]:[SERVICE_INIT] ----> **** Services initialized *******************************
+    28.08.2024 08:00:37.064 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:37.071 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:37.071 INFO  [main]:[SERVICE_INIT] ----> Create Initial SEB Server API Account with name: SEBServerAPIAccount
+    28.08.2024 08:00:37.072 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:37.109 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
+    28.08.2024 08:00:37.110 INFO  [main]:[SERVICE_INIT] ----> *** Webservice Info:                                  ***
+    28.08.2024 08:00:37.110 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
+    28.08.2024 08:00:37.110 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:37.110 INFO  [main]:[SERVICE_INIT] ----> JDBC connection pool max size: 10
+    28.08.2024 08:00:37.110 INFO  [main]:[SERVICE_INIT] ----> Admin access token validity seconds: 3600
+    28.08.2024 08:00:37.110 INFO  [main]:[SERVICE_INIT] ----> Admin refresh token validity seconds: 25200
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> SEB session access token validity seconds: 43200
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Webservice context path: /
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Internal Server address: 0.0.0.0
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Internal Server port: 8090
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Local-Host address: 172.19.0.5
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Local-Host name: 47e92ba78184
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Remote-Host address: 127.0.0.1
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Remote-Host name: localhost
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> External service URI: https://localhost:4431
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ----> Remote-Host name: localhost
+    28.08.2024 08:00:37.111 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:37.112 INFO  [main]:[SERVICE_INIT] ----> Setup: distributed / cloud setup
+    28.08.2024 08:00:37.112 INFO  [main]:[SERVICE_INIT] ----> Bundle: SEB Server bundle
+    28.08.2024 08:00:37.112 INFO  [main]:[SERVICE_INIT] ---->
+    28.08.2024 08:00:37.112 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
+    28.08.2024 08:00:37.112 INFO  [main]:[SERVICE_INIT] ----> *** Webservice successfully started up!               ***
+    28.08.2024 08:00:37.112 INFO  [main]:[SERVICE_INIT] ----> *********************************************************
+
+    **the following section shows logging of specific migration tasks applied on fist update to 3.0**
+
+    28.10.2026 11:30:30.196 INFO  [http-nio-0.0.0.0-8090-exec-8]:[ch.ethz.seb.sps.server.datalayer.dao.impl.ExamDAOBatis] Update: change Supporter for Exam: 39 : 6538:3268:Testkurs Mac KI:-- : 401-0242-00J 2024W : MAYDAY -- Schnellübung 11: Integration durch Substitution --> from: 30261dba-cb87-4e48-ae2a-e6747d36112c to: []

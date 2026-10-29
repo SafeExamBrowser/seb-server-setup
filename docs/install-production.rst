@@ -81,7 +81,7 @@ The configuration for each service is located in the local /config directory sep
 contains all the Spring and Spring-Boot based configurations and is used by the seb-server service. The "mariadb" folder contains the
 usual mariadb configuration file that is loaded from the seb-server-mariadb service on startup. The "nginx" folder contains a usual 
 nginx reverse-proxy configuration and is used by the reverse-proxy service. The "jmx" folder contains JMX related configurations and is also
-used by the seb-server service if JMX is enabled. 
+used by the seb-server service if JMX is enabled (experimental).
 
 For a reference of the base environment variables see: :ref:`baseenv-label` 
 
