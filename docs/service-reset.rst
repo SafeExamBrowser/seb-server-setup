@@ -23,6 +23,9 @@ and prune the docker system entirely. To do so, use the following steps.
         
 2. Prune the related volumes (type yes of docker is asking you to proceed)
 
+.. warn::
+    Be aware that this action will delete your database volume and all data are lost if you didn't made a backup of this volume before
+
  .. code-block:: bash
     
     $ docker volume prune --all

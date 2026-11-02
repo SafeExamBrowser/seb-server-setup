@@ -29,12 +29,11 @@ spec:
                         - seb-webservice
                         - seb-guiservice
                         - sps-webservice
-                        - sps-guiservice
                         - seb-mariadb
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: sps-webservice
-          image: anhefti/seb-sps:v1.2-stable
+          image: sebadmin/seb-sps:demo
           imagePullPolicy: Always
           env:
             - name: "JAVA_HEAP_MIN"
@@ -88,7 +87,10 @@ spec:
       volumes:
         - name: application-properties-sps
           configMap:
-            items:
-              - key: application-properties-sps
-                path: application-properties-sps
             name: application-properties-sps
+            items:
+              - key: "application-prod.properties"
+                path: "application-prod.properties"
+              - key: "logback-prod.xml"
+                path: "logback-prod.xml"
+

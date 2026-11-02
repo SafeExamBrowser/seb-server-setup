@@ -28,7 +28,7 @@ spec:
             claimName: mysql-pv-claim
       containers:
         - name: seb-mariadb
-          image: mariadb:10.6
+          image: mariadb:12.3
           ports:
             - containerPort: 3306
           volumeMounts:

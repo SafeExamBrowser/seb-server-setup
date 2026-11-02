@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seb-guiservice
+spec:
+  template:
+    spec:
+      containers:
+        - name: seb-guiservice
+          image: sebadmin/seb-server-gui:sprint-testing
+          imagePullPolicy: Always
+          env:
+            - name: NODE_ENV
+              value: prod
+            - name: LOG_LEVEL
+              value: info
+            - name: SERVER_PORT
+              value: "8081"
+            - name: SERVE_CLIENT
+              value: "true"
+            - name: SEB_SERVER_USERNAME
+              value: guiClient
+            - name: SEB_SERVER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sebservercredentials
+                  key: SEBSERVER_PWD
+            - name: PROCTOR_SERVER_USERNAME
+              value: spsGuiClient
+            - name: PROCTOR_SERVER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sebservercredentials
+                  key: PROCTOR_SERVER_PASSWORD
+            - name: SEB_SERVER_URL
+              value: http://seb-webservice:8080
+            - name: PROCTOR_SERVER_URL
+              value: http://sps-webservice:8090

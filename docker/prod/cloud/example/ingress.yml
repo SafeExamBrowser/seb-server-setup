@@ -1,0 +1,53 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: seb-service
+  annotations:
+    alias-managed: "true"
+    alias-managed-vip: reserved-alias-110-091.ethz.ch
+
+    acme.cert-manager.io/http01-ingress-class: "haproxy-external"
+    ingress.kubernetes.io/balance-algorithm: source
+    cert-manager.io/cluster-issuer: "letsencrypt-haproxy-external"
+
+spec:
+  ingressClassName: "haproxy-external"
+  rules:
+    - host: sebserver-test.ethz.ch
+      http:
+        paths:
+          - backend:
+              service:
+                name: seb-guiservice
+                port:
+                  number: 8081
+            pathType: Prefix
+            path: /
+    - host: sebserver-webservice-test.ethz.ch
+      http:
+        paths:
+          - backend:
+              service:
+                name: seb-webservice
+                port:
+                  number: 8080
+            pathType: Prefix
+            path: /
+    - host: sps-webservice-test.ethz.ch
+      http:
+        paths:
+          - backend:
+              service:
+                name: sps-webservice
+                port:
+                  number: 8090
+            pathType: Prefix
+            path: /
+
+  tls:
+    - hosts:
+        - sebserver-test.ethz.ch
+        - sebserver-webservice-test.ethz.ch
+        - sps-webservice-test.ethz.ch
+      secretName: sebserver-test-ssl-request

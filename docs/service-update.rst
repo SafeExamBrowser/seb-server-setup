@@ -2,7 +2,7 @@ Service Update
 --------------
 
 .. note::
-    If you need to make a major version update, from version 1.x to version 2.x for example, please consult the :ref:`majorversionupdate-label`
+    If you need to make a major version update, from version 2.x to version 3.x for example, please consult the :ref:`majorversionupdate-label`
 
 
 The update depends on your setup and SEB Serverversion change.
@@ -17,25 +17,8 @@ To update an already installed and bundled SEB Server service, follow the steps 
     
     $ docker-compose down
      
-2. Update to the newest or preferred version within the seb-server-setup. Use git tags to show the available tags. If there are already local changed - if the configuration was modified from the original settings, and the local changes shall still be used and remain, git stash can be used to locally store and merge them.
+2. Update the SEBSERVER_VERSION tag to the version you want to update to. If you have changed the docker-compose.yml file directly, make sure you have the correct image version there.
 
- .. code-block:: bash
-    
-    # Get new tags from remote
-    $ git fetch --tags
-
-    # Get latest tag name
-    $ latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
-
-    # If local changes shall remain
-    $ git stash
-
-    # Checkout latest tag
-    $ git checkout $latestTag
-
-    # If local changes shall remain
-    $ git stash apply
-         
          
 .. note::
       Usually you want to point to the exact version of the SEB Server setup by using `semantic versioning <https://semver.org/>`_ like 1.0.0 or 1.0.1. 
@@ -45,18 +28,11 @@ To update an already installed and bundled SEB Server service, follow the steps 
 3. Do some additional configuration if needed.
     
 .. note::
-    Since SEB Server version 1.2.x there is a new setup procedure (dockerhub). If you use this setup, you have to provide the passwords that
-    was given on startup again. Do not use another password for the SEBSERVER_PWD and only adapt the DB_SA_PWD if your database has a new password for the user.
-    You can just copy or recreate the .env in the working directory that contains the needed password or you can give them with the docker-compose up command later on.
+    Usually there is no additional configuration needed on minor version updates (only on major version updates).
+    If there is, it should be stated in the Release notes of the minor or patch versions
     
     
-4. Rebuild the image with the new SEB Server version
-
- .. code-block:: bash
-    
-    $ docker-compose build --no-cache
-    
-Or with a pull if you use a setup with an image from docker-hub:
+4. Pull the new images form Docker hub
 
  .. code-block:: bash
     

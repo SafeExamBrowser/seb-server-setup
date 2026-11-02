@@ -1,0 +1,68 @@
+namespace: seb-server-prod
+nameSuffix: -prod
+
+replicas:
+  - name: seb-guiservice
+    count: 1
+  - name: seb-webservice
+    count: 1
+  - name: sps-webservice
+    count: 1
+
+images:
+  - name: sebadmin/seb-server
+    newTag: v3.0-latest
+  - name: sebadmin/seb-server-gui
+    newTag: v3.0-latest
+  - name: sebadmin/seb-sps
+    newTag: v3.0-latest
+
+resources:
+  # Get the base configuration
+  - https://github.com/SafeExamBrowser/seb-server-setup/docker/prod/cloud/example?ref=kustomize
+
+  # Add an ingress
+  - ingress.yml
+
+  # Add a secret with application variables
+  - app-env.json
+  # - app-env.yml  # if prepared with SealedSecret as shown in the README
+
+  # Same with DB connection variables
+  - db-env.json
+
+# If variables with plain "value" are replaced by variables fed from secrets ("valueFrom"),
+# the old assignment has to be deleted first! Otherwise duplicate entries for "value" and
+# "valueFrom" exists.
+patches:
+  - path: patch-seb-web-delete.yml
+  - path: patch-seb-web-add.yml
+  - path: patch-seb-gui-delete.yml
+  - path: patch-seb-gui-add.yml
+  - path: patch-sps-web-delete.yml
+  - path: patch-sps-web-add.yml
+
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: seb-mariadb
+      $patch: delete
+  - patch: |-
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: mysql-pv-claim
+      $patch: delete
+  - patch: |-
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: seb-mariadb-config
+      $patch: delete
+  - patch: |-
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: seb-mariadb
+      $patch: delete

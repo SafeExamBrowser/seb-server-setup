@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sps-webservice
+spec:
+  template:
+    spec:
+      containers:
+        - name: sps-webservice
+          env:
+            - name: spring_datasource_username
+              $patch: delete
+            - name: spring_datasource_password
+              $patch: delete
+            - name: sebserver_client_secret
+              $patch: delete
+            - name: spsgui_client_secret
+              $patch: delete
+            - name: sps_init_sebserveraccount_password
+              $patch: delete
+            - name: sebserver_password
+              $patch: delete
+            - name: sps-s3-tls-cert
+              $patch: delete
+            - name: s3_secretKey
+              $patch: delete
+            - name: s3_accessKey
+              $patch: delete

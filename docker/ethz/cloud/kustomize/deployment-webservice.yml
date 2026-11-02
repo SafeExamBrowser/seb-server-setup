@@ -29,7 +29,6 @@ spec:
                         - seb-webservice
                         - seb-guiservice
                         - sps-webservice
-                        - sps-guiservice
                         - seb-mariadb
                 topologyKey: kubernetes.io/hostname
       volumes:
@@ -49,7 +48,7 @@ spec:
                 path: "jmxremote.access"
       containers:
         - name: seb-webservice
-          image: anhefti/seb-server:v2.2-stable
+          image: sebadmin/seb-server:demo
           imagePullPolicy: Always
           resources:
             requests:
@@ -64,6 +63,18 @@ spec:
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 5
+            successThreshold: 1
+          readinessProbe:
+            httpGet:
+              path: /sebserver/check
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 1
+            successThreshold: 1
           volumeMounts:
             - name: application-properties
               mountPath: /sebserver/config/spring
@@ -80,6 +91,8 @@ spec:
             - name: "sebserver_password"
               value: "SET_PASSWORD"
 # NOTE: Database settings. Account must be able to create / delete table
+            - name: "datastore_mariadb_server_port"
+              value: "3306"
             - name: "datastore_mariadb_server_address"
               value: "sebserver-db-test.ethz.ch"
             - name: "spring_datasource_username"
@@ -89,6 +102,8 @@ spec:
 # NOTE: Screen Proctoring settings and passwords
             - name: "sebserver_feature_exam_seb_screenProctoring_bundled_url"
               value: "https://sps-webservice-test.ethz.ch"
+            - name: "sebserver_feature_exam_seb_screenProctoring_bundled_url_intern"
+              value: "http://sps-webservice:8090"
             - name: "sps_sebserver_client_secret"
               value: "SET_PASSWORD"
             - name: "sps_sebserver_password"
@@ -98,3 +113,6 @@ spec:
               value: "sebserver-webservice.ethz.ch"
             - name: "sebserver_webservice_autologin_url"
               value: "https://sebserver.ethz.ch"
+# ETHZ specific settings
+            - name: "sebserver_feature_seb_screenProctoring_settings_show_disclaimer_enabled"
+              value: "true"
