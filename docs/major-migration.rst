@@ -13,7 +13,8 @@ are  mostly the same except the seb-server is renames to seb-webservice and does
 
 Since this changes the container setup slightly we recommend the following update procedure for a seamless update:
 
- - Bundled Setups
+ Bundled Setups
+ -----------------------
 
  For bundled setups the easiest way to update is to make a new setup beside the existing one and using the same DB connection
  to connect to the existing database. You strictly require to use the SEBSERVER_PWD you used for your current setup also for the new setup.
@@ -65,7 +66,8 @@ or
 7. You should now be able to access the new SEB Server with old data and old logins.
 
 
- - Cloud Setup
+ Cloud Setup
+ -----------------------
 
  There are new templates for cloud setup that gives an example of what the new setup contains. You can compare this
  to the setup you already have and adapt to the changes.
