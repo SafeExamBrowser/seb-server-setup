@@ -15,5 +15,4 @@ SEB Server Installation Guide
    installation
    production
    configuration
-   troubleshooting
 

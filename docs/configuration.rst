@@ -65,108 +65,141 @@ service dedicated configuration files. For the Java/Spring services these are th
     sebserver.init.adminaccount.gen-on-init
         - Indicates whether initial admin account creation is on/off
         - If an initial admin account should be created on first startup of the SEB Server this must be set
-        - Default is true
+        - Default is true, only seb-webservice
     sebserver.init.adminaccount.username
         - Defines the username of the initial admin account.
         - If initial admin account creation is switched on, this is mandatory and defines the username that is created for the initial account.
-        - Default is "SEB Server"
+        - Default is "SEB Server", only seb-webservice
     sebserver.init.organisation.name
         - Defines the institution name for of the institution to create for the initial admin account
         - If an initial admin account must be created, we need also an institution to assign this initial account to. This defines the name of that initial institution that is created together with the initial admin account.
-        - Default is "sebserver-admin"
+        - Default is "sebserver-admin", only seb-webservice
     datastore.mariadb.server.address
         - Defines the address of the MariaDB data-store server
         - Usually the data-store is defined in a separated docker container/service and connected within a docker-network. This is usually a docker service name. If the data-store lives on a separated server, this is the server URL
+        - seb-webservice and sps-webservice
     datastore.mariadb.server.port
         - Defines the port of the MariaDB data-store server
         - Same as datastore.mariadb.server.address
+        - seb-webservice and sps-webservice
     spring.datasource.username
         - The username for the JDBC account to use to connect to the MariaDB server
         - In a bundled environment with docker, root is default and must not be changed
+        - seb-webservice and sps-webservice
     spring.datasource.hikari.initializationFailTimeout
     spring.datasource.hikari.connectionTimeout
     spring.datasource.hikari.idleTimeout
     spring.datasource.hikari.maxLifetime
         - Hikari data-base connection pool times and timeouts
         - See `Hakari Documentation <https://github.com/brettwooldridge/HikariCP#configuration-knobs-baby>`_
+        - seb-webservice and sps-webservice
     spring.datasource.url
         - the JDBC connection URL
         - This mostly is composed from other settings and must not be changed
+        - seb-webservice and sps-webservice
     spring.datasource.hikari.initializationFailTimeout
     spring.datasource.hikari.connectionTimeout
     spring.datasource.hikari.idleTimeout
     spring.datasource.hikari.maxLifetime
         - Hikari data-base connection pool times and timeouts
         - See `Hakari Documentation <https://github.com/brettwooldridge/HikariCP#configuration-knobs-baby>`_
+        - seb-webservice and sps-webservice
     spring.datasource.password
         - The password for the database connection
         - This usually is automatically set by the password given from the initial setup process and must not be changed. If there is the need to change this for whatever reason, be aware that it is not secure to give a password in plain test within the configuration and everyone that is able to read the configuration is able to get the password.
+        - seb-webservice and sps-webservice
     sebserver.webservice.api.admin.clientSecret
+    sps.api.admin.gui.clientSecret
         - The secret for the GUI service basic authentication to connect to the webservice; OAuth2
         - This usually is automatically set by the password given from the initial setup process and must not be changed. If there is the need to change this for whatever reason, be aware that it is not secure to give a password in plain test within the configuration and everyone that is able to read the configuration is able to get the password.
+        - seb-webservice and sps-webservice
     sebserver.webservice.internalSecret
+    sps.webservice.internalSecret
         - The secret that is used for SEB Server internal encryption.
         - This usually is automatically set by the password given from the initial setup process and must not be changed. If there is the need to change this for whatever reason, be aware that it is not secure to give a password in plain test within the configuration and everyone that is able to read the configuration is able to get the password.
+        - seb-webservice and sps-webservice
     sebserver.webservice.distributed
+    sps.webservice.distributed
         - Indicates whether the web-service runs within a distributed environment or as single-bundled server
         - On a distributed environment (multiple running instances with load balancing) this must set to true to ensure internal cache strategies are working correctly on distributed setup.
     sebserver.webservice.http.external.scheme
     sebserver.webservice.http.external.servername
     sebserver.webservice.http.external.port
+    sps.webservice.http.external.scheme
+    sps.webservice.http.external.servername
+    sps.webservice.http.external.port=
         - This properties defines the URL on that the SEB Server can be accessed from the public Internet.
         - Set the scheme (http/https) and the server name to the external URL settings of the SEB Server. If the web-service runs on default HTTP/HTTPS ports, the port must not be specified.
-    sebserver.webservice.http.redirect.gui
-        - Defines the redirection URL/Path to the GUI service.
-        - On a single-bundled setup this can stick to the default and for a distributed setup this must define the public URL of the GUI service, where redirects from web-service should point to.
     sebserver.webservice.api.admin.endpoint
     sebserver.webservice.api.admin.accessTokenValiditySeconds
     sebserver.webservice.api.admin.refreshTokenValiditySeconds
+    sps.api.admin.endpoint
+    sps.api.admin.accessTokenValiditySeconds
+    sps.api.admin.refreshTokenValiditySeconds
         - Defines properties for the admin API access.
         - The admin API access is needed to access the admin API of the web-service. The admin API defines a REST API for all administrative purposes.
     sebserver.webservice.api.exam.endpoint
     sebserver.webservice.api.exam.accessTokenValiditySeconds
     sebserver.webservice.api.exam.endpoint.v1
     sebserver.webservice.api.exam.endpoint.discovery
+    sps.api.session.endpoint
+    sps.api.session.endpoint.v1
+    sps.api.session.accessTokenValiditySeconds
         - Defines properties for the exam API access.
         - The exam API access is needed to access the exam API of the web-service. The exam API defines a REST API for SEB clients to connect.
     sebserver.webservice.api.exam.enable-indicator-cache
         - Indicates if internal indicator value cache should be used where possible
         - This is usually done on a bundled single instance setup to gain performance. If we have a distributed setup with many SEB Server instances this should be set to false.
-        - Default is true
-    sebserver.webservice.api.pagination.maxPageSize
-        - This defines a maximal page size for the REST API list/page endpoints
-        - The maximal page size restricts the page size on the REST API to avoid performance problems by loading all data at once
-        - Default is set to 500
-    sebserver.webservice.lms.openedx.api.token.request.paths
-        - Defines a comma separated list of known Open edX LMS API token request paths.
-        - This paths will be used by the web-service to try to connect to a Open edX LMS REST API and request an access token.
-        - Default is "/oauth2/access_token"
-    sebserver.webservice.lms.moodle.api.token.request.paths
-        - Defines a comma separated list of known Moodle LMS API token request paths.
-        - This paths will be used by the web-service to try to connect to a Moodle LMS REST API and request an access token.
-        - Default is "/login/token.php"
+        - Default is true, only seb-webservice
     sebserver.webservice.api.admin.request.limit
         - A general request limit used for request limits on certain exposed API endpoints
         - This uses a bucked-algorithm where each request attempt removes a item from the bucket and if the bucket is empty no request is permittet
           Involved endpoints: user-account-registration
-        - Default is 10
+        - Default is 10, only seb-webservice
     sebserver.webservice.api.admin.request.limit.refill
         - The refill items count for the above request limit
-        - Default is 2
+        - Default is 2, only seb-webservice
     sebserver.webservice.api.admin.request.limit.interval.min
         - The refill interval in minutes for the above request limit
-        - Default is 10
+        - Default is 10, only seb-webservice
     sebserver.webservice.api.admin.create.limit
         - A general object create limit used to prevent exessive object creation (persistent storage)
         - This uses a bucked-algorithm where each creation attempt removes a item from the bucket and if the bucket is empty no object creation is permittet
           Involved endpoints: user-account-registration
-        - Default is 10
+        - Default is 10, only seb-webservice
     sebserver.webservice.api.admin.create.limit.refill
         - The refill items count for the above object creation limit
-        - Default is 10
+        - Default is 10, only seb-webservice
     sebserver.webservice.api.admin.create.limit.interval.min=3600
         - The refill interval in minutes for the above object creation limit
-        - Default is 3600
+        - Default is 3600, only seb-webservice
+
+    sps.data.store.adapter
+        - Defines the overall image store strategy and if images are stored in DB or S3
+        - Default is FULL_RDBMS that stores all in DB. (S3_RDBMS stores images in bound S3 service)
+        - only sps-webservice
+
+    sps.s3.endpointUrl
+        - Defines the S3 storage base URL for access
+        - only sps-webservice
+    sps.s3.accessKey
+        - Defines the S3 access key for S3 service authentication
+        - only sps-webservice
+    sps.s3.secretKey
+        - Defines the S3 secret key for S3 service authentication
+        - only sps-webservice
+    sps.s3.bucketName
+        - Defines the S3 bucket to use for images store
+        - only sps-webservice
+    sps.s3.defaultBucketName
+        - Defines the S3 default bucket name. If the bucket name defined in sps.s3.bucketName does not exists, and this is set, tries to create one new
+        - only sps-webservice
+    sps.s3.store.batch
+        - Defines the S3 to use batch stores. This is only possible if the S3 service that is used support batch operations
+        - only sps-webservice
+    sps.s3.tls.cert
+        - Defines the S3 access certificate to use to access S3 if the service need and supports one
+        - only sps-webservice
 
 **SEB Server GUI Service Settings**
 

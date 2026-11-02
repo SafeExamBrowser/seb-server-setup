@@ -10,7 +10,7 @@ as an example for a cloud based setup with kubernetes kind example configuration
 
 .. note::
     If you already have a SEB Server installation and want to migrate from a former installation with major version 2.X
-    to the new major version 3.x, please consult the Major Version Migration Guide first.
+    to the new major version 3.x, please consult the :ref:`majorversionupdate-label` first.
   
 The bundled setups are used to bundle the whole SEB Server setup and all its services together for deploying on one host machine or virtual host machine.
 This is accomplished with a docker-compose bundle consisting of the MariaDB database, all SEB Server service components and a reverse proxy to communicate
@@ -113,6 +113,10 @@ For more details on how to configure each service see :ref:`configuration-label`
         - The super user password for the data base connection. If you don't want to use the super user to connect to database you need to configure this within the docker-compose file for all services that needs a database connection.
     DNS_NAME
         - The DNS name where your host is available from the Internet
+    DB_VOLUME_NAME
+        - This is used to define the name of the docker volume for the database. This is for convenience for testing different setups but also with different DB's locally Usually you do not need to change this except you already changed this volume name in your docker-compose.yml file Per default it points to the name used in previous version.
+    SEBSERVER_VERSION
+        - This is the SEB Server version that is used as tag name for Docker image pull. The tags has the following structure (M=Major,m=Minor, p=Patch -number) - vM.m-latest points to the latest built image of a specific minor version and is manly used for development  - vM.m-stable points to the latest stable version of a specific minor version that usually is the latest patch version - vM.m.p points to a specific release or patch version
 
 .. note::
     The passwords must be given also when the service is stopped and restarted again. You can either let the .env file

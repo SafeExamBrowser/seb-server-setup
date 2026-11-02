@@ -50,12 +50,14 @@ to clone the seb-server-setup repository on your local install machine and work 
 
 .. glossary::
     
-    SEBSERVER_PWD -
+    SEBSERVER_PWD
         - The SEB Server password is needed for various reasons. This password must be always the same and should be securely stored somewhere
-    CLIENT_EXTERNAL_DNS_NAME
+    EXTERNAL_DNS_NAME
         - The DNS name for clients connecting to SEB Server. When deploy locally this is localhost. IP address or DNS name for dedicated host
-    SERVER_EXTERNAL_DNS_NAME 
-        - The DNS name for internal communication. When deploy locally this is host.docker.internal. IP address or DNS name for dedicated host
+    DB_VOLUME_NAME
+        - The name of the database docker volume. Default is "seb-demo-server-db"
+    SEBSERVER_VERSION
+        - The version tag of SEB Server you want to pull and run.
     
 4. Use "docker-compose pull" to let docker pull all needed images first
 

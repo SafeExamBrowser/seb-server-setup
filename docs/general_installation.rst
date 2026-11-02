@@ -11,7 +11,7 @@ different docker-compose configuration to set up SEB Server in a distributed env
 A docker compose configuration for a bundled setup looks pretty much the same for each setup and consists of the following services:
  
 - **mariadb** This is the MariaDB service that is bound to the internal network as well as exposing its default port to the host
-  network by default. This service uses the official "mariadb/server:10.5" image for the service and the configuration that is provided
+  network by default. This service uses the official "mariadb:12.3" image for the service and the configuration that is provided
   within the config/mariadb7 folder. The MariaDB container is started with the given internal password as the root password. This service
   uses a separated named docker volume to store the data.
  
@@ -24,12 +24,12 @@ A docker compose configuration for a bundled setup looks pretty much the same fo
   connects to the database within the internal docker network that is created with the docker-compose setup (seb-server-network).
  
 .. note::
-    (since 3.0)
+    Since SEB Server v3.0.0
 
-    The SEBSERVER_VERSION attribute relates on a Git tag of the seb-server repository (without the "v" prefix). Usually you want to point to
-    the exact version of the SEB Server by using `sematic versioning <https://semver.org/>`_ like 1.0.0 or 1.0.1 or you can set the latest
+    The SEBSERVER_VERSION attribute relates on a Git tag of the seb-server repository. Usually you want to point to
+    the exact version of the SEB Server by using `sematic versioning <https://semver.org/>`_ like v1.0.0 or v1.0.1 or you can set the latest
     minor version to always get the latest specific minor version with all patches on installation or update. If you want the latest minor version
-    use version tags like 1.0-latest or 1.1-latest.
+    use version tags like v1.0-latest or v1.1-latest.
 
 - **sps-webservice** This is the webservice back-end for the new screen proctoring feature that is separated from the SEB Server for performance and scaling reasons.
   This is a usual Java/Spring Boot application like seb-server and implements screen proctoring maintenance API as well as screen proctoring session API

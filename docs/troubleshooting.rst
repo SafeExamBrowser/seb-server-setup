@@ -6,7 +6,7 @@ There shall be at least a problem description, an optional explanation if needed
 
 --------------------------------
 
-- **Version**     : 1.0.0
+- **Version**     : 3.0.0
 - **Domain**      : production / bundled / basic
 - **Problem**     : This is an example problem description.
 - **Explanation** : An explanation is not mandatory but shall be provided if you want to give some background information to the problem.
@@ -14,7 +14,7 @@ There shall be at least a problem description, an optional explanation if needed
 
 ------------------------------
 
-- **Version** : 1.0.0
+- **Version** : 3.0.0
 - **Domain**  : general bundled setups or stand-alone webservice
 - **Problem** : You cannot find the admin-account that is expected to be generated on the first initial startup of the SEB Server web-service within the logs.
 
@@ -67,7 +67,7 @@ Now the initial user-account should be created again and the credentials should 
 
 ------------------------------
 
-- **Version** : 1.0.0
+- **Version** : 3.0.0
 - **Domain**  : general bundled setups
 - **Problem** : SEB Server is not able to connect internally to MariaDB SEB Server is not able to connect internally to MariaDB within the docker network. You see a connection error on the seb-server log files in SEB Server startup. 
 
@@ -97,7 +97,7 @@ Now the initial user-account should be created again and the credentials should 
    
 -------------------------------------
    
-- **Version** : 1.0.0
+- **Version** : 3.0.0
 - **Domain**  : general bundled setups
 - **Problem** : The initial password file setup was not correctly done for the first time or you need or want to reset the password.
 - **Solution** : You have to remove the configuration volume from the docker engine and create the password file again. Then restarting the service.
