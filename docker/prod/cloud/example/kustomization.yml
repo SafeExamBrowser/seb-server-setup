@@ -11,11 +11,11 @@ replicas:
 
 images:
   - name: sebadmin/seb-server
-    newTag: v3.0-latest
+    newTag: v3.0-stable
   - name: sebadmin/seb-server-gui
-    newTag: v3.0-latest
+    newTag: v3.0-stable
   - name: sebadmin/seb-sps
-    newTag: v3.0-latest
+    newTag: v3.0-stable
 
 resources:
   # Get the base configuration
